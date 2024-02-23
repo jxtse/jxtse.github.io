@@ -114,6 +114,19 @@ input, select, textarea {
 		}
 
 /* Type */
+	.photo-container {
+		position: relative;
+		width: 200px; /* 你可以根据需要调整这个值 */
+		height: 200px; /* 保持宽高一致以保持圆形 */
+		border-radius: 50%; /* 使边框变为圆形 */
+		overflow: hidden; /* 隐藏超出部分 */
+	}
+
+	.photo-container img {
+		width: 100%;
+		height: auto;
+		display: block; /* 防止图片下方有空隙 */
+	}
 
 	html {
 		font-size: 16pt;
