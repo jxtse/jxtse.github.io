@@ -2647,7 +2647,7 @@ input, select, textarea {
 
 		.image.main {
 			display: block;
-			margin: 4rem 0;
+			margin: 4rem 0 0 0;
 			width: 100%;
 		}
 
@@ -2958,7 +2958,7 @@ input, select, textarea {
 		}
 
 		header.major {
-			margin: 0 0 4rem 0;
+			margin: 0 0 0rem 0;
 			text-align: center;
 		}
 
@@ -2973,7 +2973,7 @@ input, select, textarea {
 
 			header.major > .date {
 				font-size: 1rem;
-				margin: 0 0 4rem 0;
+				margin: 0 0 2rem 0;
 			}
 
 				header.major > .date:before, header.major > .date:after {
