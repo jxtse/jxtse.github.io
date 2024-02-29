@@ -2975,7 +2975,7 @@ input, select, textarea {
 
 			header.major > .date {
 				font-size: 1rem;
-				margin: 0 0 1rem 0;
+				margin: 1rem 0 1rem 0;
 			}
 
 				header.major > .date:before, header.major > .date:after {
@@ -3006,7 +3006,7 @@ input, select, textarea {
 		@media screen and (max-width: 736px) {
 
 			header.major {
-				margin: 0 0 2rem 0;
+				margin: 0 0 0rem 0;
 			}
 
 		}
@@ -3916,7 +3916,7 @@ input, select, textarea {
 				}
 
 				#main > .posts > * {
-					padding: 2rem;
+					padding: 0rem 2rem;
 					width: 100%;
 				}
 
