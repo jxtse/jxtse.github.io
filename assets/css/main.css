@@ -2662,11 +2662,11 @@ input, select, textarea {
 		@media screen and (max-width: 736px) {
 
 			.image.fit {
-				margin: 2rem 0;
+				margin: 1rem 0;
 			}
 
 			.image.main {
-				margin: 2rem 0;
+				margin: 1rem 0;
 			}
 
 		}
@@ -3903,7 +3903,7 @@ input, select, textarea {
 				}
 
 				#main > .posts > * {
-					padding: 2.5rem;
+					padding: 0rem;
 					width: 50%;
 				}
 
@@ -3916,7 +3916,7 @@ input, select, textarea {
 				}
 
 				#main > .posts > * {
-					padding: 2rem;
+					padding: 1rem;
 					width: 100%;
 				}
 
