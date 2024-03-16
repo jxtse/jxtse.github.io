@@ -3885,7 +3885,7 @@ input, select, textarea {
 			}
 
 				#main > .posts > article > :last-child {
-					margin-bottom: 0;
+					margin-bottom: 1rem;
 				}
 
 				#main > .posts > article:nth-child(2n - 1) {
