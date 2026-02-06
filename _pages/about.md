@@ -109,6 +109,43 @@ Feel free to reach out if you'd like to discuss research or explore potential co
 
 # <i class="fas fa-blog"></i> Blogs
 
+<!-- Local Blog Posts Section -->
+{% if site.posts.size > 0 %}
+<div class="local-blogs-section">
+  <div class="local-blogs-header">
+    <h3><i class="fas fa-pen-nib"></i> Latest Posts</h3>
+    <a href="{{ '/blog/' | relative_url }}" class="view-all-btn">
+      View All Posts <i class="fas fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="blog-grid">
+    {% assign sorted_posts = site.posts | sort: 'date' | reverse %}
+    {% for post in sorted_posts limit:3 %}
+    <a href="{{ post.url | relative_url }}" class="blog-card-link">
+      <div class="blog-card">
+        <div class="blog-card-image">
+          <div class="blog-badge">{{ post.date | date: "%B, %Y" }}</div>
+          {% if post.cover_image %}
+          <img src="{{ post.cover_image | relative_url }}" alt="{{ post.title }}">
+          {% else %}
+          <img src="{{ '/images/default-blog-cover.jpg' | relative_url }}" alt="{{ post.title }}">
+          {% endif %}
+        </div>
+        <div class="blog-card-content">
+          <div class="blog-title">{{ post.title }}</div>
+          <div class="blog-description">{{ post.description | default: post.excerpt | strip_html | truncate: 120 }}</div>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="external-blogs-divider">
+  <span><i class="fas fa-external-link-alt"></i> External Articles</span>
+</div>
+{% endif %}
+
 <div class="blog-grid">
   <div class="blog-card">
     <div class="blog-card-image">

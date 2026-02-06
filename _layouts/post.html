@@ -1,0 +1,107 @@
+---
+layout: compress
+---
+
+<!doctype html>
+<html lang="{{ site.lang | default: 'en' }}" class="no-js">
+  <head>
+    {% include head.html %}
+    {% include head/custom.html %}
+  </head>
+
+  <body>
+    {% include browser-upgrade.html %}
+    {% include masthead.html %}
+
+    <div id="main" role="main" style="padding-bottom: 3em;">
+      {% include sidebar.html %}
+
+      <article class="post-article page" itemscope itemtype="http://schema.org/BlogPosting">
+        <meta itemprop="headline" content="{{ page.title | markdownify | strip_html | strip_newlines | escape_once }}">
+        <meta itemprop="datePublished" content="{{ page.date | date_to_xmlschema }}">
+
+        <div class="page__inner-wrap">
+          <!-- Post Header -->
+          <header class="post-header">
+            {% if page.cover_image %}
+            <div class="post-cover">
+              <img src="{{ page.cover_image | relative_url }}" alt="{{ page.title }}">
+            </div>
+            {% endif %}
+
+            <h1 class="post-title" itemprop="name">{{ page.title }}</h1>
+
+            <div class="post-meta">
+              <span class="post-date">
+                <i class="fas fa-calendar-alt"></i>
+                <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %d, %Y" }}</time>
+              </span>
+
+              {% if page.reading_time %}
+              <span class="post-reading-time">
+                <i class="fas fa-clock"></i>
+                {{ page.reading_time }} min read
+              </span>
+              {% endif %}
+
+              {% if page.categories and page.categories.size > 0 %}
+              <span class="post-categories">
+                <i class="fas fa-folder"></i>
+                {% for category in page.categories %}
+                  <span class="tag-accent">{{ category }}</span>
+                {% endfor %}
+              </span>
+              {% endif %}
+            </div>
+
+            {% if page.tags and page.tags.size > 0 %}
+            <div class="post-tags">
+              <i class="fas fa-tags"></i>
+              {% for tag in page.tags %}
+                <span class="tag-accent tag-small">{{ tag }}</span>
+              {% endfor %}
+            </div>
+            {% endif %}
+          </header>
+
+          <!-- Post Content -->
+          <section class="post-content" itemprop="articleBody">
+            {{ content }}
+          </section>
+
+          <!-- Post Navigation -->
+          <nav class="post-navigation">
+            <div class="post-nav-links">
+              {% if page.previous.url %}
+              <a href="{{ page.previous.url | relative_url }}" class="post-nav-link post-nav-prev">
+                <span class="nav-label"><i class="fas fa-arrow-left"></i> Previous</span>
+                <span class="nav-title">{{ page.previous.title }}</span>
+              </a>
+              {% else %}
+              <div class="post-nav-link post-nav-prev disabled"></div>
+              {% endif %}
+
+              <a href="{{ '/blog/' | relative_url }}" class="post-nav-link post-nav-all">
+                <span class="nav-label"><i class="fas fa-th-large"></i></span>
+                <span class="nav-title">All Posts</span>
+              </a>
+
+              {% if page.next.url %}
+              <a href="{{ page.next.url | relative_url }}" class="post-nav-link post-nav-next">
+                <span class="nav-label">Next <i class="fas fa-arrow-right"></i></span>
+                <span class="nav-title">{{ page.next.title }}</span>
+              </a>
+              {% else %}
+              <div class="post-nav-link post-nav-next disabled"></div>
+              {% endif %}
+            </div>
+          </nav>
+        </div>
+      </article>
+    </div>
+
+    {% include scripts.html %}
+    {% include footer.html %}
+
+  </body>
+</html>
