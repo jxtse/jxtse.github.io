@@ -1176,11 +1176,19 @@ body {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.view-all-btn i {
+  color: white !important;
+}
+
 .view-all-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 15px rgba(254, 102, 123, 0.3);
   color: white !important;
   text-decoration: none !important;
+}
+
+.view-all-btn:hover i {
+  color: white !important;
 }
 
 .view-all-btn::after {
