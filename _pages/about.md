@@ -146,7 +146,7 @@ Feel free to reach out if you'd like to discuss research or explore potential co
 </div>
 {% endif %}
 
-<div class="blog-grid">
+<!--<div class="blog-grid">
   <div class="blog-card">
     <div class="blog-card-image">
       <div class="blog-badge">November, 2025</div>
@@ -164,9 +164,9 @@ Feel free to reach out if you'd like to discuss research or explore potential co
         </a>
       </div>
     </div>
-  </div>
+  </div>-->
 
-<div class="blog-card">
+<!--<div class="blog-card">
     <div class="blog-card-image">
       <div class="blog-badge">June, 2025</div>
       <img src="images/pic06.jpg" alt="The Limits of My Language Mean the Limits of My World">
@@ -183,9 +183,9 @@ Feel free to reach out if you'd like to discuss research or explore potential co
         </a>
       </div>
     </div>
-  </div>
+  </div>-->
 
-  <div class="blog-card">
+  <!--<div class="blog-card">
     <div class="blog-card-image">
       <div class="blog-badge">January, 2025</div>
       <img src="images/pic04.jpg" alt="Beyond the Future of AI">
@@ -202,7 +202,7 @@ Feel free to reach out if you'd like to discuss research or explore potential co
         </a>
       </div>
     </div>
-  </div>
+  </div>-->
 
   <div class="blog-card">
     <div class="blog-card-image">
@@ -242,7 +242,7 @@ Feel free to reach out if you'd like to discuss research or explore potential co
     </div>
   </div> -->
 
-  <div class="blog-card">
+  <!--<div class="blog-card">
     <div class="blog-card-image">
       <div class="blog-badge">November, 2023</div>
       <img src="images/pic03.jpg" alt="LLMs Technology">
@@ -256,6 +256,6 @@ Feel free to reach out if you'd like to discuss research or explore potential co
         </a>
       </div>
     </div>
-  </div>
+  </div>-->
 
 </div>
