@@ -17,16 +17,13 @@ original_url: https://mp.weixin.qq.com/s/_rHrBpRZX_U2Zmt8vRZ22Q
 过去几个月，我系统地研究了 Anthropic 的 Claude Code 文档，并用它搭建了两个面向真实科研场景的系统：
 
 1.  一个可以大规模、跨付费墙下载论文的自动化文献下载 Agent
-
 2.  一个在特定数据集上自动迭代优化预测算法的「自迭代 AI Scientist」
 
 
 这篇文章会把这两套系统拆开讲，重点放在三件事：
 
 *   Skills 和 Subagents 到底在实践中扮演什么角色
-
 *   它们如何把 LLM 从「聊天工具」升级成生产级科研基础设施
-
 *   在长时间运行、复杂优化任务中，你会遇到哪些真实的坑
 
 
@@ -39,8 +36,7 @@ original_url: https://mp.weixin.qq.com/s/_rHrBpRZX_U2Zmt8vRZ22Q
 下面是最终的系统结构图。
 
 ![](./images/2025-11-27-claude-code-skills-subagents/640.png)
-
-AI驱动的自动化文献下载Agent示意图（由Nano Banana Pro生成）
+*AI驱动的自动化文献下载Agent示意图（由Nano Banana Pro生成）*
 
 ## 第一阶段：从 Agent 到 Skill 的演变
 
@@ -51,9 +47,7 @@ AI驱动的自动化文献下载Agent示意图（由Nano Banana Pro生成）
 最初我构建了一个专门服务于多肽自组装主题的 Agent，其核心任务是进行全面的文献综述，系统性地搜索、下载、组织并遵循严格的命名和去重协议。
 
 *   **搜索与去重：** Agent 利用 MCP 访问外部系统和学术数据库（如 Semantic Scholar, PubMed, Biorxiv, Sci-Hub）进行文献查找。在添加任何新文献之前，它被要求必须检查本地的 `total.htm` 文件以确保不重复。
-
 *   **标准化命名：** 严格遵循统一的命名格式，例如：`<YYYY>_<JournalAbbr>_<Sanitized-Title>_MS.pdf`。
-
 *   **成果：** 首次运行该 Agent 大约花费了 10 分钟，进行了 32 次工具调用，并成功交付了 50 篇新的多肽自组装文献。
 
 
@@ -80,9 +74,7 @@ Skills 是项目内的功能脚本集合，用于封装具体的工作流步骤�
 有了 Skills，下载能力稳了下来。我用 15293 条多肽自组装相关文献信息做了压力测试，结果如下：
 
 *   **总成功率：**最终成功下载了 9071 篇 PDF，总成功率达到 59.3%。
-
 *   **渠道表现：**得益于 TDM API 的使用，受机构订阅支持的渠道下载成功率极高：Elsevier 成功率 99.8%，Wiley 成功率 95.9%。这证明了结合机构 API 是解决付费文献大规模获取问题的有效途径。此外，工作流中还引入了 Unpaywall 回退机制来补充缺失的 OA 链接。
-
 
 这说明「AI 检索 + TDM API 下载」的组合非常有效。
 
@@ -97,9 +89,7 @@ Skills 是项目内的功能脚本集合，用于封装具体的工作流步骤�
 为了解决这个问题，我先在工作流中增加了严格的约束和分批次处理逻辑：
 
 *   **限制搜索结果数量：** 明确规定在使用 MCP 搜索文献时，必须限制返回结果数量（例如 `max_results` 不超过 50），以避免上下文窗口过载。
-
 *   **分批次执行：** 面对大型下载任务，Agent 必须将任务拆分成更小的部分，例如将 DOI 列表保存为 `doi_batch_1.txt`, `doi_batch_2.txt`, `doi_batch_3.txt`，然后按顺序执行下载 Skill。
-
 *   **在后台执行命令：** 可以利用 Claude Code 提供的后台命令功能来规避命令执行超时的问题，只需要简单地在 `CLAUDE.md` 里加上"Always execute download command in the background"的记忆即可。
 
 通过这种方式，Agent 的鲁棒性得到了提升，能够更有效地管理其上下文，从而完成大规模的自动化任务，但还是时常会出现提前结束任务的问题。
@@ -123,20 +113,15 @@ Claude Code 提供的 MCP 和 Skills 框架，使得我们将复杂的科研逻�
 早期版本的实验管线是这样的：
 
 1.  Python 脚本驱动 LLM 做特征选择和算法设计
-
 2.  再用 Codex 或 Claude Code 实现算法代码
-
 3.  代码跑完以后，输出验证集上的 c-index 结果（c-index 是一种用于衡量「排序一致性」的评估指标，这里可以粗略地把它理解成「验证集表现分数」，和 R²、MSE 一样用来衡量模型好坏。）
-
 4.  脚本把这个 c-index 反馈给 LLM，让它在下一轮调整特征和模型结构
-
 5.  重复，形成一个闭环优化过程
 
 
 在这个阶段已经能让 LLM 生成非常复杂的算法 blueprint，包括特征工程、正则化、损失函数、评估方案、文献引用等等。但有两个现实问题迅速出现：
 
 *   **实现层面很不稳定：**Claude Code 和 Codex 都有「写到一半停手」的倾向，经常需要多轮提示才能得到完整可靠的代码。
-
 *   **迭代效果很快触顶甚至开始下滑：**第一轮迭代会有一点提升，再继续迭代，c-index 反而下降。
 
 
@@ -147,18 +132,14 @@ Claude Code 提供的 MCP 和 Skills 框架，使得我们将复杂的科研逻�
 我最终把整套系统拆成两个部分：
 
 *   1个 Skill：专门负责「迭代想法」
-
 *   4个 Subagent：专门负责「实现代码并跑完」
 
 
 Claude 负责 orchestrate 整个循环，好处很明显：
 
 *   每个 Subagent 的 role 非常清晰，不容易 stuck
-
 *   Claude Code 只协调，不需要记住所有历史
-
 *   结构化文件成为上下文来源
-
 *   整个系统可以连续运行几个小时
 
 
@@ -177,11 +158,8 @@ Claude 负责 orchestrate 整个循环，好处很明显：
 输出文件结构如下（按轮次保存）：
 
 *   `results.json`：包含本轮指标表现
-
 *   `model_checkpoint.pt`：模型权重
-
 *   `training_log.txt`：训练日志
-
 *   `implementation_summary.md`：实现与思路总结
 
 
@@ -192,13 +170,9 @@ Claude 负责 orchestrate 整个循环，好处很明显：
 它会：
 
 *   基于历史表现推断哪些特征有贡献
-
 *   快速进行 web search 以了解各个特征的含义
-
 *   排查冗余或高度相关特征
-
 *   适度提出组合特征或轻量化派生特征
-
 *   给出明确的特征选择理由（可解释化）
 
 
@@ -214,11 +188,8 @@ Claude 负责 orchestrate 整个循环，好处很明显：
 它会：
 
 *   生成新的建模思路
-
 *   根据失败案例提出修复或规避方案
-
 *   对本轮特征提出匹配度较高的设计 输出：
-
 *   `ideas.json`：多条按优先级排序的想法清单
 
 
@@ -254,7 +225,6 @@ Claude 负责 orchestrate 整个循环，好处很明显：
 在文献下载 Agent 的早期，我曾尝试让 LLM 记住下载列表，通过 Prompt 让它「通过循环一个个下载」。结果是它在处理几十个文件后就开始出现幻觉或自行终止。解决之道的关键在于降维：
 
 *   **凡是涉及循环、计数、精准匹配的逻辑，一律下沉为 Python 代码（Skills）。**
-
 *   **LLM 的职责仅限于：理解意图 -> 组装参数 -> 调用 Skills -> 检查返回值。**
 
 
@@ -267,7 +237,6 @@ Claude 负责 orchestrate 整个循环，好处很明显：
 引入 Subagents 的本质，不仅仅是角色扮演，更是为了建立上下文防火墙：
 
 *   **Feature-Selection Agent** 不需要知道 **Algorithm-Implementer** 具体的 PyTorch 代码写得有多烂，它只需要看 `results.json`。
-
 *   **Idea-Iteration Agent** 不需要关注具体的 API 鉴权细节，它只需要专注于 ideas.json 的逻辑推演。
 
 
@@ -278,9 +247,7 @@ Claude 负责 orchestrate 整个循环，好处很明显：
 在传统的 Chat 模式中，我们习惯认为对话历史 = 记忆。但在生产级工作流中，对话历史是最不可靠的存储介质。在我的两个系统中，真正的状态从未保存在 LLM 的脑子里，而是保存在文件系统中：
 
 *   文献下载进度保存在 `total.htm` 和 `doi_batch.txt`。
-
 *   AI 科学家的进化路径保存在 `ideas.json` 和 `config.yaml`。
-
 *   任务的执行流转依靠 continuous-claude 的 Git 提交记录。
 
 
