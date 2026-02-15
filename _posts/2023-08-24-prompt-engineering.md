@@ -6,7 +6,7 @@ description: "Introduce a number of methods for optimizing the output of large l
 cover_image: /images/pic01.jpg
 categories: [AI, Tutorial]
 tags: [LLM, Prompt Engineering, ChatGPT, AI]
-reading_time: 10
+original_url: https://sspai.com/post/82322
 ---
 
 从去年ChatGPT问世以来，我已使用大语言模型近一年。随着大模型广泛应用于微软Copilot、Notion AI等产品，人们开始研究如何优化输出结果。相比调整模型参数或微调等复杂技术，提示词工程（Prompt Engineering）是非专业人士更易掌握的方法。

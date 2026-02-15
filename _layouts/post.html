@@ -24,11 +24,11 @@ layout: default
         <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %d, %Y" }}</time>
       </span>
 
-      {% if page.reading_time %}
-      <span class="post-reading-time">
-        <i class="fas fa-clock"></i>
-        {{ page.reading_time }} min read
-      </span>
+      {% if page.original_url %}
+      <a href="{{ page.original_url }}" class="post-original-link" target="_blank" rel="noopener noreferrer">
+        <i class="fas fa-external-link-alt"></i>
+        Original Post
+      </a>
       {% endif %}
 
       {% if page.categories and page.categories.size > 0 %}
