@@ -141,12 +141,12 @@ Feel free to reach out if you'd like to discuss research or explore potential co
   </div>
 </div>
 
-<div class="external-blogs-divider">
+<!--<div class="external-blogs-divider">
   <span><i class="fas fa-external-link-alt"></i> External Articles</span>
 </div>
-{% endif %}
+{% endif %}-->
 
-<div class="blog-grid">
+<!--<div class="blog-grid">-->
   <!--<div class="blog-card">
     <div class="blog-card-image">
       <div class="blog-badge">November, 2025</div>
@@ -204,7 +204,7 @@ Feel free to reach out if you'd like to discuss research or explore potential co
     </div>
   </div>-->
 
-  <div class="blog-card">
+  <!--<div class="blog-card">
     <div class="blog-card-image">
       <div class="blog-badge">November, 2024</div>
       <img src="images/pic05.jpg" alt="LexiMind">
@@ -221,7 +221,7 @@ Feel free to reach out if you'd like to discuss research or explore potential co
         </a>
       </div>
     </div>
-  </div>
+  </div>-->
 
   <!-- <div class="blog-card">
     <div class="blog-card-image">
@@ -258,4 +258,4 @@ Feel free to reach out if you'd like to discuss research or explore potential co
     </div>
   </div>-->
 
-</div>
+<!--</div>-->

@@ -8,6 +8,8 @@ categories: [AI, Tutorial]
 original_url: https://sspai.com/post/82322
 ---
 
+# 如何更好地向大模型提问？
+
 从去年ChatGPT问世以来，我已使用大语言模型近一年。随着大模型广泛应用于微软Copilot、Notion AI等产品，人们开始研究如何优化输出结果。相比调整模型参数或微调等复杂技术，提示词工程（Prompt Engineering）是非专业人士更易掌握的方法。
 
 ## 什么是提示词工程？

@@ -966,6 +966,10 @@ body {
   font-size: 1.3rem;
 }
 
+.post-content h1 {
+  font-size: 2rem;
+}
+
 .post-content p {
   margin-bottom: 1.5rem;
 }
@@ -991,13 +995,15 @@ body {
 }
 
 .post-content blockquote {
-  background: #f8f9fa;
+  margin: 2em 1em 2em 0;
+  padding: 1.5em 2em;
+  background: #f8f9fa !important;
   border-left: 4px solid #FE667B;
-  padding: 1rem 1.5rem;
-  margin: 1.5rem 0;
-  border-radius: 0 8px 8px 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(1, 47, 99, 0.08);
+  position: relative;
   font-style: italic;
-  color: #495057;
+  color: #012F63 !important;
 }
 
 .post-content code {
@@ -1188,11 +1194,15 @@ body {
   }
 
   .post-content h2 {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
   }
 
   .post-content h3 {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+  }
+
+  .post-content h1 {
+    font-size: 1.6rem;
   }
 
   .local-blogs-header {
