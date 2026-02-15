@@ -66,7 +66,7 @@ Feel free to reach out if you'd like to discuss research or explore potential co
 <div class='paper-box floating-card'>
   <div class='paper-box-image'>
     <div class="badge pulse-accent">Under Review</div>
-    <img src='images/TADA_pipeline.jpg' alt="CAST Framework Architecture" width="100%">
+    <img src='images/TADA-pipeline.jpg' alt="CAST Framework Architecture" width="100%">
   </div>
   <div class='paper-box-text'>
     <h3>CAST: Achieving Stable LLM-based Text Analysis for Data Analytics</h3>
@@ -95,7 +95,7 @@ Feel free to reach out if you'd like to discuss research or explore potential co
   </div>
 </div>
 
-- Qiyang Chen, Yuezhi Wang, **Jinxiang Xie**, Guozheng Li, Chi Harold Liu. $M^3$ Trader: Multimodal Macro–Micro Inference with LLM-Guided Reinforcement Learning for Quantitative Trading. **Under Review**.
+<!--- Qiyang Chen, Yuezhi Wang, **Jinxiang Xie**, Guozheng Li, Chi Harold Liu. $M^3$ Trader: Multimodal Macro–Micro Inference with LLM-Guided Reinforcement Learning for Quantitative Trading. **Under Review**.-->
 
 # <i class="fas fa-graduation-cap"></i> Educations
 - *2025.09 - Present*: &nbsp;Master of Science at <span class="primary-gradient-text">Kuang Yaming Honors School, Nanjing University</span>.

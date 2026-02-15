@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "My 21st Year | From Beijing to the World, What I Saw Beyond the Borders"
+title: "The Limits of My Language Mean the Limits of My World"
 date: 2025-06-01
-description: "From New York to Jeddah, from Peking University to Microsoft - a story of cultural shock, self-discovery, and growth during a journey around the world at 21."
+description: "Drawing on Wittgenstein's philosophy, a recent paper argues that our existing language might be the fundamental bottleneck."
 cover_image: /images/2025-06-01-the-limits-of-my-language-mean-the-limits-of-my-world/0.jpg
 categories: [Life, Travel]
 original_url: https://mp.weixin.qq.com/s/pomI-HLyVpOitxor-7hTDQ

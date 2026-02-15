@@ -19,24 +19,28 @@ layout: default
     <h1 class="post-title" itemprop="name">{{ page.title }}</h1>
 
     <div class="post-meta">
-      <span class="post-date">
+      <span class="post-date post-meta-item">
         <i class="fas fa-calendar-alt"></i>
         <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %d, %Y" }}</time>
       </span>
 
       {% if page.original_url %}
-      <a href="{{ page.original_url }}" class="post-original-link" target="_blank" rel="noopener noreferrer">
+      <span class="post-meta-separator" aria-hidden="true">|</span>
+      <a href="{{ page.original_url }}" class="post-original-link post-meta-item" target="_blank" rel="noopener noreferrer">
         <i class="fas fa-external-link-alt"></i>
         Original Post
       </a>
       {% endif %}
 
       {% if page.categories and page.categories.size > 0 %}
-      <span class="post-categories">
+      <span class="post-meta-separator" aria-hidden="true">|</span>
+      <span class="post-categories post-meta-item">
         <i class="fas fa-folder"></i>
-        {% for category in page.categories %}
-          <span class="tag-accent">{{ category }}</span>
-        {% endfor %}
+        <span class="post-categories-list">
+          {% for category in page.categories %}
+            <span class="post-category">{{ category }}</span>{% unless forloop.last %}, {% endunless %}
+          {% endfor %}
+        </span>
       </span>
       {% endif %}
     </div>
@@ -44,35 +48,22 @@ layout: default
   </header>
 
   <!-- Post Content -->
+  {% assign image_root = '/images/' | relative_url %}
+  {% assign src_images_double = 'src="' | append: image_root %}
+  {% assign src_images_single = "src='" | append: image_root %}
+  {% assign href_images_double = 'href="' | append: image_root %}
+  {% assign href_images_single = "href='" | append: image_root %}
+  {% assign normalized_content = content
+    | replace: 'src="./images/', src_images_double
+    | replace: "src='./images/", src_images_single
+    | replace: 'src="images/', src_images_double
+    | replace: "src='images/", src_images_single
+    | replace: 'href="./images/', href_images_double
+    | replace: "href='./images/", href_images_single
+    | replace: 'href="images/', href_images_double
+    | replace: "href='images/", href_images_single
+  %}
   <section class="post-content" itemprop="articleBody">
-    {{ content }}
+    {{ normalized_content }}
   </section>
-
-  <!-- Post Navigation -->
-  <nav class="post-navigation">
-    <div class="post-nav-links">
-      {% if page.previous.url %}
-      <a href="{{ page.previous.url | relative_url }}" class="post-nav-link post-nav-prev">
-        <span class="nav-label"><i class="fas fa-arrow-left"></i> Previous</span>
-        <span class="nav-title">{{ page.previous.title }}</span>
-      </a>
-      {% else %}
-      <div class="post-nav-link post-nav-prev disabled"></div>
-      {% endif %}
-
-      <a href="{{ '/blog/' | relative_url }}" class="post-nav-link post-nav-all">
-        <span class="nav-label"><i class="fas fa-th-large"></i></span>
-        <span class="nav-title">All Posts</span>
-      </a>
-
-      {% if page.next.url %}
-      <a href="{{ page.next.url | relative_url }}" class="post-nav-link post-nav-next">
-        <span class="nav-label">Next <i class="fas fa-arrow-right"></i></span>
-        <span class="nav-title">{{ page.next.title }}</span>
-      </a>
-      {% else %}
-      <div class="post-nav-link post-nav-next disabled"></div>
-      {% endif %}
-    </div>
-  </nav>
 </article>

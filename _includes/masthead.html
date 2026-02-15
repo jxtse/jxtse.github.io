@@ -5,11 +5,11 @@
         <button><div class="navicon"></div></button>
         <ul class="visible-links">
           <li class="masthead__menu-item masthead__menu-item--lg masthead__menu-home-item">
-            <a href="#about-me">Homepage</a>
+            <a href="{{ '/#about-me' | relative_url }}">Homepage</a>
           </li>
           {% for link in site.data.navigation.main %}
             <li class="masthead__menu-item">
-              <a href="{{ domain }}{{ link.url }}">{{ site.t.en[link.title] | default: link.title }}</a>
+              <a href="{{ link.url | relative_url }}">{{ site.t.en[link.title] | default: link.title }}</a>
             </li>
           {% endfor %}
         </ul>
