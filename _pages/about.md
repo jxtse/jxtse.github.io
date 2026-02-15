@@ -120,7 +120,7 @@ Feel free to reach out if you'd like to discuss research or explore potential co
   </div>
   <div class="blog-grid">
     {% assign sorted_posts = site.posts | sort: 'date' | reverse %}
-    {% for post in sorted_posts limit:6 %}
+    {% for post in sorted_posts limit:9 %}
     <a href="{{ post.url | relative_url }}" class="blog-card-link">
       <div class="blog-card">
         <div class="blog-card-image">
