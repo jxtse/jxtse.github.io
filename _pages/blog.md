@@ -27,13 +27,6 @@ author_profile: true
       <div class="blog-card-content">
         <div class="blog-title">{{ post.title }}</div>
         <div class="blog-description">{{ post.description | default: post.excerpt | strip_html | truncate: 150 }}</div>
-        {% if post.tags and post.tags.size > 0 %}
-        <div class="blog-tags">
-          {% for tag in post.tags limit:3 %}
-          <span class="tag-accent tag-small">{{ tag }}</span>
-          {% endfor %}
-        </div>
-        {% endif %}
       </div>
     </div>
   </a>

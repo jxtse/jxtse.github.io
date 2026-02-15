@@ -5,7 +5,6 @@ date: 2025-01-26
 description: "From Web 3.0 to Bitcoin breaking $100K, from speculators to true believers - exploring the technical potential of cryptocurrency, its future direction, and the possibility of a decentralized society in the AGI era."
 cover_image: /images/pic04.jpg
 categories: [Tech, Finance]
-tags: [Cryptocurrency, Bitcoin, Web3, Blockchain, AI, Future]
 original_url: https://mp.weixin.qq.com/s/luu2qEzPnYAuryJ9mYoJ6Q
 ---
 
@@ -15,7 +14,7 @@ original_url: https://mp.weixin.qq.com/s/luu2qEzPnYAuryJ9mYoJ6Q
 
 同年11月20日，我在班级的团日活动上做了一个演讲，其中有一节的内容名为《元宇宙、区块链、NFT：中国在Web 3.0领域的落后与探索》。在这次演讲上，我从国际共产主义运动，谈到Web 3.0领域的基础知识，再谈到「一带一路」战略和我心目中的中华民族伟大复兴。时至今日，我依然认为这是我做过选题最大胆、成分最复杂的演讲。
 
-![](./images/ce86b10c-00c5-404d-a909-7e66d60e3e99.jpg)
+![](./images/2025-01-26-beyond-the-future-of-ai/640.jpg)
 
   
 
@@ -29,7 +28,7 @@ original_url: https://mp.weixin.qq.com/s/luu2qEzPnYAuryJ9mYoJ6Q
     
 *   2025年1月，特朗普通过社交媒体宣布推出名为「$TRUMP」的代币，这一举动引发市场热议，代币在短短24小时内价格飙升超过240倍，全流通市值从零暴涨至450亿美元。
     
-    ![](./images/6e54f7b8-7fec-444f-8a9c-12ea79e1a55c.jpg)
+    ![](./images/2025-01-26-beyond-the-future-of-ai/650.jpg)
     
     特朗普推特发币
     
@@ -48,7 +47,7 @@ original_url: https://mp.weixin.qq.com/s/luu2qEzPnYAuryJ9mYoJ6Q
 
 与股票、期货等金融交易品不同，加密货币背后往往没有实体资产的支撑，它们的价格更多地基于「社会共识」。比如，以太坊（ETH）是一条区块链，随着越来越多的项目在其上发布代币，其价格就会逐渐上涨，这里的价格上涨来源于人们对于代币背后项目的认可。而与之不同，Solana这条链上的一些加密货币则可能是基于模因（Meme）文化所创造的，模因文化是一种通过模仿和传递在社交平台上快速传播的文化现象，这种类型的加密货币背后不与实际项目挂钩。例如马斯克曾力挺的狗狗币（DOGE），就是基于大家上网常用的那个狗头表情包创建的，特朗普最近发布的「$TRUMP」币也是在Solana链上。这些模因币虽然起源于玩笑，但却承载了一种特殊的共识：它们不需要复杂的技术，也不需要落地的应用，只需要一个足够强大的文化符号，就能凝聚信仰。
 
-![](./images/c5c01cb6-f1c2-468d-a180-4bc3dcfec576.jpg)
+![](./images/2025-01-26-beyond-the-future-of-ai/660.jpg)
 
 狗狗币（DOGE）
 
@@ -66,7 +65,7 @@ original_url: https://mp.weixin.qq.com/s/luu2qEzPnYAuryJ9mYoJ6Q
 
 这种价值投资的方法论同样适用于以太坊等其他加密货币。以太坊代表了一种理想化的「技术乌托邦」，其智能合约和去中心化应用（DApp）生态系统为其代币ETH提供了内在价值。这种模式，与某些理想化的「链上共产主义」有着天然的契合点，导致其一直被视为加密技术的「灯塔」。
 
-![](./images/31e1b8dd-1186-41bb-9afa-f6eb61cfdafc.jpg)
+![](./images/2025-01-26-beyond-the-future-of-ai/670.jpg)
 
 ETH的介绍，图片来源：Investopedia
 
@@ -82,7 +81,7 @@ ETH的介绍，图片来源：Investopedia
 
 2022年11月30日，ChatGPT横空出世，创造了用户增长的新神话。我在当年的12月成为了ChatGPT的早期用户之一，并在次年四月决定把精力都投入到以大语言模型（Large Language Model, LLM）引领的AI科技浪潮中。大家往往喜欢把ChatGPT的发布作为本轮AI科技革命的起点，但早在ChatGPT发布的6个月前，AI生成图片的成功就已经为这场革命拉开了序幕。2022年5月17日，Marques Brownlee在YouTube上发表了一条题为《DALLE: AI Made This Thumbnail!》的视频，介绍了DALLE这一跨时代的AI产品，它可以根据用户的提示词生成你想要的图片。
 
-![](./images/2c43d256-821b-4e71-a526-a7018580f6e7.jpg)
+![](./images/2025-01-26-beyond-the-future-of-ai/680.png)
 
 油管数码博主MKBHD关于DALLE的分享
 
@@ -93,14 +92,13 @@ ETH的介绍，图片来源：Investopedia
 那么这些与区块链和加密货币有什么关系呢？
 
 > 你不能只改变一点而不改变一切
-> 
 > ——奥地利哲学家，马丁·布伯
 
 在我看来，区块链和AI并非各自独立发展的技术，而是密切相互依存、相互促进的。三年前有人说AIGC（AI Generated Content，AI生成的内容）是补上了Web 3.0的最后一块缺口，这种说法不无道理。在Web 3.0的愿景中，区块链为数字世界中的每个实体赋予了唯一的标识，并且这种标识在链上是唯一、公开且不可篡改的，这给数字化世界的社区提供了很大的便利。与此相辅相成的是，AI技术正在重新定义内容创作和数据处理的方式。如果用区块链给所有AI生成的内容打上标识，大家就可以清晰地看到该内容是由人创造地还是由AI生成的，还能够对该内容的来源和演化进行清晰的追溯。这对防止互联网上充斥着各种真假难辨良莠不齐的AI生成内容有巨大帮助。
 
 例如，当前已经有一些项目开始尝试将AI与区块链技术结合，以解决数字内容的版权保护和溯源问题。通过将AI生成的内容（如图片、音乐、视频等）的哈希值存储在区块链上，可以创建一个不可篡改的记录，证明该内容的所有权和创作时间。这种技术可以应用于数字艺术品、音乐作品、软件代码等领域，为创作者提供更好的版权保护，并为消费者提供更可信的数字内容来源。
 
-![](./images/c49d74b4-f8ba-4de0-8117-4ccbf5a5baf5.jpg)
+![](./images/2025-01-26-beyond-the-future-of-ai/690.png)
 
 **一个专为知识产权设计的区块链平台**
 
@@ -108,7 +106,7 @@ ETH的介绍，图片来源：Investopedia
 
 除了高性能显卡和可控核聚变，这次新技术革命还有什么关键基础设施的需求吗？有的，有的，脑机接口也是其中的重要一环。2016年，马斯克创立Neuralink，专注于开发植入式脑机接口技术。该公司的目标是实现人脑与机器之间的高度连接，以增强人类智能并降低人工智能带来的风险。在一次播客采访中，马斯克提到，Neuralink不仅为了给神经系统疾病患者提供新的治疗方案，更希望推动人类与人工智能之间的共生关系，他设想未来用户可以用意念控制机器人等设备，这将改变人类与机器之间的互动方式。
 
-![](./images/eb8b2004-d567-4577-a374-f6be513334c6.jpg)
+![](./images/2025-01-26-beyond-the-future-of-ai/700.jpg)
 
 马斯克的Neuralink
 
@@ -120,7 +118,7 @@ ETH的介绍，图片来源：Investopedia
 
 试想一下，当每棵树都被「NFT化」后，全球的环境保护事业能够真正得以推动，滥砍滥伐的行为能够被彻底制止。未来的社会，将不再单纯依赖传统的法律和政策，而是通过技术手段实现自我治理和自我规范。
 
-![](./images/1847ab61-01ba-41af-b4b7-7f2f2569454b.jpg)
+![](./images/2025-01-26-beyond-the-future-of-ai/710.png)
 
 区块链在供应链管理中的应用
 
@@ -130,8 +128,7 @@ ETH的介绍，图片来源：Investopedia
 
 我们必须要设计出比区块链更为精巧的信任机制，为AI加装「护栏」；通过设计新的传播媒介，让人类始终在与AI的协作中处于领导地位；通过探索新的能量获取途径，实现对地球资源的可持续开发。只有这样，以人为本的AI（Human-Centric AI）才可能实现。
 
-> 在马克思看来，劳动是实现人类价值的唯一途径，劳动定义了你是什么样的人。马克思设想的共产主义社会是人人都可以选择做自己喜欢做的事，可以今天做渔民，明天做教师，后天做工人，消灭雇佣关系之后，人可以有自由选择和表达的权利。在现代社会，决定经济增长的不是劳动和资本，而是技术。
-> 
+> 在马克思看来，劳动是实现人类价值的唯一途径，劳动定义了你是什么样的人。马克思设想的共产主义社会是人人都可以选择做自己喜欢做的事，可以今天做渔民，明天做教师，后天做工人，消灭雇佣关系之后，人可以有自由选择和表达的权利。在现代社会，决定经济增长的不是劳动和资本，而是技术。 
 > ——《我们的未来·数字社会乌托邦》
 
 # 参考文献与推荐阅读
@@ -144,21 +141,8 @@ ETH的介绍，图片来源：Investopedia
     
 *   梁州令·EP08：对谈比特币个人玩家：博士休学炒币后，我发现一个亿，只是进虚拟货币圈的门槛
     
-*   [我的Web 3.0学习笔记
+*   [我的Web 3.0学习笔记](https://mp.weixin.qq.com/s?__biz=Mzg5NzczMzM3MA==&mid=2247483651&idx=1&sn=e8d04b8f58f2b3cdb96ae59fe22a1f76&scene=21#wechat_redirect)
     
-    ](https://mp.weixin.qq.com/s?__biz=Mzg5NzczMzM3MA==&mid=2247483651&idx=1&sn=e8d04b8f58f2b3cdb96ae59fe22a1f76&scene=21#wechat_redirect)
-    
-*   [关于现货比特币ETF的概念和意义
-    
-    ](https://mp.weixin.qq.com/s?__biz=Mzk0MzI3MTMxOA==&mid=2247490156&idx=1&sn=2ef8d022336c3529337b247d09a08d6c&scene=21#wechat_redirect)
+*   [关于现货比特币ETF的概念和意义](https://mp.weixin.qq.com/s?__biz=Mzk0MzI3MTMxOA==&mid=2247490156&idx=1&sn=2ef8d022336c3529337b247d09a08d6c&scene=21#wechat_redirect)
     
 *   各大高校的区块链协会
-    
-
-  
-
-* * *
-
-  
-
-免责声明：本文内容仅供参考，不构成任何财务、法律、税务、投资建议或其他意见。某些特定的交易会导致重大风险，并不适宜所有的投资者参与。用户应当自寻专业人士及金融顾问，在参与本文中所提及的交易前就法律、商业、财务、税收及其他方面的问题获得专业的建议。依据本文所发布的信息以及所表达的意见行事所造成的一切后果由行事者自负，与本文作者无关。

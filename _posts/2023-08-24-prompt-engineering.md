@@ -5,7 +5,6 @@ date: 2023-08-24
 description: "Introduce a number of methods for optimizing the output of large language models and reducing the probability of irrelevant or incorrect responses."
 cover_image: /images/pic01.jpg
 categories: [AI, Tutorial]
-tags: [LLM, Prompt Engineering, ChatGPT, AI]
 original_url: https://sspai.com/post/82322
 ---
 

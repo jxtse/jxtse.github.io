@@ -5,8 +5,7 @@ date: 2025-06-01
 description: "From New York to Jeddah, from Peking University to Microsoft - a story of cultural shock, self-discovery, and growth during a journey around the world at 21."
 cover_image: /images/2025-06-01-the-limits-of-my-language-mean-the-limits-of-my-world/0.jpg
 categories: [Life, Travel]
-tags: [Travel, New York, Personal Growth, Reflection]
-original_url: https://mp.weixin.qq.com/s/5wn3NvB2FBpJD1jK0L4qbQ
+original_url: https://mp.weixin.qq.com/s/pomI-HLyVpOitxor-7hTDQ
 ---
 
 # 我的21岁｜从北京到世界，越过边界我看见的未来

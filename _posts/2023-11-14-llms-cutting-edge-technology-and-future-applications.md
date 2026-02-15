@@ -5,21 +5,17 @@ date: 2023-08-24
 description: "Introduce a number of methods for optimizing the output of large language models and reducing the probability of irrelevant or incorrect responses."
 cover_image: /images/pic03.jpg
 categories: [AI, Tutorial]
-tags: [LLM, Agent, AI]
-reading_time: 10
+original_url: https://mp.weixin.qq.com/s/G7PTKk63RhnwuKplh9qYlQ
 ---
 
-# 在人间vol.4｜大模型：前沿技术与未来应用
+# 大模型：前沿技术与未来应用
 
 今天去中国人民大学高瓴人工智能学院参加了一个有关大模型的报告，报告请来了来自人大高瓴、北大王选所、中科院计算所、哈工大计算机学院和小米AI实验室等顶尖科研机构的人员。报告的节奏非常快，知识密度非常高，以下是我从有限的记录中回忆出的报告内容：
 
   
 
-![](./images/c7e0e22b-93c9-4fab-be25-bed25966658f.jpg)
+![](./images/2023-11-14-llms-cutting-edge-technology-and-future-applications/640.png)
 
-  
-
-![](./images/6ac21ac1-9bb1-459f-b875-d40123f2319c.jpg)
 
 ## 基于大模型的自主智能体
 
@@ -31,7 +27,7 @@ reading_time: 10
 
   
 
-![](./images/b9012928-19c1-4f50-a639-e2c4c98a3ef9.jpg)
+![](./images/2023-11-14-llms-cutting-edge-technology-and-future-applications/640.jpg)
 
   
 
@@ -77,7 +73,7 @@ reading_time: 10
 
   
 
-![](./images/fcefc624-c5e9-4691-8c8f-d2531d3f82cc.jpg)
+![](./images/2023-11-14-llms-cutting-edge-technology-and-future-applications/650.jpg)
 
   
 
@@ -89,7 +85,7 @@ reading_time: 10
 
   
 
-![](./images/6354d93e-ccf1-4f3f-baac-91efdb0da8a0.jpg)
+![](./images/2023-11-14-llms-cutting-edge-technology-and-future-applications/660.jpg)
 
   
 
@@ -109,7 +105,7 @@ reading_time: 10
 
   
 
-![](./images/03378861-604b-4294-aaab-0e861aa540fc.jpg)
+![](./images/2023-11-14-llms-cutting-edge-technology-and-future-applications/670.jpg)
 
   
 
@@ -123,7 +119,7 @@ reading_time: 10
 
   
 
-![](./images/d842bd7a-10a1-48d2-bb6e-c5edb7c8c94b.jpg)
+![](./images/2023-11-14-llms-cutting-edge-technology-and-future-applications/680.jpg)
 
   
 
@@ -131,7 +127,7 @@ reading_time: 10
 
   
 
-![](./images/6a7d42eb-2aa1-499d-af29-59b41eb1eeb0.jpg)
+![](./images/2023-11-14-llms-cutting-edge-technology-and-future-applications/690.jpg)
 
   
 
@@ -149,7 +145,7 @@ reading_time: 10
 
   
 
-![](./images/46fc5a1d-79a1-456d-aaa3-5570250a4fae.jpg)
+![](./images/2023-11-14-llms-cutting-edge-technology-and-future-applications/700.jpg)
 
   
 
@@ -157,7 +153,7 @@ reading_time: 10
 
   
 
-![](./images/c808650d-6b92-4096-8034-0ee494d7e113.jpg)
+![](./images/2023-11-14-llms-cutting-edge-technology-and-future-applications/710.jpg)
 
   
 
@@ -165,7 +161,7 @@ reading_time: 10
 
 接下来是来自中科院计算所的敖翔老师分享了他对大模型在金融行业落地的前景和思考。他首先简单回顾了大模型的发展历程和安全风险，PPT上列出的详细总结引的大家纷纷举起手机拍照。谈到在金融行业的落地场景，他指出目前能够落地的智能客服、文档审核、信息抽取和文案生成工作并不是金融行业独有的，在其他行业也依然适用。而金融行业期望的数据信息的定量分析与解释，如收入预测、量化交易和信用评级等核心诉求，大模型目前并没有办法做到，大模型要真正在金融行业落地还有很长的路要走。
 
-![](./images/28c64f83-cdee-4914-b7eb-04385b9c3daa.jpg)
+![](./images/2023-11-14-llms-cutting-edge-technology-and-future-applications/720.jpg)
 
   
 
@@ -179,7 +175,7 @@ reading_time: 10
 
   
 
-![](./images/0104f77b-5539-420f-8461-1565c194068b.jpg)
+![](./images/2023-11-14-llms-cutting-edge-technology-and-future-applications/730.jpg)
 
   
 
@@ -187,7 +183,7 @@ reading_time: 10
 
   
 
-![](./images/7ba1484d-d48d-4ff5-9e9a-1ba2b431ccc2.jpg)
+![](./images/2023-11-14-llms-cutting-edge-technology-and-future-applications/740.jpg)
 
   
 
@@ -195,7 +191,7 @@ reading_time: 10
 
 接着是有关大模型工具学习的分享，即让大模型学会使用工具，增强模型自主解决复杂任务的能力。林老师团队试图构建一个统一的基础框架，给大模型提供一个良好的Perceiver、Controller、Tool Set和Environment，让大模型可以根据用户的不同需求，使用不同的工具解决任务。比如让大模型学会使用搜索引擎，他们通过模拟人类使用搜索引擎的点击和滚动等行为对大模型进行有监督微调加强化学习，只需6000个注释数据就可以达到接近人类的搜索引擎使用水平。其他诸如ToolBench、Elo树搜索和XAgent我就不过多介绍了。XAgent的愿景很不错，希望可以建立统一的智能体语言，通过海量的外部工具和Docker执行环境让智能体能够更好地为用户服务。
 
-![](./images/88b0384c-d56e-4c19-ba7d-97448415ef33.jpg)
+![](./images/2023-11-14-llms-cutting-edge-technology-and-future-applications/750.jpg)
 
   
 
@@ -203,4 +199,4 @@ reading_time: 10
 
 接着来自小米的邓巍老师介绍了小米在端侧视觉大模型方面的研究。他介绍了视觉模型从特定任务模型到预训练模型再到如今多模态大模型的发展历程，还介绍了文生图大模型的基本框架，接着以小米相册搜索为例介绍了他们的大模型实践，我也不过多赘述了。
 
-![](./images/22d616b9-dd24-4606-87ad-d25ffdeb6498.jpg)
+![](./images/2023-11-14-llms-cutting-edge-technology-and-future-applications/760.jpg)
