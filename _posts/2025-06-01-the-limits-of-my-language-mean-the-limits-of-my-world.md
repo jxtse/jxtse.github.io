@@ -3,7 +3,7 @@ layout: post
 title: "My 21st Year | From Beijing to the World, What I Saw Beyond the Borders"
 date: 2025-06-01
 description: "From New York to Jeddah, from Peking University to Microsoft - a story of cultural shock, self-discovery, and growth during a journey around the world at 21."
-cover_image: /images/pic06.jpg
+cover_image: /images/2025-06-01-the-limits-of-my-language-mean-the-limits-of-my-world/0.jpg
 categories: [Life, Travel]
 tags: [Travel, New York, Personal Growth, Reflection]
 original_url: https://mp.weixin.qq.com/s/5wn3NvB2FBpJD1jK0L4qbQ
@@ -11,31 +11,15 @@ original_url: https://mp.weixin.qq.com/s/5wn3NvB2FBpJD1jK0L4qbQ
 
 # 我的21岁｜从北京到世界，越过边界我看见的未来
 
-  
-
-  
-
-![](./images/69bb87fb-c12a-4c22-be6f-0671ce7f3f16.jpg)
 
 封面图：在纽约时代广场
 
-  
 
 从纽约坐飞机回国，前后辗转了四十多个小时，是我体验过最长的飞行。长途飞行带来的晕眩感，波音777巨大的引擎轰鸣声，难吃的飞机餐、刺鼻的厕所味和旁边老外奇怪的体味，都在深深折磨着我。从美国东海岸出发，经圣皮埃尔离开北美大陆，跨越大西洋。大不列颠岛上是一望无际的绿色平原，跨过英吉利海峡后，很快又能看到连绵不断的山丘，然后是阿尔卑斯皑皑的雪山。直到华北平原古老而沧桑的轮廓出现在我眼前。忍受着脑壳、耳蜗和腰部的多处疼痛，我在飞机上完成了半个环球旅行。
 
-  
 
-1
+## 1. 不朽的美梦：美国的一切像金碧辉煌的海市蜃楼
 
-  
-
-  
-
-**不朽的美梦：美国的一切像金碧辉**
-
-**煌****的海市蜃楼**
-
-  
 
 赴美的过程十分曲折，先是我因论文被接收拿到了参会的邀请函，用邀请函提交了美国签证的申请。签证申请阶段就屡屡碰壁，1月初的面签预约被无故取消，然后2月初面签时又被丝滑check，一等又是3个月，下签时那个会议早就已经结束了，奔波许久拿的来自AAAI的旅行资助也打了水漂。
 
@@ -51,7 +35,7 @@ original_url: https://mp.weixin.qq.com/s/5wn3NvB2FBpJD1jK0L4qbQ
 
 我们在世贸中心Oculus里路过一家名为The Strangers Project的店铺，这种电影般的印象在这里开始出现裂痕。墙上贴满了在纽约的陌生人手写的独白：有人控诉原生家庭带来的创伤，有人倾诉在这都市丛林中的孤独，有人记录自己不顾一切的追梦之旅……我从这些纽约客们的故事中感受到纽约的确是世界的中心，它用无限的可能性拥抱那些怀揣梦想而来的人们，也用同等的冷漠和无情对他们进行残酷的压迫和筛选。
 
-![](./images/59dc5545-4786-40c1-9783-68c370299ae0.jpg)
+![](./images/2025-06-01-the-limits-of-my-language-mean-the-limits-of-my-world/640.jpg)
 
 The Strangers Project的店铺
 
@@ -71,7 +55,7 @@ The Strangers Project的店铺
 
 我还在第五大道偶遇了关于巴以冲突的示威游行，那天从第50街到第59街的地区全部被警察封锁，我要去的现代艺术博物馆恰好在第53街，我绕了很久也没绕进去，被迫观看了游行。游行人员身穿统一的服装，有的还披着以色列和美国的国旗，很有秩序地扫码入场。他们在场内分成了一个一个的方阵，在警察的指挥下喊口号。在一个方阵走过去后，警察会放我们行人快速通行，我排了挺久的队才成功过了马路。除了以色列的人群相比，还有一些反对的声音显得势单力薄。他们聚集在封锁区的外侧举着诸如「Judaism yes! Zionism no! State of Israel must go!」（接受犹太教！反对犹太复国主义！以色列国必须消失！）的牌子，身穿典型的犹太人服装，有些还戴着耳机听着音乐，像在玩一场Cosplay游戏。
 
-![](./images/af6931a4-8f52-4e8a-b528-9f6f44286dfd.jpg)
+![](./images/2025-06-01-the-limits-of-my-language-mean-the-limits-of-my-world/650.jpg)
 
 反对以色列的抗议人群
 
@@ -103,7 +87,7 @@ The Strangers Project是一个流动的、参与性的艺术装置，把城市�
 
 到了剑桥和波士顿，我们参观了哈佛大学、MIT、NEU等学校。在MIT Meida Lab和Art Museum我大受震撼，写下了「在MIT看全世界同行最优秀的作品」。我逐渐消失的科研热情被重新燃起，我也想像他们一样，做出改变世界的伟大作品。
 
-![](./images/c630568a-a015-482d-a6ed-7dc3b212fc54.jpg)
+![](./images/2025-06-01-the-limits-of-my-language-mean-the-limits-of-my-world/660.jpg)
 
 哈佛的兔子看着也很well-educated的样子
 
@@ -111,7 +95,7 @@ The Strangers Project是一个流动的、参与性的艺术装置，把城市�
 
 跟电影人的旅程每天都像生活在电影里。在尼亚加拉河边，温暖的阳光洒闪烁在湍急的河面和河边青绿色的草地上，很有夏天的感觉，脑海中响起了那首经典的《Mystery of Love》。大大小小的加拿大鹅在河滨的步道上觅食，年轻的情侣在长椅上谈天说地、拥抱亲吻，又如电影《Niagara》里度蜜月的玛丽莲·梦露。
 
-![](./images/54f87e4b-9fef-4b30-84f3-13540338f2ee.jpg)
+![](./images/2025-06-01-the-limits-of-my-language-mean-the-limits-of-my-world/670.jpg)
 
 尼亚加拉河边
 
@@ -131,7 +115,7 @@ The Strangers Project是一个流动的、参与性的艺术装置，把城市�
 
 我每天早上就是从这里蓬头垢面地出发，日复日载饥载渴，身体忍受着折磨，精神世界却是无比轻盈的。在中央公园的小山上随意找一块草地躺下，让思绪自由地漫游，然后再穿过几十个街区，一路走到西岸喝杯咖啡。在一个没有人认识我的陌生城市，在繁华的钢筋混凝土的树丛中，在嘈杂的街道声中，我的内心获得了前所未有的平静。
 
-![](./images/1677d3ab-218c-44eb-939d-b6df4d0629e2.jpg)
+![](./images/2025-06-01-the-limits-of-my-language-mean-the-limits-of-my-world/680.jpg)
 
 躺在中央公园的小山坡上
 
@@ -143,23 +127,19 @@ The Strangers Project是一个流动的、参与性的艺术装置，把城市�
 
 我打开刚买的鸡肉卷吃，由于卷的横截面积特别大，我每次吃的时候都会把酱汁粘到嘴边，然后我就要跑到卫生间去洗掉。那是我吃过最辣的鸡肉卷，比我吃过任何的湘菜和川菜还要夸张，我咣咣灌了半瓶健怡可乐依然不解辣。只吃了不到一半，辣的我眼泪都出来了，然后眼泪越流越多，越流越汹涌，仿佛是积蓄已久的情绪，终于找到了一个喷薄而出的借口。我分不清自己是被辣哭了还是真的在哭，只能不断地跑去洗手间，让冰冷的自来水冲刷掉脸上所有的痕迹......
 
-![](./images/03ddfd30-eeb5-40dc-a043-6afbd527a499.jpg)
+![](./images/2025-06-01-the-limits-of-my-language-mean-the-limits-of-my-world/690.jpg)
 
 《了不起的盖茨比》台词
 
   
 
-2
-
-Her v.s Him
-
-：人类智能的能与不能
+## 2. Her v.s Him：人类智能的能与不能
 
   
 
 除了探索了地理的边界和自由的边界，这一年更给我激烈冲击的是探索人类与人工智能的边界。在波士顿的酒店里看了《Her》，这部电影于2014年上映，是讲述未来人与人工智能相爱的科幻爱情片，2025年恰好是剧中设定的未来时间。如今电影中的幻想已经部分成为了现实——ChatGPT可以代替真人进行情感陪伴，AI Agent可以替我们处理生活中的一些复杂事务。有人认为该电影非常超前地预言了大语言模型的出现，因此把ChatGPT称为「Him」。
 
-![](./images/a8621c1a-e22c-4348-8224-18cc4c57e134.jpg)
+![](./images/2025-06-01-the-limits-of-my-language-mean-the-limits-of-my-world/700.jpg)
 
 电影《Her》的宣传海报
 
@@ -183,7 +163,7 @@ Her v.s Him
 
 今年6月，我在北京的智源大会上聆听了各位专家对这些问题的讨论。首先，已经很少有人争论机器的智能会不会超过人类这个问题了，因为问题的答案几乎是肯定的，机器智能在未来会大幅超越人类。中外的专家们默契地给出了差不多的预言：AGI（Artificial General Intellifence, 通用人工智能）会在2-5年内到来，ASI（Artificial Super Intelligence, 超级人工智能）将会紧随其后。事实上，目前还没有达成通用的AI模型已经在数学、编码、阅读和写作速度方面超过大多数人类了，那么AGI对绝大多数人来说绝对算得上是降维打击了。
 
-![](./images/5d3159fe-cf76-4716-9a3b-8a02154ef450.jpg)
+![](./images/2025-06-01-the-limits-of-my-language-mean-the-limits-of-my-world/710.jpg)
 
 在智源大会2025听圆桌讨论
 
@@ -195,7 +175,7 @@ Her v.s Him
 
 Google Deepmind和哥伦比亚大学今年有一篇论文叫《We Can't Understand AI Using our Existing Vocabulary 》，文中引用了维特根斯坦说的「我语言的边界，意味着我世界的边界」，认为现有的人类词汇无法充分理解和控制AI系统，因为人类和机器对世界概念化的方式存在差异。作者提出应开发「新词」（neologisms），即能够精确表达特定人类或机器概念的新词汇，以弥合人机沟通的鸿沟，并通过实验展示了这些新词如何帮助更有效地控制和理解AI行为。
 
-![](./images/9170bf3e-bdc1-47a7-924c-9f4b4dda15a0.jpg)
+![](./images/2025-06-01-the-limits-of-my-language-mean-the-limits-of-my-world/720.jpg)
 
 机器和人类对世界的理解可能从根本上有所不同
 
@@ -219,7 +199,7 @@ Google Deepmind和哥伦比亚大学今年有一篇论文叫《We Can't Understa
 
 比如，我们询问AI，「the capital of the state containing Dallas is?」(包含达拉斯的州的首府在哪里？)。直观上，这个完成需要两个步骤——首先，推断出包含达拉斯的州是德克萨斯州；其次，德克萨斯州的首府是奥斯汀。Anthropic的实验表明，模型在回答这个问题时的确执行了两步推理，激活了代表「say a captital」和「Texas」的超节点，并最终激活了「say Austin」的超节点，给出了正确的回答。
 
-![](./images/222a24c7-c774-4f95-8ed4-605293bdc251.jpg)
+![](./images/2025-06-01-the-limits-of-my-language-mean-the-limits-of-my-world/730.png)
 
 the capital of the state containing Dallas is?
 
@@ -235,7 +215,7 @@ the capital of the state containing Dallas is?
 
 另一个例子是，在研究模型是如何做加法的时候，他们发现模型会并行地进行推理。在一条路径上，模型得出36+59的结果应当以5结尾，另一条路径上，模型得出这两个数的和应当在88-97的范围内，然后结合这两条得到最终的和是95，这与人类做加法的方式不太一样。
 
-![](./images/c21df14c-f03d-4c58-aebb-61ac81f3e917.jpg)
+![](./images/2025-06-01-the-limits-of-my-language-mean-the-limits-of-my-world/740.png)
 
 Claude模型做加法时的推理路径
 
@@ -247,7 +227,7 @@ Claude模型做加法时的推理路径
 
 这里适合贴一下蔡国强老师的关于人类与AI共存法则的宣言的第10条：「人类的发展一直是对降维的追求，寻求简化和理解复杂高纬度的宇宙本质。记住，这是一把双面刃：在寻求降维的过程中，人类最终可能会缩小自己，成为曾经的影子——只是一台不断膨胀的机器中的齿轮」。
 
-![](./images/1de38425-0688-44e7-96aa-3f991ea82245.jpg)
+![](./images/2025-06-01-the-limits-of-my-language-mean-the-limits-of-my-world/750.jpg)
 
 关于人类与AI共存法则的宣言
 
@@ -261,9 +241,7 @@ Claude模型做加法时的推理路径
 
   
 
-3
-
-**雨季不再来**
+## 3. 雨季不再来
 
   
 
@@ -363,4 +341,4 @@ Claude模型做加法时的推理路径
 
 在即将迈入22岁的节点上，祝我们都像三毛说的那样：「总有一日，我要在一个充满阳光的早晨醒来，那时我要躺在床上，静静地听听窗外如洗的鸟声，那是多么安适而又快乐的一种苏醒。到时候，我早晨起来，对着镜子，我会再度看见阳光驻留在我的脸上，我会一遍遍地告诉自己，雨季过了，雨季将不再来。」
 
-![](./images/d03d7cfc-3b20-48b7-a80f-f6c68fc829cb.jpg)
+![](./images/2025-06-01-the-limits-of-my-language-mean-the-limits-of-my-world/760.jpg)

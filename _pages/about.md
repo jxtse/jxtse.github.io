@@ -146,8 +146,8 @@ Feel free to reach out if you'd like to discuss research or explore potential co
 </div>
 {% endif %}
 
-<!--<div class="blog-grid">
-  <div class="blog-card">
+<div class="blog-grid">
+  <!--<div class="blog-card">
     <div class="blog-card-image">
       <div class="blog-badge">November, 2025</div>
       <img src="images/claude-pipeline.png" alt="Claude Code Skills 和 Subagents 的个人实践">

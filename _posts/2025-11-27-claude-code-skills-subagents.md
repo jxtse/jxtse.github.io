@@ -3,7 +3,7 @@ layout: post
 title: "Claude Code Skills and Subagents in Practice"
 date: 2025-11-27
 description: "Two production-grade systems for real research scenarios: a paywall-crossing paper harvester and a self-iterating AI Scientist, demonstrating how Skills and Subagents upgrade LLMs into research infrastructure."
-cover_image: /images/claude-pipeline.png
+cover_image: /images/2025-11-27-claude-code-skills-subagents/0.png
 categories: [AI, Tutorial]
 tags: [Claude Code, LLM, AI Agent, Skills, Subagents, Automation]
 original_url: https://mp.weixin.qq.com/s/_rHrBpRZX_U2Zmt8vRZ22Q
@@ -39,7 +39,7 @@ original_url: https://mp.weixin.qq.com/s/_rHrBpRZX_U2Zmt8vRZ22Q
 
 下面是最终的系统结构图。
 
-![](./images/ceaf7cf1-f9b8-44d1-9ece-5edbf0d42c9b.jpg)
+![](./images/2025-11-27-claude-code-skills-subagents/640.png)
 
 AI驱动的自动化文献下载Agent示意图（由Nano Banana Pro生成）
 
@@ -51,13 +51,9 @@ AI驱动的自动化文献下载Agent示意图（由Nano Banana Pro生成）
 
 最初我构建了一个专门服务于多肽自组装主题的 Agent，其核心任务是进行全面的文献综述，系统性地搜索、下载、组织并遵循严格的命名和去重协议。
 
-*   **搜索与去重：** Agent 利用 MCP 访问外部系统和学术数据库（如 Semantic Scholar, PubMed, Biorxiv, Sci-Hub）进行文献查找。在添加任何新文献之前，它被要求必须检查本地的
+*   **搜索与去重：** Agent 利用 MCP 访问外部系统和学术数据库（如 Semantic Scholar, PubMed, Biorxiv, Sci-Hub）进行文献查找。在添加任何新文献之前，它被要求必须检查本地的 `total.htm` 文件以确保不重复。
 
-     `total.htm  ` 文件以确保不重复。
-
-*   **标准化命名：** 严格遵循统一的命名格式，例如：
-
-    `<YYYY>_<JournalAbbr>_<Sanitized-Title>_MS.pdf  `。
+*   **标准化命名：** 严格遵循统一的命名格式，例如：`<YYYY>_<JournalAbbr>_<Sanitized-Title>_MS.pdf`。
 
 *   **成果：** 首次运行该 Agent 大约花费了 10 分钟，进行了 32 次工具调用，并成功交付了 50 篇新的多肽自组装文献。
 
@@ -68,27 +64,15 @@ AI驱动的自动化文献下载Agent示意图（由Nano Banana Pro生成）
 
 虽然 Agent 在小规模任务中表现优异，但要应对大规模数据下载，需要更专业的工具集成，尤其是针对付费文献。
 
-我发现可以利用机构订阅的权限，通过
-
- **Springer, Elsevier 和 Wiley** 的 TDM (Text and Data Mining) API 获取付费墙内的文献全文本。对于开放获取（OA）文献，则使用
-
- **OpenAlex REST API** 进行检索和下载。
+我发现可以利用机构订阅的权限，通过 **Springer, Elsevier 和 Wiley** 的 TDM (Text and Data Mining) API 获取付费墙内的文献全文本。对于开放获取（OA）文献，则使用 **OpenAlex REST API** 进行检索和下载。
 
 为了将这些专业的 API 调用逻辑和批量处理能力集成到 Claude Code 的自动化工作流中，我采用了 Skills 机制。
 
 Skills 是项目内的功能脚本集合，用于封装具体的工作流步骤。通过将「按 DOI 下载论文PDF」的能力封装成 Skill，Agent 可以在研究流程中直接、高效地调用。
 
-**核心脚本：** 我创建了
+**核心脚本：** 我创建了 `.claude/skills/paper-download Skill`，包含了用于单个 DOI 下载的 `download_by_doi.py` 和支持批量下载的 `download_multiple_dois.py` 脚本，以及关于该 Skill的说明 `SKILL.md`。
 
- `.claude/skills/paper-download Skill  `，包含了用于单个 DOI 下载的
-
- `download_by_doi.py  ` 和支持批量下载的
-
- `download_multiple_dois.py  ` 脚本，以及关于该 Skill的说明
-
- `SKILL.md  ` 。
-
-（如果您想要有更直观的感觉，可以到我的GitHub库里查看SKILL文档的全文）
+（如果您想要有更直观的感觉，可以到[我的GitHub库](https://github.com/jxtse/auto-paper-harvester)里查看SKILL文档的全文）
 
 至此，Agent 不再负责实现逻辑，只做调度。需要检索文献的时候调用MCP，需要下载文献的时候调用Skills，有了这些坚实的基础设施，我想要下载文献的时候只需要给一句简单的 prompt 「帮我下载100篇xxx领域的文献」即可。
 
@@ -96,9 +80,9 @@ Skills 是项目内的功能脚本集合，用于封装具体的工作流步骤�
 
 有了 Skills，下载能力稳了下来。我用 15293 条多肽自组装相关文献信息做了压力测试，结果如下：
 
-*   **总成功率：** 最终成功下载了 9071 篇 PDF，总成功率达到 59.3%。
+*   **总成功率：**最终成功下载了 9071 篇 PDF，总成功率达到 59.3%。
 
-*   **渠道表现：** 得益于 TDM API 的使用，受机构订阅支持的渠道下载成功率极高：Elsevier 成功率 99.8%，Wiley 成功率 95.9%。这证明了结合机构 API 是解决付费文献大规模获取问题的有效途径。此外，工作流中还引入了 Unpaywall 回退机制来补充缺失的 OA 链接。
+*   **渠道表现：**得益于 TDM API 的使用，受机构订阅支持的渠道下载成功率极高：Elsevier 成功率 99.8%，Wiley 成功率 95.9%。这证明了结合机构 API 是解决付费文献大规模获取问题的有效途径。此外，工作流中还引入了 Unpaywall 回退机制来补充缺失的 OA 链接。
 
 
 这说明「AI 检索 + TDM API 下载」的组合非常有效。
@@ -113,24 +97,15 @@ Skills 是项目内的功能脚本集合，用于封装具体的工作流步骤�
 
 为了解决这个问题，我先在工作流中增加了严格的约束和分批次处理逻辑：
 
-*   **限制搜索结果数量：** 明确规定在使用 MCP 搜索文献时，必须限制返回结果数量（例如
+*   **限制搜索结果数量：** 明确规定在使用 MCP 搜索文献时，必须限制返回结果数量（例如 `max_results` 不超过 50），以避免上下文窗口过载。
 
-     `max_results  ` 不超过 50），以避免上下文窗口过载。
+*   **分批次执行：** 面对大型下载任务，Agent 必须将任务拆分成更小的部分，例如将 DOI 列表保存为 `doi_batch_1.txt`, `doi_batch_2.txt`, `doi_batch_3.txt`，然后按顺序执行下载 Skill。
 
-*   **分批次执行：** 面对大型下载任务，Agent 必须将任务拆分成更小的部分，例如将 DOI 列表保存为
-
-     `doi_batch_1.txt  `,
-
-     `doi_batch_2.txt  `，然后按顺序执行下载 Skill。
-
-*   **在后台执行命令：** 可以利用 Claude Code 提供的后台命令功能来规避命令执行超时的问题，只需要简单地在
-
-     `CLAUDE.md  ` 里加上"Always execute download command in the background"的记忆即可。
-
+*   **在后台执行命令：** 可以利用 Claude Code 提供的后台命令功能来规避命令执行超时的问题，只需要简单地在 `CLAUDE.md` 里加上"Always execute download command in the background"的记忆即可。
 
 通过这种方式，Agent 的鲁棒性得到了提升，能够更有效地管理其上下文，从而完成大规模的自动化任务，但还是时常会出现提前结束任务的问题。
 
-一个更优雅的解决方法是使用一个叫做 continuous-claude 的开源库（https://github.com/AnandChowdhary/continuous-claude），这个库使用Git的方式来管理任务进度，Claude 可以持续运行直到完成用户设定的结果。
+一个更优雅的解决方法是使用一个叫做 [continuous-claude](https://github.com/AnandChowdhary/continuous-claude) 的开源库，这个库使用Git的方式来管理任务进度，Claude 可以持续运行直到完成用户设定的结果。
 
 ## 小结：AI 驱动科研工作流的价值
 
@@ -161,9 +136,9 @@ Claude Code 提供的 MCP 和 Skills 框架，使得我们将复杂的科研逻�
 
 在这个阶段已经能让 LLM 生成非常复杂的算法 blueprint，包括特征工程、正则化、损失函数、评估方案、文献引用等等。但有两个现实问题迅速出现：
 
-*   **实现层面很不稳定：** Claude Code 和 Codex 都有「写到一半停手」的倾向，经常需要多轮提示才能得到完整可靠的代码。
+*   **实现层面很不稳定：**Claude Code 和 Codex 都有「写到一半停手」的倾向，经常需要多轮提示才能得到完整可靠的代码。
 
-*   **迭代效果很快触顶甚至开始下滑：** 第一轮迭代会有一点提升，再继续迭代，c-index 反而下降。
+*   **迭代效果很快触顶甚至开始下滑：**第一轮迭代会有一点提升，再继续迭代，c-index 反而下降。
 
 
 这提醒了一件事：LLM 在缺少结构化上下文时非常容易失焦。没有清晰的科学工作流和状态管理，让它「自己瞎改」，很快就会从局部贪心变成随机游走。
@@ -202,13 +177,13 @@ Claude 负责 orchestrate 整个循环，好处很明显：
 
 输出文件结构如下（按轮次保存）：
 
-*   `results.json  `：包含本轮指标表现
+*   `results.json`：包含本轮指标表现
 
-*   `model_checkpoint.pt  `：模型权重
+*   `model_checkpoint.pt`：模型权重
 
-*   `training_log.txt  `
+*   `training_log.txt`：训练日志
 
-*   `implementation_summary.md  `：实现与思路总结
+*   `implementation_summary.md`：实现与思路总结
 
 
 #### Subagent 2：Feature-Selection-Agent
@@ -230,7 +205,7 @@ Claude 负责 orchestrate 整个循环，好处很明显：
 
 输出：
 
-*   `selected_features.json  `（特征集与理由）
+*   `selected_features.json`（特征集与理由）
 
 
 #### Subagent 3：Idea-Iteration-Agent
@@ -245,7 +220,7 @@ Claude 负责 orchestrate 整个循环，好处很明显：
 
 *   对本轮特征提出匹配度较高的设计 输出：
 
-*   `ideas.json  `：多条按优先级排序的想法清单
+*   `ideas.json`：多条按优先级排序的想法清单
 
 
 #### Subagent 4：Optimization-Algorithm-Agent
@@ -254,14 +229,10 @@ Claude 负责 orchestrate 整个循环，好处很明显：
 
 输出：
 
-*   `config.yaml  `：完整可执行的训练配置
+*   `config.yaml`：完整可执行的训练配置
 
 
-所有的 Subagent 被完善地定义在
-
- `.claude/subagents  ` 文件夹当中，可以在 Claude Code 中输入
-
- `/agents  ` 命令进行快速查看和编辑。其中负责特征选择的 Subagent 2 被提供了快速查看数据集中的 column name 以及少量样本的 skill；负责迭代想法的 Subagent 3 被提供了调用LLM API迭代想法的 skill，这个 skill 包含了精心设计的迭代 prompt。
+所有的 Subagent 被完善地定义在 `.claude/subagents` 文件夹当中，可以在 Claude Code 中输入 `/agents` 命令进行快速查看和编辑。其中负责特征选择的 Subagent 2 被提供了快速查看数据集中的 column name 以及少量样本的 skill；负责迭代想法的 Subagent 3 被提供了调用LLM API迭代想法的 skill，这个 skill 包含了精心设计的迭代 prompt。
 
 通过预定义的 Subagents 和 Skills，LLM 可以自主地主持迭代过程和协调任务，更加省时、有效地完成优化任务。
 
@@ -296,13 +267,9 @@ Claude 负责 orchestrate 整个循环，好处很明显：
 
 引入 Subagents 的本质，不仅仅是角色扮演，更是为了建立上下文防火墙：
 
-*   **Feature-Selection Agent** 不需要知道
+*   **Feature-Selection Agent** 不需要知道 **Algorithm-Implementer** 具体的 PyTorch 代码写得有多烂，它只需要看 `results.json`。
 
-     **Algorithm-Implementer** 具体的 PyTorch 代码写得有多烂，它只需要看
-
-     `results.json  `。
-
-*   **Idea-Iteration Agent** 不需要关注具体的 API 鉴权细节，它只需要专注于 ideas.json 的逻辑推演。
+*   **Idea-Iteration Agent** 不需要关注具体的 API 鉴权细节，它只需要专注于 ideas.json 的逻辑推演。
 
 
 每个 Subagent 都在一个干净、独立的上下文中运行，完成任务后即销毁，只向下游传递经过压缩的高价值信息（Summary/JSON）。这种架构极大地延缓了上下文污染的速度，使得系统能够进行长程的自我迭代。
@@ -311,17 +278,9 @@ Claude 负责 orchestrate 整个循环，好处很明显：
 
 在传统的 Chat 模式中，我们习惯认为对话历史 = 记忆。但在生产级工作流中，对话历史是最不可靠的存储介质。在我的两个系统中，真正的状态从未保存在 LLM 的脑子里，而是保存在文件系统中：
 
-*   文献下载进度保存在
+*   文献下载进度保存在 `total.htm` 和 `doi_batch.txt`。
 
-     `total.htm  ` 和
-
-     `doi_batch.txt  `。
-
-*   AI 科学家的进化路径保存在
-
-     `ideas.json  ` 和
-
-     `config.yaml  `。
+*   AI 科学家的进化路径保存在 `ideas.json` 和 `config.yaml`。
 
 *   任务的执行流转依靠 continuous-claude 的 Git 提交记录。
 
