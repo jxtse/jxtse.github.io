@@ -257,9 +257,10 @@
   padding: .25em;
   font-size: 1.75em;
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
+  align-content: center;
   margin-bottom: 0;
-  line-height: 1;
+  line-height: 1.4;
   a {
     color: inherit;
     text-decoration: none;
