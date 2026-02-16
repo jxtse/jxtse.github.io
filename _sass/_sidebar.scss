@@ -147,11 +147,10 @@
 
 .author__urls-wrapper {
   position: relative;
-  display: table-cell;
-  vertical-align: middle;
+  display: flex;
+  align-items: center;
   font-family: $sans-serif;
   z-index: 10;
-  position: relative;
   margin-left: auto;
   cursor: pointer;
 
