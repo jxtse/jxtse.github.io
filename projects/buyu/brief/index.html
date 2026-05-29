@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>步语 · BUYU — 产品与技术 Brief</title>
+<meta name="description" content="步语 BuYu — AI 散步同伴 App。音频优先、主动克制、360° 纪念品。产品与技术 brief。">
+<meta property="og:title" content="步语 · BUYU — 产品与技术 Brief">
+<meta property="og:description" content="你只管散步和说话，AI 替你看、替你记，回家送你一份 360° 的散步纪念品。">
+<meta property="og:type" content="article">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=LXGW+WenKai+TC&family=Fraunces:opsz,wght@9..144,400;9..144,700;9..144,900&family=DM+Mono&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   步语 · BUYU — Brief
+   Style: Sun & Stroll (与 pitch deck 同源)
+   ============================================================ */
+:root{
+  --cream:#fbf3e4;
+  --cream-2:#f5e8cf;
+  --cream-3:#fdf8ec;
+  --sage:#9bb887;
+  --sage-dk:#6b8a55;
+  --moss:#3d5239;
+  --amber:#e89545;
+  --amber-dk:#c97525;
+  --pink:#f5b6b6;
+  --ink:#2b2418;
+  --muted:#6b5e44;
+  --line:#d4c8b0;
+
+  --font-display:'Fraunces',serif;
+  --font-cn:'LXGW WenKai TC','Noto Serif SC',serif;
+  --font-hand:'Caveat',cursive;
+  --font-mono:'DM Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-cn);
+  background:var(--cream);
+  color:var(--ink);
+  line-height:1.7;
+  font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ===== layout ===== */
+.wrap{
+  max-width:880px;
+  margin:0 auto;
+  padding:clamp(2rem,5vw,4rem) clamp(1.2rem,4vw,2.5rem);
+}
+section{
+  margin-bottom:clamp(3rem,6vw,5rem);
+  scroll-margin-top:1rem;
+}
+
+/* ===== typography ===== */
+h1.title{
+  font-family:var(--font-display);
+  font-weight:900;
+  font-size:clamp(2.4rem,6vw,4.2rem);
+  line-height:.98;
+  letter-spacing:-.02em;
+  color:var(--moss);
+}
+h2{
+  font-family:var(--font-cn);
+  font-weight:700;
+  font-size:clamp(1.5rem,3vw,2.1rem);
+  margin-bottom:1.2rem;
+  letter-spacing:-.01em;
+  color:var(--moss);
+  display:flex;align-items:baseline;gap:.7em;
+}
+h2 .num{
+  font-family:var(--font-display);
+  font-weight:900;
+  font-size:.7em;
+  color:var(--amber-dk);
+  font-style:italic;
+}
+h3{
+  font-family:var(--font-cn);
+  font-weight:700;
+  font-size:clamp(1.1rem,2vw,1.3rem);
+  margin:1.4rem 0 .6rem;
+  color:var(--ink);
+}
+p{margin-bottom:1rem}
+.lead{
+  font-size:clamp(1.05rem,1.6vw,1.25rem);
+  color:var(--muted);
+  margin-bottom:1.5rem;
+}
+.hand{font-family:var(--font-hand);color:var(--amber-dk);font-size:1.4em;line-height:1}
+.mono{font-family:var(--font-mono);font-size:.92em;letter-spacing:.02em}
+strong{color:var(--moss);font-weight:700}
+em{font-style:normal;color:var(--amber-dk)}
+a{color:var(--amber-dk);text-decoration:none;border-bottom:1px dashed var(--amber-dk)}
+a:hover{color:var(--amber);border-bottom-style:solid}
+ul,ol{padding-left:1.4rem;margin-bottom:1rem}
+li{margin-bottom:.45rem}
+
+/* ===== hero ===== */
+.hero{
+  background:
+    radial-gradient(ellipse at 80% 10%, rgba(232,149,69,0.15) 0%, transparent 55%),
+    radial-gradient(ellipse at 10% 95%, rgba(155,184,135,0.22) 0%, transparent 55%),
+    var(--cream);
+  padding:clamp(2.5rem,6vw,5rem) clamp(1.2rem,4vw,2.5rem) clamp(2rem,5vw,4rem);
+  border-bottom:1px dashed var(--line);
+  margin-bottom:clamp(2rem,4vw,3rem);
+  position:relative;
+  overflow:hidden;
+}
+.hero .wrap{padding:0;max-width:880px;margin:0 auto}
+.hero .doc-kind{
+  font-family:var(--font-hand);
+  color:var(--amber-dk);
+  font-size:1.6rem;
+  margin-bottom:.5rem;
+}
+.hero .sub{
+  font-family:var(--font-cn);
+  font-size:clamp(1.1rem,2vw,1.4rem);
+  color:var(--moss);
+  margin:1.2rem 0 1.8rem;
+  font-weight:400;
+  max-width:640px;
+}
+.hero .meta{
+  display:flex;flex-wrap:wrap;gap:1.2rem 2rem;
+  font-family:var(--font-mono);
+  font-size:.85rem;
+  color:var(--muted);
+  padding-top:1.4rem;
+  border-top:1px dashed var(--line);
+}
+.hero .meta .k{color:var(--moss);font-weight:700;margin-right:.3em}
+.hero-actions{
+  display:flex;flex-wrap:wrap;gap:.8rem;margin:1.4rem 0;
+}
+.btn{
+  display:inline-flex;align-items:center;gap:.5em;
+  padding:.7em 1.3em;
+  border-radius:999px;
+  font-family:var(--font-cn);
+  font-weight:700;
+  font-size:.95rem;
+  border:2px solid var(--moss);
+  background:var(--moss);
+  color:var(--cream);
+  border-bottom-color:var(--moss);
+  transition:all .2s ease;
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(61,82,57,.2);color:var(--cream)}
+.btn.ghost{background:transparent;color:var(--moss);border-color:var(--moss)}
+.btn.ghost:hover{background:var(--moss);color:var(--cream)}
+
+/* ===== TOC ===== */
+.toc{
+  background:var(--cream-3);
+  border:1px dashed var(--line);
+  border-radius:14px;
+  padding:1.3rem 1.6rem;
+  margin-bottom:clamp(2.5rem,5vw,4rem);
+}
+.toc-label{
+  font-family:var(--font-hand);
+  color:var(--amber-dk);
+  font-size:1.4rem;
+  margin-bottom:.4rem;
+}
+.toc ol{
+  columns:2;column-gap:2rem;
+  padding-left:1.3rem;
+  font-family:var(--font-mono);
+  font-size:.88rem;
+  list-style:decimal-leading-zero;
+}
+.toc li{margin-bottom:.25rem;break-inside:avoid;color:var(--muted)}
+.toc a{color:var(--ink);border:none}
+.toc a:hover{color:var(--amber-dk)}
+@media (max-width:640px){.toc ol{columns:1}}
+
+/* ===== one-liner card ===== */
+.one-liner{
+  background:linear-gradient(135deg,var(--cream-2) 0%,var(--cream) 100%);
+  border:2px solid var(--moss);
+  border-radius:18px;
+  padding:1.8rem 2rem;
+  margin:1.5rem 0;
+  position:relative;
+}
+.one-liner::before{
+  content:'"';
+  position:absolute;
+  left:-.2em;top:-.3em;
+  font-family:var(--font-display);
+  font-size:6rem;
+  color:var(--amber);
+  line-height:1;
+  opacity:.4;
+}
+.one-liner p{
+  font-family:var(--font-cn);
+  font-size:clamp(1.15rem,2vw,1.4rem);
+  font-weight:700;
+  color:var(--moss);
+  margin:0;
+  line-height:1.5;
+}
+
+/* ===== feature blocks ===== */
+.feature-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:1.2rem;
+  margin:1.5rem 0;
+}
+.feature{
+  background:var(--cream-3);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:1.4rem 1.5rem;
+}
+.feature .icon{
+  font-family:var(--font-hand);
+  color:var(--amber-dk);
+  font-size:2rem;
+  line-height:1;
+  margin-bottom:.4rem;
+}
+.feature h4{
+  font-family:var(--font-cn);
+  font-weight:700;
+  font-size:1.05rem;
+  color:var(--moss);
+  margin-bottom:.5rem;
+}
+.feature p{font-size:.92rem;color:var(--muted);margin:0;line-height:1.55}
+
+/* ===== role cards (insta360 三角色) ===== */
+.roles{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.5rem 0;
+}
+@media (max-width:680px){.roles{grid-template-columns:1fr}}
+.role{
+  background:var(--cream-3);
+  border:2px solid var(--sage);
+  border-radius:16px;
+  padding:1.4rem;
+  text-align:center;
+  position:relative;
+}
+.role .badge{
+  position:absolute;top:-.6rem;left:50%;transform:translateX(-50%);
+  background:var(--sage-dk);color:var(--cream);
+  font-family:var(--font-mono);font-size:.7rem;font-weight:700;
+  padding:.2rem .7rem;border-radius:999px;letter-spacing:.05em;
+}
+.role h4{font-family:var(--font-cn);font-weight:700;font-size:1.05rem;color:var(--moss);margin:.6rem 0 .5rem}
+.role p{font-size:.88rem;color:var(--muted);margin:0;line-height:1.5}
+
+/* ===== screenshots strip ===== */
+.shots{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:.8rem;margin:1.5rem 0;
+}
+.shots figure{
+  margin:0;text-align:center;
+}
+.shots img{
+  width:100%;height:auto;aspect-ratio:9/19.5;object-fit:cover;
+  border-radius:18px;border:1px solid var(--line);
+  background:var(--cream-2);
+}
+.shots figcaption{
+  font-family:var(--font-hand);color:var(--amber-dk);font-size:1rem;
+  margin-top:.4rem;
+}
+
+/* ===== tables ===== */
+.tbl{
+  width:100%;border-collapse:collapse;margin:1rem 0;
+  font-size:.9rem;
+}
+.tbl th{
+  text-align:left;
+  background:var(--cream-2);
+  font-family:var(--font-cn);
+  font-weight:700;
+  color:var(--moss);
+  padding:.7rem 1rem;
+  border-bottom:2px solid var(--sage-dk);
+}
+.tbl td{
+  padding:.7rem 1rem;
+  border-bottom:1px dashed var(--line);
+  vertical-align:top;
+}
+.tbl tr:last-child td{border-bottom:none}
+.tbl td.mono{font-family:var(--font-mono);font-size:.85rem}
+
+/* ===== architecture diagram (svg-style ascii alt) ===== */
+.arch{
+  background:var(--ink);
+  color:var(--cream);
+  border-radius:14px;
+  padding:1.5rem;
+  font-family:var(--font-mono);
+  font-size:.78rem;
+  line-height:1.5;
+  overflow-x:auto;
+  margin:1.2rem 0;
+  white-space:pre;
+}
+.arch .c-sage{color:var(--sage)}
+.arch .c-amber{color:var(--amber)}
+.arch .c-pink{color:var(--pink)}
+
+/* ===== contract / constraints ===== */
+.contract{
+  display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0;
+}
+@media (max-width:680px){.contract{grid-template-columns:1fr}}
+.contract .item{
+  background:var(--cream-3);
+  border-radius:12px;
+  padding:1.1rem 1.3rem;
+  border-left:4px solid var(--amber);
+}
+.contract .item.hard{border-left-color:#c44}
+.contract .item.soft{border-left-color:var(--sage-dk)}
+.contract .item .tag{
+  font-family:var(--font-mono);font-size:.72rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.1em;
+  color:#c44;margin-bottom:.3rem;display:block;
+}
+.contract .item.soft .tag{color:var(--sage-dk)}
+.contract .item h4{font-family:var(--font-cn);font-size:1rem;color:var(--moss);margin-bottom:.3rem}
+.contract .item p{font-size:.88rem;color:var(--muted);margin:0}
+
+/* ===== degradation matrix ===== */
+.matrix{
+  border:2px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+  margin:1.2rem 0;
+}
+.matrix-row{
+  display:grid;grid-template-columns:1fr 1.5fr 1.5fr;
+  border-bottom:1px dashed var(--line);
+}
+.matrix-row:last-child{border-bottom:none}
+.matrix-row.head{
+  background:var(--moss);color:var(--cream);
+  font-family:var(--font-cn);font-weight:700;
+}
+.matrix-row.safety{
+  background:var(--amber);color:var(--ink);
+  font-family:var(--font-cn);font-weight:700;
+  grid-template-columns:1fr;text-align:center;
+}
+.matrix-row > div{padding:.8rem 1rem;font-size:.9rem}
+.matrix-row > div:not(:last-child){border-right:1px dashed var(--line)}
+.matrix-row.head > div:not(:last-child){border-right-color:rgba(251,243,228,.2)}
+@media (max-width:680px){
+  .matrix-row{grid-template-columns:1fr}
+  .matrix-row > div{border-right:none !important;border-bottom:1px dotted var(--line)}
+  .matrix-row.head{display:none}
+}
+
+/* ===== milestones ===== */
+.milestones{list-style:none;padding:0;margin:1.2rem 0}
+.milestones li{
+  display:flex;align-items:flex-start;gap:.8rem;
+  padding:.6rem 0;
+  border-bottom:1px dashed var(--line);
+}
+.milestones li:last-child{border-bottom:none}
+.milestones .check{
+  font-family:var(--font-display);font-weight:900;font-size:1.2rem;
+  color:var(--sage-dk);flex-shrink:0;width:1.5rem;
+}
+
+/* ===== roadmap ===== */
+.roadmap{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem;margin:1.5rem 0;
+  position:relative;
+}
+@media (max-width:680px){.roadmap{grid-template-columns:1fr 1fr}}
+.roadmap .step{
+  background:var(--cream-3);
+  border:2px solid var(--line);
+  border-radius:14px;
+  padding:1.1rem;
+  position:relative;
+}
+.roadmap .step.current{border-color:var(--amber);background:var(--cream-2)}
+.roadmap .step .v{
+  font-family:var(--font-mono);font-size:.78rem;font-weight:700;
+  color:var(--amber-dk);letter-spacing:.05em;
+}
+.roadmap .step h4{font-family:var(--font-cn);font-weight:700;font-size:1rem;color:var(--moss);margin:.3rem 0 .4rem}
+.roadmap .step p{font-size:.85rem;color:var(--muted);margin:0;line-height:1.5}
+
+/* ===== contact ===== */
+.contact{
+  background:linear-gradient(135deg,var(--sage) 0%,var(--sage-dk) 100%);
+  color:var(--cream);
+  border-radius:18px;
+  padding:2rem 2.2rem;
+  margin:2rem 0;
+}
+.contact h2{color:var(--cream)}
+.contact h2 .num{color:var(--cream-2)}
+.contact p{color:var(--cream-2)}
+.contact a{color:var(--cream);border-bottom-color:var(--cream)}
+.contact-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:1rem;margin-top:1rem;font-size:.95rem;
+}
+.contact-grid div{
+  padding:.6rem 0;border-bottom:1px dashed rgba(251,243,228,.3);
+}
+.contact-grid .k{
+  font-family:var(--font-mono);font-size:.78rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.1em;
+  color:var(--cream-2);display:block;margin-bottom:.2rem;
+}
+
+/* ===== footer ===== */
+footer{
+  text-align:center;
+  padding:2rem 1rem 3rem;
+  color:var(--muted);
+  font-family:var(--font-mono);
+  font-size:.82rem;
+  border-top:1px dashed var(--line);
+  margin-top:3rem;
+}
+footer a{color:var(--muted)}
+
+/* ===== print ===== */
+@media print{
+  body{background:#fff;font-size:11pt;line-height:1.55}
+  .hero{background:#fff !important;padding:1rem 0;border-bottom:1px solid #ccc;break-after:avoid}
+  .toc,.btn,footer{display:none !important}
+  section{break-inside:avoid;margin-bottom:1.5rem}
+  h2{break-after:avoid}
+  .one-liner{background:#f5f5f5 !important;break-inside:avoid}
+  .arch{background:#f8f8f8 !important;color:#000 !important;border:1px solid #ccc}
+  .arch *{color:#000 !important}
+  .contact{background:#f5f5f5 !important;color:#000 !important}
+  .contact h2,.contact p,.contact a,.contact-grid .k{color:#000 !important}
+  a{color:#000 !important;border-bottom:none}
+  a[href^="http"]::after{content:" (" attr(href) ")";font-size:.8em;color:#666}
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<header class="hero">
+  <div class="wrap">
+    <div class="doc-kind">产品 + 技术 Brief</div>
+    <h1 class="title">步语 · BuYu</h1>
+    <p class="sub">你只管散步和说话，AI 替你看、替你记，回家送你一份 360° 的散步纪念品。</p>
+    <div class="hero-actions">
+      <a class="btn" href="../">📊 完整 Pitch Deck</a>
+      <a class="btn ghost" href="javascript:window.print()">🖨️ 打印 / 存 PDF</a>
+    </div>
+    <div class="meta">
+      <div><span class="k">类目</span>AI 散步同伴 App</div>
+      <div><span class="k">平台</span>iOS 原生 · Insta360 Link 2 Pro</div>
+      <div><span class="k">阶段</span>MVP · 玄武湖实测 ×3</div>
+      <div><span class="k">赛道</span>影石（Insta360）开发者</div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- ============================================================
+     TOC
+     ============================================================ -->
+<nav class="toc">
+  <div class="toc-label">目录 · Contents</div>
+  <ol>
+    <li><a href="#about">产品是什么</a></li>
+    <li><a href="#problem">问题与洞察</a></li>
+    <li><a href="#contract">AI 行为契约</a></li>
+    <li><a href="#insta360">为什么 Insta360 是核心</a></li>
+    <li><a href="#product">产品体验</a></li>
+    <li><a href="#arch">技术架构</a></li>
+    <li><a href="#degrade">降级策略矩阵</a></li>
+    <li><a href="#milestones">实测里程碑</a></li>
+    <li><a href="#roadmap">路线图</a></li>
+    <li><a href="#contact">联系合作</a></li>
+  </ol>
+</nav>
+
+<!-- ============================================================
+     ABOUT
+     ============================================================ -->
+<section id="about">
+  <h2><span class="num">01</span>产品是什么</h2>
+
+  <div class="one-liner">
+    <p>一款 <strong>iOS 原生</strong>、<strong>音频优先</strong> 的 AI 散步同伴 App。用户出门时戴影石相机 + 蓝牙耳机，手机进口袋。AI 替你看世界、替你记录，散步结束自动生成一份 360° 的纪念品。</p>
+  </div>
+
+  <h3>散步中 — 三条交互约定</h3>
+  <ul>
+    <li><strong>AI 几乎不打扰</strong>：主动开口 ≤ 3 次 / 10 分钟，且只用来"推荐附近值得看的地方"</li>
+    <li><strong>被动有问必答</strong>：你说"那是什么花？"，相机帧 + VLM 在 3 秒内给答案</li>
+    <li><strong>被动捕捉</strong>：你说"记一下"，AI 才记。<em>不替你判断"什么值得记"</em></li>
+  </ul>
+
+  <h3>散步后 — Keepsake 走步纪念物</h3>
+  <ul>
+    <li>自动生成 <strong>30–60 秒短视频纪念品</strong>，含 360° 视频精选 + 地图轨迹 + 对话精华字幕 + AI 海报</li>
+    <li>任何环节失败均<strong>降级到长图海报</strong> — 保证至少有一份纪念品</li>
+  </ul>
+</section>
+
+<!-- ============================================================
+     PROBLEM
+     ============================================================ -->
+<section id="problem">
+  <h2><span class="num">02</span>问题与洞察</h2>
+
+  <h3>问题：phone-as-stage tax</h3>
+  <p>散步 App 普遍要求用户把手机当舞台 — 抬手、点屏、看图、再切回路面。<strong>注意力本来该给世界，被舞台抢走了。</strong>AI 的位置应该在<em>眼睛之外</em>。</p>
+
+  <h3>洞察：音频优先 + 主动配额</h3>
+  <div class="feature-grid">
+    <div class="feature">
+      <div class="icon">🎧</div>
+      <h4>音频优先</h4>
+      <p>耳机是唯一的输入输出通道。视觉留给世界，不留给屏幕。</p>
+    </div>
+    <div class="feature">
+      <div class="icon">🤫</div>
+      <h4>默认沉默</h4>
+      <p>AI 的默认状态是闭嘴。≤ 3 次 / 10 分钟的主动开口，是产品契约。</p>
+    </div>
+    <div class="feature">
+      <div class="icon">📍</div>
+      <h4>主动 = 仅地点</h4>
+      <p>主动开口的唯一合法场景，是推荐附近值得看的地方。其他都属于打扰。</p>
+    </div>
+    <div class="feature">
+      <div class="icon">👂</div>
+      <h4>被动开放</h4>
+      <p>"那是什么花？""记一下" — 用户说话，AI 才动。永不抢戏。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CONTRACT
+     ============================================================ -->
+<section id="contract">
+  <h2><span class="num">03</span>AI 行为契约</h2>
+  <p class="lead">写进 system prompt + 独立配额计数器，<strong>双保险</strong>。运行时拒绝超额的主动 speak 调用。</p>
+
+  <div class="contract">
+    <div class="item hard">
+      <span class="tag">硬约束 · Hard</span>
+      <h4>≤ 3 主动开口 / 10 分钟</h4>
+      <p>由 <span class="mono">ProactiveQuota</span> 类滑动窗口计数；prompt + 运行时双重拦截。</p>
+    </div>
+    <div class="item hard">
+      <span class="tag">硬约束 · Hard</span>
+      <h4>主动开口 = 仅地点推荐</h4>
+      <p>不评价天气、不寒暄、不主动接话。任何非地点推荐的主动 speak 会被运行时拒绝。</p>
+    </div>
+    <div class="item hard">
+      <span class="tag">硬约束 · Hard</span>
+      <h4>被动捕捉只走明确语音指令</h4>
+      <p>不替用户判断"什么值得记"。"记一下"才记，没有就不记。</p>
+    </div>
+    <div class="item soft">
+      <span class="tag">可协商 · Soft</span>
+      <h4>推荐被拒可换、可聊</h4>
+      <p>用户说"不想去"，可继续聊一聊或换一个推荐。<strong>但配额已扣</strong>。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     INSTA360
+     ============================================================ -->
+<section id="insta360">
+  <h2><span class="num">04</span>为什么 Insta360 是核心</h2>
+  <p class="lead">影石相机在产品里承担<strong>三个不可替代的角色</strong>。拔掉 Insta360 → 产品 = 普通 vlog 工具。</p>
+
+  <div class="roles">
+    <div class="role">
+      <span class="badge">角色 1</span>
+      <h4>第一视角眼睛</h4>
+      <p>给 VLM 提供"用户看到的世界"。没有它，被动 Q&A 就只是文本聊天。</p>
+    </div>
+    <div class="role">
+      <span class="badge">角色 2</span>
+      <h4>本机录制</h4>
+      <p>高质量素材独立保存在相机里，不挤占手机带宽 / 电量。</p>
+    </div>
+    <div class="role">
+      <span class="badge">角色 3</span>
+      <h4>纪念品的灵魂</h4>
+      <p>360° 镜头语言是纪念品<strong>辨识度最高的部分</strong>。同样一段散步，没有 360°，纪念品就是普通 vlog。</p>
+    </div>
+  </div>
+
+  <div class="one-liner" style="margin-top:1.5rem">
+    <p>结论：步语 = 影石相机的"日常使用入口"。<strong>每一次散步都自然产出值得回看的 360° 内容。</strong></p>
+  </div>
+</section>
+
+<!-- ============================================================
+     PRODUCT (screenshots)
+     ============================================================ -->
+<section id="product">
+  <h2><span class="num">05</span>产品体验</h2>
+  <p class="lead">完整 7 屏产品截图详见 <a href="../">Pitch Deck</a>。下面是核心交互流。</p>
+
+  <div class="shots">
+    <figure>
+      <img src="../buyu-assets/p2_home.jpg" alt="首页">
+      <figcaption>1 · 主页</figcaption>
+    </figure>
+    <figure>
+      <img src="../buyu-assets/p3_route.jpg" alt="路线推荐">
+      <figcaption>2 · 路线</figcaption>
+    </figure>
+    <figure>
+      <img src="../buyu-assets/p4_walk.jpg" alt="散步中">
+      <figcaption>3 · 散步中</figcaption>
+    </figure>
+    <figure>
+      <img src="../buyu-assets/p5_discover.jpg" alt="发现">
+      <figcaption>4 · 发现</figcaption>
+    </figure>
+    <figure>
+      <img src="../buyu-assets/p6_notes.jpg" alt="记一下">
+      <figcaption>5 · 记一下</figcaption>
+    </figure>
+    <figure>
+      <img src="../buyu-assets/p7_plog.jpg" alt="Keepsake">
+      <figcaption>6 · 纪念品</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============================================================
+     ARCHITECTURE
+     ============================================================ -->
+<section id="arch">
+  <h2><span class="num">06</span>技术架构</h2>
+  <p class="lead">两条平行的实现线：<strong>iOS 原生 App</strong>（主交付）与 <strong>Windows 桌面 Demo</strong>（Insta360 Link 2 Pro 桌面演示验证）。</p>
+
+  <h3>核心架构概览</h3>
+  <div class="arch">
+<span class="c-sage">┌────────── iPhone（iOS 原生）──────────┐</span>
+<span class="c-sage">│</span>                                        <span class="c-sage">│</span>
+<span class="c-sage">│</span>  纪念品合成层（Keepsake）              <span class="c-sage">│</span>
+<span class="c-sage">│</span>   · VideoAssembler / BGMMixer          <span class="c-sage">│</span>
+<span class="c-sage">│</span>   · PosterComposer / MapRenderer       <span class="c-sage">│</span>
+<span class="c-sage">│</span>                                        <span class="c-sage">│</span>
+<span class="c-sage">│</span>  <span class="c-amber">Agent 层（ReAct Runtime）</span>             <span class="c-sage">│</span>
+<span class="c-sage">│</span>   · AgentRuntime · ToolRegistry        <span class="c-sage">│</span>
+<span class="c-sage">│</span>   · <span class="c-pink">ProactiveQuota（双保险计数器）</span>     <span class="c-sage">│</span>
+<span class="c-sage">│</span>   · 8 Tools（高德 ×3 / 视觉 ×2 / 交互 ×3）<span class="c-sage">│</span>
+<span class="c-sage">│</span>                                        <span class="c-sage">│</span>
+<span class="c-sage">│</span>  硬件桥接层                            <span class="c-sage">│</span>
+<span class="c-sage">│</span>   · CameraBridge（Insta360 SDK）       <span class="c-sage">│</span>
+<span class="c-sage">│</span>   · LocationSvc（CoreLocation）        <span class="c-sage">│</span>
+<span class="c-sage">│</span>   · AudioIO（AVFoundation + Speech）   <span class="c-sage">│</span>
+<span class="c-sage">└────┬────────────┬───────────────┬──────┘</span>
+     <span class="c-sage">│</span>            <span class="c-sage">│</span>               <span class="c-sage">│</span>
+   <span class="c-amber">[ 相机 ]</span>     <span class="c-amber">[ LLM / VLM ]</span>     <span class="c-amber">[ 高德 ]</span>
+   Insta360       OpenAI 兼容        POI / 路径
+   Link 2 Pro       端点
+</div>
+
+  <h3>iOS 端技术栈</h3>
+  <table class="tbl">
+    <tr><th width="22%">分层</th><th width="38%">选型</th><th>说明</th></tr>
+    <tr><td>语言 / 工具链</td><td class="mono">Swift 5.9 · SPM</td><td>跨平台协作，后续迁移至 Xcode</td></tr>
+    <tr><td>UI</td><td class="mono">SwiftUI</td><td>RootView / WalkScreen / 分享卡片</td></tr>
+    <tr><td>地图</td><td class="mono">MapKit + 高德 iOS SDK</td><td>路线绘制、POI、快照</td></tr>
+    <tr><td>定位</td><td class="mono">CoreLocation</td><td>GPS 轨迹采集与缓冲</td></tr>
+    <tr><td>相机</td><td class="mono">Insta360 Camera SDK + CameraBridge</td><td>Link 2 Pro 取流 / PTZ；带 Mock</td></tr>
+    <tr><td>音频</td><td class="mono">AVFoundation + Speech</td><td>TTS 播报 · STT 唤起对话</td></tr>
+    <tr><td>Agent 运行时</td><td class="mono">自研 AgentRuntime + ProactiveQuota</td><td>Tool-use 调度 · 主动行为节流</td></tr>
+    <tr><td>视频合成</td><td class="mono">AVAssetWriter</td><td>VideoAssembler · BGMMixer · CaptionOverlay</td></tr>
+    <tr><td>海报合成</td><td class="mono">CoreGraphics + CoreImage</td><td>PosterComposer · MapRenderer</td></tr>
+    <tr><td>测试</td><td class="mono">XCTest</td><td>LocalGravityTests/ 全模块覆盖</td></tr>
+  </table>
+
+  <h3>Agent 工具集（8 工具）</h3>
+  <table class="tbl">
+    <tr><th width="20%">类别</th><th width="35%">工具</th><th>用途</th></tr>
+    <tr><td>高德 ×3</td><td class="mono">AmapAroundSearch / AmapDirection / AmapText / AmapGeo</td><td>周边 POI · 路径 · 地理编码</td></tr>
+    <tr><td>视觉 ×2</td><td class="mono">GetCameraFrame / AnalyzeFrameVLM</td><td>取帧 · VLM 分析</td></tr>
+    <tr><td>交互 ×3</td><td class="mono">SpeakToUser / RecordMoment / RecommendNearbyPlace</td><td>TTS · 瞬间持久化 · 配额内地点推荐</td></tr>
+  </table>
+
+  <h3>Windows 桌面 Demo 端（演示验证）</h3>
+  <p>面向 Insta360 Link 2 Pro × LLM 的端到端体验验证；浏览器作为 iPhone Mockup 演示界面。</p>
+  <table class="tbl">
+    <tr><th width="22%">分层</th><th>选型</th></tr>
+    <tr><td>语言 / Web</td><td class="mono">Python 3.11 · FastAPI · Uvicorn · SSE</td></tr>
+    <tr><td>相机</td><td class="mono">DirectShow（pygrabber + ffmpeg MJPEG）</td></tr>
+    <tr><td>TTS / LLM</td><td class="mono">pyttsx3 · 远端 LLM / VLM（Tailscale）</td></tr>
+    <tr><td>POI</td><td class="mono">高德 Web Service + 预烤数据</td></tr>
+    <tr><td>测试</td><td class="mono">pytest + pytest-asyncio</td></tr>
+  </table>
+</section>
+
+<!-- ============================================================
+     DEGRADATION MATRIX
+     ============================================================ -->
+<section id="degrade">
+  <h2><span class="num">07</span>降级策略矩阵</h2>
+  <p class="lead">三条独立降级路径，<strong>均已实测</strong>。</p>
+
+  <div class="matrix">
+    <div class="matrix-row head">
+      <div>失败点</div>
+      <div>触发条件</div>
+      <div>降级动作</div>
+    </div>
+    <div class="matrix-row">
+      <div><strong>相机断</strong></div>
+      <div>Insta360 连接丢失或取帧超时</div>
+      <div>GPS + 对话继续；纪念品缺视频段，仍出海报</div>
+    </div>
+    <div class="matrix-row">
+      <div><strong>LLM 不通</strong></div>
+      <div>OpenAI 兼容端点不可达 / 超时</div>
+      <div>主动行为静默；被动 Q&A 给本地兜底回复</div>
+    </div>
+    <div class="matrix-row">
+      <div><strong>视频合成失败</strong></div>
+      <div>AVAssetWriter / FFmpeg 编码异常</div>
+      <div>长图海报兜底（CoreGraphics 路径独立）</div>
+    </div>
+    <div class="matrix-row safety">
+      <div>🛟 保底契约：永远保证至少一份纪念品</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     MILESTONES
+     ============================================================ -->
+<section id="milestones">
+  <h2><span class="num">08</span>实测里程碑</h2>
+  <ul class="milestones">
+    <li><span class="check">✓</span><div><strong>玄武湖 30 分钟完整散步</strong> — 已跑通 ×3，<span class="mono">walk-1 / walk-2 / walk-3</span></div></li>
+    <li><span class="check">✓</span><div><strong>主动配额实测</strong> — 30 分钟内主动开口 ≤ 9 次（≤ 3 / 10 min 契约未超额）</div></li>
+    <li><span class="check">✓</span><div><strong>降级路径实测</strong> — 拔相机 / 断 LLM / 视频失败 三场景全绿</div></li>
+    <li><span class="check">✓</span><div><strong>纪念品评分</strong> — 内部评估 ≥ 3 / 5 分（基础体验达标）</div></li>
+    <li><span class="check">✓</span><div><strong>测试覆盖</strong> — XCTest 单元 + 集成 + 3 次真机走查</div></li>
+  </ul>
+</section>
+
+<!-- ============================================================
+     ROADMAP
+     ============================================================ -->
+<section id="roadmap">
+  <h2><span class="num">09</span>路线图</h2>
+  <div class="roadmap">
+    <div class="step current">
+      <div class="v">MVP · 当前</div>
+      <h4>iOS 跑通</h4>
+      <p>玄武湖 30 分钟全程 + 短视频纪念品</p>
+    </div>
+    <div class="step">
+      <div class="v">v0.2</div>
+      <h4>多主题 + 配音</h4>
+      <p>多海报风格 / 用户配音入纪念品 / 推荐协商更细</p>
+    </div>
+    <div class="step">
+      <div class="v">v0.3</div>
+      <h4>多人同行</h4>
+      <p>同一段散步两个视角合成</p>
+    </div>
+    <div class="step">
+      <div class="v">v1.0</div>
+      <h4>开放 SDK</h4>
+      <p>第三方 POI 服务可接入推荐工具集</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CONTACT
+     ============================================================ -->
+<section id="contact" class="contact">
+  <h2><span class="num">10</span>联系合作</h2>
+  <p>欢迎影石生态伙伴、内容平台、城市文旅、独立投资人就步语项目的合作可能性沟通。</p>
+
+  <div class="contact-grid">
+    <div>
+      <span class="k">团队联系人</span>
+      Jinxiang Xie（谢锦翔）/ Richard
+    </div>
+    <div>
+      <span class="k">邮箱</span>
+      <a href="mailto:jxTse@outlook.com">jxTse@outlook.com</a>
+    </div>
+    <div>
+      <span class="k">个人主页</span>
+      <a href="https://jxtse.github.io">jxtse.github.io</a>
+    </div>
+    <div>
+      <span class="k">Pitch Deck</span>
+      <a href="../">jxtse.github.io/projects/buyu</a>
+    </div>
+  </div>
+
+  <p style="margin-top:1.5rem;font-size:.9rem;opacity:.85">如需完整 demo 视频、设计文档或现场演示，请通过邮箱预约。</p>
+</section>
+
+</main>
+
+<footer>
+  步语 · BuYu · 产品与技术 Brief &nbsp;|&nbsp;
+  Source: <span class="mono">walk-talk/BUYU</span> + <span class="mono">walk-talk/docs/superpowers</span> &nbsp;|&nbsp;
+  © 2026 Jinxiang Xie
+</footer>
+
+</body>
+</html>
