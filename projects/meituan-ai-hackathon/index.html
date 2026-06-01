@@ -160,9 +160,9 @@ tr:nth-child(even) td{background:rgba(232,230,220,.32)}
   </div>
 </div>
 
-<p class="lead">小团是一个 <strong>LLM Agent</strong>，不是预设脚本的 workflow。LLM 作为 <span class="hl">tools orchestrator</span>，通过 <strong>ReAct 循环</strong>（Reason → Act → Observe）自主决定每一步调用哪个工具——
+<p class="lead">小团是一个 <strong>LLM Agent</strong>，不是静态脚本化 workflow。LLM 作为 <span class="hl">tools orchestrator</span>，通过 <strong>ReAct 循环</strong>（Reason → Act → Observe）自主决定每一步调用哪个工具——
 <strong>地图定位 · 地点检索 · 地点详情 · 团购套餐 · 用户评论 · 大众点评种草帖 · 实时订位 · 下单交易</strong>。
-它在与用户交互中<strong>渐进式总结</strong>需求、动态规划行程；用户每一次选择与每一轮对话都沉淀为 <strong>memory</strong>，让后续每段推荐越来越贴合本次出行的真实意图。本文说明四件事：Planning 策略、工具调用链路、实时调整机制、记忆与技能内化。</p>
+它在与用户交互中<strong>渐进式总结</strong>需求、动态规划行程；用户每一次选择与每一轮对话都沉淀为 <strong>memory</strong>，让后续每段推荐越来越贴合本次出行的真实意图。本文聚焦比赛要求的三件事：Planning 策略、工具调用链路、异常处理机制；并补充记忆与技能内化的设计依据。</p>
 
 <!-- ═════════ 01 Planning 策略 ═════════ -->
 <h2 class="sec"><span class="n">01</span>Planning 策略</h2>
@@ -174,7 +174,7 @@ tr:nth-child(even) td{background:rgba(232,230,220,.32)}
   <div class="fstep"><span class="k">stage · intent</span><b>意图解析</b><p>自然语言 → 结构化约束：场景 / 人群 / 饮食 / 时间窗 / 预算，写入 memory。</p><span class="tg mono">LLM · JSON</span><span class="nn">Agent 推理</span></div>
   <div class="fstep"><span class="k">stage · plan</span><b>分段编排</b><p>软固定三段「玩→吃→额外」，按约束灵活增删；硬上限 3 段。</p><span class="tg mono">segment_plan</span><span class="nn">Agent 规划</span></div>
   <div class="fstep"><span class="k">stage · search+reason</span><b>逐段出卡</b><p>段内检索真实候选 → 结合 memory 权衡 → 选 1 个生成可执行卡片。</p><span class="tg mono">dianping_search</span><span class="nn">ReAct 一轮</span></div>
-  <div class="fstep"><span class="k">stage · execute</span><b>一键执行</b><p>逐站调用下单工具，命中异常当场自愈。</p><span class="tg mono">execute_booking</span><span class="nn">工具调用</span></div>
+  <div class="fstep"><span class="k">stage · execute</span><b>一键执行</b><p>逐站调用下单工具，命中异常当场自动调整。</p><span class="tg mono">execute_booking</span><span class="nn">工具调用</span></div>
 </div>
 
 <div class="cols">
@@ -209,7 +209,7 @@ tr:nth-child(even) td{background:rgba(232,230,220,.32)}
     <tr><td class="c0">定位</td><td><span class="mono">meituan_locate</span></td><td>地图工具</td><td>∅ → 当前坐标 + 商圈，作为距离原点</td></tr>
     <tr><td class="c0">理解</td><td><span class="mono">intent_parse (LLM)</span></td><td>Agent 推理</td><td>query → 结构化约束 JSON，写入 memory（失败则启发式兜底）</td></tr>
     <tr><td class="c0">检索</td><td><span class="mono">dianping_search</span></td><td>地点检索工具</td><td>段 + 场景 + 排除集 → 真实候选（按距离、评分排序，top-6）</td></tr>
-    <tr><td class="c0">决策</td><td><span class="mono">recommend (LLM)</span></td><td>Agent 决策</td><td>候选集 + memory → 选 1 个 id + 卡片话术（只能选候选内，不幻觉）</td></tr>
+    <tr><td class="c0">决策</td><td><span class="mono">recommend (LLM)</span></td><td>Agent 决策</td><td>候选集 + memory → 选 1 个 id + 卡片话术（只在候选内选择，不编造地点）</td></tr>
     <tr><td class="c0">详情</td><td><span class="mono">meituan_detail</span></td><td>详情 / 团购 / 评论 / 种草帖</td><td>poi_id → 种草帖 / 团购套餐 / 评论 + 同段可切换候选</td></tr>
     <tr><td class="c0">查位</td><td><span class="mono">meituan_query_queue</span></td><td>实时订位工具</td><td>poi_id + 人数 → 实时排队 / 有无可订桌位</td></tr>
     <tr><td class="c0">执行</td><td><span class="mono">meituan_buy_ticket / book_table / order_delivery</span></td><td>下单工具</td><td>按段类型逐站下单 → 状态 + 订单号 / 确认号</td></tr>
@@ -217,9 +217,9 @@ tr:nth-child(even) td{background:rgba(232,230,220,.32)}
 </table>
 
 <div class="callout">
-  <b>Agent 与工具的边界：</b>工具负责<b>确定性的脏活</b>——检索召回真实存在的候选、算距离、匹配团购、查实时队列、执行下单、注入故障，结果可复现、可审计。
+  <b>Agent 与工具的边界：</b>工具负责<b>确定性操作</b>——检索召回真实存在的候选、算距离、匹配团购、查实时队列、执行下单、注入故障，结果可复现、可审计。
   LLM 不碰这些数字，而是做<b>tools orchestration 与多维权衡</b>：读工具回来的 observation，结合 memory 里积累的偏好，在<b>真实候选里</b>（被严格约束「只能选一个，绝不编造」）综合
-  <b>同行人结构</b>（如两大一小、5 岁孩子）、<b>时间与体力状态</b>（玩完后孩子体力下降）、<b>实时约束</b>（无桌、等待时长）、<b>体验风险</b>（孩子等位哭闹、行程失控）、<b>执行确定性</b>（可订、可下单、可替换）——挑出最合适那个并说人话，再决定下一步调哪个工具。
+  <b>同行人结构</b>（如两大一小、5 岁孩子）、<b>时间与体力状态</b>（玩完后孩子体力下降）、<b>实时约束</b>（无桌、等待时长）、<b>体验风险</b>（孩子等位哭闹、行程失控）、<b>执行确定性</b>（可订、可下单、可替换）——挑出最合适的候选并生成用户可理解的解释，再决定下一步调哪个工具。
 </div>
 
 <!-- ═════════ 03 实时调整机制 ═════════ -->
@@ -271,7 +271,7 @@ tr:nth-child(even) td{background:rgba(232,230,220,.32)}
   <div class="card">
     <h3>通用技能内化 → 认知基础</h3>
     <ul>
-      <li><b>把通用技能内化进参数</b>：分段规划范式、动线与体力常识、五类自愈策略这类跨场景复用的「打法」，通过 <b>LoRA + RL</b> 内化为模型能力，而非每次塞进上下文。</li>
+      <li><b>把通用技能内化进参数</b>：分段规划范式、动线与体力常识、五类自动调整策略这类跨场景复用的「策略模式」，通过 <b>LoRA + RL</b> 内化为模型能力，而非每次写入上下文。</li>
       <li><b>为困难任务奠定认知基础</b>：Agent 必须先具备基础策略图式，才谈得上灵活调用细粒度规则——通用技能内化正是这层底座。</li>
       <li><b>表现远超外挂方案</b>：相比把技能全留在 context（prompt 膨胀、长程推理退化）或纯靠 in-context learning，<b>先内化通用技能、再利用专项技能</b>在分布内与分布外任务上都更强，OOD 泛化提升尤其显著。</li>
     </ul>
@@ -280,17 +280,17 @@ tr:nth-child(even) td{background:rgba(232,230,220,.32)}
     <h3>结构化事实 → 极致参数效率</h3>
     <ul>
       <li><b>结构化记忆极省参数</b>：LoRA 作为参数化记忆，对有规律的结构化事实参数效率极高——极少的参数即可承载<b>数十万 token</b> 量级的内容。</li>
-      <li><b>强依赖内容规律性</b>：同样的参数预算，在毫无规律的精确串（随机 token、逐字密钥）上效率断崖式下降，单个「顽固 token」就可能触发逐字记忆崩溃。</li>
+      <li><b>强依赖内容规律性</b>：同样的参数预算，在毫无规律的精确串（随机 token、逐字密钥）上效率断崖式下降，单个低规律 token 就可能触发逐字记忆崩溃。</li>
       <li><b>落到小团的分工</b>：商户、团购、常识性偏好这类<b>结构化知识</b>适合廉价内化；实时排队、库存、价格这类<b>精确且易变的事实</b>必须留在工具侧实时检索，不进参数——否则既贵又不可靠。</li>
     </ul>
   </div>
 </div>
 
 <div class="callout">
-  <b>设计依据：</b>上述「内化 vs 外挂」的边界不是拍脑袋，而是两条经验规律共同界定——
+  <b>设计依据：</b>上述「内化 vs 外挂」的边界不是主观设定，而是两条经验规律共同界定——
   <b>(1)</b> 在多轮交互 Agent 上，先内化通用技能构建认知基础、再利用专项技能的方案，系统性地优于把技能全外挂在 context 或纯 in-context learning；
   <b>(2)</b> LoRA 的参数化记忆容量遵循 <span class="mono">ΔL ∝ rank<sup>α</sup> · 长度<sup>−β</sup></span> 的幂律：对结构化内容以极小 rank 承载长序列，对无规律精确记忆则需跨过 <span class="mono">p&gt;0.5</span> 的确定性相变才能逐字复现。
-  二者共同回答了「什么该内化、什么该外挂」——这正是小团把通用打法内化、把易变事实留给工具检索的理论基础。
+  二者共同回答了「什么该内化、什么该外挂」——这正是小团把通用策略内化、把易变事实留给工具检索的理论基础。
 </div>
 
 <!-- ═════════ 硬性指标 ═════════ -->
