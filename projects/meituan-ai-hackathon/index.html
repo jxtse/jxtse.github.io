@@ -216,7 +216,7 @@ async function probe(){
     if(r.ok){
       const j = await r.json();
       dot.className = "dot up";
-      statustxt.textContent = "服务在线 · 可试玩";
+      statustxt.textContent = "";
       launch.classList.remove("dead");
       return;
     }
