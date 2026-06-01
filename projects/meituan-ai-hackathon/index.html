@@ -114,11 +114,17 @@ tr:nth-child(even) td{background:rgba(232,230,220,.32)}
   padding:10px 14px;margin:10px 0;line-height:1.5;font-size:9.5pt;color:var(--olive);break-inside:avoid}
 .callout b{color:var(--dark-warm)}
 
-/* ---------- demo 实拍 ---------- */
-.shot{margin:16px 0 4px;break-inside:avoid}
-.shot img{width:100%;display:block;border:0.5pt solid var(--border);border-radius:8pt;
-  box-shadow:0 2px 14px rgba(0,0,0,.06)}
-.shot figcaption{font-size:8.5pt;color:var(--stone);margin-top:7px;line-height:1.5;text-align:center}
+/* ---------- 手机端实拍（左文右图） ---------- */
+.shot-split{display:grid;grid-template-columns:1fr 270px;gap:22px;align-items:center;
+  margin:18px 0 6px;break-inside:avoid}
+.shot-txt h3{margin:0 0 8px;font-size:11pt;color:var(--dark-warm)}
+.shot-txt p{font-size:9.5pt;color:var(--olive);line-height:1.6;margin:0}
+.shot-fig{margin:0}
+.shot-fig img{width:100%;display:block;border:0.5pt solid var(--border);border-radius:14pt;
+  box-shadow:0 4px 20px rgba(0,0,0,.08)}
+.shot-fig figcaption{font-size:8.5pt;color:var(--stone);margin-top:7px;line-height:1.5;text-align:center}
+@media(max-width:680px){.shot-split{grid-template-columns:1fr;gap:14px}
+  .shot-fig{max-width:300px;margin:0 auto}}
 
 /* ---------- 指标 ---------- */
 .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:10px 0}
@@ -165,12 +171,6 @@ tr:nth-child(even) td{background:rgba(232,230,220,.32)}
     <div class="status"><span class="dot" id="dot"></span><span id="statustxt">检测服务状态…</span></div>
   </div>
 </div>
-
-<!-- ═════════ demo 实拍图（第一屏可见） ═════════ -->
-<figure class="shot">
-  <img src="assets/demo-shot.png" alt="小团 Demo 实拍：左侧手机端推荐卡片 + 右侧 Agent 实时思考链路双栏视图">
-  <figcaption>实拍 · 左侧手机端推荐卡片（接受 / 换一个 / 详情）+ 右侧 Agent 实时思考链路（工具输入输出、模型独白、实时调整按时间线展开）。</figcaption>
-</figure>
 
 <p class="lead">小团把「想出去玩」这件含糊的事拆成一条可执行的下午行程：<span class="hl">理解约束 → 分段规划 → 逐段决策出卡 → 一键下单</span>。
 设计上区分两类能力——<strong>symbolic（确定性计算）</strong>负责检索、距离、排序、下单与故障判定，给出<strong>不会幻觉的保证</strong>；
@@ -272,6 +272,21 @@ tr:nth-child(even) td{background:rgba(232,230,220,.32)}
     命中时间冲突自动错峰；每次调整推 <span class="mono">自动调整</span>（internal: <span class="mono">self_heal → self_heal_ok</span>）两段事件，
     告诉用户「原选满座，已自动改为 X」。整条链路 <b>Pass@1</b>，不回退到「请稍后再试」。</p>
   </div>
+</div>
+
+<!-- ═════════ 手机端实拍（靠下，左文右图） ═════════ -->
+<div class="shot-split">
+  <div class="shot-txt">
+    <h3>手机端长什么样</h3>
+    <p>用户侧只保留一块极简的卡片交互：每段推荐<b>出一张卡</b>，配图、评分、人均、距离、团购一目了然，
+    底部三键<b>「就这家 / 换一个 / 详情」</b>——不必从长列表里挑。卡片下方常驻对话框，可随时补充偏好或质疑推荐，
+    模型据此判定 <span class="mono">keep / switch / refine</span> 并即时换卡。</p>
+    <p style="margin-top:8px">右侧 Agent 思考链路是给评审看的「玻璃箱」视图；真实用户只面对左边这块手机界面。</p>
+  </div>
+  <figure class="shot-fig">
+    <img src="assets/demo-phone.png" alt="小团手机端界面：家庭遛娃场景的推荐卡片与三键交互">
+    <figcaption>实拍 · 家庭遛娃场景的推荐卡片</figcaption>
+  </figure>
 </div>
 
 <!-- ═════════ 硬性指标 ═════════ -->
