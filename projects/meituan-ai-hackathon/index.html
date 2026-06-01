@@ -162,7 +162,7 @@ tr:nth-child(even) td{background:rgba(232,230,220,.32)}
 
 <p class="lead">小团是一个 <strong>LLM Agent</strong>，不是预设脚本的 workflow。LLM 作为 <span class="hl">tools orchestrator</span>，通过 <strong>ReAct 循环</strong>（Reason → Act → Observe）自主决定每一步调用哪个工具——
 <strong>地图定位 · 地点检索 · 地点详情 · 团购套餐 · 用户评论 · 大众点评种草帖 · 实时订位 · 下单交易</strong>。
-它在与用户交互中<strong>渐进式总结</strong>需求、动态规划行程；用户每一次选择与每一轮对话都沉淀为 <strong>memory</strong>，让后续每段推荐越来越贴合本次出行的真实意图。本文说明三件事：Planning 策略、工具调用链路、实时调整机制。</p>
+它在与用户交互中<strong>渐进式总结</strong>需求、动态规划行程；用户每一次选择与每一轮对话都沉淀为 <strong>memory</strong>，让后续每段推荐越来越贴合本次出行的真实意图。本文说明四件事：Planning 策略、工具调用链路、实时调整机制、记忆与技能内化。</p>
 
 <!-- ═════════ 01 Planning 策略 ═════════ -->
 <h2 class="sec"><span class="n">01</span>Planning 策略</h2>
@@ -262,8 +262,39 @@ tr:nth-child(even) td{background:rgba(232,230,220,.32)}
   </div>
 </div>
 
+<!-- ═════════ 04 记忆与技能内化 ═════════ -->
+<h2 class="sec"><span class="n">04</span>记忆与技能内化</h2>
+
+<p>小团的记忆分两层：<strong>会话记忆</strong>（运行中）让「这次出行越聊越懂」；<strong>参数化技能内化</strong>（演进方向）把跨场景复用的通用规划能力沉淀为模型自身的<strong>认知基础</strong>。两层的分工遵循一条原则——<span class="hl">有规律、可复用的通用技能适合内化进参数；精确、易变的事实适合留在外部按需检索</span>。</p>
+
+<div class="cols">
+  <div class="card">
+    <h3>通用技能内化 → 认知基础</h3>
+    <ul>
+      <li><b>把通用技能内化进参数</b>：分段规划范式、动线与体力常识、五类自愈策略这类跨场景复用的「打法」，通过 <b>LoRA + RL</b> 内化为模型能力，而非每次塞进上下文。</li>
+      <li><b>为困难任务奠定认知基础</b>：Agent 必须先具备基础策略图式，才谈得上灵活调用细粒度规则——通用技能内化正是这层底座。</li>
+      <li><b>表现远超外挂方案</b>：相比把技能全留在 context（prompt 膨胀、长程推理退化）或纯靠 in-context learning，<b>先内化通用技能、再利用专项技能</b>在分布内与分布外任务上都更强，OOD 泛化提升尤其显著。</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>结构化事实 → 极致参数效率</h3>
+    <ul>
+      <li><b>结构化记忆极省参数</b>：LoRA 作为参数化记忆，对有规律的结构化事实参数效率极高——极少的参数即可承载<b>数十万 token</b> 量级的内容。</li>
+      <li><b>强依赖内容规律性</b>：同样的参数预算，在毫无规律的精确串（随机 token、逐字密钥）上效率断崖式下降，单个「顽固 token」就可能触发逐字记忆崩溃。</li>
+      <li><b>落到小团的分工</b>：商户、团购、常识性偏好这类<b>结构化知识</b>适合廉价内化；实时排队、库存、价格这类<b>精确且易变的事实</b>必须留在工具侧实时检索，不进参数——否则既贵又不可靠。</li>
+    </ul>
+  </div>
+</div>
+
+<div class="callout">
+  <b>设计依据：</b>上述「内化 vs 外挂」的边界不是拍脑袋，而是两条经验规律共同界定——
+  <b>(1)</b> 在多轮交互 Agent 上，先内化通用技能构建认知基础、再利用专项技能的方案，系统性地优于把技能全外挂在 context 或纯 in-context learning；
+  <b>(2)</b> LoRA 的参数化记忆容量遵循 <span class="mono">ΔL ∝ rank<sup>α</sup> · 长度<sup>−β</sup></span> 的幂律：对结构化内容以极小 rank 承载长序列，对无规律精确记忆则需跨过 <span class="mono">p&gt;0.5</span> 的确定性相变才能逐字复现。
+  二者共同回答了「什么该内化、什么该外挂」——这正是小团把通用打法内化、把易变事实留给工具检索的理论基础。
+</div>
+
 <!-- ═════════ 硬性指标 ═════════ -->
-<h2 class="sec"><span class="n">04</span>性能与约束</h2>
+<h2 class="sec"><span class="n">05</span>性能与约束</h2>
 <div class="metrics">
   <div class="metric"><div class="v">&lt; 30s</div><div class="l">方案生成</div></div>
   <div class="metric"><div class="v">&lt; 3s</div><div class="l">单工具调用</div></div>
