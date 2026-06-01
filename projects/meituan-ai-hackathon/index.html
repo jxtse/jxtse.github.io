@@ -1,6 +1,6 @@
 <!doctype html>
 <!-- ==================================================================
-     小团 BuYu · 美团 AI Hackathon 2026 赛题06 设计文档
+     步语 BuYu · 美团 AI Hackathon 2026 赛题06 设计文档
      parchment design system (kami) · screen-first, A4 print-clean (≤2 页)
      内容：Planning 策略 / 工具调用链路 / 异常处理机制
      ================================================================== -->
@@ -8,7 +8,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>小团 · 设计文档 — 美团 AI Hackathon 赛题06</title>
+<title>步语 BuYu · 设计文档 — 美团 AI Hackathon 赛题06</title>
 <meta name="description" content="一句话 → 周末半天吃喝玩乐完整方案 → 一键下单执行的本地生活规划 Agent。Planning 策略、工具调用链路、异常处理机制设计文档。">
 <meta name="generator" content="Kami">
 <style>
@@ -143,7 +143,7 @@ tr:nth-child(even) td{background:rgba(232,230,220,.32)}
 <div class="head">
   <div class="head-l">
     <div class="eyebrow">美团 AI Hackathon 2026 · 赛题06「本地探索 · 周末闲时活动规划」· 设计文档</div>
-    <div class="title">小团 <span class="en">设计文档</span></div>
+    <div class="title">步语 <span class="en">BuYu · 设计文档</span></div>
     <div class="subtitle">一句话需求 → 周末半天「边玩边吃」完整方案 → 一键下单执行的本地生活规划与执行 Agent。</div>
   </div>
 </div>
@@ -160,7 +160,7 @@ tr:nth-child(even) td{background:rgba(232,230,220,.32)}
   </div>
 </div>
 
-<p class="lead">小团面向「周末半天不知道去哪儿」这一高频本地生活场景，把一句含糊需求转化为一条<strong>可确认、可解释、可执行</strong>的本地生活方案。系统设计的核心不是生成推荐文案，而是把 LLM 放在规划中枢：在真实商户候选、实时可用性与用户反馈之间持续权衡，并把推荐、确认与执行连成闭环。本文聚焦比赛要求的三件事：Planning 策略、工具调用链路、异常处理机制；并补充记忆与技能内化的设计依据。</p>
+<p class="lead">步语 BuYu 面向「周末半天不知道去哪儿」这一高频本地生活场景，把一句含糊需求转化为一条<strong>可确认、可解释、可执行</strong>的本地生活方案。系统设计的核心不是生成推荐文案，而是把 LLM 放在规划中枢：在真实商户候选、实时可用性与用户反馈之间持续权衡，并把推荐、确认与执行连成闭环。本文聚焦比赛要求的三件事：Planning 策略、工具调用链路、异常处理机制；并补充记忆与技能内化的设计依据。</p>
 
 <!-- ═════════ 01 Planning 策略 ═════════ -->
 <h2 class="sec"><span class="n">01</span>Planning 策略</h2>
@@ -263,7 +263,7 @@ tr:nth-child(even) td{background:rgba(232,230,220,.32)}
 <!-- ═════════ 04 记忆与技能内化 ═════════ -->
 <h2 class="sec"><span class="n">04</span>记忆与技能内化</h2>
 
-<p>小团的记忆分两层：<strong>会话记忆</strong>（运行中）让「这次出行越聊越懂」；<strong>参数化技能内化</strong>（演进方向）把跨场景复用的通用规划能力沉淀为模型自身的<strong>认知基础</strong>。两层的分工遵循一条原则——<span class="hl">有规律、可复用的通用技能适合内化进参数；精确、易变的事实适合留在外部按需检索</span>。</p>
+<p>步语 BuYu 的记忆分两层：<strong>会话记忆</strong>（运行中）让「这次出行越聊越懂」；<strong>参数化技能内化</strong>（演进方向）把跨场景复用的通用规划能力沉淀为模型自身的<strong>认知基础</strong>。两层的分工遵循一条原则——<span class="hl">有规律、可复用的通用技能适合内化进参数；精确、易变的事实适合留在外部按需检索</span>。</p>
 
 <div class="cols">
   <div class="card">
@@ -279,7 +279,7 @@ tr:nth-child(even) td{background:rgba(232,230,220,.32)}
     <ul>
       <li><b>结构化记忆极省参数</b>：LoRA 作为参数化记忆，对有规律的结构化事实参数效率极高——极少的参数即可承载<b>数十万 token</b> 量级的内容。</li>
       <li><b>强依赖内容规律性</b>：同样的参数预算，在毫无规律的精确串（随机 token、逐字密钥）上效率断崖式下降，单个低规律 token 就可能触发逐字记忆崩溃。</li>
-      <li><b>落到小团的分工</b>：商户、团购、常识性偏好这类<b>结构化知识</b>适合廉价内化；实时排队、库存、价格这类<b>精确且易变的事实</b>必须留在工具侧实时检索，不进参数——否则既贵又不可靠。</li>
+      <li><b>落到步语 BuYu 的分工</b>：商户、团购、常识性偏好这类<b>结构化知识</b>适合廉价内化；实时排队、库存、价格这类<b>精确且易变的事实</b>必须留在工具侧实时检索，不进参数——否则既贵又不可靠。</li>
     </ul>
   </div>
 </div>
@@ -288,7 +288,7 @@ tr:nth-child(even) td{background:rgba(232,230,220,.32)}
   <b>设计依据：</b>上述「内化 vs 外挂」的边界不是主观设定，而是两条经验规律共同界定——
   <b>(1)</b> 在多轮交互 Agent 上，先内化通用技能构建认知基础、再利用专项技能的方案，系统性地优于把技能全外挂在 context 或纯 in-context learning；
   <b>(2)</b> LoRA 的参数化记忆容量遵循 <span class="mono">ΔL ∝ rank<sup>α</sup> · 长度<sup>−β</sup></span> 的幂律：对结构化内容以极小 rank 承载长序列，对无规律精确记忆则需跨过 <span class="mono">p&gt;0.5</span> 的确定性相变才能逐字复现。
-  二者共同回答了「什么该内化、什么该外挂」——这正是小团把通用策略内化、把易变事实留给工具检索的理论基础。
+  二者共同回答了「什么该内化、什么该外挂」——这正是步语 BuYu 把通用策略内化、把易变事实留给工具检索的理论基础。
 </div>
 
 <!-- ═════════ 硬性指标 ═════════ -->
@@ -302,7 +302,7 @@ tr:nth-child(even) td{background:rgba(232,230,220,.32)}
 <p style="font-size:9pt;color:var(--olive);margin-top:6px">商户数据全 Mock、不接真实交易；API Key 仅存服务端环境变量，前端零暴露；在线服务经隧道从作者本机暴露，仅供评审试玩，比赛结束后一并下线。</p>
 
 <div class="note">
-  小团 · 美团 AI Hackathon 2026 赛题06 设计文档 ·
+  步语 BuYu · 美团 AI Hackathon 2026 赛题06 设计文档 ·
   <a href="https://jxtse.github.io">← 返回 jxtse.github.io</a> ·
   在线 Demo 入口见页首「进入 Demo」。
 </div>
