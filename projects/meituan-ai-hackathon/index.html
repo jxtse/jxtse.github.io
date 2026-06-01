@@ -1,236 +1,303 @@
 <!doctype html>
+<!-- ==================================================================
+     小团 BuYu · 美团 AI Hackathon 2026 赛题06 设计文档
+     parchment design system (kami) · screen-first, A4 print-clean (≤2 页)
+     内容：Planning 策略 / 工具调用链路 / 异常处理机制
+     ================================================================== -->
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>小团 · 美团 AI Hackathon 赛题06 Demo 入口</title>
-<meta name="description" content="一句话 → 周末半天吃喝玩乐完整方案 → 一键下单执行的本地生活规划 Agent。可在线试玩。">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&display=swap" rel="stylesheet">
+<title>小团 BuYu · 设计文档 — 美团 AI Hackathon 赛题06</title>
+<meta name="description" content="一句话 → 周末半天吃喝玩乐完整方案 → 一键下单执行的本地生活规划 Agent。Planning 策略、工具调用链路、异常处理机制设计文档。">
+<meta name="generator" content="Kami">
 <style>
+@page { size: A4; margin: 15mm 18mm; }
+
 :root{
-  --bg:#0e1014; --panel:#171a20; --panel2:#1f232b; --line:#2b313b;
-  --ink:#f2efe9; --muted:#9aa3b0; --dim:#6b7480;
-  --mt:#ffd100; --mt-ink:#1a1400;
-  --amber:#f5b942; --green:#34d399; --blue:#7aa2ff; --purple:#b8a4e3;
-  --r:16px; --e:cubic-bezier(.16,1,.3,1);
+  --parchment:#f5f4ed; --ivory:#faf9f5; --warm-sand:#e8e6dc;
+  --near-black:#141413; --dark-warm:#3d3d3a; --olive:#504e49; --stone:#6b6a64;
+  --brand:#1B365D; --ink-light:#2D5A8A;
+  --border:#e8e6dc; --border-soft:#e5e3d8; --tag-bg:#E4ECF5;
+  --serif:"TsangerJinKai02","Source Han Serif SC","Noto Serif CJK SC","Songti SC","STSong",Georgia,serif;
+  --mono:"JetBrains Mono","SF Mono",Consolas,Monaco,"TsangerJinKai02","Source Han Serif SC",monospace;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);
-  font-family:-apple-system,"PingFang SC","Segoe UI",system-ui,sans-serif;
-  line-height:1.65;-webkit-font-smoothing:antialiased}
-.wrap{max-width:980px;margin:0 auto;padding:0 22px}
-a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
+html{background:var(--parchment);scroll-behavior:smooth}
+body{
+  background:var(--parchment);color:var(--near-black);
+  font-family:var(--serif);font-size:10.5pt;line-height:1.55;letter-spacing:0.2pt;
+  -webkit-font-smoothing:antialiased;
+}
+@media screen{
+  body{max-width:920px;margin:0 auto;padding:34px 30px 80px}
+}
+a{color:var(--ink-light);text-decoration:none}
+a:hover{text-decoration:underline}
+.mono{font-family:var(--mono)}
+.hl{color:var(--brand);font-weight:500}
+strong{font-weight:500;color:var(--near-black)}
 
-.tmp-banner{background:linear-gradient(90deg,#3a2e00,#262011);border-bottom:1px solid var(--line);
-  font-size:13px;color:var(--amber);text-align:center;padding:7px 12px}
+/* ---------- 抬头 ---------- */
+.head{display:flex;justify-content:space-between;align-items:flex-end;
+  gap:18px;flex-wrap:wrap;padding-bottom:14px;border-bottom:2.5pt solid var(--brand)}
+.head-l{flex:1 1 380px;min-width:0}
+.eyebrow{font-size:9pt;font-weight:500;letter-spacing:1pt;text-transform:uppercase;
+  color:var(--brand);margin-bottom:6px}
+.title{font-size:27pt;font-weight:500;line-height:1.12;letter-spacing:0.3pt}
+.title .en{color:var(--stone);font-size:18pt}
+.subtitle{font-size:11pt;color:var(--olive);margin-top:8px;line-height:1.5}
+.meta{flex:0 0 auto;text-align:right;font-size:8.5pt;color:var(--stone);line-height:1.7}
+.meta strong{color:var(--dark-warm)}
 
-.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
-.hero-bg{position:absolute;inset:0;background:
-  radial-gradient(900px 420px at 78% -10%,rgba(255,209,0,.16),transparent 60%),
-  radial-gradient(720px 400px at 0% 8%,rgba(184,164,227,.14),transparent 60%)}
-.hero .wrap{position:relative;padding:64px 22px 52px}
-.kicker{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;
-  color:var(--mt-ink);background:var(--mt);padding:5px 12px;border-radius:999px;letter-spacing:.02em}
-h1{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(34px,5.6vw,60px);
-  line-height:1.05;margin:18px 0 6px;letter-spacing:-.01em}
-h1 .zh{font-family:-apple-system,"PingFang SC",sans-serif}
-.sub{font-size:clamp(16px,2vw,20px);color:var(--muted);max-width:660px;margin-top:12px}
-.badge-k{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--purple);
-  border:1px solid #3a3450;background:#1c1826;border-radius:999px;padding:3px 10px}
+/* ---------- demo CTA ---------- */
+.cta{margin:16px 0 4px;background:var(--ivory);border:0.5pt solid var(--border);
+  border-radius:10pt;padding:14px 18px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.cta-l{flex:1 1 340px;min-width:0}
+.cta-l b{font-size:11pt;color:var(--near-black)}
+.cta-l p{font-size:9pt;color:var(--olive);margin-top:2px}
+.cta-r{flex:0 0 auto;display:flex;flex-direction:column;gap:6px;align-items:stretch}
+.launch{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  background:var(--brand);color:var(--ivory);font-weight:500;font-size:11pt;
+  border:none;border-radius:8pt;padding:11px 26px;cursor:pointer;
+  transition:transform .16s,box-shadow .16s}
+.launch:hover{transform:translateY(-1px);box-shadow:0 6pt 22pt rgba(27,54,93,.18);text-decoration:none}
+.status{display:flex;align-items:center;gap:6px;font-size:8pt;color:var(--stone);justify-content:center}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--stone)}
+.dot.up{background:#2f7d4f;box-shadow:0 0 0 3px rgba(47,125,79,.14)}
 
-/* CTA */
-.cta-box{margin-top:34px;background:var(--panel);border:1px solid var(--line);
-  border-radius:20px;padding:26px;display:flex;gap:22px;align-items:center;flex-wrap:wrap}
-.cta-left{flex:1 1 340px;min-width:0}
-.cta-left h2{font-family:'Fraunces',serif;font-size:22px;margin-bottom:6px}
-.cta-left p{font-size:14px;color:var(--muted)}
-.cta-right{flex:0 0 auto;display:flex;flex-direction:column;gap:10px;align-items:stretch}
-.launch{display:inline-flex;align-items:center;justify-content:center;gap:10px;
-  background:var(--mt);color:var(--mt-ink);font-weight:800;font-size:17px;
-  border:none;border-radius:14px;padding:16px 30px;cursor:pointer;
-  box-shadow:0 10px 30px rgba(255,209,0,.22);transition:.18s var(--e);text-decoration:none}
-.launch:hover{transform:translateY(-2px);box-shadow:0 14px 38px rgba(255,209,0,.32);text-decoration:none}
-.launch.dead{background:var(--panel2);color:var(--dim);box-shadow:none;cursor:not-allowed}
-.status{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--dim);justify-content:center}
-.dot{width:8px;height:8px;border-radius:50%;background:var(--dim)}
-.dot.up{background:var(--green);box-shadow:0 0 0 4px rgba(52,211,153,.15)}
-.dot.down{background:#f87171;box-shadow:0 0 0 4px rgba(248,113,113,.15)}
-.tip{font-size:11.5px;color:var(--dim);text-align:center;max-width:220px}
+/* ---------- 摘要条 ---------- */
+.lead{font-size:11pt;color:var(--dark-warm);line-height:1.55;margin:16px 0 4px}
 
-section{padding:48px 0;border-bottom:1px solid var(--line)}
-.eyebrow{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
-h2.sec{font-family:'Fraunces',serif;font-size:clamp(23px,3.2vw,32px);font-weight:800;margin:8px 0 4px}
-.lead{color:var(--muted);max-width:720px;margin-bottom:10px}
+/* ---------- 段标题（brand 左条是签名动作） ---------- */
+h2.sec{font-size:15pt;font-weight:500;color:var(--near-black);
+  margin:26px 0 8px;border-left:2.5pt solid var(--brand);border-radius:1.5pt;
+  padding-left:9px;break-after:avoid}
+h2.sec .n{color:var(--brand);font-family:var(--mono);font-size:11pt;margin-right:8px}
+h3{font-size:11.5pt;font-weight:500;color:var(--dark-warm);margin:14px 0 5px;break-after:avoid}
+p{margin:0 0 8px;line-height:1.55}
+ul,ol{margin:5px 0 9px;padding-left:20px}
+li{margin:2px 0;line-height:1.5}
+li::marker{color:var(--brand)}
 
-.plays{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:22px}
-.play{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 14px;text-align:center}
-.play .em{font-size:26px}
-.play b{display:block;font-size:14px;margin-top:8px}
-.play span{font-size:12px;color:var(--dim);display:block;margin-top:4px}
+/* ---------- 流程链路 ---------- */
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:12px 0 6px}
+.fstep{background:var(--ivory);border:0.5pt solid var(--border);border-radius:8pt;
+  padding:11px 11px;position:relative;break-inside:avoid}
+.fstep .k{font-family:var(--mono);font-size:8pt;color:var(--brand);font-weight:500}
+.fstep b{display:block;font-size:10.5pt;margin:4px 0 3px;color:var(--near-black)}
+.fstep p{font-size:8.3pt;color:var(--olive);margin:0;line-height:1.42}
+.fstep .tg{display:inline-block;margin-top:6px;font-family:var(--mono);font-size:7.5pt;
+  background:var(--tag-bg);color:var(--brand);padding:1px 5px;border-radius:3pt}
+.fstep .nn{font-size:7.5pt;color:var(--stone);margin-top:3px;display:block}
 
-.pipe{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:24px}
-.pstep{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 16px}
-.pstep .num{font-family:'Fraunces',serif;font-size:13px;color:var(--mt);font-weight:700}
-.pstep h3{font-size:16px;margin:8px 0 6px}
-.pstep p{font-size:13px;color:var(--muted)}
-.pstep .tool{margin-top:10px;font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--blue)}
+/* ---------- 两栏 ---------- */
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+.card{background:var(--ivory);border:0.5pt solid var(--border);border-radius:8pt;
+  padding:14px 16px;break-inside:avoid}
+.card h3{margin-top:0}
+.card ul{padding-left:16px}
+.card li{font-size:9.5pt;color:var(--olive)}
+.card li b{color:var(--dark-warm)}
 
-.arch{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
-.acard{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px}
-.acard h3{font-size:16px;margin-bottom:8px}
-.acard ul{list-style:none;font-size:13.5px;color:var(--muted)}
-.acard li{padding:4px 0 4px 18px;position:relative}
-.acard li::before{content:"›";position:absolute;left:2px;color:var(--mt)}
-.acard code{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:var(--blue)}
+/* ---------- 表 ---------- */
+table{width:100%;border-collapse:collapse;font-size:9pt;margin:10px 0;break-inside:avoid}
+th{text-align:left;font-weight:500;color:var(--dark-warm);padding:6px 8px;
+  border-bottom:1pt solid var(--border)}
+td{padding:5px 8px;border-bottom:0.3pt solid var(--border-soft);vertical-align:top;color:var(--olive)}
+td.c0{color:var(--near-black);font-weight:500;white-space:nowrap}
+td .mono,th .mono{font-size:8.3pt;color:var(--ink-light)}
+tr:nth-child(even) td{background:rgba(232,230,220,.32)}
 
-.note{font-size:12.5px;color:var(--dim);background:var(--panel);border:1px solid var(--line);
-  border-radius:12px;padding:14px 16px;margin-top:20px}
-footer{padding:34px 0 60px;color:var(--dim);font-size:13px}
-footer a{color:var(--muted)}
-@media(max-width:760px){.plays,.pipe,.arch{grid-template-columns:repeat(2,1fr)}.cta-right{flex-basis:100%}}
+/* ---------- callout ---------- */
+.callout{background:var(--ivory);border-left:2pt solid var(--brand);border-radius:3pt;
+  padding:10px 14px;margin:10px 0;line-height:1.5;font-size:9.5pt;color:var(--olive);break-inside:avoid}
+.callout b{color:var(--dark-warm)}
+
+/* ---------- 指标 ---------- */
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:10px 0}
+.metric{background:var(--ivory);border:0.5pt solid var(--border);border-radius:8pt;padding:11px 13px}
+.metric .v{font-size:15pt;font-weight:500;color:var(--brand);font-variant-numeric:tabular-nums}
+.metric .l{font-size:8pt;color:var(--olive);margin-top:2px}
+
+.note{font-size:8.5pt;color:var(--stone);border-top:0.5pt solid var(--border-soft);
+  margin-top:24px;padding-top:12px;line-height:1.55}
+.note a{color:var(--olive)}
+
+@media(max-width:760px){
+  .flow{grid-template-columns:repeat(2,1fr)}
+  .cols{grid-template-columns:1fr}
+  .metrics{grid-template-columns:repeat(2,1fr)}
+}
+@media print{
+  body{font-size:9.6pt}
+  .cta{display:none}
+  .flow{gap:6px}
+  a{color:var(--brand)}
+}
 </style>
 </head>
 <body>
 
-<header class="hero">
-  <div class="hero-bg"></div>
-  <div class="wrap">
-    <span class="kicker">🍔 美团 AI Hackathon 2026 · 赛题06「本地探索 · 周末闲时活动规划」</span>
-    <h1><span class="zh">小团</span><br>把"想出去玩"一句话<br>变成一张可执行的下午</h1>
-    <p class="sub">不是搜索推荐，是帮你<b>把事情做完</b>。一句话需求 → 边玩边吃的行程卡 → 接受 / 换一个 / 看详情 → 一键下单，
-    遇到无座 / 无票 / 时间冲突当场自愈。</p>
-
-    <div class="cta-box">
-      <div class="cta-left">
-        <h2>🚀 在线试玩</h2>
-        <p>点击进入完整可交互 Demo —— 真实大模型推理、真实 Mock 美团商户数据、SSE 实时思考链路。
-        建议用电脑浏览器打开，体验左侧手机界面 + 右侧 Agent 思考链路的双栏视图。</p>
-      </div>
-      <div class="cta-right">
-        <a class="launch" id="launch" href="#" target="_blank" rel="noopener">▶ 进入 Demo</a>
-        <div class="status"><span class="dot" id="dot"></span><span id="statustxt">正在检测服务状态…</span></div>
-        <div class="tip">在线服务运行于作者本机，如打不开说明临时离线，请稍后再试或联系作者。</div>
-      </div>
-    </div>
+<!-- ═════════ 抬头 ═════════ -->
+<div class="head">
+  <div class="head-l">
+    <div class="eyebrow">美团 AI Hackathon 2026 · 赛题06「本地探索 · 周末闲时活动规划」· 设计文档</div>
+    <div class="title">小团 BuYu <span class="en">设计文档</span></div>
+    <div class="subtitle">一句话需求 → 周末半天「边玩边吃」完整方案 → 一键下单执行的本地生活规划与执行 Agent。
+    核心不是搜索推荐，而是<span class="hl">把事情做完</span>。</div>
   </div>
-</header>
-
-<section>
-  <div class="wrap">
-    <div class="eyebrow">Try these</div>
-    <h2 class="sec">四个一句话玩法</h2>
-    <p class="lead">进入 Demo 后可直接点这些预设，或自己打一句话。</p>
-    <div class="plays">
-      <div class="play"><div class="em">👨‍👩‍👧</div><b>带5岁娃遛弯+吃饭</b><span>亲子 · 遛娃半天</span></div>
-      <div class="play"><div class="em">💕</div><b>情侣约会+惊喜</b><span>约会 · 含小惊喜</span></div>
-      <div class="play"><div class="em">🎉</div><b>朋友聚会撸串</b><span>聚会 · 男女混合</span></div>
-      <div class="play"><div class="em">🚶</div><b>一个人 City Walk</b><span>独行 · 轻松慢逛</span></div>
-    </div>
+  <div class="meta">
+    <strong>作者</strong> 谢锦翔 Jinxiang Xie<br>
+    <strong>赛道</strong> 命题赛道 06（单人）<br>
+    <strong>版本</strong> v1.0 · 2026.06<br>
+    <strong>栈</strong> FastAPI · 单会话 Agent · SSE
   </div>
-</section>
+</div>
 
-<section>
-  <div class="wrap">
-    <div class="eyebrow">How it works</div>
-    <h2 class="sec">一句话 → 下单执行，四步全自动</h2>
-    <p class="lead">语义理解与自愈决策交给大模型，规划 / 执行 / 自愈 / 分享本地纯计算。</p>
-    <div class="pipe">
-      <div class="pstep"><div class="num">01 · 理解</div><h3>意图解析</h3>
-        <p>自然语言 → 结构化约束：场景、人群画像、饮食限制、时间窗、地理范围。</p>
-        <div class="tool">大模型意图解析</div></div>
-      <div class="pstep"><div class="num">02 · 规划</div><h3>边玩边吃排程</h3>
-        <p>玩 → 吃 → 顺路活动逐段推进，每段出卡片可接受 / 换一个 / 看详情。</p>
-        <div class="tool">Session · 分段推进</div></div>
-      <div class="pstep"><div class="num">03 · 执行</div><h3>一键下单</h3>
-        <p>逐段调用 Mock 工具：买票 / 订座 / 下单团购，返回真实订单号。</p>
-        <div class="tool">MeituanMock</div></div>
-      <div class="pstep"><div class="num">04 · 自愈</div><h3>异常处理</h3>
-        <p>无座 / 无票 / 冲突 → 诊断约束 → 在合法候选里切换或重排，不中断流程。</p>
-        <div class="tool">大模型 · self_heal</div></div>
-    </div>
+<!-- ═════════ demo 入口（屏幕版保留，打印隐藏） ═════════ -->
+<div class="cta">
+  <div class="cta-l">
+    <b>▶ 在线试玩完整可交互 Demo</b>
+    <p>左侧手机界面（接受 / 换一个 / 看详情 / 多轮对话 / 一键执行）+ 右侧 Agent 实时思考链路双栏视图。建议用电脑浏览器打开。</p>
   </div>
-</section>
+  <div class="cta-r">
+    <a class="launch" id="launch" href="#" target="_blank" rel="noopener">进入 Demo</a>
+    <div class="status"><span class="dot" id="dot"></span><span id="statustxt">检测服务状态…</span></div>
+  </div>
+</div>
 
-<section>
-  <div class="wrap">
-    <div class="eyebrow">Under the hood</div>
-    <h2 class="sec">技术架构</h2>
-    <p class="lead">FastAPI + 单会话 Agent + SSE 实时事件流 + Mock 美团/点评数据层。</p>
-    <div class="arch">
-      <div class="acard"><h3>🧠 Agent 与交互</h3>
-        <ul>
-          <li>单会话状态机，分段推进：<code>/api/start → accept / reject / switch → execute</code></li>
-          <li>SSE <code>/api/events</code> 实时推 thinking / stage / tool / self_heal 事件到前端思考链路</li>
-          <li>LLM 接口 OpenAI 兼容，可对接任意兼容网关</li>
-        </ul></div>
-      <div class="acard"><h3>🛡️ 三类异常自愈</h3>
-        <ul>
-          <li><code>no_table</code> 无座 → 同人群/饮食约束切换可订餐厅</li>
-          <li><code>sold_out</code> 无票 → 同类顺路活动替换，保留时间轴</li>
-          <li><code>conflict</code> 冲突/超窗 → 触发规划器整体重排</li>
-        </ul></div>
-      <div class="acard"><h3>⏱️ 硬性指标（赛题约束）</h3>
-        <ul>
-          <li>方案生成 &lt; 30s · 单工具 &lt; 3s · 端到端 &lt; 2min</li>
-          <li>至少处理 3 类异常 · Pass@1</li>
-          <li>商户数据全 Mock，不接真实美团</li>
-        </ul></div>
-      <div class="acard"><h3>🔒 安全说明</h3>
-        <ul>
-          <li>大模型 API Key 仅存于服务端环境变量，前端零暴露</li>
-          <li>在线服务经 Cloudflare Tunnel 从作者本机暴露，仅供评审试玩</li>
-          <li>无真实交易、无真实下单，订单号均为 Mock</li>
-        </ul></div>
-    </div>
-    <div class="note">📌 说明：本页为美团 AI Hackathon 赛题06 评审入口。「进入 Demo」链接指向作者本机经 Cloudflare Tunnel 暴露的在线服务。
-    如服务离线，状态指示会变红、按钮置灰。比赛结束后本页与在线服务将一并下线。</div>
-  </div>
-</section>
+<p class="lead">小团把「想出去玩」这件含糊的事拆成一条可执行的下午行程：<span class="hl">理解约束 → 分段规划 → 逐段决策出卡 → 一键下单</span>。
+设计上区分两类能力——<strong>symbolic（确定性计算）</strong>负责检索、距离、排序、下单与故障判定，给出<strong>不会幻觉的保证</strong>；
+<strong>neural（大模型）</strong>负责需求解析、候选语义选择与话术，给出<strong>拟人的判断</strong>。本文说明三件事：Planning 策略、工具调用链路、异常处理机制。</p>
 
-<footer>
-  <div class="wrap">
-    小团 BuYu · 美团 AI Hackathon 2026 赛题06 Demo ·
-    <a href="https://jxtse.github.io">← 返回 jxtse.github.io</a>
+<!-- ═════════ 01 Planning 策略 ═════════ -->
+<h2 class="sec"><span class="n">01</span>Planning 策略</h2>
+
+<p>规划不是一次性吐出整张行程，而是<strong>分段、软固定、渐进式确认</strong>的状态机。一次会话 = 一个下午，由单会话状态机（<span class="mono">Session</span>）驱动：</p>
+
+<div class="flow">
+  <div class="fstep"><span class="k">stage · locate</span><b>定位</b><p>读取当前位置与商圈，作为后续距离计算的原点。</p><span class="tg mono">meituan_locate</span><span class="nn">symbolic</span></div>
+  <div class="fstep"><span class="k">stage · intent</span><b>意图解析</b><p>自然语言 → 结构化约束：场景 / 人群 / 饮食 / 时间窗 / 预算。</p><span class="tg mono">LLM · JSON</span><span class="nn">neural（启发式兜底）</span></div>
+  <div class="fstep"><span class="k">stage · plan</span><b>分段编排</b><p>软固定三段「玩→吃→额外」，按约束灵活增删；硬上限 3 段。</p><span class="tg mono">segment_plan</span><span class="nn">neural / 规则</span></div>
+  <div class="fstep"><span class="k">stage · search+reason</span><b>逐段出卡</b><p>段内检索真实候选 → 排序 → 选 1 个生成可执行卡片。</p><span class="tg mono">dianping_search</span><span class="nn">symbolic + neural</span></div>
+  <div class="fstep"><span class="k">stage · execute</span><b>一键执行</b><p>逐站调用下单工具，命中异常当场自愈。</p><span class="tg mono">execute_booking</span><span class="nn">symbolic</span></div>
+</div>
+
+<div class="cols">
+  <div class="card">
+    <h3>软固定三段框架</h3>
+    <ul>
+      <li><b>play → eat → extra</b>：默认「先玩、再吃、轻松收尾」。段的顺序即推荐顺序。</li>
+      <li><b>场景自适应</b>：约会把 extra 设计成「鲜花惊喜」，家庭设为「亲子手作 / 环湖消食」，朋友设为「续摊收尾」。</li>
+      <li><b>可裁剪</b>：时间紧（hours≤3）砍掉 extra，只想吃饭则只留 eat。</li>
+      <li><b>动线感知</b>：每段决策都把「从上一站过去的摩擦成本」纳入，下一张卡不是孤立推荐，而是接住整条路线的后续选择。</li>
+    </ul>
   </div>
-</footer>
+  <div class="card">
+    <h3>渐进式确认（人机协同）</h3>
+    <ul>
+      <li><b>每段出一张卡</b>，用户只需<b>接受 / 换一个 / 看详情</b>三选一，不必从长列表里挑。</li>
+      <li><b>accept</b> → 当前卡写入行程，推进下一段；<b>reject</b> → 拉黑该 id，同段换次优候选。</li>
+      <li><b>多轮对话</b>：用户补充偏好或质疑推荐，模型判定 <span class="mono">keep / switch / refine</span> 并更新约束。</li>
+      <li><b>状态可见</b>：每一步通过 SSE 推 <span class="mono">thinking / stage / tool / self_heal</span> 事件，右侧链路实时展示「为什么这么选」。</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═════════ 02 工具调用链路 ═════════ -->
+<h2 class="sec"><span class="n">02</span>工具调用链路</h2>
+
+<p>所有外部能力收敛为一组<strong>统一签名的工具</strong>（<span class="mono">name / description / parameters / invoke()</span>），由 Agent 按阶段调度；每次调用都向事件总线 publish，前端实时回放。商户数据全部走 <span class="mono">Mock 美团 / 点评</span> 层，保证无真实交易、可复现、低延迟。</p>
+
+<table>
+  <thead><tr><th>阶段</th><th>工具</th><th>类型</th><th>输入 → 输出</th></tr></thead>
+  <tbody>
+    <tr><td class="c0">定位</td><td><span class="mono">meituan_locate</span></td><td>symbolic</td><td>∅ → 当前坐标 + 商圈，作为距离原点</td></tr>
+    <tr><td class="c0">理解</td><td><span class="mono">intent_parse (LLM)</span></td><td>neural</td><td>query → 结构化约束 JSON（失败则启发式兜底）</td></tr>
+    <tr><td class="c0">检索</td><td><span class="mono">dianping_search</span></td><td>symbolic</td><td>段 + 场景 + 排除集 → 真实候选（按距离、评分排序，top-6）</td></tr>
+    <tr><td class="c0">决策</td><td><span class="mono">recommend (LLM)</span></td><td>neural</td><td>候选集 → 选 1 个 id + 卡片话术（只能选候选内，不幻觉）</td></tr>
+    <tr><td class="c0">详情</td><td><span class="mono">meituan_detail</span></td><td>symbolic</td><td>poi_id → 种草帖 / 团购 / 评论 + 同段可切换候选</td></tr>
+    <tr><td class="c0">查位</td><td><span class="mono">meituan_query_queue</span></td><td>symbolic</td><td>poi_id + 人数 → 实时排队 / 有无可订桌位</td></tr>
+    <tr><td class="c0">执行</td><td><span class="mono">meituan_buy_ticket / book_table / order_delivery</span></td><td>symbolic</td><td>按段类型逐站下单 → 状态 + 订单号 / 确认号</td></tr>
+  </tbody>
+</table>
+
+<div class="callout">
+  <b>分工原则：</b>检索召回的候选<b>全部真实存在</b>，模型被严格约束「只能从候选里选一个，绝不编造」——
+  symbolic 给「不会推荐不存在的店」的保证，neural 给「在真实候选里挑出最合适那个并说人话」的判断。
+  排序、距离、团购匹配、下单结果、故障注入均为确定性计算，模型不参与，因此可复现、可审计。
+</div>
+
+<!-- ═════════ 03 异常处理机制 ═════════ -->
+<h2 class="sec"><span class="n">03</span>异常处理机制</h2>
+
+<p>异常处理贯穿<strong>规划期</strong>与<strong>执行期</strong>两个阶段，目标是<strong>不中断流程、当场自愈</strong>，并把每一次调整显式推给用户（<span class="mono">self_heal</span> 事件），可见、可解释。</p>
+
+<table>
+  <thead><tr><th>类型</th><th>触发条件</th><th>处理策略</th><th>发生阶段</th></tr></thead>
+  <tbody>
+    <tr><td class="c0">模型降级</td><td>意图解析 / 对话的 LLM 调用异常或返回非法 JSON</td><td>捕获异常 → 切换<b>启发式规则兜底</b>（关键词判场景/人数），流程继续不报错</td><td>规划期</td></tr>
+    <tr><td class="c0">无座 <span class="mono">no_table</span></td><td>下单前查位无可订桌 / 等待 ≥30min，或下单返回满座</td><td><b>出卡前预过滤</b>降权高风险店；执行期则在<b>同段候选自动改约</b>，保留时间轴</td><td>规划 + 执行</td></tr>
+    <tr><td class="c0">无票 <span class="mono">sold_out</span></td><td>下单返回票 / 名额售罄</td><td>同段顺路候选<b>自动替换重试</b>，沿用已选时间，成功即写回行程</td><td>执行期</td></tr>
+    <tr><td class="c0">时间冲突 <span class="mono">conflict</span></td><td>同一时段已有预约</td><td><b>自动错峰 +15min</b> 重排该站，避免撞车</td><td>执行期</td></tr>
+    <tr><td class="c0">无候选</td><td>某段在场景约束下检索为空</td><td><b>放宽场景</b>再搜；仍为空则跳过该段，不阻塞整体方案</td><td>规划期</td></tr>
+  </tbody>
+</table>
+
+<div class="cols">
+  <div class="card">
+    <h3>规划期：风险前置</h3>
+    <p style="font-size:9.5pt;color:var(--olive);margin:0">出卡前即调用查位工具，对「评分高但实时落地风险高」的餐厅<b>主动降权</b>，
+    优先把<b>可订、等待短</b>的候选放进卡片——避免把一个看起来不错、到店却坐不下的选项推给用户。
+    每一次降权都附带一段思考，解释「我原本会选 A，但实时队列显示它没桌，所以改 B」。</p>
+  </div>
+  <div class="card">
+    <h3>执行期：逐站自愈</h3>
+    <p style="font-size:9.5pt;color:var(--olive);margin:0">一键执行时逐站下单，命中无座 / 无票立即在<b>同段合法候选</b>里改约重试，
+    命中时间冲突自动错峰；每次自愈推 <span class="mono">self_heal → self_heal_ok</span> 两段事件，
+    告诉用户「原选满座，已自动改为 X」。整条链路 <b>Pass@1</b>，不回退到「请稍后再试」。</p>
+  </div>
+</div>
+
+<!-- ═════════ 硬性指标 ═════════ -->
+<h2 class="sec"><span class="n">04</span>性能与约束</h2>
+<div class="metrics">
+  <div class="metric"><div class="v">&lt; 30s</div><div class="l">方案生成</div></div>
+  <div class="metric"><div class="v">&lt; 3s</div><div class="l">单工具调用</div></div>
+  <div class="metric"><div class="v">&lt; 2min</div><div class="l">端到端完成</div></div>
+  <div class="metric"><div class="v">≥ 3 类</div><div class="l">异常自愈 · Pass@1</div></div>
+</div>
+<p style="font-size:9pt;color:var(--olive);margin-top:6px">商户数据全 Mock、不接真实交易；API Key 仅存服务端环境变量，前端零暴露；在线服务经隧道从作者本机暴露，仅供评审试玩，比赛结束后一并下线。</p>
+
+<div class="note">
+  小团 BuYu · 美团 AI Hackathon 2026 赛题06 设计文档 ·
+  <a href="https://jxtse.github.io">← 返回 jxtse.github.io</a> ·
+  在线 Demo 入口见页首「进入 Demo」。本页为临时评审页，比赛结束后将下线。
+</div>
 
 <script>
 // ====== 在线 Demo 地址：换隧道时只改这一行 ======
 const DEMO_URL = "https://dan-newest-grant-headlines.trycloudflare.com/";
 // =================================================
-
-const launch = document.getElementById("launch");
-const dot = document.getElementById("dot");
-const statustxt = document.getElementById("statustxt");
-launch.href = DEMO_URL;
-
-// 健康检测：探活 /api/health，决定按钮可用性
+const launch=document.getElementById("launch");
+const dot=document.getElementById("dot");
+const statustxt=document.getElementById("statustxt");
+launch.href=DEMO_URL;
 async function probe(){
   try{
-    const ctrl = new AbortController();
-    const t = setTimeout(()=>ctrl.abort(), 8000);
-    const r = await fetch(DEMO_URL.replace(/\/$/,"") + "/api/health",
-                          {signal:ctrl.signal, cache:"no-store"});
+    const ctrl=new AbortController();
+    const t=setTimeout(()=>ctrl.abort(),8000);
+    const r=await fetch(DEMO_URL.replace(/\/$/,"")+"/api/health",{signal:ctrl.signal,cache:"no-store"});
     clearTimeout(t);
-    if(r.ok){
-      const j = await r.json();
-      dot.className = "dot up";
-      statustxt.textContent = "";
-      launch.classList.remove("dead");
-      return;
-    }
-    throw new Error("bad status");
+    if(r.ok){dot.className="dot up";statustxt.textContent="在线 · 点击进入";launch.classList.remove("dead");return;}
+    throw new Error("bad");
   }catch(e){
-    // 探活失败（多为跨域/网络瞬断）不代表 Demo 不可用 —— 链接仍在新标签页可用。
-    // 只给中性提示，绝不置灰按钮，避免误导评审以为服务挂了。
-    dot.className = "dot";
-    statustxt.textContent = "状态未知 · 点击按钮直接试玩";
-    launch.classList.remove("dead");
+    // 探活失败多为跨域/瞬断，不代表 Demo 不可用，链接仍可在新标签页打开
+    dot.className="dot";statustxt.textContent="状态未知 · 点击直接试玩";
   }
 }
-probe();
-setInterval(probe, 30000);
+probe();setInterval(probe,30000);
 </script>
 </body>
 </html>
