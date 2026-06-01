@@ -160,21 +160,21 @@ tr:nth-child(even) td{background:rgba(232,230,220,.32)}
   </div>
 </div>
 
-<p class="lead">小团把「想出去玩」这件含糊的事拆成一条可执行的下午行程：<span class="hl">理解约束 → 分段规划 → 逐段决策出卡 → 一键下单</span>。
-设计上区分两类能力——<strong>symbolic（确定性计算）</strong>负责检索、距离、排序、下单与故障判定，给出<strong>不会幻觉的保证</strong>；
-<strong>neural（大模型）</strong>负责需求解析、候选选择与话术——它综合的不只是「语义匹配」，而是<strong>同行人结构 · 时间与体力状态 · 实时约束 · 体验风险 · 执行确定性</strong>多维信号，给出<strong>像人一样的判断</strong>。本文说明三件事：Planning 策略、工具调用链路、实时调整机制。</p>
+<p class="lead">小团是一个 <strong>LLM Agent</strong>，不是预设脚本的 workflow。LLM 作为 <span class="hl">tools orchestrator</span>，通过 <strong>ReAct 循环</strong>（Reason → Act → Observe）自主决定每一步调用哪个工具——
+<strong>地图定位 · 地点检索 · 地点详情 · 团购套餐 · 用户评论 · 大众点评种草帖 · 实时订位 · 下单交易</strong>。
+它在与用户交互中<strong>渐进式总结</strong>需求、动态规划行程；用户每一次选择与每一轮对话都沉淀为 <strong>memory</strong>，让后续每段推荐越来越贴合本次出行的真实意图。本文说明三件事：Planning 策略、工具调用链路、实时调整机制。</p>
 
 <!-- ═════════ 01 Planning 策略 ═════════ -->
 <h2 class="sec"><span class="n">01</span>Planning 策略</h2>
 
-<p>规划不是一次性吐出整张行程，而是<strong>分段、软固定、渐进式确认</strong>的状态机。一次会话 = 一个下午，由单会话状态机（<span class="mono">Session</span>）驱动：</p>
+<p>规划不是一次性吐出整张行程，而是 Agent 在 ReAct 循环里<strong>分段、软固定、渐进式确认</strong>地推进。每一段都是一轮「Reason（结合已知 memory 想清楚这段要什么）→ Act（调工具检索 / 查位 / 取详情）→ Observe（读结果、必要时改主意）」，由单会话上下文（<span class="mono">Session memory</span>）串起整个下午：</p>
 
 <div class="flow">
-  <div class="fstep"><span class="k">stage · locate</span><b>定位</b><p>读取当前位置与商圈，作为后续距离计算的原点。</p><span class="tg mono">meituan_locate</span><span class="nn">symbolic</span></div>
-  <div class="fstep"><span class="k">stage · intent</span><b>意图解析</b><p>自然语言 → 结构化约束：场景 / 人群 / 饮食 / 时间窗 / 预算。</p><span class="tg mono">LLM · JSON</span><span class="nn">neural（启发式兜底）</span></div>
-  <div class="fstep"><span class="k">stage · plan</span><b>分段编排</b><p>软固定三段「玩→吃→额外」，按约束灵活增删；硬上限 3 段。</p><span class="tg mono">segment_plan</span><span class="nn">neural / 规则</span></div>
-  <div class="fstep"><span class="k">stage · search+reason</span><b>逐段出卡</b><p>段内检索真实候选 → 排序 → 选 1 个生成可执行卡片。</p><span class="tg mono">dianping_search</span><span class="nn">symbolic + neural</span></div>
-  <div class="fstep"><span class="k">stage · execute</span><b>一键执行</b><p>逐站调用下单工具，命中异常当场自愈。</p><span class="tg mono">execute_booking</span><span class="nn">symbolic</span></div>
+  <div class="fstep"><span class="k">stage · locate</span><b>定位</b><p>读取当前位置与商圈，作为后续距离计算的原点。</p><span class="tg mono">meituan_locate</span><span class="nn">工具调用</span></div>
+  <div class="fstep"><span class="k">stage · intent</span><b>意图解析</b><p>自然语言 → 结构化约束：场景 / 人群 / 饮食 / 时间窗 / 预算，写入 memory。</p><span class="tg mono">LLM · JSON</span><span class="nn">Agent 推理</span></div>
+  <div class="fstep"><span class="k">stage · plan</span><b>分段编排</b><p>软固定三段「玩→吃→额外」，按约束灵活增删；硬上限 3 段。</p><span class="tg mono">segment_plan</span><span class="nn">Agent 规划</span></div>
+  <div class="fstep"><span class="k">stage · search+reason</span><b>逐段出卡</b><p>段内检索真实候选 → 结合 memory 权衡 → 选 1 个生成可执行卡片。</p><span class="tg mono">dianping_search</span><span class="nn">ReAct 一轮</span></div>
+  <div class="fstep"><span class="k">stage · execute</span><b>一键执行</b><p>逐站调用下单工具，命中异常当场自愈。</p><span class="tg mono">execute_booking</span><span class="nn">工具调用</span></div>
 </div>
 
 <div class="cols">
@@ -188,12 +188,12 @@ tr:nth-child(even) td{background:rgba(232,230,220,.32)}
     </ul>
   </div>
   <div class="card">
-    <h3>渐进式确认（人机协同）</h3>
+    <h3>渐进式总结 + memory（人机协同）</h3>
     <ul>
       <li><b>每段出一张卡</b>，用户只需<b>接受 / 换一个 / 看详情</b>三选一，不必从长列表里挑。</li>
-      <li><b>accept</b> → 当前卡写入行程，推进下一段；<b>reject</b> → 拉黑该 id，同段换次优候选。</li>
-      <li><b>多轮对话</b>：用户补充偏好或质疑推荐，模型判定 <span class="mono">keep / switch / refine</span> 并更新约束。</li>
-      <li><b>状态可见</b>：每一步通过 SSE 推 <span class="mono">thinking / stage / tool / self_heal</span> 事件，右侧链路实时展示「为什么这么选」。其中 <span class="mono">自动调整</span>（internal: <span class="mono">self_heal</span>）事件解释每一次实时改选。</li>
+      <li><b>每次选择都进 memory</b>：<b>accept</b> → 当前卡写入行程并沉淀为偏好信号，推进下一段；<b>reject</b> → 拉黑该 id 写入 memory，同段换次优候选，下段也据此调整。</li>
+      <li><b>多轮对话渐进式总结</b>：用户补充偏好或质疑推荐，Agent 把新信息并入 memory，判定 <span class="mono">keep / switch / refine</span> 并更新约束——越聊越懂这次要什么。</li>
+      <li><b>推理可见</b>：每一步通过 SSE 推 <span class="mono">thinking / stage / tool / self_heal</span> 事件，右侧链路实时展示 Agent「为什么这么选」。其中 <span class="mono">自动调整</span>（internal: <span class="mono">self_heal</span>）事件解释每一次实时改选。</li>
     </ul>
   </div>
 </div>
@@ -201,25 +201,25 @@ tr:nth-child(even) td{background:rgba(232,230,220,.32)}
 <!-- ═════════ 02 工具调用链路 ═════════ -->
 <h2 class="sec"><span class="n">02</span>工具调用链路</h2>
 
-<p>所有外部能力收敛为一组<strong>统一签名的工具</strong>（<span class="mono">name / description / parameters / invoke()</span>），由 Agent 按阶段调度。右侧 Agent 链路由事件总线驱动；公网环境下，为避免 SSE 被代理缓冲，关键预设和用户点击动作会随接口响应返回 <span class="mono">agent_events</span>，由前端按时间线回放，保证链路与卡片生成同步。商户数据全部走 <span class="mono">Mock 美团 / 点评</span> 层，保证无真实交易、可复现、低延迟。</p>
+<p>所有外部能力收敛为一组<strong>统一签名的工具</strong>（<span class="mono">name / description / parameters / invoke()</span>），LLM 作为 <strong>tools orchestrator</strong> 在 ReAct 循环里按需调度——它读工具描述、自己决定何时调哪个、用上一步的 observation 决定下一步。覆盖<strong>地图 / 地点检索 / 地点详情 / 团购套餐 / 用户评论 / 大众点评种草帖 / 实时订位 / 下单</strong>全链路。右侧 Agent 链路由事件总线驱动；公网环境下，为避免 SSE 被代理缓冲，关键预设和用户点击动作会随接口响应返回 <span class="mono">agent_events</span>，由前端按时间线回放，保证链路与卡片生成同步。商户数据全部走 <span class="mono">Mock 美团 / 点评</span> 层，保证无真实交易、可复现、低延迟。</p>
 
 <table>
-  <thead><tr><th>阶段</th><th>工具</th><th>类型</th><th>输入 → 输出</th></tr></thead>
+  <thead><tr><th>阶段</th><th>工具</th><th>角色</th><th>输入 → 输出</th></tr></thead>
   <tbody>
-    <tr><td class="c0">定位</td><td><span class="mono">meituan_locate</span></td><td>symbolic</td><td>∅ → 当前坐标 + 商圈，作为距离原点</td></tr>
-    <tr><td class="c0">理解</td><td><span class="mono">intent_parse (LLM)</span></td><td>neural</td><td>query → 结构化约束 JSON（失败则启发式兜底）</td></tr>
-    <tr><td class="c0">检索</td><td><span class="mono">dianping_search</span></td><td>symbolic</td><td>段 + 场景 + 排除集 → 真实候选（按距离、评分排序，top-6）</td></tr>
-    <tr><td class="c0">决策</td><td><span class="mono">recommend (LLM)</span></td><td>neural</td><td>候选集 → 选 1 个 id + 卡片话术（只能选候选内，不幻觉）</td></tr>
-    <tr><td class="c0">详情</td><td><span class="mono">meituan_detail</span></td><td>symbolic</td><td>poi_id → 种草帖 / 团购 / 评论 + 同段可切换候选</td></tr>
-    <tr><td class="c0">查位</td><td><span class="mono">meituan_query_queue</span></td><td>symbolic</td><td>poi_id + 人数 → 实时排队 / 有无可订桌位</td></tr>
-    <tr><td class="c0">执行</td><td><span class="mono">meituan_buy_ticket / book_table / order_delivery</span></td><td>symbolic</td><td>按段类型逐站下单 → 状态 + 订单号 / 确认号</td></tr>
+    <tr><td class="c0">定位</td><td><span class="mono">meituan_locate</span></td><td>地图工具</td><td>∅ → 当前坐标 + 商圈，作为距离原点</td></tr>
+    <tr><td class="c0">理解</td><td><span class="mono">intent_parse (LLM)</span></td><td>Agent 推理</td><td>query → 结构化约束 JSON，写入 memory（失败则启发式兜底）</td></tr>
+    <tr><td class="c0">检索</td><td><span class="mono">dianping_search</span></td><td>地点检索工具</td><td>段 + 场景 + 排除集 → 真实候选（按距离、评分排序，top-6）</td></tr>
+    <tr><td class="c0">决策</td><td><span class="mono">recommend (LLM)</span></td><td>Agent 决策</td><td>候选集 + memory → 选 1 个 id + 卡片话术（只能选候选内，不幻觉）</td></tr>
+    <tr><td class="c0">详情</td><td><span class="mono">meituan_detail</span></td><td>详情 / 团购 / 评论 / 种草帖</td><td>poi_id → 种草帖 / 团购套餐 / 评论 + 同段可切换候选</td></tr>
+    <tr><td class="c0">查位</td><td><span class="mono">meituan_query_queue</span></td><td>实时订位工具</td><td>poi_id + 人数 → 实时排队 / 有无可订桌位</td></tr>
+    <tr><td class="c0">执行</td><td><span class="mono">meituan_buy_ticket / book_table / order_delivery</span></td><td>下单工具</td><td>按段类型逐站下单 → 状态 + 订单号 / 确认号</td></tr>
   </tbody>
 </table>
 
 <div class="callout">
-  <b>分工原则：</b>检索召回的候选<b>全部真实存在</b>，模型被严格约束「只能从候选里选一个，绝不编造」——
-  symbolic 给「不会推荐不存在的店」的保证；neural 在真实候选里做多维权衡——<b>同行人结构</b>（如两大一小、5 岁孩子）、<b>时间与体力状态</b>（玩完后孩子体力下降）、<b>实时约束</b>（无桌、等待时长）、<b>体验风险</b>（孩子等位哭闹、行程失控）、<b>执行确定性</b>（可订、可下单、可替换）——挑出最合适那个并说人话。
-  排序、距离、团购匹配、下单结果、故障注入均为确定性计算，模型不参与，因此可复现、可审计。
+  <b>Agent 与工具的边界：</b>工具负责<b>确定性的脏活</b>——检索召回真实存在的候选、算距离、匹配团购、查实时队列、执行下单、注入故障，结果可复现、可审计。
+  LLM 不碰这些数字，而是做<b>tools orchestration 与多维权衡</b>：读工具回来的 observation，结合 memory 里积累的偏好，在<b>真实候选里</b>（被严格约束「只能选一个，绝不编造」）综合
+  <b>同行人结构</b>（如两大一小、5 岁孩子）、<b>时间与体力状态</b>（玩完后孩子体力下降）、<b>实时约束</b>（无桌、等待时长）、<b>体验风险</b>（孩子等位哭闹、行程失控）、<b>执行确定性</b>（可订、可下单、可替换）——挑出最合适那个并说人话，再决定下一步调哪个工具。
 </div>
 
 <!-- ═════════ 03 实时调整机制 ═════════ -->
@@ -242,7 +242,7 @@ tr:nth-child(even) td{background:rgba(232,230,220,.32)}
   <b>典型链路 · 家庭晚饭段实时调整</b><br>
   用户确认 <b>Kiddo Lab</b>（亲子手作）后，Agent 进入吃饭段。系统先按距离和评价召回 <b>Green Bowl</b>——它离上一站最近，也符合轻食需求；
   但在下单前调用 <span class="mono">meituan_query_queue</span>，发现当前<b>无可订桌位、预计等待 35min</b>。
-  模型综合判断：<b>5 岁孩子刚完成一场高参与度活动、体力已下降</b>，继续等位会显著放大「孩子哭闹、行程失控」的体验风险，
+  Agent 读到这条 observation 后重新推理：<b>5 岁孩子刚完成一场高参与度活动、体力已下降</b>，继续等位会显著放大「孩子哭闹、行程失控」的体验风险，
   因此<b>主动降权 Green Bowl，改选 Sprout Table</b>。虽然 Sprout Table 距离更远，但<b>有可订座位、等待更短、热食与轻食选择更稳</b>，
   更贴合「省心吃顿好的」目标。整个调整推 <span class="mono">自动调整</span> 事件呈现在右侧链路，用户全程可见为什么改。
 </div>
