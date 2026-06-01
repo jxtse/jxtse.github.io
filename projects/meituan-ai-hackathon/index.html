@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>小团 · 美团 AI Hackathon 赛题06 Demo 入口</title>
-<meta name="description" content="一句话 → 周末半天吃喝玩乐完整方案 → 一键下单执行的本地生活规划 Agent。Kimi K2.6 驱动，可在线试玩。">
+<meta name="description" content="一句话 → 周末半天吃喝玩乐完整方案 → 一键下单执行的本地生活规划 Agent。可在线试玩。">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -99,7 +99,7 @@ footer a{color:var(--muted)}
     <span class="kicker">🍔 美团 AI Hackathon 2026 · 赛题06「本地探索 · 周末闲时活动规划」</span>
     <h1><span class="zh">小团</span><br>把"想出去玩"一句话<br>变成一张可执行的下午</h1>
     <p class="sub">不是搜索推荐，是帮你<b>把事情做完</b>。一句话需求 → 边玩边吃的行程卡 → 接受 / 换一个 / 看详情 → 一键下单，
-    遇到无座 / 无票 / 时间冲突当场自愈。在线 Demo 由 <span class="badge-k">🌙 Kimi K2.6</span> 实时驱动。</p>
+    遇到无座 / 无票 / 时间冲突当场自愈。</p>
 
     <div class="cta-box">
       <div class="cta-left">
@@ -134,11 +134,11 @@ footer a{color:var(--muted)}
   <div class="wrap">
     <div class="eyebrow">How it works</div>
     <h2 class="sec">一句话 → 下单执行，四步全自动</h2>
-    <p class="lead">语义理解与自愈决策交给 Kimi K2.6，规划 / 执行 / 自愈 / 分享本地纯计算。</p>
+    <p class="lead">语义理解与自愈决策交给大模型，规划 / 执行 / 自愈 / 分享本地纯计算。</p>
     <div class="pipe">
       <div class="pstep"><div class="num">01 · 理解</div><h3>意图解析</h3>
         <p>自然语言 → 结构化约束：场景、人群画像、饮食限制、时间窗、地理范围。</p>
-        <div class="tool">Kimi K2.6</div></div>
+        <div class="tool">大模型意图解析</div></div>
       <div class="pstep"><div class="num">02 · 规划</div><h3>边玩边吃排程</h3>
         <p>玩 → 吃 → 顺路活动逐段推进，每段出卡片可接受 / 换一个 / 看详情。</p>
         <div class="tool">Session · 分段推进</div></div>
@@ -147,7 +147,7 @@ footer a{color:var(--muted)}
         <div class="tool">MeituanMock</div></div>
       <div class="pstep"><div class="num">04 · 自愈</div><h3>异常处理</h3>
         <p>无座 / 无票 / 冲突 → 诊断约束 → 在合法候选里切换或重排，不中断流程。</p>
-        <div class="tool">Kimi K2.6 · self_heal</div></div>
+        <div class="tool">大模型 · self_heal</div></div>
     </div>
   </div>
 </section>
@@ -162,7 +162,7 @@ footer a{color:var(--muted)}
         <ul>
           <li>单会话状态机，分段推进：<code>/api/start → accept / reject / switch → execute</code></li>
           <li>SSE <code>/api/events</code> 实时推 thinking / stage / tool / self_heal 事件到前端思考链路</li>
-          <li>LLM 接口 OpenAI 兼容，在线 Demo 接 <code>kimi-k2.6</code>（<code>api.moonshot.ai/v1</code>）</li>
+          <li>LLM 接口 OpenAI 兼容，可对接任意兼容网关</li>
         </ul></div>
       <div class="acard"><h3>🛡️ 三类异常自愈</h3>
         <ul>
@@ -183,15 +183,14 @@ footer a{color:var(--muted)}
           <li>无真实交易、无真实下单，订单号均为 Mock</li>
         </ul></div>
     </div>
-    <div class="note">📌 说明：本页为美团 AI Hackathon 赛题06 评审入口。「进入 Demo」链接指向作者本机经 Cloudflare Tunnel 暴露的在线服务，
-    由 <b>Kimi K2.6</b> 实时驱动。如服务离线，状态指示会变红、按钮置灰。比赛结束后本页与在线服务将一并下线。</div>
+    <div class="note">📌 说明：本页为美团 AI Hackathon 赛题06 评审入口。「进入 Demo」链接指向作者本机经 Cloudflare Tunnel 暴露的在线服务。
+    如服务离线，状态指示会变红、按钮置灰。比赛结束后本页与在线服务将一并下线。</div>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
     小团 BuYu · 美团 AI Hackathon 2026 赛题06 Demo ·
-    LLM by Kimi K2.6 (Moonshot AI) ·
     <a href="https://jxtse.github.io">← 返回 jxtse.github.io</a>
   </div>
 </footer>
@@ -217,7 +216,7 @@ async function probe(){
     if(r.ok){
       const j = await r.json();
       dot.className = "dot up";
-      statustxt.textContent = "服务在线 · 模型 " + (j.model||"") + " · 可试玩";
+      statustxt.textContent = "服务在线 · 可试玩";
       launch.classList.remove("dead");
       return;
     }
