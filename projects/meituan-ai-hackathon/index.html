@@ -114,6 +114,12 @@ tr:nth-child(even) td{background:rgba(232,230,220,.32)}
   padding:10px 14px;margin:10px 0;line-height:1.5;font-size:9.5pt;color:var(--olive);break-inside:avoid}
 .callout b{color:var(--dark-warm)}
 
+/* ---------- demo 实拍 ---------- */
+.shot{margin:16px 0 4px;break-inside:avoid}
+.shot img{width:100%;display:block;border:0.5pt solid var(--border);border-radius:8pt;
+  box-shadow:0 2px 14px rgba(0,0,0,.06)}
+.shot figcaption{font-size:8.5pt;color:var(--stone);margin-top:7px;line-height:1.5;text-align:center}
+
 /* ---------- 指标 ---------- */
 .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:10px 0}
 .metric{background:var(--ivory);border:0.5pt solid var(--border);border-radius:8pt;padding:11px 13px}
@@ -160,9 +166,15 @@ tr:nth-child(even) td{background:rgba(232,230,220,.32)}
   </div>
 </div>
 
+<!-- ═════════ demo 实拍图（第一屏可见） ═════════ -->
+<figure class="shot">
+  <img src="assets/demo-shot.png" alt="小团 Demo 实拍：左侧手机端推荐卡片 + 右侧 Agent 实时思考链路双栏视图">
+  <figcaption>实拍 · 左侧手机端推荐卡片（接受 / 换一个 / 详情）+ 右侧 Agent 实时思考链路（工具输入输出、模型独白、实时调整按时间线展开）。</figcaption>
+</figure>
+
 <p class="lead">小团把「想出去玩」这件含糊的事拆成一条可执行的下午行程：<span class="hl">理解约束 → 分段规划 → 逐段决策出卡 → 一键下单</span>。
 设计上区分两类能力——<strong>symbolic（确定性计算）</strong>负责检索、距离、排序、下单与故障判定，给出<strong>不会幻觉的保证</strong>；
-<strong>neural（大模型）</strong>负责需求解析、候选语义选择与话术，给出<strong>拟人的判断</strong>。本文说明三件事：Planning 策略、工具调用链路、异常处理机制。</p>
+<strong>neural（大模型）</strong>负责需求解析、候选选择与话术——它综合的不只是「语义匹配」，而是<strong>同行人结构 · 时间与体力状态 · 实时约束 · 体验风险 · 执行确定性</strong>多维信号，给出<strong>像人一样的判断</strong>。本文说明三件事：Planning 策略、工具调用链路、实时调整机制。</p>
 
 <!-- ═════════ 01 Planning 策略 ═════════ -->
 <h2 class="sec"><span class="n">01</span>Planning 策略</h2>
@@ -193,7 +205,7 @@ tr:nth-child(even) td{background:rgba(232,230,220,.32)}
       <li><b>每段出一张卡</b>，用户只需<b>接受 / 换一个 / 看详情</b>三选一，不必从长列表里挑。</li>
       <li><b>accept</b> → 当前卡写入行程，推进下一段；<b>reject</b> → 拉黑该 id，同段换次优候选。</li>
       <li><b>多轮对话</b>：用户补充偏好或质疑推荐，模型判定 <span class="mono">keep / switch / refine</span> 并更新约束。</li>
-      <li><b>状态可见</b>：每一步通过 SSE 推 <span class="mono">thinking / stage / tool / self_heal</span> 事件，右侧链路实时展示「为什么这么选」。</li>
+      <li><b>状态可见</b>：每一步通过 SSE 推 <span class="mono">thinking / stage / tool / self_heal</span> 事件，右侧链路实时展示「为什么这么选」。其中 <span class="mono">自动调整</span>（internal: <span class="mono">self_heal</span>）事件解释每一次实时改选。</li>
     </ul>
   </div>
 </div>
@@ -201,7 +213,7 @@ tr:nth-child(even) td{background:rgba(232,230,220,.32)}
 <!-- ═════════ 02 工具调用链路 ═════════ -->
 <h2 class="sec"><span class="n">02</span>工具调用链路</h2>
 
-<p>所有外部能力收敛为一组<strong>统一签名的工具</strong>（<span class="mono">name / description / parameters / invoke()</span>），由 Agent 按阶段调度；每次调用都向事件总线 publish，前端实时回放。商户数据全部走 <span class="mono">Mock 美团 / 点评</span> 层，保证无真实交易、可复现、低延迟。</p>
+<p>所有外部能力收敛为一组<strong>统一签名的工具</strong>（<span class="mono">name / description / parameters / invoke()</span>），由 Agent 按阶段调度。右侧 Agent 链路由事件总线驱动；公网环境下，为避免 SSE 被代理缓冲，关键预设和用户点击动作会随接口响应返回 <span class="mono">agent_events</span>，由前端按时间线回放，保证链路与卡片生成同步。商户数据全部走 <span class="mono">Mock 美团 / 点评</span> 层，保证无真实交易、可复现、低延迟。</p>
 
 <table>
   <thead><tr><th>阶段</th><th>工具</th><th>类型</th><th>输入 → 输出</th></tr></thead>
@@ -218,14 +230,14 @@ tr:nth-child(even) td{background:rgba(232,230,220,.32)}
 
 <div class="callout">
   <b>分工原则：</b>检索召回的候选<b>全部真实存在</b>，模型被严格约束「只能从候选里选一个，绝不编造」——
-  symbolic 给「不会推荐不存在的店」的保证，neural 给「在真实候选里挑出最合适那个并说人话」的判断。
+  symbolic 给「不会推荐不存在的店」的保证；neural 在真实候选里做多维权衡——<b>同行人结构</b>（如两大一小、5 岁孩子）、<b>时间与体力状态</b>（玩完后孩子体力下降）、<b>实时约束</b>（无桌、等待时长）、<b>体验风险</b>（孩子等位哭闹、行程失控）、<b>执行确定性</b>（可订、可下单、可替换）——挑出最合适那个并说人话。
   排序、距离、团购匹配、下单结果、故障注入均为确定性计算，模型不参与，因此可复现、可审计。
 </div>
 
-<!-- ═════════ 03 异常处理机制 ═════════ -->
-<h2 class="sec"><span class="n">03</span>异常处理机制</h2>
+<!-- ═════════ 03 实时调整机制 ═════════ -->
+<h2 class="sec"><span class="n">03</span>实时调整机制</h2>
 
-<p>异常处理贯穿<strong>规划期</strong>与<strong>执行期</strong>两个阶段，目标是<strong>不中断流程、当场自愈</strong>，并把每一次调整显式推给用户（<span class="mono">self_heal</span> 事件），可见、可解释。</p>
+<p>规划与执行中遇到的落地障碍，目标是<strong>不中断流程、当场自动调整</strong>，并把每一次调整显式推给用户（<span class="mono">自动调整</span>事件，internal: <span class="mono">self_heal</span>），可见、可解释。机制贯穿<strong>规划期</strong>（风险前置）与<strong>执行期</strong>（逐站调整）两个阶段。</p>
 
 <table>
   <thead><tr><th>类型</th><th>触发条件</th><th>处理策略</th><th>发生阶段</th></tr></thead>
@@ -238,6 +250,15 @@ tr:nth-child(even) td{background:rgba(232,230,220,.32)}
   </tbody>
 </table>
 
+<div class="callout" style="border-left-color:var(--brand)">
+  <b>典型链路 · 家庭晚饭段实时调整</b><br>
+  用户确认 <b>Kiddo Lab</b>（亲子手作）后，Agent 进入吃饭段。系统先按距离和评价召回 <b>Green Bowl</b>——它离上一站最近，也符合轻食需求；
+  但在下单前调用 <span class="mono">meituan_query_queue</span>，发现当前<b>无可订桌位、预计等待 35min</b>。
+  模型综合判断：<b>5 岁孩子刚完成一场高参与度活动、体力已下降</b>，继续等位会显著放大「孩子哭闹、行程失控」的体验风险，
+  因此<b>主动降权 Green Bowl，改选 Sprout Table</b>。虽然 Sprout Table 距离更远，但<b>有可订座位、等待更短、热食与轻食选择更稳</b>，
+  更贴合「省心吃顿好的」目标。整个调整推 <span class="mono">自动调整</span> 事件呈现在右侧链路，用户全程可见为什么改。
+</div>
+
 <div class="cols">
   <div class="card">
     <h3>规划期：风险前置</h3>
@@ -246,9 +267,9 @@ tr:nth-child(even) td{background:rgba(232,230,220,.32)}
     每一次降权都附带一段思考，解释「我原本会选 A，但实时队列显示它没桌，所以改 B」。</p>
   </div>
   <div class="card">
-    <h3>执行期：逐站自愈</h3>
+    <h3>执行期：逐站调整</h3>
     <p style="font-size:9.5pt;color:var(--olive);margin:0">一键执行时逐站下单，命中无座 / 无票立即在<b>同段合法候选</b>里改约重试，
-    命中时间冲突自动错峰；每次自愈推 <span class="mono">self_heal → self_heal_ok</span> 两段事件，
+    命中时间冲突自动错峰；每次调整推 <span class="mono">自动调整</span>（internal: <span class="mono">self_heal → self_heal_ok</span>）两段事件，
     告诉用户「原选满座，已自动改为 X」。整条链路 <b>Pass@1</b>，不回退到「请稍后再试」。</p>
   </div>
 </div>
@@ -259,7 +280,7 @@ tr:nth-child(even) td{background:rgba(232,230,220,.32)}
   <div class="metric"><div class="v">&lt; 30s</div><div class="l">方案生成</div></div>
   <div class="metric"><div class="v">&lt; 3s</div><div class="l">单工具调用</div></div>
   <div class="metric"><div class="v">&lt; 2min</div><div class="l">端到端完成</div></div>
-  <div class="metric"><div class="v">≥ 3 类</div><div class="l">异常自愈 · Pass@1</div></div>
+  <div class="metric"><div class="v">≥ 3 类</div><div class="l">实时调整 · Pass@1</div></div>
 </div>
 <p style="font-size:9pt;color:var(--olive);margin-top:6px">商户数据全 Mock、不接真实交易；API Key 仅存服务端环境变量，前端零暴露；在线服务经隧道从作者本机暴露，仅供评审试玩，比赛结束后一并下线。</p>
 
