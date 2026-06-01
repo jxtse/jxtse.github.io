@@ -160,14 +160,12 @@ tr:nth-child(even) td{background:rgba(232,230,220,.32)}
   </div>
 </div>
 
-<p class="lead">小团是一个 <strong>LLM Agent</strong>，不是静态脚本化 workflow。LLM 作为 <span class="hl">tools orchestrator</span>，通过 <strong>ReAct 循环</strong>（Reason → Act → Observe）自主决定每一步调用哪个工具——
-<strong>地图定位 · 地点检索 · 地点详情 · 团购套餐 · 用户评论 · 大众点评种草帖 · 实时订位 · 下单交易</strong>。
-它在与用户交互中<strong>渐进式总结</strong>需求、动态规划行程；用户每一次选择与每一轮对话都沉淀为 <strong>memory</strong>，让后续每段推荐越来越贴合本次出行的真实意图。本文聚焦比赛要求的三件事：Planning 策略、工具调用链路、异常处理机制；并补充记忆与技能内化的设计依据。</p>
+<p class="lead">小团面向「周末半天不知道去哪儿」这一高频本地生活场景，把一句含糊需求转化为一条<strong>可确认、可解释、可执行</strong>的本地生活方案。系统设计的核心不是生成推荐文案，而是把 LLM 放在规划中枢：在真实商户候选、实时可用性与用户反馈之间持续权衡，并把推荐、确认与执行连成闭环。本文聚焦比赛要求的三件事：Planning 策略、工具调用链路、异常处理机制；并补充记忆与技能内化的设计依据。</p>
 
 <!-- ═════════ 01 Planning 策略 ═════════ -->
 <h2 class="sec"><span class="n">01</span>Planning 策略</h2>
 
-<p>规划不是一次性吐出整张行程，而是 Agent 在 ReAct 循环里<strong>分段、软固定、渐进式确认</strong>地推进。每一段都是一轮「Reason（结合已知 memory 想清楚这段要什么）→ Act（调工具检索 / 查位 / 取详情）→ Observe（读结果、必要时改主意）」，由单会话上下文（<span class="mono">Session memory</span>）串起整个下午：</p>
+<p>规划不是一次性吐出整张行程，而是 LLM 作为 <span class="hl">tools orchestrator</span>，在 <strong>ReAct 循环</strong>（Reason → Act → Observe）里<strong>分段、软固定、渐进式确认</strong>地推进。每一段都是一轮「Reason（结合已知 memory 想清楚这段要什么）→ Act（按需调用地图定位、地点检索、详情、团购、评论、种草帖、查位等工具）→ Observe（读结果、必要时改主意）」。接受、换选、追问、查位和下单都被视作同一条规划链上的状态变化；每一次用户反馈都会写入单会话上下文（<span class="mono">Session memory</span>），让下一段推荐继续沿着本次出行的真实意图收敛：</p>
 
 <div class="flow">
   <div class="fstep"><span class="k">stage · locate</span><b>定位</b><p>读取当前位置与商圈，作为后续距离计算的原点。</p><span class="tg mono">meituan_locate</span><span class="nn">工具调用</span></div>
