@@ -152,7 +152,7 @@ tr:nth-child(even) td{background:rgba(232,230,220,.32)}
 <div class="cta">
   <div class="cta-l">
     <b>▶ 在线试玩完整可交互 Demo</b>
-    <p>左侧手机界面（接受 / 换一个 / 看详情 / 多轮对话 / 一键执行）+ 右侧 Agent 实时思考链路双栏视图。完整 Tool 实现代码（含 Mock API）见 <a href="https://github.com/jxtse/buyu-meituan" target="_blank" rel="noopener">jxtse/buyu-meituan</a>。</p>
+    <p>左侧手机界面（接受 / 换一个 / 看详情 / 多轮对话 / 一键执行）+ 右侧 Agent 实时思考链路双栏视图。首页四个按钮是预设场景，仅用于快速演示；在输入框输入自定义 query，会调用真实 LLM API，进行思考、工具调用、卡片推荐和执行操作。完整 Tool 实现代码（含 Mock API）见 <a href="https://github.com/jxtse/buyu-meituan" target="_blank" rel="noopener">jxtse/buyu-meituan</a>。</p>
   </div>
   <div class="cta-r">
     <a class="launch" id="launch" href="#" target="_blank" rel="noopener">进入 Demo</a>
@@ -160,18 +160,18 @@ tr:nth-child(even) td{background:rgba(232,230,220,.32)}
   </div>
 </div>
 
-<p class="lead">步语 BuYu 面向「周末半天不知道去哪儿」这一高频本地生活场景，把一句含糊需求转化为一条<strong>可确认、可解释、可执行</strong>的本地生活方案。系统设计的核心不是生成推荐文案，而是把 LLM 放在规划中枢：在真实商户候选、实时可用性与用户反馈之间持续权衡，并把推荐、确认与执行连成闭环。本文聚焦比赛要求的三件事：Planning 策略、工具调用链路、异常处理机制；并补充记忆与技能内化的设计依据。</p>
+<p class="lead">步语 BuYu 面向「周末半天不知道去哪儿」这一高频本地生活场景，把一句含糊需求转化为一条<strong>可确认、可解释、可执行</strong>的本地生活方案。它不只是生成一段推荐文案，而是让 LLM 在真实候选、实时可用性和用户反馈之间做选择：先理解需求，再调用工具查证，最后把推荐、确认与执行连成闭环。本文聚焦比赛要求的三件事：Planning 策略、工具调用链路、异常处理机制；并说明通用规划能力如何通过 LoRA 内化。</p>
 
 <!-- ═════════ 01 Planning 策略 ═════════ -->
 <h2 class="sec"><span class="n">01</span>Planning 策略</h2>
 
-<p>规划不是一次性吐出整张行程，而是 LLM 作为 <span class="hl">tools orchestrator</span>，在 <strong>ReAct 循环</strong>（Reason → Act → Observe）里<strong>分段、软固定、渐进式确认</strong>地推进。每一段都是一轮「Reason（结合已知 memory 想清楚这段要什么）→ Act（按需调用地图定位、地点检索、详情、团购、评论、种草帖、查位等工具）→ Observe（读结果、必要时改主意）」。接受、换选、追问、查位和下单都被视作同一条规划链上的状态变化；每一次用户反馈都会写入单会话上下文（<span class="mono">Session memory</span>），让下一段推荐继续沿着本次出行的真实意图收敛：</p>
+<p>规划不是一次性吐出整张行程，而是 LLM 作为 <span class="hl">tools orchestrator</span>，在 <strong>ReAct 循环</strong>（Reason → Act → Observe）里<strong>分段、软固定、渐进式确认</strong>地推进。每一段都是一轮「Reason（结合当前会话上下文想清楚这段要什么）→ Act（按需调用地图定位、地点检索、详情、团购、评论、种草帖、查位等工具）→ Observe（读取结果，必要时调整选择）」。接受、换选、追问、查位和下单都被视作同一条规划链上的状态变化；每一次用户反馈都会更新当前任务状态摘要，让下一段推荐继续沿着本次出行的真实意图收敛：</p>
 
 <div class="flow">
   <div class="fstep"><span class="k">stage · locate</span><b>定位</b><p>读取当前位置与商圈，作为后续距离计算的原点。</p><span class="tg mono">meituan_locate</span><span class="nn">工具调用</span></div>
-  <div class="fstep"><span class="k">stage · intent</span><b>意图解析</b><p>自然语言 → 结构化约束：场景 / 人群 / 饮食 / 时间窗 / 预算，写入 memory。</p><span class="tg mono">LLM · JSON</span><span class="nn">Agent 推理</span></div>
+  <div class="fstep"><span class="k">stage · intent</span><b>意图解析</b><p>自然语言 → 结构化约束：场景 / 人群 / 饮食 / 时间窗 / 预算，更新当前任务状态。</p><span class="tg mono">LLM · JSON</span><span class="nn">Agent 推理</span></div>
   <div class="fstep"><span class="k">stage · plan</span><b>分段编排</b><p>软固定三段「玩→吃→额外」，按约束灵活增删；硬上限 3 段。</p><span class="tg mono">segment_plan</span><span class="nn">Agent 规划</span></div>
-  <div class="fstep"><span class="k">stage · search+reason</span><b>逐段出卡</b><p>段内检索真实候选 → 结合 memory 权衡 → 选 1 个生成可执行卡片。</p><span class="tg mono">dianping_search</span><span class="nn">ReAct 一轮</span></div>
+  <div class="fstep"><span class="k">stage · search+reason</span><b>逐段出卡</b><p>段内检索真实候选 → 结合上下文权衡 → 选 1 个生成可执行卡片。</p><span class="tg mono">dianping_search</span><span class="nn">ReAct 一轮</span></div>
   <div class="fstep"><span class="k">stage · execute</span><b>一键执行</b><p>逐站调用下单工具，命中异常当场自动调整。</p><span class="tg mono">execute_booking</span><span class="nn">工具调用</span></div>
 </div>
 
@@ -186,11 +186,11 @@ tr:nth-child(even) td{background:rgba(232,230,220,.32)}
     </ul>
   </div>
   <div class="card">
-    <h3>渐进式总结 + memory（人机协同）</h3>
+    <h3>渐进式总结 + 会话上下文</h3>
     <ul>
       <li><b>每段出一张卡</b>，用户只需<b>接受 / 换一个 / 看详情</b>三选一，不必从长列表里挑。</li>
-      <li><b>每次选择都进 memory</b>：<b>accept</b> → 当前卡写入行程并沉淀为偏好信号，推进下一段；<b>reject</b> → 拉黑该 id 写入 memory，同段换次优候选，下段也据此调整。</li>
-      <li><b>多轮对话渐进式总结</b>：用户补充偏好或质疑推荐，Agent 把新信息并入 memory，判定 <span class="mono">keep / switch / refine</span> 并更新约束——越聊越懂这次要什么。</li>
+      <li><b>每次选择都更新上下文</b>：<b>accept</b> → 当前卡写入行程并沉淀为偏好信号，推进下一段；<b>reject</b> → 将该 id 加入本轮排除集，同段换次优候选，下段也据此调整。</li>
+      <li><b>多轮对话渐进式总结</b>：用户补充偏好或质疑推荐，Agent 把新信息并入当前任务状态，判定 <span class="mono">keep / switch / refine</span> 并更新约束，让后续推荐更贴近本次需求。</li>
       <li><b>推理可见</b>：每一步通过 SSE 推 <span class="mono">thinking / stage / tool / self_heal</span> 事件，右侧链路实时展示 Agent「为什么这么选」。其中 <span class="mono">自动调整</span>（internal: <span class="mono">self_heal</span>）事件解释每一次实时改选。</li>
     </ul>
   </div>
@@ -199,25 +199,25 @@ tr:nth-child(even) td{background:rgba(232,230,220,.32)}
 <!-- ═════════ 02 工具调用链路 ═════════ -->
 <h2 class="sec"><span class="n">02</span>工具调用链路</h2>
 
-<p>所有外部能力收敛为一组<strong>统一签名的工具</strong>（<span class="mono">name / description / parameters / invoke()</span>），LLM 作为 <strong>tools orchestrator</strong> 在 ReAct 循环里按需调度——它读工具描述、自己决定何时调哪个、用上一步的 observation 决定下一步。覆盖<strong>地图 / 地点检索 / 地点详情 / 团购套餐 / 用户评论 / 大众点评种草帖 / 实时订位 / 下单</strong>全链路。右侧 Agent 链路由事件总线驱动；公网环境下，为避免 SSE 被代理缓冲，关键预设和用户点击动作会随接口响应返回 <span class="mono">agent_events</span>，由前端按时间线回放，保证链路与卡片生成同步。商户数据全部走 <span class="mono">Mock 美团 / 点评</span> 层，保证无真实交易、可复现、低延迟。</p>
+<p>外部能力被拆成一组可审计的工具（<span class="mono">name / description / parameters / invoke()</span>）。LLM 不直接编造商户或订单，而是在 ReAct 循环里读工具描述、调用工具、查看返回值，再决定下一步。链路覆盖定位、地点搜索、地点详情、团购套餐、用户评论、种草帖、实时排队、预订取号和下单执行。当前实现使用完整 Mock API：<span class="mono">dianping_search</span> 负责从南京代表性地点库召回候选，<span class="mono">dianping_detail</span> 返回图片、套餐、评论、亮点和同段备选，<span class="mono">meituan_query_queue</span> 返回排队 / 可订状态，执行类工具完成订座、买券、取号或下单并返回确认号。右侧 Agent 链路由事件总线驱动；公网环境下，为避免 SSE 被代理缓冲，关键预设和用户点击动作会随接口响应返回 <span class="mono">agent_events</span>，由前端按时间线回放。商户数据全部走 <span class="mono">Mock 美团 / 点评</span> 层，不产生真实交易，便于评审复现。</p>
 
 <table>
   <thead><tr><th>阶段</th><th>工具</th><th>角色</th><th>输入 → 输出</th></tr></thead>
   <tbody>
     <tr><td class="c0">定位</td><td><span class="mono">meituan_locate</span></td><td>地图工具</td><td>∅ → 当前坐标 + 商圈，作为距离原点</td></tr>
-    <tr><td class="c0">理解</td><td><span class="mono">intent_parse (LLM)</span></td><td>Agent 推理</td><td>query → 结构化约束 JSON，写入 memory（失败则启发式兜底）</td></tr>
-    <tr><td class="c0">检索</td><td><span class="mono">dianping_search</span></td><td>地点检索工具</td><td>段 + 场景 + 排除集 → 真实候选（按距离、评分排序，top-6）</td></tr>
-    <tr><td class="c0">决策</td><td><span class="mono">recommend (LLM)</span></td><td>Agent 决策</td><td>候选集 + memory → 选 1 个 id + 卡片话术（只在候选内选择，不编造地点）</td></tr>
-    <tr><td class="c0">详情</td><td><span class="mono">meituan_detail</span></td><td>详情 / 团购 / 评论 / 种草帖</td><td>poi_id → 种草帖 / 团购套餐 / 评论 + 同段可切换候选</td></tr>
-    <tr><td class="c0">查位</td><td><span class="mono">meituan_query_queue</span></td><td>实时订位工具</td><td>poi_id + 人数 → 实时排队 / 有无可订桌位</td></tr>
-    <tr><td class="c0">执行</td><td><span class="mono">meituan_buy_ticket / book_table / order_delivery</span></td><td>下单工具</td><td>按段类型逐站下单 → 状态 + 订单号 / 确认号</td></tr>
+    <tr><td class="c0">理解</td><td><span class="mono">intent_parse (LLM)</span></td><td>Agent 推理</td><td>query → 结构化约束 JSON，更新当前任务状态（失败则启发式兜底）</td></tr>
+    <tr><td class="c0">检索</td><td><span class="mono">dianping_search</span></td><td>地点检索工具</td><td>段 + 场景 + 排除集 → 南京代表性地点候选（按距离、评分、标签和可用性排序）</td></tr>
+    <tr><td class="c0">决策</td><td><span class="mono">recommend (LLM)</span></td><td>Agent 决策</td><td>候选集 + 当前上下文 → 选 1 个 id + 卡片话术（只在候选内选择，不编造地点）</td></tr>
+    <tr><td class="c0">详情</td><td><span class="mono">dianping_detail</span></td><td>详情 / 团购 / 评论 / 种草帖</td><td>poi_id → 图片 / 亮点 / 套餐 / 评论 / 种草帖 + 同段可切换候选</td></tr>
+    <tr><td class="c0">查位</td><td><span class="mono">meituan_query_queue</span></td><td>实时订位工具</td><td>poi_id + 人数 → 等位分钟数 / 可订桌位 / 风险提示</td></tr>
+    <tr><td class="c0">执行</td><td><span class="mono">meituan_book_table / meituan_buy_ticket / meituan_order_delivery</span></td><td>下单工具</td><td>按业务类型完成订座、买券、取号或下单 → 状态 + 订单号 / 确认号</td></tr>
   </tbody>
 </table>
 
 <div class="callout">
-  <b>Agent 与工具的边界：</b>工具负责<b>确定性操作</b>——检索召回真实存在的候选、算距离、匹配团购、查实时队列、执行下单、注入故障，结果可复现、可审计。
-  LLM 不碰这些数字，而是做<b>tools orchestration 与多维权衡</b>：读工具回来的 observation，结合 memory 里积累的偏好，在<b>真实候选里</b>（被严格约束「只能选一个，绝不编造」）综合
-  <b>同行人结构</b>（如两大一小、5 岁孩子）、<b>时间与体力状态</b>（玩完后孩子体力下降）、<b>实时约束</b>（无桌、等待时长）、<b>体验风险</b>（孩子等位哭闹、行程失控）、<b>执行确定性</b>（可订、可下单、可替换）——挑出最合适的候选并生成用户可理解的解释，再决定下一步调哪个工具。
+  <b>Agent 与工具的边界：</b>工具负责<b>确定性操作</b>——召回真实存在的候选、计算距离、匹配团购、查询实时队列、执行下单并返回可审计结果。
+  LLM 负责<b>工具编排与取舍</b>：读工具返回的 observation，结合当前会话里的偏好和排除集，在<b>真实候选里</b>（被严格约束「只能选一个，绝不编造」）综合
+  <b>同行人结构</b>、<b>时间与体力状态</b>、<b>实时约束</b>、<b>体验风险</b>和<b>执行确定性</b>，挑出最合适的候选并给出用户能理解的理由，再决定下一步调哪个工具。
 </div>
 
 <!-- ═════════ 03 实时调整机制 ═════════ -->
@@ -260,35 +260,32 @@ tr:nth-child(even) td{background:rgba(232,230,220,.32)}
   </div>
 </div>
 
-<!-- ═════════ 04 记忆与技能内化 ═════════ -->
-<h2 class="sec"><span class="n">04</span>记忆与技能内化</h2>
+<!-- ═════════ 04 上下文与技能内化 ═════════ -->
+<h2 class="sec"><span class="n">04</span>上下文与技能内化</h2>
 
-<p>步语 BuYu 的记忆分两层：<strong>会话记忆</strong>（运行中）让「这次出行越聊越懂」；<strong>参数化技能内化</strong>（演进方向）把跨场景复用的通用规划能力沉淀为模型自身的<strong>认知基础</strong>。两层的分工遵循一条原则——<span class="hl">有规律、可复用的通用技能适合内化进参数；精确、易变的事实适合留在外部按需检索</span>。</p>
+<p>步语 BuYu 不在工具层单独维护长期状态。单个会话里的偏好、排除集和已确认行程直接保存在当前任务上下文中，保证多轮对话能接住用户刚刚补充的信息；跨会话的通用规划能力则通过 <strong>LoRA / 参数化技能内化</strong>沉淀到模型能力里。分工原则很简单：<span class="hl">稳定、可复用的规划模式适合内化；实时、精确、易变的事实留给工具检索</span>。</p>
 
 <div class="cols">
   <div class="card">
     <h3>通用技能内化 → 认知基础</h3>
     <ul>
       <li><b>把通用技能内化进参数</b>：分段规划范式、动线与体力常识、五类自动调整策略这类跨场景复用的「策略模式」，通过 <b>LoRA + RL</b> 内化为模型能力，而非每次写入上下文。</li>
-      <li><b>为困难任务奠定认知基础</b>：Agent 必须先具备基础策略图式，才谈得上灵活调用细粒度规则——通用技能内化正是这层底座。</li>
-      <li><b>表现远超外挂方案</b>：相比把技能全留在 context（prompt 膨胀、长程推理退化）或纯靠 in-context learning，<b>先内化通用技能、再利用专项技能</b>在分布内与分布外任务上都更强，OOD 泛化提升尤其显著。</li>
+      <li><b>先有基础策略，再做细粒度调用</b>：Agent 需要知道怎样拆段、怎样处理动线和风险，才谈得上灵活调用地点、排队、下单等工具。</li>
+      <li><b>避免把所有规则塞进 prompt</b>：通用策略内化后，运行时上下文只保留本次任务真正需要的信息，减少提示膨胀，也让多轮对话更稳定。</li>
     </ul>
   </div>
   <div class="card">
-    <h3>结构化事实 → 极致参数效率</h3>
+    <h3>结构化事实 → 工具实时检索</h3>
     <ul>
-      <li><b>结构化记忆极省参数</b>：LoRA 作为参数化记忆，对有规律的结构化事实参数效率极高——极少的参数即可承载<b>数十万 token</b> 量级的内容。</li>
-      <li><b>强依赖内容规律性</b>：同样的参数预算，在毫无规律的精确串（随机 token、逐字密钥）上效率断崖式下降，单个低规律 token 就可能触发逐字记忆崩溃。</li>
-      <li><b>落到步语 BuYu 的分工</b>：商户、团购、常识性偏好这类<b>结构化知识</b>适合廉价内化；实时排队、库存、价格这类<b>精确且易变的事实</b>必须留在工具侧实时检索，不进参数——否则既贵又不可靠。</li>
+      <li><b>商户事实不靠模型背诵</b>：地点、套餐、库存、排队、价格都由工具侧 Mock API 返回，方便更新，也方便评审复现。</li>
+      <li><b>LoRA 更适合内化规律</b>：它沉淀的是「怎么规划、怎么权衡、怎么自动调整」这类可复用模式，而不是逐字记住某家店今天有没有桌。</li>
+      <li><b>落到步语 BuYu 的分工</b>：稳定策略进入模型能力，实时事实保留在工具侧检索。这样既减少上下文负担，也避免把易变数据写死。</li>
     </ul>
   </div>
 </div>
 
 <div class="callout">
-  <b>设计依据：</b>上述「内化 vs 外挂」的边界不是主观设定，而是两条经验规律共同界定——
-  <b>(1)</b> 在多轮交互 Agent 上，先内化通用技能构建认知基础、再利用专项技能的方案，系统性地优于把技能全外挂在 context 或纯 in-context learning；
-  <b>(2)</b> LoRA 的参数化记忆容量遵循 <span class="mono">ΔL ∝ rank<sup>α</sup> · 长度<sup>−β</sup></span> 的幂律：对结构化内容以极小 rank 承载长序列，对无规律精确记忆则需跨过 <span class="mono">p&gt;0.5</span> 的确定性相变才能逐字复现。
-  二者共同回答了「什么该内化、什么该外挂」——这正是步语 BuYu 把通用策略内化、把易变事实留给工具检索的理论基础。
+  <b>设计依据：</b>步语 BuYu 把上下文和长期能力拆开处理：本次对话里的约束直接放在会话状态里，跨场景复用的规划能力通过 LoRA 内化，商户、排队、库存、价格等事实始终由工具返回。这样评审看到的不是一个靠提示词硬撑的推荐器，而是一个能在「理解需求 → 调工具 → 读返回值 → 改选择 → 执行」之间闭环运转的 Agent。
 </div>
 
 <!-- ═════════ 硬性指标 ═════════ -->
@@ -309,7 +306,7 @@ tr:nth-child(even) td{background:rgba(232,230,220,.32)}
 
 <script>
 // ====== 在线 Demo 地址：换隧道时只改这一行 ======
-const DEMO_URL = "https://dan-newest-grant-headlines.trycloudflare.com/";
+const DEMO_URL = "https://backing-cell-rentals-certainly.trycloudflare.com/";
 // =================================================
 const launch=document.getElementById("launch");
 const dot=document.getElementById("dot");
