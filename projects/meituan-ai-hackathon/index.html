@@ -191,7 +191,6 @@ tr:nth-child(even) td{background:rgba(232,230,220,.32)}
       <li><b>每段出一张卡</b>，用户只需<b>接受 / 换一个 / 看详情</b>三选一，不必从长列表里挑。</li>
       <li><b>每次选择都更新上下文</b>：<b>accept</b> → 当前卡写入行程并沉淀为偏好信号，推进下一段；<b>reject</b> → 将该 id 加入本轮排除集，同段换次优候选，下段也据此调整。</li>
       <li><b>多轮对话渐进式总结</b>：用户补充偏好或质疑推荐，Agent 把新信息并入当前任务状态，判定 <span class="mono">keep / switch / refine</span> 并更新约束，让后续推荐更贴近本次需求。</li>
-      <li><b>推理可见</b>：每一步通过 SSE 推 <span class="mono">thinking / stage / tool / self_heal</span> 事件，右侧链路实时展示 Agent「为什么这么选」。其中 <span class="mono">自动调整</span>（internal: <span class="mono">self_heal</span>）事件解释每一次实时改选。</li>
     </ul>
   </div>
 </div>
