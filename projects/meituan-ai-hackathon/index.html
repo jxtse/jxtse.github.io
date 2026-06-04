@@ -1,6 +1,6 @@
 <!doctype html>
 <!-- ==================================================================
-     步语 BuYu · 美团 AI Hackathon 2026 赛题06 设计文档
+     本地引力 · 美团 AI Hackathon 2026 赛题06 设计文档
      parchment design system (kami) · screen-first, A4 print-clean (≤2 页)
      内容：Planning 策略 / 工具调用链路 / 异常处理机制
      ================================================================== -->
@@ -8,7 +8,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>步语 BuYu · 设计文档 — 美团 AI Hackathon 赛题06</title>
+<title>本地引力 · 设计文档 — 美团 AI Hackathon 赛题06</title>
 <meta name="description" content="一句话 → 周末半天吃喝玩乐完整方案 → 一键下单执行的本地生活规划 Agent。Planning 策略、工具调用链路、异常处理机制设计文档。">
 <meta name="generator" content="Kami">
 <style>
@@ -143,7 +143,7 @@ tr:nth-child(even) td{background:rgba(232,230,220,.32)}
 <div class="head">
   <div class="head-l">
     <div class="eyebrow">美团 AI Hackathon 2026 · 赛题06「本地探索 · 周末闲时活动规划」· 设计文档</div>
-    <div class="title">步语 <span class="en">BuYu · 设计文档</span></div>
+    <div class="title">本地引力 <span class="en">· 设计文档</span></div>
     <div class="subtitle">一句话需求 → 周末半天「边玩边吃」完整方案 → 一键下单执行的本地生活规划与执行 Agent。</div>
   </div>
 </div>
@@ -160,7 +160,7 @@ tr:nth-child(even) td{background:rgba(232,230,220,.32)}
   </div>
 </div>
 
-<p class="lead">步语 BuYu 面向「周末半天不知道去哪儿」这一高频本地生活场景，把一句含糊需求转化为一条<strong>可确认、可解释、可执行</strong>的本地生活方案。它不只是生成一段推荐文案，而是让 LLM 在真实候选、实时可用性和用户反馈之间做选择：先理解需求，再调用工具查证，最后把推荐、确认与执行连成闭环。本文聚焦比赛要求的三件事：Planning 策略、工具调用链路、异常处理机制；并说明通用规划能力如何通过 LoRA 内化。</p>
+<p class="lead">本地引力面向「周末半天不知道去哪儿」这一高频本地生活场景，把一句含糊需求转化为一条<strong>可确认、可解释、可执行</strong>的本地生活方案。它不只是生成一段推荐文案，而是让 LLM 在真实候选、实时可用性和用户反馈之间做选择：先理解需求，再调用工具查证，最后把推荐、确认与执行连成闭环。本文聚焦比赛要求的三件事：Planning 策略、工具调用链路、异常处理机制；并说明通用规划能力如何通过 LoRA 内化。</p>
 
 <!-- ═════════ 01 Planning 策略 ═════════ -->
 <h2 class="sec"><span class="n">01</span>Planning 策略</h2>
@@ -262,7 +262,7 @@ tr:nth-child(even) td{background:rgba(232,230,220,.32)}
 <!-- ═════════ 04 上下文与技能内化 ═════════ -->
 <h2 class="sec"><span class="n">04</span>上下文与技能内化</h2>
 
-<p>步语 BuYu 不在工具层单独维护长期状态。单个会话里的偏好、排除集和已确认行程直接保存在当前任务上下文中，保证多轮对话能接住用户刚刚补充的信息；跨会话的通用规划能力则通过 <strong>LoRA / 参数化技能内化</strong>沉淀到模型能力里。分工原则很简单：<span class="hl">稳定、可复用的规划模式适合内化；实时、精确、易变的事实留给工具检索</span>。</p>
+<p>本地引力不在工具层单独维护长期状态。单个会话里的偏好、排除集和已确认行程直接保存在当前任务上下文中，保证多轮对话能接住用户刚刚补充的信息；跨会话的通用规划能力则通过 <strong>LoRA / 参数化技能内化</strong>沉淀到模型能力里。分工原则很简单：<span class="hl">稳定、可复用的规划模式适合内化；实时、精确、易变的事实留给工具检索</span>。</p>
 
 <div class="cols">
   <div class="card">
@@ -278,7 +278,7 @@ tr:nth-child(even) td{background:rgba(232,230,220,.32)}
     <ul>
       <li><b>商户事实不靠模型背诵</b>：地点、套餐、库存、排队、价格都由工具侧 Mock API 返回，方便更新，也方便评审复现。</li>
       <li><b>LoRA 更适合内化规律</b>：它沉淀的是「怎么规划、怎么权衡、怎么自动调整」这类可复用模式，而不是逐字记住某家店今天有没有桌。</li>
-      <li><b>落到步语 BuYu 的分工</b>：稳定策略进入模型能力，实时事实保留在工具侧检索。这样既减少上下文负担，也避免把易变数据写死。</li>
+      <li><b>落到本地引力的分工</b>：稳定策略进入模型能力，实时事实保留在工具侧检索。这样既减少上下文负担，也避免把易变数据写死。</li>
     </ul>
   </div>
 </div>
@@ -292,17 +292,17 @@ tr:nth-child(even) td{background:rgba(232,230,220,.32)}
   <div class="metric"><div class="v">&lt; 2min</div><div class="l">端到端完成</div></div>
   <div class="metric"><div class="v">≥ 3 类</div><div class="l">实时调整 · Pass@1</div></div>
 </div>
-<p style="font-size:9pt;color:var(--olive);margin-top:6px">商户数据全 Mock、不接真实交易；API Key 仅存服务端环境变量，前端零暴露；在线服务经隧道从作者本机暴露，仅供评审试玩，比赛结束后一并下线。</p>
+<p style="font-size:9pt;color:var(--olive);margin-top:6px">商户数据全 Mock、不接真实交易；API Key 仅存 Vercel 服务端环境变量，前端零暴露；在线 Demo 部署在 Vercel，供评审稳定试玩。</p>
 
 <div class="note">
-  步语 BuYu · 美团 AI Hackathon 2026 赛题06 设计文档 ·
+  本地引力 · 美团 AI Hackathon 2026 赛题06 设计文档 ·
   <a href="https://jxtse.github.io">← 返回 jxtse.github.io</a> ·
   在线 Demo 入口见页首「进入 Demo」。
 </div>
 
 <script>
-// ====== 在线 Demo 地址：换隧道时只改这一行 ======
-const DEMO_URL = "https://backing-cell-rentals-certainly.trycloudflare.com/";
+// ====== 在线 Demo 地址 ======
+const DEMO_URL = "https://buyu-two.vercel.app/";
 // =================================================
 const launch=document.getElementById("launch");
 const dot=document.getElementById("dot");
