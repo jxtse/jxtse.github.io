@@ -3,6 +3,7 @@ layout: post
 title: "快节奏科研下，我们如何自处？"
 date: 2026-06-17
 description: "信息源优先级、领域深耕与科研基础设施——面对 AI 领域的高速迭代，一个研究生的三条 principles。"
+cover_image: /images/2026-06-17-how-to-cope/cover.jpg
 categories: [Research, AI]
 ---
 
