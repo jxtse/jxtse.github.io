@@ -44,13 +44,7 @@ layout: compress
         });
       }
 
-      /* 2 — Section headings (h1 with icons): fade-in from left on scroll */
-      gsap.utils.toArray('.page__content > h1').forEach(function (el) {
-        gsap.from(el, {
-          scrollTrigger: { trigger: el, start: 'top 85%', once: true },
-          opacity: 0, x: -20, duration: 0.6, ease: 'power2.out'
-        });
-      });
+      /* 2 — Section headings: no animation (static) */
 
       /* 3 — Publication / Open Source cards: staggered fade-in */
       var pubItems = gsap.utils.toArray('.pub-item');
