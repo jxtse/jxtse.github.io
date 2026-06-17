@@ -63,36 +63,25 @@ Feel free to reach out if you'd like to discuss research or explore potential co
 
 # <i class="fas fa-file-alt"></i> Publications 
 
-<div class='paper-box floating-card'>
-  <div class='paper-box-image'>
-    <div class="badge pulse-accent">ACL 2026 Findings</div>
-    <img src='images/TADA-pipeline.jpg' alt="CAST Framework Architecture" width="100%">
-  </div>
-  <div class='paper-box-text'>
-    <h3><a href="/cast/" style="color: inherit; text-decoration: none;">CAST: Achieving Stable LLM-based Text Analysis for Data Analytics</a></h3>
-    <div class="authors"><strong>Jinxiang Xie</strong>, Zihao Li, Wei He, Rui Ding, Shi Han, Dongmei Zhang</div>
-    <div class="venue">In Findings of the 64th Annual Meeting of the Association for Computational Linguistics (ACL 2026)</div>
-    <div class="links">
-      <a href="/cast/" class="btn-accent"><i class="fas fa-home"></i> Project</a>
-      <a href="https://arxiv.org/abs/2602.15861" class="btn-accent"><i class="fas fa-file-alt"></i> ArXiv</a>
-      <a href="https://github.com/jxtse/CAST-text-analysis" class="btn-accent"><i class="fab fa-github"></i> Code</a>
+<div class="pub-list">
+  <div class="pub-item">
+    <div class="pub-venue-badge">ACL 2026 Findings</div>
+    <h3><a href="/cast/">CAST: Achieving Stable LLM-based Text Analysis for Data Analytics</a></h3>
+    <div class="pub-authors"><strong>Jinxiang Xie</strong>, Zihao Li, Wei He, Rui Ding, Shi Han, Dongmei Zhang</div>
+    <div class="pub-links">
+      <a href="/cast/"><i class="fas fa-home"></i> Project</a>
+      <a href="https://arxiv.org/abs/2602.15861"><i class="fas fa-file-alt"></i> ArXiv</a>
+      <a href="https://github.com/jxtse/CAST-text-analysis"><i class="fab fa-github"></i> Code</a>
     </div>
   </div>
-</div>
-
-<div class='paper-box floating-card'>
-  <div class='paper-box-image'>
-    <div class="badge pulse-accent">AAAI 2025</div>
-    <img src='images/Example_page-0001.png' alt="DSGram Framework Overview" width="100%">
-  </div>
-  <div class='paper-box-text'>
-    <h3><a href="/dsgram/" style="color: inherit; text-decoration: none;">DSGram: Dynamic Weighting Sub-Metrics for Grammatical Error Correction in the Era of Large Language Models</a></h3>
-    <div class="authors"><strong>Jinxiang Xie</strong>, Yilin Li, Xunjian Yin, Xiaojun Wan</div>
-    <div class="venue">In The 39th Annual AAAI Conference on Artificial Intelligence (AAAI 2025)</div>
-    <div class="links">
-      <a href="/dsgram/" class="btn-accent"><i class="fas fa-home"></i> Project</a>
-      <a href="https://arxiv.org/abs/2412.12832" class="btn-accent"><i class="fas fa-file-alt"></i> ArXiv</a>
-      <a href="https://github.com/jxtse/GEC-Metrics-DSGram" class="btn-accent"><i class="fab fa-github"></i> Code</a>
+  <div class="pub-item">
+    <div class="pub-venue-badge">AAAI 2025</div>
+    <h3><a href="/dsgram/">DSGram: Dynamic Weighting Sub-Metrics for Grammatical Error Correction in the Era of Large Language Models</a></h3>
+    <div class="pub-authors"><strong>Jinxiang Xie</strong>, Yilin Li, Xunjian Yin, Xiaojun Wan</div>
+    <div class="pub-links">
+      <a href="/dsgram/"><i class="fas fa-home"></i> Project</a>
+      <a href="https://arxiv.org/abs/2412.12832"><i class="fas fa-file-alt"></i> ArXiv</a>
+      <a href="https://github.com/jxtse/GEC-Metrics-DSGram"><i class="fab fa-github"></i> Code</a>
     </div>
   </div>
 </div>
@@ -111,24 +100,15 @@ Feel free to reach out if you'd like to discuss research or explore potential co
 
 # <i class="fas fa-code-branch"></i> Open Source
 
-<div class="paper-box floating-card">
-  <div class="paper-box-image">
-    <div class="badge pulse-accent">Skills for AI Agents</div>
-    <div style="display:flex;align-items:center;justify-content:center;height:100%;background:linear-gradient(135deg,#0f172a 0%,#1e40af 60%,#0ea5e9 100%);color:#fff;border-radius:8px;padding:24px;text-align:center;">
-      <div>
-        <div style="font-size:2.4em;line-height:1;margin-bottom:10px;">🔬</div>
-        <div style="font-family:ui-monospace,Menlo,monospace;font-weight:700;font-size:1.05em;">scientific-research-skills</div>
-        <div style="opacity:0.85;font-size:0.85em;margin-top:6px;">6 workflows · MIT · OpenClaw · Claude Code · Codex</div>
-      </div>
-    </div>
-  </div>
-  <div class="paper-box-text">
-    <h3><a href="/skills/" style="color: inherit; text-decoration: none;">Scientific Research Skills</a></h3>
-    <div class="authors">High-level research methodology skills for AI coding agents</div>
-    <div class="venue">Not another tool list — each skill encodes a complete research workflow: literature search, paper reading, social-media triage, related-work survey, Zotero management, and figure generation.</div>
-    <div class="links">
-      <a href="/skills/" class="btn-accent"><i class="fas fa-home"></i> Project Page</a>
-      <a href="https://github.com/jxtse/scientific-research-skills" class="btn-accent"><i class="fab fa-github"></i> GitHub</a>
+<div class="pub-list">
+  <div class="pub-item">
+    <div class="pub-venue-badge">Skills for AI Agents</div>
+    <h3><a href="/skills/">Scientific Research Skills</a></h3>
+    <div class="pub-authors">High-level research methodology skills for AI coding agents</div>
+    <div class="pub-description">Not another tool list — each skill encodes a complete research workflow: literature search, paper reading, social-media triage, related-work survey, Zotero management, and figure generation.</div>
+    <div class="pub-links">
+      <a href="/skills/"><i class="fas fa-home"></i> Project Page</a>
+      <a href="https://github.com/jxtse/scientific-research-skills"><i class="fab fa-github"></i> GitHub</a>
     </div>
   </div>
 </div>
