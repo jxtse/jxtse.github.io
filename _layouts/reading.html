@@ -1,0 +1,100 @@
+---
+layout: compress
+---
+
+<!doctype html>
+<html lang="{{ site.lang | default: 'en' }}" class="no-js">
+  <head>
+    {% include head.html %}
+    {% include head/custom.html %}
+    <style>
+      /* Reading layout: hide all site chrome */
+      .masthead, .sidebar, .page__footer { display: none !important; }
+
+      /* Full-width centered reading container */
+      .reading-wrap {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 1.5rem 1.25rem 4rem;
+      }
+
+      /* Minimal back link */
+      .reading-back {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-size: 0.9rem;
+        color: #6b7280;
+        text-decoration: none;
+        margin-bottom: 2rem;
+        transition: color 0.2s;
+      }
+      .reading-back:hover { color: #1a1a1a; }
+      .reading-back svg {
+        width: 16px; height: 16px;
+        stroke: currentColor; fill: none;
+        stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+      }
+
+      /* Post meta: single line, compact */
+      .reading-wrap .post-meta {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.85rem;
+        color: #9ca3af;
+        margin-bottom: 0;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+      .reading-wrap .post-meta i {
+        color: #9ca3af;
+        font-size: 0.8em;
+      }
+      .reading-wrap .post-meta-separator {
+        color: #d1d5db;
+        font-size: 0.8rem;
+      }
+      .reading-wrap .post-date time {
+        color: #6b7280;
+        font-weight: 400;
+      }
+      .reading-wrap .post-categories-list {
+        color: #6b7280;
+        font-weight: 400;
+      }
+
+      /* Remove all pink accents in reading mode */
+      .reading-wrap .post-meta i,
+      .reading-wrap .post-content code {
+        color: inherit;
+      }
+
+      @media (max-width: 600px) {
+        .reading-wrap {
+          padding: 1rem 1rem 3rem;
+        }
+        .reading-wrap .post-meta {
+          font-size: 0.8rem;
+          gap: 0.4rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    {% include browser-upgrade.html %}
+
+    <div class="reading-wrap">
+      <a href="{{ '/blog/' | relative_url }}" class="reading-back">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        Blog
+      </a>
+
+      {{ content }}
+    </div>
+
+    {% include scripts.html %}
+  </body>
+</html>
