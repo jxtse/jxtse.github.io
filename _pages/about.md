@@ -120,7 +120,6 @@ Feel free to reach out if you'd like to discuss research or explore potential co
     <div class="pub-description">A ReAct-based agent that plans weekend outings by orchestrating real Meituan/Dianping APIs — map, POI search, reviews, real-time reservation, and order placement — with 3-class anomaly self-healing.</div>
   </a>
 </div>
-</div>
 
 <script>
 // Fetch GitHub stars in real-time
