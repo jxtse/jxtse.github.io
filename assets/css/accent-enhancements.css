@@ -1290,21 +1290,25 @@ body {
 
 .pub-links a {
   font-size: 0.82rem;
-  color: #012F63;
+  color: white !important;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
-  padding: 0.25rem 0.6rem;
-  border: 1px solid #e5e7eb;
-  border-radius: 5px;
-  transition: all 0.2s;
+  padding: 0.35rem 0.75rem;
+  background: #FE667B;
+  border: none;
+  border-radius: 20px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(254, 102, 123, 0.25);
 }
 
 .pub-links a:hover {
-  background: #012F63;
-  color: #fff;
-  border-color: #012F63;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(254, 102, 123, 0.4);
+  background: #FE667B;
+  color: white !important;
 }
 
 .pub-links a i {
