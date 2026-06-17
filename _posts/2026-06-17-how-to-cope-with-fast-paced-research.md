@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "快节奏科研下，我们如何自处？"
+title: "Staying Grounded in Fast-Paced AI Research"
 date: 2026-06-17
-description: "信息源优先级、领域深耕与科研基础设施——面对 AI 领域的高速迭代，一个研究生的三条 principles。"
+description: "Three principles for navigating the AI research firehose: prioritizing information sources (blogs over papers for frontier insights), building domain-specific harnesses instead of chasing hype, and constructing a personal research infrastructure with unified memory and automated pipelines."
 cover_image: /images/2026-06-17-how-to-cope/cover.jpg
 categories: [Research, AI]
 ---
