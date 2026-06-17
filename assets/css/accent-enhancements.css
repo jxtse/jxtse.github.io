@@ -229,14 +229,7 @@
 }
 
 .link-accent::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: linear-gradient(90deg, #FE667B 0%, #ff8599 100%);
-  transition: width 0.3s ease;
+  display: none;
 }
 
 .link-accent:hover {
@@ -244,7 +237,7 @@
 }
 
 .link-accent:hover::after {
-  width: 100%;
+  display: none;
 }
 
 /* 强调色悬浮动画 */
@@ -1309,6 +1302,11 @@ body {
   box-shadow: 0 4px 15px rgba(254, 102, 123, 0.4);
   background: #FE667B;
   color: white !important;
+  text-decoration: none !important;
+}
+
+.pub-links a::after {
+  display: none !important;
 }
 
 .pub-links a i {
