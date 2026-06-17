@@ -1331,3 +1331,29 @@ body {
 .pub-links a i {
   font-size: 0.8em;
 }
+
+/* Clickable card link (whole card is an <a>) */
+a.pub-item-link {
+  display: block;
+  text-decoration: none !important;
+  color: inherit;
+  cursor: pointer;
+}
+
+a.pub-item-link:hover {
+  text-decoration: none !important;
+  color: inherit;
+}
+
+a.pub-item-link::after {
+  display: none !important;
+}
+
+a.pub-item-link h3 {
+  color: #1a1a1a;
+  transition: color 0.2s;
+}
+
+a.pub-item-link:hover h3 {
+  color: #012F63;
+}

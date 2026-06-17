@@ -101,34 +101,25 @@ Feel free to reach out if you'd like to discuss research or explore potential co
 # <i class="fas fa-code-branch"></i> Open Source
 
 <div class="pub-list">
-  <div class="pub-item" data-repo="jxtse/scientific-research-skills">
+  <a class="pub-item pub-item-link" href="https://github.com/jxtse/scientific-research-skills" target="_blank" data-repo="jxtse/scientific-research-skills">
     <div class="pub-venue-badge">Skills for AI Agents</div>
-    <h3><a href="/skills/">Scientific Research Skills</a> <span class="gh-stars" data-repo="jxtse/scientific-research-skills"></span></h3>
+    <h3>Scientific Research Skills <span class="gh-stars" data-repo="jxtse/scientific-research-skills"></span></h3>
     <div class="pub-authors">High-level research methodology skills for AI coding agents</div>
     <div class="pub-description">Not another tool list — each skill encodes a complete research workflow: literature search, paper reading, social-media triage, related-work survey, Zotero management, and figure generation.</div>
-    <div class="pub-links">
-      <a href="/skills/"><i class="fas fa-home"></i> Project Page</a>
-      <a href="https://github.com/jxtse/scientific-research-skills"><i class="fab fa-github"></i> GitHub</a>
-    </div>
-  </div>
-  <div class="pub-item" data-repo="jxtse/auto-paper-harvester">
+  </a>
+  <a class="pub-item pub-item-link" href="https://github.com/jxtse/auto-paper-harvester" target="_blank" data-repo="jxtse/auto-paper-harvester">
     <div class="pub-venue-badge">Research Tool</div>
-    <h3><a href="https://github.com/jxtse/auto-paper-harvester">Auto Paper Harvester</a> <span class="gh-stars" data-repo="jxtse/auto-paper-harvester"></span></h3>
+    <h3>Auto Paper Harvester <span class="gh-stars" data-repo="jxtse/auto-paper-harvester"></span></h3>
     <div class="pub-authors">Batch-download paper PDFs by DOI with multi-source fallback</div>
     <div class="pub-description">Routes through publisher TDM APIs (Wiley/Elsevier/Springer) → OA fallbacks (Crossref/OpenAlex/Unpaywall) → optional Playwright browser fallback. Ships as both a CLI and an agent skill.</div>
-    <div class="pub-links">
-      <a href="https://github.com/jxtse/auto-paper-harvester"><i class="fab fa-github"></i> GitHub</a>
-    </div>
-  </div>
-  <div class="pub-item" data-repo="jxtse/buyu-meituan">
+  </a>
+  <a class="pub-item pub-item-link" href="https://github.com/jxtse/buyu-meituan" target="_blank" data-repo="jxtse/buyu-meituan">
     <div class="pub-venue-badge">AI Hackathon 2026</div>
-    <h3><a href="https://github.com/jxtse/buyu-meituan">BuYu · 本地引力</a> <span class="gh-stars" data-repo="jxtse/buyu-meituan"></span></h3>
+    <h3>BuYu · 本地引力 <span class="gh-stars" data-repo="jxtse/buyu-meituan"></span></h3>
     <div class="pub-authors">Local life planning & execution Agent for Meituan AI Hackathon</div>
     <div class="pub-description">A ReAct-based agent that plans weekend outings by orchestrating real Meituan/Dianping APIs — map, POI search, reviews, real-time reservation, and order placement — with 3-class anomaly self-healing.</div>
-    <div class="pub-links">
-      <a href="https://github.com/jxtse/buyu-meituan"><i class="fab fa-github"></i> GitHub</a>
-    </div>
-  </div>
+  </a>
+</div>
 </div>
 
 <script>
