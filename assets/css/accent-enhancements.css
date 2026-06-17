@@ -983,7 +983,7 @@ body {
 }
 
 .post-content a:hover {
-  text-decoration: underline;
+  text-decoration: none;
   color: #1d4ed8;
 }
 
