@@ -411,13 +411,13 @@
       left: 0;
       right: 0;
       height: 4px;
-      background: linear-gradient(135deg, #012F63 0%, #1a4f8a 50%, #336fa1 100%);
+      background: linear-gradient(135deg, #FE667B 0%, #ff8599 50%, #012F63 100%);
     }
 
     &:hover {
       transform: translateY(-4px);
       box-shadow: 0 4px 12px rgba(0,0,0,0.06), 0 12px 32px rgba(0,0,0,0.08);
-      border-color: rgba(1, 47, 99, 0.25);
+      border-color: rgba(254, 102, 123, 0.25);
     }
 
     h3 {
@@ -478,7 +478,7 @@
     &:hover {
       transform: translateY(-3px);
       box-shadow: 0 4px 12px rgba(0,0,0,0.06), 0 12px 32px rgba(0,0,0,0.08);
-      border-color: rgba(1, 47, 99, 0.25);
+      border-color: rgba(254, 102, 123, 0.25);
     }
     
     .paper-box-text {
@@ -518,7 +518,7 @@
     color: $primary-color;
     margin: 3.5rem 0 1.25rem;
     padding-bottom: 0.6rem;
-    border-bottom: 1px solid rgba(1, 47, 99, 0.12);
+    border-bottom: 1px solid rgba(254, 102, 123, 0.2);
   }
   
   h2 {

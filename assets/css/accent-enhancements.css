@@ -82,7 +82,7 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, #012F63 0%, #1a4f8a 50%, #336fa1 100%);
+  background: linear-gradient(90deg, #FE667B 0%, #ff8599 50%, #012F63 100%);
   opacity: 0;
   transition: opacity 0.2s ease;
 }
@@ -90,7 +90,7 @@
 .floating-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 4px 12px rgba(0,0,0,0.06), 0 12px 32px rgba(0,0,0,0.08);
-  border-color: rgba(1, 47, 99, 0.25);
+  border-color: rgba(254, 102, 123, 0.25);
 }
 
 .floating-card:hover::before {
@@ -121,7 +121,7 @@
 }
 
 .fas:hover, .fab:hover, .far:hover {
-  color: #1a4f8a; /* 主色的浅色变体 */
+  color: #FE667B; /* 强调粉色 */
   transform: scale(1.05);
 }
 
@@ -133,7 +133,7 @@
 
 .sidebar .fas:hover, .sidebar .fab:hover, .sidebar .far:hover,
 .author__urls .fas:hover, .author__urls .fab:hover, .author__urls .far:hover {
-  color: #1a4f8a !important; /* 悬停时使用主色浅色变体 */
+  color: #FE667B !important; /* 悬停时使用粉色强调 */
 }
 
 /* 强调色分割线 */
@@ -202,21 +202,23 @@
 
 /* 强调色标签 */
 .tag-accent {
-  background: #012F63;
-  color: white;
+  background: rgba(254, 102, 123, 0.12);
+  color: #FE667B;
   padding: 0.25rem 0.75rem;
   border-radius: 9999px;
   font-size: 0.8rem;
   font-weight: 600;
   display: inline-block;
   margin: 0.25rem;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(1,47,99,0.06);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(254,102,123,0.06);
   transition: all 0.2s ease;
 }
 
 .tag-accent:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(1,47,99,0.12), 0 8px 24px rgba(1,47,99,0.1);
+  background: #FE667B;
+  color: white;
+  box-shadow: 0 4px 12px rgba(254,102,123,0.18), 0 8px 24px rgba(254,102,123,0.12);
 }
 
 /* 强调色链接装饰 */
@@ -233,7 +235,7 @@
 }
 
 .link-accent:hover {
-  color: #1a4f8a;
+  color: #FE667B;
 }
 
 .link-accent:hover::after {
@@ -387,7 +389,7 @@ body {
 .paper-box:hover {
   transform: translateY(-4px);
   box-shadow: 0 4px 12px rgba(0,0,0,0.06), 0 12px 32px rgba(0,0,0,0.08);
-  border-color: rgba(1, 47, 99, 0.25);
+  border-color: rgba(254, 102, 123, 0.25);
 }
 
 .paper-box-image {
@@ -619,7 +621,7 @@ body {
 .blog-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 4px 12px rgba(0,0,0,0.06), 0 12px 32px rgba(0,0,0,0.08);
-  border-color: rgba(1, 47, 99, 0.25);
+  border-color: rgba(254, 102, 123, 0.25);
 }
 
 .blog-card-image {
@@ -644,13 +646,13 @@ body {
   position: absolute;
   top: 12px;
   left: 12px;
-  background: #012F63;
+  background: #FE667B;
   color: white;
   padding: 0.4em 0.8em;
   border-radius: 9999px;
   font-size: 0.75em;
   font-weight: 600;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(1,47,99,0.1);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(254,102,123,0.15);
   z-index: 10;
 }
 
@@ -697,13 +699,13 @@ body {
   align-items: center;
   gap: 0.4rem;
   padding: 0.5rem 1rem;
-  background: #012F63;
+  background: #FE667B;
   color: white !important;
   text-decoration: none !important;
   border-radius: 9999px;
   font-size: 0.85rem;
   font-weight: 600;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(1,47,99,0.08);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(254,102,123,0.18);
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
@@ -732,7 +734,7 @@ body {
 
 .blog-link:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(1,47,99,0.12), 0 8px 24px rgba(1,47,99,0.1);
+  box-shadow: 0 4px 12px rgba(254,102,123,0.22), 0 8px 24px rgba(254,102,123,0.15);
   color: white !important;
   text-decoration: none !important;
 }
@@ -893,7 +895,7 @@ body {
 }
 
 .post-meta i {
-  color: #9ca3af;
+  color: #FE667B;
   font-size: 0.85em;
 }
 
@@ -926,13 +928,17 @@ body {
 }
 
 .post-tags i {
-  color: #9ca3af;
+  color: #FE667B;
   margin-right: 0.25rem;
 }
 
 .tag-small {
   font-size: 0.75rem;
   padding: 0.2rem 0.6rem;
+  background: rgba(254, 102, 123, 0.1);
+  color: #FE667B;
+  border-radius: 9999px;
+  font-weight: 500;
 }
 
 /* Post Content */
@@ -1118,14 +1124,14 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: #012F63;
+  background: #FE667B;
   color: white !important;
   padding: 0.5rem 1.2rem;
   border-radius: 9999px;
   font-size: 0.9rem;
   font-weight: 600;
   text-decoration: none !important;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(1,47,99,0.08);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(254,102,123,0.18);
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -1135,7 +1141,7 @@ body {
 
 .view-all-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(1,47,99,0.12), 0 8px 24px rgba(1,47,99,0.1);
+  box-shadow: 0 4px 12px rgba(254,102,123,0.22), 0 8px 24px rgba(254,102,123,0.15);
   color: white !important;
   text-decoration: none !important;
 }
@@ -1217,6 +1223,12 @@ body {
    Publication & Open Source — compact list cards (no images)
    ========================================================================== */
 
+/* Page content link hover — pink accent */
+.page__content a:hover {
+  color: #FE667B;
+  text-decoration: none;
+}
+
 .pub-list {
   display: flex;
   flex-direction: column;
@@ -1233,7 +1245,7 @@ body {
 }
 
 .pub-item:hover {
-  border-color: rgba(1, 47, 99, 0.25);
+  border-color: rgba(254, 102, 123, 0.25);
   box-shadow: 0 4px 12px rgba(0,0,0,0.06), 0 12px 32px rgba(0,0,0,0.08);
   transform: translateY(-2px);
 }
@@ -1243,7 +1255,7 @@ body {
   font-size: 0.75rem;
   font-weight: 600;
   color: #fff;
-  background: #012F63;
+  background: #FE667B;
   padding: 0.2rem 0.6rem;
   border-radius: 9999px;
   margin-bottom: 0.5rem;
@@ -1291,24 +1303,26 @@ body {
 
 .pub-links a {
   font-size: 0.82rem;
-  color: #012F63 !important;
+  color: #fff !important;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
   padding: 0.35rem 0.85rem;
-  background: #f0f4f8;
-  border: 1px solid rgba(1, 47, 99, 0.18);
+  background: #FE667B;
+  border: none;
   border-radius: 9999px;
   font-weight: 600;
   transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(254,102,123,0.18);
 }
 
 .pub-links a:hover {
-  background: #012F63;
-  border-color: #012F63;
+  background: #e5475d;
   color: #fff !important;
   text-decoration: none !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(254,102,123,0.22), 0 8px 24px rgba(254,102,123,0.15);
 }
 
 .pub-links a::after {

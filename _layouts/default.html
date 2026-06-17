@@ -29,5 +29,70 @@ layout: compress
     {% include scripts.html %}
     {% include footer.html %}
 
+    <!-- GSAP entrance animations (default layout only) -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+      gsap.registerPlugin(ScrollTrigger);
+
+      /* 1 — Hero / about section: fade-in + slide up on load */
+      var hero = document.querySelector('.page__content');
+      if (hero) {
+        gsap.from(hero, {
+          opacity: 0, y: 30, duration: 0.8,
+          ease: 'power3.out', delay: 0.1
+        });
+      }
+
+      /* 2 — Section headings (h1 with icons): fade-in from left on scroll */
+      gsap.utils.toArray('.page__content > h1').forEach(function (el) {
+        gsap.from(el, {
+          scrollTrigger: { trigger: el, start: 'top 85%', once: true },
+          opacity: 0, x: -20, duration: 0.6, ease: 'power2.out'
+        });
+      });
+
+      /* 3 — Publication / Open Source cards: staggered fade-in */
+      var pubItems = gsap.utils.toArray('.pub-item');
+      if (pubItems.length) {
+        gsap.set(pubItems, { opacity: 0, y: 20 });
+        ScrollTrigger.batch(pubItems, {
+          start: 'top 85%',
+          once: true,
+          onEnter: function (batch) {
+            gsap.to(batch, {
+              opacity: 1, y: 0, duration: 0.6,
+              ease: 'power2.out', stagger: 0.15
+            });
+          }
+        });
+      }
+
+      /* 4 — Blog cards: staggered fade-in */
+      var blogCards = gsap.utils.toArray('.blog-card');
+      if (blogCards.length) {
+        gsap.set(blogCards, { opacity: 0, y: 20 });
+        ScrollTrigger.batch(blogCards, {
+          start: 'top 85%',
+          once: true,
+          onEnter: function (batch) {
+            gsap.to(batch, {
+              opacity: 1, y: 0, duration: 0.6,
+              ease: 'power2.out', stagger: 0.15
+            });
+          }
+        });
+      }
+
+      /* 5 — Floating cards: gentle scale-in */
+      gsap.utils.toArray('.floating-card').forEach(function (el) {
+        gsap.from(el, {
+          scrollTrigger: { trigger: el, start: 'top 85%', once: true },
+          opacity: 0, scale: 0.95, duration: 0.7, ease: 'power2.out'
+        });
+      });
+    });
+    </script>
+
   </body>
 </html>
