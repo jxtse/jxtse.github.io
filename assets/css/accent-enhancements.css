@@ -29,12 +29,12 @@
   color: white !important;
   border: none;
   padding: 12px 24px;
-  border-radius: 25px;
+  border-radius: 9999px;
   font-weight: 600;
   text-decoration: none;
   display: inline-block;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 15px rgba(254, 102, 123, 0.3);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(254,102,123,0.18);
   position: relative;
   overflow: hidden;
 }
@@ -56,7 +56,7 @@
 
 .btn-accent:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(254, 102, 123, 0.4);
+  box-shadow: 0 4px 12px rgba(254,102,123,0.22), 0 12px 32px rgba(254,102,123,0.18);
   color: white !important;
 }
 
@@ -67,10 +67,10 @@
 /* 强调色悬浮卡片 */
 .floating-card {
   background: #ffffff !important; /* 强制使用白色背景 */
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(1, 47, 99, 0.08);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 1px solid rgba(1, 47, 99, 0.06);
+  border-radius: 10px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.04), 0 0.8px 3px rgba(0,0,0,0.02);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   position: relative;
   overflow: hidden;
 }
@@ -82,15 +82,15 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, #FE667B 0%, #ff8599 50%, #a29bfe 100%);
+  background: linear-gradient(90deg, #012F63 0%, #1a4f8a 50%, #336fa1 100%);
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.2s ease;
 }
 
 .floating-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 35px rgba(1, 47, 99, 0.15);
-  border-color: rgba(254, 102, 123, 0.2);
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06), 0 12px 32px rgba(0,0,0,0.08);
+  border-color: rgba(1, 47, 99, 0.25);
 }
 
 .floating-card:hover::before {
@@ -133,13 +133,13 @@
 
 .sidebar .fas:hover, .sidebar .fab:hover, .sidebar .far:hover,
 .author__urls .fas:hover, .author__urls .fab:hover, .author__urls .far:hover {
-  color: #FE667B !important; /* 悬停时使用强调色 */
+  color: #1a4f8a !important; /* 悬停时使用主色浅色变体 */
 }
 
 /* 强调色分割线 */
 .divider-accent {
   height: 2px;
-  background: linear-gradient(90deg, transparent 0%, #FE667B 50%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, #012F63 50%, transparent 100%);
   margin: 2rem 0;
   border: none;
 }
@@ -147,10 +147,10 @@
 /* 强调色引用块 */
 .quote-accent {
   background: #f8f9fa !important; /* 强制使用浅色背景 */
-  border-left: 4px solid #FE667B;
+  border-left: 4px solid #012F63;
   padding: 1.5rem 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(1, 47, 99, 0.08);
+  border-radius: 10px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.04), 0 0.8px 3px rgba(0,0,0,0.02);
   position: relative;
   margin: 2rem 0;
   color: #012F63 !important; /* 确保文字颜色 */
@@ -159,8 +159,8 @@
 .quote-accent::before {
   content: '"';
   font-size: 4rem;
-  color: #FE667B;
-  opacity: 0.2;
+  color: #012F63;
+  opacity: 0.15;
   position: absolute;
   top: -10px;
   left: 15px;
@@ -202,21 +202,21 @@
 
 /* 强调色标签 */
 .tag-accent {
-  background: linear-gradient(135deg, #FE667B 0%, #ff8599 100%);
+  background: #012F63;
   color: white;
   padding: 0.25rem 0.75rem;
-  border-radius: 20px;
+  border-radius: 9999px;
   font-size: 0.8rem;
   font-weight: 600;
   display: inline-block;
   margin: 0.25rem;
-  box-shadow: 0 2px 8px rgba(254, 102, 123, 0.3);
-  transition: all 0.3s ease;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(1,47,99,0.06);
+  transition: all 0.2s ease;
 }
 
 .tag-accent:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(254, 102, 123, 0.4);
+  box-shadow: 0 4px 12px rgba(1,47,99,0.12), 0 8px 24px rgba(1,47,99,0.1);
 }
 
 /* 强调色链接装饰 */
@@ -233,7 +233,7 @@
 }
 
 .link-accent:hover {
-  color: #FE667B;
+  color: #1a4f8a;
 }
 
 .link-accent:hover::after {
@@ -247,7 +247,7 @@
 
 .hover-float:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(1, 47, 99, 0.12);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06), 0 12px 32px rgba(0,0,0,0.08);
 }
 
 /* 强调色脉冲动画 */
@@ -314,7 +314,7 @@
   }
   
   .floating-card a:hover, .highlight-block a:hover, .paper-box a:hover, .quote-accent a:hover {
-    color: #FE667B !important;
+    color: #1a4f8a !important;
   }
 }
 
@@ -348,7 +348,10 @@
 /* 确保所有重要元素的背景和文字颜色 */
 body {
   background-color: #ffffff !important;
-  color: #012F63 !important;
+  color: #1a1a1a !important;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .highlight-block, .paper-box, .floating-card, blockquote, .quote-accent {
@@ -370,11 +373,11 @@ body {
   display: flex !important;
   flex-direction: row;
   background: #ffffff !important;
-  border-radius: 16px;
+  border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 6px 20px rgba(1, 47, 99, 0.06), 0 2px 6px rgba(1, 47, 99, 0.04);
-  border: 1px solid rgba(1, 47, 99, 0.04);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.04), 0 0.8px 3px rgba(0,0,0,0.02);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   margin-bottom: 2rem;
   align-items: stretch;
@@ -383,8 +386,8 @@ body {
 
 .paper-box:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 35px rgba(1, 47, 99, 0.1), 0 4px 15px rgba(254, 102, 123, 0.08);
-  border-color: rgba(254, 102, 123, 0.12);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06), 0 12px 32px rgba(0,0,0,0.08);
+  border-color: rgba(1, 47, 99, 0.25);
 }
 
 .paper-box-image {
@@ -416,30 +419,30 @@ body {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(1, 47, 99, 0.08);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 6px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.04), 0 0.8px 3px rgba(0,0,0,0.02);
   position: relative;
   z-index: 2;
 }
 
 .paper-box:hover .paper-box-image img {
   transform: none;
-  box-shadow: 0 8px 25px rgba(1, 47, 99, 0.12);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06), 0 12px 32px rgba(0,0,0,0.08);
 }
 
 .paper-box-image .badge {
   position: absolute;
   top: 16px;
   left: 16px;
-  background: linear-gradient(135deg, #FE667B 0%, #ff8599 100%);
+  background: #012F63;
   color: white;
   padding: 0.4em 0.8em;
-  border-radius: 20px;
+  border-radius: 9999px;
   font-size: 0.75em;
   font-weight: 700;
   letter-spacing: 0.5px;
-  box-shadow: 0 4px 12px rgba(254, 102, 123, 0.25);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(1,47,99,0.1);
   z-index: 10;
   text-transform: uppercase;
   backdrop-filter: blur(10px);
@@ -465,7 +468,7 @@ body {
 
 .paper-box-text p {
   margin: 0.5rem 0;
-  color: #495057;
+  color: #2d2d2d;
   line-height: 1.6;
   font-size: 0.95rem;
 }
@@ -478,12 +481,12 @@ body {
 }
 
 .paper-box-text .authors strong {
-  color: #FE667B;
+  color: #012F63;
   font-weight: 700;
 }
 
 .paper-box-text .venue {
-  color: #6c757d;
+  color: #6b7280;
   font-style: italic;
   margin-bottom: 1.2rem;
   font-size: 0.9rem;
@@ -501,7 +504,7 @@ body {
   .paper-box {
     flex-direction: column;
     margin-bottom: 1.8rem;
-    border-radius: 12px;
+    border-radius: 10px;
   }
   
   .paper-box-image {
@@ -539,16 +542,16 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  background: #FE667B;
+  background: #012F63;
   color: white !important;
   padding: 0.5rem 1rem;
-  border-radius: 25px;
+  border-radius: 9999px;
   font-size: 0.85rem;
   font-weight: 600;
   text-decoration: none;
   border: none;
-  box-shadow: 0 3px 8px rgba(254, 102, 123, 0.2);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(1,47,99,0.08);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
 }
@@ -570,7 +573,7 @@ body {
 
 .paper-box-text .btn-accent:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(254, 102, 123, 0.3);
+  box-shadow: 0 4px 12px rgba(1,47,99,0.12), 0 8px 24px rgba(1,47,99,0.1);
   color: white !important;
 }
 
@@ -605,16 +608,18 @@ body {
 
 .blog-card {
   background: #ffffff;
-  border-radius: 12px;
+  border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 2px 12px rgba(1, 47, 99, 0.08);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.04), 0 0.8px 3px rgba(0,0,0,0.02);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
 }
 
 .blog-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 8px 25px rgba(1, 47, 99, 0.15);
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06), 0 12px 32px rgba(0,0,0,0.08);
+  border-color: rgba(1, 47, 99, 0.25);
 }
 
 .blog-card-image {
@@ -639,13 +644,13 @@ body {
   position: absolute;
   top: 12px;
   left: 12px;
-  background: #FE667B;
+  background: #012F63;
   color: white;
   padding: 0.4em 0.8em;
-  border-radius: 20px;
+  border-radius: 9999px;
   font-size: 0.75em;
   font-weight: 600;
-  box-shadow: 0 2px 8px rgba(254, 102, 123, 0.3);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(1,47,99,0.1);
   z-index: 10;
 }
 
@@ -669,7 +674,7 @@ body {
 
 .blog-description {
   font-size: 0.9rem;
-  color: #666 !important;
+  color: #6b7280 !important;
   line-height: 1.5;
   margin-bottom: 1rem;
   display: -webkit-box;
@@ -692,14 +697,14 @@ body {
   align-items: center;
   gap: 0.4rem;
   padding: 0.5rem 1rem;
-  background: #FE667B;
+  background: #012F63;
   color: white !important;
   text-decoration: none !important;
-  border-radius: 25px;
+  border-radius: 9999px;
   font-size: 0.85rem;
   font-weight: 600;
-  box-shadow: 0 3px 8px rgba(254, 102, 123, 0.2);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(1,47,99,0.08);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
   border: none;
@@ -727,7 +732,7 @@ body {
 
 .blog-link:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(254, 102, 123, 0.3);
+  box-shadow: 0 4px 12px rgba(1,47,99,0.12), 0 8px 24px rgba(1,47,99,0.1);
   color: white !important;
   text-decoration: none !important;
 }
@@ -779,7 +784,7 @@ body {
   .blog-link {
     font-size: 0.8rem;
     padding: 0.45rem 0.8rem;
-    border-radius: 20px;
+    border-radius: 9999px;
     justify-content: center;
     width: 100%;
     box-sizing: border-box;
@@ -933,8 +938,8 @@ body {
 /* Post Content */
 .post-content {
   font-size: 1.1rem;
-  line-height: 1.9;
-  color: #333;
+  line-height: 1.7;
+  color: #2d2d2d;
 }
 
 .post-content h1,
@@ -1113,15 +1118,15 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: #FE667B;
+  background: #012F63;
   color: white !important;
   padding: 0.5rem 1.2rem;
-  border-radius: 25px;
+  border-radius: 9999px;
   font-size: 0.9rem;
   font-weight: 600;
   text-decoration: none !important;
-  box-shadow: 0 3px 8px rgba(254, 102, 123, 0.2);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(1,47,99,0.08);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .view-all-btn i {
@@ -1130,7 +1135,7 @@ body {
 
 .view-all-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(254, 102, 123, 0.3);
+  box-shadow: 0 4px 12px rgba(1,47,99,0.12), 0 8px 24px rgba(1,47,99,0.1);
   color: white !important;
   text-decoration: none !important;
 }
@@ -1219,16 +1224,18 @@ body {
 }
 
 .pub-item {
-  padding: 1.25rem 1.5rem;
-  border: 1px solid #e5e7eb;
+  padding: 1.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 10px;
   background: #fff;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.04), 0 0.8px 3px rgba(0,0,0,0.02);
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
 }
 
 .pub-item:hover {
-  border-color: #012F63;
-  box-shadow: 0 2px 12px rgba(1, 47, 99, 0.08);
+  border-color: rgba(1, 47, 99, 0.25);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06), 0 12px 32px rgba(0,0,0,0.08);
+  transform: translateY(-2px);
 }
 
 .pub-venue-badge {
@@ -1238,7 +1245,7 @@ body {
   color: #fff;
   background: #012F63;
   padding: 0.2rem 0.6rem;
-  border-radius: 4px;
+  border-radius: 9999px;
   margin-bottom: 0.5rem;
   letter-spacing: 0.02em;
 }
@@ -1249,6 +1256,7 @@ body {
   line-height: 1.4;
   margin: 0 0 0.4rem;
   color: #1a1a1a;
+  letter-spacing: -0.01em;
 }
 
 .pub-item h3 a {
@@ -1270,7 +1278,7 @@ body {
 .pub-description {
   font-size: 0.88rem;
   color: #6b7280;
-  line-height: 1.5;
+  line-height: 1.7;
   margin-bottom: 0.5rem;
 }
 
@@ -1278,30 +1286,28 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
 }
 
 .pub-links a {
   font-size: 0.82rem;
-  color: white !important;
+  color: #012F63 !important;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
-  padding: 0.35rem 0.75rem;
-  background: #FE667B;
-  border: none;
-  border-radius: 20px;
+  padding: 0.35rem 0.85rem;
+  background: #f0f4f8;
+  border: 1px solid rgba(1, 47, 99, 0.18);
+  border-radius: 9999px;
   font-weight: 600;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(254, 102, 123, 0.25);
+  transition: all 0.2s ease;
 }
 
 .pub-links a:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 15px rgba(254, 102, 123, 0.4);
-  background: #FE667B;
-  color: white !important;
+  background: #012F63;
+  border-color: #012F63;
+  color: #fff !important;
   text-decoration: none !important;
 }
 

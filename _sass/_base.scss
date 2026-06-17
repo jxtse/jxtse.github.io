@@ -13,12 +13,13 @@
     --gradient-accent: linear-gradient(135deg, #FE667B 0%, #ff8599 50%, #a29bfe 100%);
     --gradient-primary: linear-gradient(135deg, #012F63 0%, #1a4f8a 50%, #FE667B 100%);
     --gradient-subtle: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    --box-shadow: 0 4px 15px rgba(1, 47, 99, 0.08);
-    --box-shadow-hover: 0 8px 25px rgba(1, 47, 99, 0.12);
-    --box-shadow-accent: 0 4px 15px rgba(254, 102, 123, 0.15);
-    --border-radius: 8px;
-    --border-radius-large: 12px;
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.04), 0 0.8px 3px rgba(0,0,0,0.02);
+    --box-shadow-hover: 0 4px 12px rgba(0,0,0,0.06), 0 12px 32px rgba(0,0,0,0.08);
+    --box-shadow-accent: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(1,47,99,0.06);
+    --border-radius: 6px;
+    --border-radius-large: 10px;
+    --border-radius-pill: 9999px;
+    --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     --spacing-unit: 1.4rem;
     
     /* 强调色CSS变量 */
@@ -41,6 +42,8 @@
     color: $text-color;
     font-family: $global-font-family;
     line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   
     &.overflow--hidden {
       /* when primary navigation is visible, the content in the background won't scroll */
@@ -52,18 +55,20 @@
     margin: 1em 0 0.5em;
     line-height: 1.2;
     font-family: $header-font-family;
-    font-weight: bold;
+    font-weight: 700;
   }
   
   h1 {
     margin-top: 1em;
     font-size: $type-size-3;
     color: $primary-color;
+    letter-spacing: -0.02em;
   }
   
   h2 {
     font-size: $type-size-4;
     color: $primary-color;
+    letter-spacing: -0.02em;
     
     &:hover {
       color: $accent-color;
@@ -73,6 +78,7 @@
   
   h3 {
     font-size: $type-size-5;
+    letter-spacing: -0.01em;
   }
   
   h4 {
@@ -136,20 +142,20 @@
     padding: 1.5em 2em;
     font-style: italic;
     background: #f8f9fa !important; /* 强制使用浅色背景 */
-    border-left: 4px solid #FE667B;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(1, 47, 99, 0.08);
+    border-left: 4px solid #012F63;
+    border-radius: 10px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.04), 0 0.8px 3px rgba(0,0,0,0.02);
     position: relative;
     color: #012F63 !important; /* 确保文字颜色 */
     
     &::before {
       content: '"';
       font-size: 4em;
-      color: #FE667B;
+      color: #012F63;
       position: absolute;
       top: -10px;
       left: 10px;
-      opacity: 0.3;
+      opacity: 0.15;
     }
   
     cite {
@@ -168,10 +174,10 @@
   a {
     color: $primary-color;
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: color 0.2s ease;
     
     &:hover {
-      color: var(--accent-color);
+      color: $primary-light;
       text-decoration: none;
     }
     
@@ -390,10 +396,10 @@
   .highlight-block {
     padding: 1.68rem 1.96rem;
     background: #ffffff !important; /* 强制使用白色背景 */
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(1, 47, 99, 0.08);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 1px solid rgba(1, 47, 99, 0.08);
+    border-radius: 10px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.04), 0 0.8px 3px rgba(0,0,0,0.02);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(0, 0, 0, 0.08);
     margin-bottom: 1.12rem;
     position: relative;
     overflow: hidden;
@@ -405,24 +411,25 @@
       left: 0;
       right: 0;
       height: 4px;
-      background: linear-gradient(135deg, #FE667B 0%, #ff8599 50%, #a29bfe 100%);
+      background: linear-gradient(135deg, #012F63 0%, #1a4f8a 50%, #336fa1 100%);
     }
 
     &:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 8px 25px rgba(1, 47, 99, 0.12);
-      border-color: rgba(254, 102, 123, 0.2);
+      transform: translateY(-4px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06), 0 12px 32px rgba(0,0,0,0.08);
+      border-color: rgba(1, 47, 99, 0.25);
     }
 
     h3 {
       margin-top: 0;
       margin-bottom: 0.84rem;
-      background: linear-gradient(135deg, #012F63 0%, #1a4f8a 50%, #FE667B 100%);
+      background: linear-gradient(135deg, #012F63 0%, #1a4f8a 50%, #336fa1 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       font-size: 1.4em;
-      font-weight: 600;
+      font-weight: 700;
+      letter-spacing: -0.01em;
     }
 
     ul {
@@ -437,7 +444,7 @@
         
         &::before {
           content: '▸';
-          color: #FE667B;
+          color: #012F63;
           font-weight: bold;
           position: absolute;
           left: -1.2em;
@@ -449,11 +456,11 @@
       color: #012F63 !important;
       
       &:hover {
-        color: #FE667B !important;
+        color: #1a4f8a !important;
       }
       
       &::after {
-        background: #FE667B;
+        background: #012F63;
       }
     }
   }
@@ -461,16 +468,17 @@
   /* Simplified Paper Box */
   .paper-box {
     background: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(1, 47, 99, 0.06);
-    transition: all 0.3s ease;
-    border: 1px solid rgba(1, 47, 99, 0.05);
+    border-radius: 10px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.04), 0 0.8px 3px rgba(0,0,0,0.02);
+    transition: all 0.2s ease;
+    border: 1px solid rgba(0, 0, 0, 0.08);
     padding: 1.5rem;
     margin: 1.5rem 0;
     
     &:hover {
       transform: translateY(-3px);
-      box-shadow: 0 4px 15px rgba(1, 47, 99, 0.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06), 0 12px 32px rgba(0,0,0,0.08);
+      border-color: rgba(1, 47, 99, 0.25);
     }
     
     .paper-box-text {
@@ -489,26 +497,28 @@
         color: $primary-color;
         
         &:hover {
-          color: $accent-color;
+          color: $primary-light;
         }
       }
     }
 
     .badge {
-      background: linear-gradient(135deg, #FE667B 0%, #ff8599 100%);
+      background: #012F63;
       color: white;
       padding: 0.3em 0.8em;
-      border-radius: 15px;
+      border-radius: 9999px;
       font-size: 0.8em;
       font-weight: 600;
-      box-shadow: 0 2px 8px rgba(254, 102, 123, 0.2);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(1,47,99,0.06);
     }
   }
   
   /* Simplified Section Headers */
   h1 {
     color: $primary-color;
-    margin: 1.5em 0 1em;
+    margin: 3.5rem 0 1.25rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid rgba(1, 47, 99, 0.12);
   }
   
   h2 {
@@ -525,7 +535,7 @@
       
       &:hover {
         transform: translateX(8px);
-        color: var(--accent-color);
+        color: var(--primary-light);
       }
     }
   }
@@ -540,7 +550,7 @@
     
     &:hover {
       text-decoration: none;
-      color: var(--accent-color);
+      color: var(--primary-light);
     }
   }
 

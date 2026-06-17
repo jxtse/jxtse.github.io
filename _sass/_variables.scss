@@ -14,7 +14,7 @@
    
    /* system typefaces */
    $serif                      : Georgia, Times, serif;
-   $sans-serif                 : "Trebuchet MS", Helvetica, sans-serif;
+   $sans-serif                 : 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
    // $sans-serif                 : Georgia, serif, sans-serif;
    
    // $sans-serif                 : -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", Arial, sans-serif;
@@ -164,12 +164,13 @@
       Enhanced Design Tokens
       ========================================================================== */
    
-   $border-radius              : 8px;
-   $border-radius-large        : 12px;
-   $border-radius-small        : 4px;
-   $box-shadow                 : 0 4px 15px rgba(1, 47, 99, 0.08);
-   $box-shadow-hover           : 0 8px 25px rgba(1, 47, 99, 0.12);
-   $box-shadow-accent          : 0 4px 15px rgba(254, 102, 123, 0.15);
+   $border-radius              : 6px;
+   $border-radius-large        : 10px;
+   $border-radius-small        : 6px;
+   $border-radius-pill         : 9999px;
+   $box-shadow                 : 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.04), 0 0.8px 3px rgba(0,0,0,0.02);
+   $box-shadow-hover           : 0 4px 12px rgba(0,0,0,0.06), 0 12px 32px rgba(0,0,0,0.08);
+   $box-shadow-accent          : 0 1px 2px rgba(0,0,0,0.04), 0 4px 12px rgba(1,47,99,0.06);
    $navicon-width              : 28px;
    $navicon-height             : 4px;
    $global-transition          : all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
