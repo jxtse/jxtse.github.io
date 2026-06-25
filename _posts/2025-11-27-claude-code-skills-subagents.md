@@ -3,7 +3,7 @@ layout: post
 title: "Claude Code Skills and Subagents in Practice"
 date: 2025-11-27
 description: "Two production-grade systems for real research scenarios: a paywall-crossing paper harvester and a self-iterating AI Scientist, demonstrating how Skills and Subagents upgrade LLMs into research infrastructure."
-cover_image: /images/2025-11-27-claude-code-skills-subagents/0.png
+cover_image: /images/2025-11-27-claude-code-skills-subagents/0.jpg
 categories: [AI, Tutorial]
 original_url: https://mp.weixin.qq.com/s/_rHrBpRZX_U2Zmt8vRZ22Q
 ---
