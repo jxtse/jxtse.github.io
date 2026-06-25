@@ -113,12 +113,6 @@ Feel free to reach out if you'd like to discuss research or explore potential co
     <div class="pub-authors">Batch-download paper PDFs by DOI with multi-source fallback</div>
     <div class="pub-description">Routes through publisher TDM APIs (Wiley/Elsevier/Springer) → OA fallbacks (Crossref/OpenAlex/Unpaywall) → optional Playwright browser fallback. Ships as both a CLI and an agent skill.</div>
   </a>
-  <a class="pub-item pub-item-link" href="https://github.com/jxtse/buyu-meituan" target="_blank" data-repo="jxtse/buyu-meituan">
-    <div class="pub-venue-badge">AI Hackathon 2026</div>
-    <h3>BuYu · 本地引力 <span class="gh-stars" data-repo="jxtse/buyu-meituan"></span></h3>
-    <div class="pub-authors">Local life planning & execution Agent for Meituan AI Hackathon</div>
-    <div class="pub-description">A ReAct-based agent that plans weekend outings by orchestrating real Meituan/Dianping APIs — map, POI search, reviews, real-time reservation, and order placement — with 3-class anomaly self-healing.</div>
-  </a>
 </div>
 
 <script>
