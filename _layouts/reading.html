@@ -88,12 +88,52 @@ layout: compress
         transform-origin: left center;
         transition: transform 80ms linear;
       }
-      .reading-progress-label {
+      .reading-progress-label,
+      .reading-toc-title {
         display: block;
-        margin-top: 0.55rem;
         color: #9a958e;
         font-size: 0.72rem;
         letter-spacing: 0.02em;
+      }
+      .reading-progress-label { margin-top: 0.55rem; }
+      .reading-toc {
+        margin-top: 1.8rem;
+        padding-right: 1.15rem;
+      }
+      .reading-toc-title {
+        margin-bottom: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .reading-toc-list {
+        display: grid;
+        gap: 0.15rem;
+      }
+      .reading-toc-link {
+        display: block;
+        padding: 0.33rem 0 0.33rem 0.7rem;
+        color: #817b75;
+        font-size: 0.75rem;
+        line-height: 1.38;
+        text-decoration: none;
+        border-left: 1px solid #ddd8d1;
+        transition: color 150ms ease, border-color 150ms ease;
+      }
+      .reading-toc-link:hover,
+      .reading-toc-link.is-active {
+        color: var(--reading-accent);
+        border-left-color: var(--reading-accent);
+        text-decoration: none;
+      }
+      .reading-toc-link::after { display: none !important; }
+      .reading-toc-link[data-level="3"] {
+        padding-left: 1.2rem;
+        color: #9a958e;
+        font-size: 0.7rem;
+      }
+      .reading-toc-empty {
+        display: none;
       }
 
       .reading-paper {
@@ -256,7 +296,8 @@ layout: compress
           border-right: 0;
         }
         .reading-progress-track,
-        .reading-progress-label { display: none; }
+        .reading-progress-label,
+        .reading-toc { display: none; }
         .reading-paper {
           width: 100%;
           min-height: 0;
@@ -268,8 +309,8 @@ layout: compress
 
       @media (max-width: 600px) {
         html, body, .reading-paper { background: #fff; }
-        .reading-rail { padding: 1rem 1rem 0; }
-        .reading-paper { padding: 1.75rem 1rem 4rem; }
+        .reading-rail { padding: 1rem 1.35rem 0; }
+        .reading-paper { padding: 1.75rem 1.35rem 4rem; }
         .reading-paper .post-header { margin-bottom: 2.25rem; padding-bottom: 1.5rem; }
         .reading-paper .post-cover { margin-bottom: 1.6rem; }
         .reading-paper .post-title {
@@ -279,11 +320,23 @@ layout: compress
         }
         .reading-paper .post-description { font-size: 0.97rem; line-height: 1.62; }
         .reading-paper .post-meta {
-          font-size: 0.76rem;
-          gap: 0.35rem;
+          display: grid;
+          grid-template-columns: auto auto auto;
+          justify-content: start;
+          align-items: center;
+          width: max-content;
+          max-width: 100%;
+          font-size: clamp(0.66rem, 2.8vw, 0.76rem);
+          gap: 0.3rem;
           white-space: nowrap;
         }
-        .reading-paper .post-meta-separator { display: inline; }
+        .reading-paper .post-meta-item,
+        .reading-paper .post-meta > span {
+          min-width: 0;
+          flex-wrap: nowrap;
+        }
+        .reading-paper .post-categories-list { white-space: nowrap; }
+        .reading-paper .post-meta-separator { display: inline-flex; }
         .reading-paper .post-content { font-size: 1.04rem; line-height: 1.86; letter-spacing: 0; }
         .reading-paper .post-content p { margin-bottom: 1.45em; }
         .reading-paper .post-content h2 { margin-top: 3.25rem; }
@@ -309,6 +362,10 @@ layout: compress
             <span class="reading-progress-bar" id="reading-progress-bar"></span>
           </div>
           <span class="reading-progress-label" aria-hidden="true">Reading progress</span>
+          <nav class="reading-toc reading-toc-empty" id="reading-toc" aria-label="Table of contents">
+            <span class="reading-toc-title">Contents</span>
+            <div class="reading-toc-list" id="reading-toc-list"></div>
+          </nav>
         </aside>
 
         <main class="reading-paper">
@@ -321,24 +378,80 @@ layout: compress
     <script>
       (function () {
         var bar = document.getElementById('reading-progress-bar');
-        if (!bar) return;
+        var toc = document.getElementById('reading-toc');
+        var tocList = document.getElementById('reading-toc-list');
+        var headings = Array.prototype.slice.call(
+          document.querySelectorAll('.post-content h1, .post-content h2, .post-content h3')
+        );
+        var tocLinks = [];
+        var activeIndex = -1;
+
+        function uniqueId(text, index) {
+          var base = text.toLowerCase()
+            .trim()
+            .replace(/[^\w\u3400-\u9fff-]+/g, '-')
+            .replace(/^-+|-+$/g, '');
+          if (!base) base = 'section-' + (index + 1);
+          var candidate = base;
+          var suffix = 2;
+          while (document.getElementById(candidate)) {
+            candidate = base + '-' + suffix;
+            suffix += 1;
+          }
+          return candidate;
+        }
+
+        if (toc && tocList && headings.length) {
+          headings.forEach(function (heading, index) {
+            if (!heading.id) heading.id = uniqueId(heading.textContent, index);
+            var link = document.createElement('a');
+            link.className = 'reading-toc-link';
+            link.href = '#' + heading.id;
+            link.dataset.level = heading.tagName.slice(1);
+            link.textContent = heading.textContent.trim();
+            link.addEventListener('click', function (event) {
+              event.preventDefault();
+              heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              if (history.replaceState) history.replaceState(null, '', '#' + heading.id);
+            });
+            tocList.appendChild(link);
+            tocLinks.push(link);
+          });
+          toc.classList.remove('reading-toc-empty');
+        }
+
+        function updateActiveHeading() {
+          if (!headings.length) return;
+          var nextIndex = 0;
+          var threshold = Math.min(180, window.innerHeight * 0.24);
+          headings.forEach(function (heading, index) {
+            if (heading.getBoundingClientRect().top <= threshold) nextIndex = index;
+          });
+          if (nextIndex === activeIndex) return;
+          activeIndex = nextIndex;
+          tocLinks.forEach(function (link, index) {
+            link.classList.toggle('is-active', index === activeIndex);
+          });
+        }
+
         var ticking = false;
-        function updateProgress() {
+        function updateReadingState() {
           var root = document.documentElement;
           var max = root.scrollHeight - root.clientHeight;
           var progress = max > 0 ? Math.min(1, Math.max(0, root.scrollTop / max)) : 0;
-          bar.style.transform = 'scaleX(' + progress + ')';
+          if (bar) bar.style.transform = 'scaleX(' + progress + ')';
+          updateActiveHeading();
           ticking = false;
         }
         function requestUpdate() {
           if (!ticking) {
-            window.requestAnimationFrame(updateProgress);
+            window.requestAnimationFrame(updateReadingState);
             ticking = true;
           }
         }
         window.addEventListener('scroll', requestUpdate, { passive: true });
         window.addEventListener('resize', requestUpdate);
-        updateProgress();
+        updateReadingState();
       }());
     </script>
   </body>
