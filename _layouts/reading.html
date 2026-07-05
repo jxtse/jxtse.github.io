@@ -35,17 +35,18 @@ layout: compress
       }
 
       .reading-grid {
-        display: grid;
-        grid-template-columns: 148px minmax(0, 760px);
-        column-gap: 3.5rem;
-        align-items: start;
-        justify-content: center;
+        position: relative;
+        display: block;
       }
 
       .reading-rail {
-        position: sticky;
-        top: 2.25rem;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        width: 148px;
+        margin-left: -12.6rem;
         padding-top: 2.25rem;
+        border-right: 1px solid var(--reading-border);
       }
 
       .reading-back {
@@ -96,8 +97,10 @@ layout: compress
       }
 
       .reading-paper {
+        width: min(100%, 760px);
         min-width: 0;
         min-height: 100vh;
+        margin: 0 auto;
         padding: 3.75rem 4.25rem 7rem;
         background: var(--reading-paper);
         border-left: 1px solid var(--reading-border);
@@ -247,12 +250,17 @@ layout: compress
         .reading-grid { display: block; }
         .reading-rail {
           position: static;
+          width: auto;
+          margin-left: 0;
           padding: 1rem 1.25rem 0;
+          border-right: 0;
         }
         .reading-progress-track,
         .reading-progress-label { display: none; }
         .reading-paper {
+          width: 100%;
           min-height: 0;
+          margin: 0;
           padding: 2rem 2rem 5rem;
           border: 0;
         }
@@ -270,7 +278,12 @@ layout: compress
           letter-spacing: -0.025em;
         }
         .reading-paper .post-description { font-size: 0.97rem; line-height: 1.62; }
-        .reading-paper .post-meta { font-size: 0.76rem; gap: 0.35rem; }
+        .reading-paper .post-meta {
+          font-size: 0.76rem;
+          gap: 0.35rem;
+          white-space: nowrap;
+        }
+        .reading-paper .post-meta-separator { display: inline; }
         .reading-paper .post-content { font-size: 1.04rem; line-height: 1.86; letter-spacing: 0; }
         .reading-paper .post-content p { margin-bottom: 1.45em; }
         .reading-paper .post-content h2 { margin-top: 3.25rem; }
