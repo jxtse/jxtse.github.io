@@ -8,77 +8,276 @@ layout: compress
     {% include head.html %}
     {% include head/custom.html %}
     <style>
-      /* Reading layout: hide all site chrome */
-      .masthead, .sidebar, .page__footer { display: none !important; }
-
-      /* Full-width centered reading container */
-      .reading-wrap {
-        max-width: 720px;
-        margin: 0 auto;
-        padding: 1.5rem 1.25rem 4rem;
+      :root {
+        --reading-bg: #f7f6f2;
+        --reading-paper: #fff;
+        --reading-ink: #252422;
+        --reading-muted: #76716b;
+        --reading-border: rgba(37, 36, 34, 0.10);
+        --reading-accent: #012f63;
       }
 
-      /* Minimal back link */
+      /* Reading mode: no global site chrome, only the article and a quiet rail. */
+      .masthead, .sidebar, .page__footer { display: none !important; }
+      html { background: var(--reading-bg); }
+      body {
+        margin: 0;
+        background: var(--reading-bg);
+        color: var(--reading-ink);
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+
+      .reading-shell {
+        width: min(100%, 1180px);
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .reading-grid {
+        display: grid;
+        grid-template-columns: 148px minmax(0, 760px);
+        column-gap: 3.5rem;
+        align-items: start;
+        justify-content: center;
+      }
+
+      .reading-rail {
+        position: sticky;
+        top: 2.25rem;
+        padding-top: 2.25rem;
+      }
+
       .reading-back {
         display: inline-flex;
         align-items: center;
-        gap: 0.35rem;
-        font-size: 0.9rem;
-        color: #6b7280;
+        gap: 0.4rem;
+        color: var(--reading-muted);
+        font-size: 0.875rem;
+        font-weight: 500;
+        line-height: 1.4;
         text-decoration: none;
-        margin-bottom: 2rem;
-        transition: color 0.2s;
+        transition: color 160ms ease;
       }
-      .reading-back:hover { color: #1a1a1a; }
+      .reading-back:hover { color: var(--reading-accent); text-decoration: none; }
+      .reading-back::after { display: none !important; }
       .reading-back svg {
-        width: 16px; height: 16px;
-        stroke: currentColor; fill: none;
-        stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+        width: 15px;
+        height: 15px;
+        stroke: currentColor;
+        fill: none;
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
       }
 
-      /* Post meta: single line, compact */
-      .reading-wrap .post-meta {
-        display: flex;
-        flex-wrap: nowrap;
-        align-items: center;
-        gap: 0.5rem;
-        font-size: 0.85rem;
-        color: #9ca3af;
-        margin-bottom: 0;
-        white-space: nowrap;
+      .reading-progress-track {
+        width: 100%;
+        height: 2px;
+        margin-top: 1.4rem;
+        background: rgba(37, 36, 34, 0.09);
         overflow: hidden;
       }
-      .reading-wrap .post-meta i {
-        color: #9ca3af;
-        font-size: 0.8em;
+      .reading-progress-bar {
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: var(--reading-accent);
+        transform: scaleX(0);
+        transform-origin: left center;
+        transition: transform 80ms linear;
       }
-      .reading-wrap .post-meta-separator {
-        color: #d1d5db;
-        font-size: 0.8rem;
-      }
-      .reading-wrap .post-date time {
-        color: #6b7280;
-        font-weight: 400;
-      }
-      .reading-wrap .post-categories-list {
-        color: #6b7280;
-        font-weight: 400;
+      .reading-progress-label {
+        display: block;
+        margin-top: 0.55rem;
+        color: #9a958e;
+        font-size: 0.72rem;
+        letter-spacing: 0.02em;
       }
 
-      /* Remove all pink accents in reading mode */
-      .reading-wrap .post-meta i,
-      .reading-wrap .post-content code {
+      .reading-paper {
+        min-width: 0;
+        min-height: 100vh;
+        padding: 3.75rem 4.25rem 7rem;
+        background: var(--reading-paper);
+        border-left: 1px solid var(--reading-border);
+        border-right: 1px solid var(--reading-border);
+      }
+
+      .reading-paper .post-article {
+        max-width: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .reading-paper .post-header {
+        margin: 0 0 3rem;
+        padding: 0 0 2rem;
+        border-bottom: 1px solid var(--reading-border);
+      }
+      .reading-paper .post-cover {
+        margin: 0 0 2.25rem;
+        border-radius: 0;
+        overflow: hidden;
+        box-shadow: none;
+      }
+      .reading-paper .post-cover img {
+        width: 100%;
+        height: auto;
+        display: block;
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
+      }
+      .reading-paper .post-title {
+        margin: 0;
+        padding: 0;
+        color: #1f1e1c;
+        font-size: clamp(2.1rem, 3.2vw, 3rem);
+        font-weight: 700;
+        line-height: 1.12;
+        letter-spacing: -0.035em;
+        border: 0;
+      }
+      .reading-paper .post-description {
+        max-width: 42rem;
+        margin: 1.15rem 0 0;
+        color: #68635e;
+        font-size: 1.03rem;
+        line-height: 1.65;
+      }
+
+      .reading-paper .post-meta {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.45rem;
+        margin: 1.35rem 0 0;
+        color: #918b84;
+        font-size: 0.78rem;
+        line-height: 1.4;
+        white-space: normal;
+        overflow: visible;
+      }
+      .reading-paper .post-meta-item,
+      .reading-paper .post-meta > span {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+      }
+      .reading-paper .post-meta i,
+      .reading-paper .post-meta time,
+      .reading-paper .post-categories-list,
+      .reading-paper .post-original-link {
         color: inherit;
+        font-weight: 400;
+      }
+      .reading-paper .post-original-link { text-decoration: none; }
+      .reading-paper .post-original-link:hover { color: var(--reading-accent); text-decoration: none; }
+      .reading-paper .post-original-link::after { display: none !important; }
+      .reading-paper .post-meta-separator { color: #c2bdb7; }
+
+      .reading-paper .post-content {
+        color: #302e2b;
+        font-size: 1.075rem;
+        line-height: 1.92;
+        letter-spacing: 0.005em;
+        text-align: left;
+        overflow-wrap: break-word;
+      }
+      .reading-paper .post-content p { margin: 0 0 1.55em; }
+      .reading-paper .post-content h1,
+      .reading-paper .post-content h2,
+      .reading-paper .post-content h3,
+      .reading-paper .post-content h4,
+      .reading-paper .post-content h5,
+      .reading-paper .post-content h6 {
+        color: #242321;
+        font-weight: 650;
+        line-height: 1.3;
+        letter-spacing: -0.018em;
+      }
+      .reading-paper .post-content h1 {
+        margin: 3.4rem 0 1.25rem;
+        font-size: 1.75rem;
+      }
+      .reading-paper .post-content h2 {
+        margin: 4.25rem 0 1.35rem;
+        padding-top: 0.4rem;
+        font-size: 1.55rem;
+        border: 0;
+      }
+      .reading-paper .post-content h3 {
+        margin: 3rem 0 1rem;
+        font-size: 1.25rem;
+      }
+      .reading-paper .post-content a {
+        color: var(--reading-accent);
+        text-decoration: none;
+        border-bottom: 0;
+      }
+      .reading-paper .post-content a:hover { color: #0a4b8c; text-decoration: none; }
+      .reading-paper .post-content a::after { display: none !important; }
+      .reading-paper .post-content blockquote {
+        margin: 2.25rem 0;
+        padding: 0.25rem 0 0.25rem 1.35rem;
+        color: #625e58 !important;
+        background: transparent !important;
+        border-left: 2px solid #c8c3bc;
+        border-radius: 0;
+        box-shadow: none;
+      }
+      .reading-paper .post-content img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        margin: 2.25rem auto;
+        border-radius: 0;
+        box-shadow: none;
+      }
+      .reading-paper .post-content hr {
+        width: 3rem;
+        margin: 4rem auto;
+        border: 0;
+        border-top: 1px solid #cbc6bf;
+      }
+      .reading-paper .post-content code { color: inherit; }
+
+      @media (max-width: 980px) {
+        .reading-shell { width: min(100%, 800px); padding: 0; }
+        .reading-grid { display: block; }
+        .reading-rail {
+          position: static;
+          padding: 1rem 1.25rem 0;
+        }
+        .reading-progress-track,
+        .reading-progress-label { display: none; }
+        .reading-paper {
+          min-height: 0;
+          padding: 2rem 2rem 5rem;
+          border: 0;
+        }
       }
 
       @media (max-width: 600px) {
-        .reading-wrap {
-          padding: 1rem 1rem 3rem;
+        html, body, .reading-paper { background: #fff; }
+        .reading-rail { padding: 1rem 1rem 0; }
+        .reading-paper { padding: 1.75rem 1rem 4rem; }
+        .reading-paper .post-header { margin-bottom: 2.25rem; padding-bottom: 1.5rem; }
+        .reading-paper .post-cover { margin-bottom: 1.6rem; }
+        .reading-paper .post-title {
+          font-size: 2rem;
+          line-height: 1.16;
+          letter-spacing: -0.025em;
         }
-        .reading-wrap .post-meta {
-          font-size: 0.8rem;
-          gap: 0.4rem;
-        }
+        .reading-paper .post-description { font-size: 0.97rem; line-height: 1.62; }
+        .reading-paper .post-meta { font-size: 0.76rem; gap: 0.35rem; }
+        .reading-paper .post-content { font-size: 1.04rem; line-height: 1.86; letter-spacing: 0; }
+        .reading-paper .post-content p { margin-bottom: 1.45em; }
+        .reading-paper .post-content h2 { margin-top: 3.25rem; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .reading-progress-bar, .reading-back { transition: none; }
       }
     </style>
   </head>
@@ -86,15 +285,48 @@ layout: compress
   <body>
     {% include browser-upgrade.html %}
 
-    <div class="reading-wrap">
-      <a href="{{ '/blog/' | relative_url }}" class="reading-back">
-        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-        Blog
-      </a>
+    <div class="reading-shell">
+      <div class="reading-grid">
+        <aside class="reading-rail" aria-label="Article navigation">
+          <a href="{{ '/blog/' | relative_url }}" class="reading-back">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+            All posts
+          </a>
+          <div class="reading-progress-track" aria-hidden="true">
+            <span class="reading-progress-bar" id="reading-progress-bar"></span>
+          </div>
+          <span class="reading-progress-label" aria-hidden="true">Reading progress</span>
+        </aside>
 
-      {{ content }}
+        <main class="reading-paper">
+          {{ content }}
+        </main>
+      </div>
     </div>
 
     {% include scripts.html %}
+    <script>
+      (function () {
+        var bar = document.getElementById('reading-progress-bar');
+        if (!bar) return;
+        var ticking = false;
+        function updateProgress() {
+          var root = document.documentElement;
+          var max = root.scrollHeight - root.clientHeight;
+          var progress = max > 0 ? Math.min(1, Math.max(0, root.scrollTop / max)) : 0;
+          bar.style.transform = 'scaleX(' + progress + ')';
+          ticking = false;
+        }
+        function requestUpdate() {
+          if (!ticking) {
+            window.requestAnimationFrame(updateProgress);
+            ticking = true;
+          }
+        }
+        window.addEventListener('scroll', requestUpdate, { passive: true });
+        window.addEventListener('resize', requestUpdate);
+        updateProgress();
+      }());
+    </script>
   </body>
 </html>
