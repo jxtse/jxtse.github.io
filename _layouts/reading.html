@@ -43,8 +43,8 @@ layout: compress
         position: fixed;
         top: 0;
         bottom: 0;
-        width: 148px;
-        margin-left: -12.6rem;
+        left: max(1.5rem, calc(50vw - 36.5rem));
+        width: 160px;
         padding-top: 2.25rem;
         border-right: 1px solid var(--reading-border);
       }
@@ -291,6 +291,7 @@ layout: compress
         .reading-rail {
           position: static;
           width: auto;
+          left: auto;
           margin-left: 0;
           padding: 1rem 1.25rem 0;
           border-right: 0;
