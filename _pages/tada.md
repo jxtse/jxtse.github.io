@@ -11,7 +11,7 @@ author_profile: false
 
   <header class="project-header">
     <div class="project-venue-badge"><i class="fas fa-database"></i> In Submission · 2026</div>
-    <h1 class="project-title">TADA: Semantic Atoms for Scalable Text Analysis in Data Analytics</h1>
+    <h1 class="project-title">Semantic Atoms for Scalable Text Analysis in Data Analytics in the Era of LLM-Based Agents</h1>
     <div class="project-subtitle">An agent-facing systems abstraction for text analysis in the era of LLM-based agents</div>
 
     <p class="pp-hero-tagline">
@@ -19,7 +19,7 @@ author_profile: false
     </p>
 
     <div class="project-authors">
-      <a href="https://jxtse.github.io">Jinxiang Xie</a> et al.
+      <a href="https://jxtse.github.io">Jinxiang Xie</a>, Zihao Li, Rui Ding, Bartuer Zhou, Shi Han, Dongmei Zhang
     </div>
     <div class="affiliations">
       Nanjing University &nbsp;|&nbsp; Microsoft Research

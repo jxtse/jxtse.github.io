@@ -74,8 +74,8 @@ Feel free to reach out if you'd like to discuss research or explore potential co
   </div>
   <div class="pub-item">
     <div class="pub-venue-badge">In Submission</div>
-    <h3><a href="/tada/">TADA: Semantic Atoms for Scalable Text Analysis in Data Analytics</a></h3>
-    <div class="pub-authors"><strong>Jinxiang Xie</strong>, et al.</div>
+    <h3><a href="/tada/">Semantic Atoms for Scalable Text Analysis in Data Analytics in the Era of LLM-Based Agents</a></h3>
+    <div class="pub-authors"><strong>Jinxiang Xie</strong>, Zihao Li, Rui Ding, Bartuer Zhou, Shi Han, Dongmei Zhang</div>
     <div class="pub-links">
       <a href="/tada/"><i class="fas fa-home"></i> Project</a>
     </div>
