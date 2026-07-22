@@ -23,18 +23,10 @@ author_profile: false
     <h2 class="section-title">Demo Video</h2>
     <div class="figure-block">
       <video controls preload="metadata" style="width:100%;border-radius:10px;">
-        <source src="{{ '/images/buyu/buyu-demo.mp4' | relative_url }}" type="video/mp4">
+        <source src="{{ '/images/buyu/hackathon-demo.mp4' | relative_url }}" type="video/mp4">
       </video>
       <div class="figure-caption">
-        <strong>Product demo.</strong> Route browsing, historical storytelling cards, and the voice-interaction entry — the core walking-companion experience.
-      </div>
-    </div>
-    <div class="figure-block">
-      <video controls preload="metadata" style="width:100%;border-radius:10px;">
-        <source src="{{ '/images/buyu/buyu-voice-demo.mp4' | relative_url }}" type="video/mp4">
-      </video>
-      <div class="figure-caption">
-        <strong>Real-time voice demo.</strong> Live speech-to-speech narration running against the app, with the realtime session monitor alongside — the guide answers while you walk.
+        <strong>Hackathon live demo.</strong> Walking a real route with voice interaction on the phone, alongside the live scene-recognition view — the guide sees what you see and answers as you walk.
       </div>
     </div>
   </section>
