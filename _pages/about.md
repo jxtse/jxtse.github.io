@@ -65,6 +65,22 @@ Feel free to reach out if you'd like to discuss research or explore potential co
 
 <div class="pub-list">
   <div class="pub-item">
+    <div class="pub-venue-badge">In Preparation</div>
+    <h3><a href="/retrace/">ReTRACE: Agent-Guided Multi-Step Retrosynthesis Planning</a></h3>
+    <div class="pub-authors"><strong>Jinxiang Xie</strong>, et al.</div>
+    <div class="pub-links">
+      <a href="/retrace/"><i class="fas fa-home"></i> Project</a>
+    </div>
+  </div>
+  <div class="pub-item">
+    <div class="pub-venue-badge">In Submission</div>
+    <h3><a href="/tada/">TADA: Semantic Atoms for Scalable Text Analysis in Data Analytics</a></h3>
+    <div class="pub-authors"><strong>Jinxiang Xie</strong>, et al.</div>
+    <div class="pub-links">
+      <a href="/tada/"><i class="fas fa-home"></i> Project</a>
+    </div>
+  </div>
+  <div class="pub-item">
     <div class="pub-venue-badge">ACL 2026 Findings</div>
     <h3><a href="/cast/">CAST: Achieving Stable LLM-based Text Analysis for Data Analytics</a></h3>
     <div class="pub-authors"><strong>Jinxiang Xie</strong>, Zihao Li, Wei He, Rui Ding, Shi Han, Dongmei Zhang</div>
@@ -101,6 +117,12 @@ Feel free to reach out if you'd like to discuss research or explore potential co
 # <i class="fas fa-code-branch"></i> Open Source
 
 <div class="pub-list">
+  <a class="pub-item pub-item-link" href="/buyu/">
+    <div class="pub-venue-badge">Product · NJU Hackathon</div>
+    <h3>BuYu 步语 — AI Walking Companion</h3>
+    <div class="pub-authors">Walk the Story of a City — real-time voice city guide for Nanjing</div>
+    <div class="pub-description">An AI walking companion that turns city walks into living, personalized narrations: curator-verified local history, real-time speech-to-speech interaction, and auto-generated shareable walking journals. Demo videos and product walkthrough inside.</div>
+  </a>
   <a class="pub-item pub-item-link" href="https://github.com/jxtse/scientific-research-skills" target="_blank" data-repo="jxtse/scientific-research-skills">
     <div class="pub-venue-badge">Skills for AI Agents</div>
     <h3>Scientific Research Skills <span class="gh-stars" data-repo="jxtse/scientific-research-skills"></span></h3>
