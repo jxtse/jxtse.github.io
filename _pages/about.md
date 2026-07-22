@@ -66,8 +66,8 @@ Feel free to reach out if you'd like to discuss research or explore potential co
 <div class="pub-list">
   <div class="pub-item">
     <div class="pub-venue-badge">In Preparation</div>
-    <h3><a href="/retrace/">ReTRACE: Agent-Guided Multi-Step Retrosynthesis Planning</a></h3>
-    <div class="pub-authors"><strong>Jinxiang Xie</strong>, et al.</div>
+    <h3><a href="/retrace/">ReTRACE: Chemically Auditable Large Language Model Agent for Multi-Step Retrosynthesis Planning</a></h3>
+    <div class="pub-authors"><strong>Jinxiang Xie</strong>, Yijian Zhang, Hao Dong</div>
     <div class="pub-links">
       <a href="/retrace/"><i class="fas fa-home"></i> Project</a>
     </div>
