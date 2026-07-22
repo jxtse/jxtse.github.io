@@ -27,9 +27,9 @@ author_profile: false
   </header>
 
   <section class="teaser-section">
-    <img src="{{ '/images/tada/tada-examples.png' | relative_url }}" alt="Three TADA workloads composing semantic and symbolic steps" class="teaser-image">
+    <img src="{{ '/images/tada/semantic-boundary.png' | relative_url }}" alt="Two placements of the semantic boundary" class="teaser-image">
     <div class="teaser-caption">
-      <strong>Three workloads that outgrow task-specific semantic operators.</strong> Orange boxes are semantic LLM steps; teal boxes are deterministic symbolic steps. (a) A row-aligned sentiment field is materialized, filtered symbolically, then feeds corpus-level topic discovery. (b) The same Categorization atom is invoked inside ordinary group-wise control flow. (c) Discovered aspects become row-aligned features entering an ordinary regression.
+      <strong>Two placements of the semantic boundary.</strong> Operator-style interfaces (left) fuse an LLM judgment into each analytical action, leaving no reusable semantic state. TADA (right) confines semantic judgment to two atoms: Tagging (N→N) adds row-aligned fields keyed by <code>rid</code>; Categorization (N→M) creates a detached category relation keyed by <code>cid</code>. Both materialize ordinary table state for deterministic filtering, grouping, ranking, joining, and regression.
     </div>
   </section>
 
@@ -71,15 +71,49 @@ author_profile: false
   </section>
 
   <section class="project-section pp-fadeup">
-    <h2 class="section-title">Evaluation Snapshot</h2>
+    <h2 class="section-title">Composing Semantic and Symbolic Steps</h2>
     <div class="figure-block">
-      <img src="{{ '/images/tada/tada-evaluation.png' | relative_url }}" alt="TABench taxonomy-based evaluation results">
+      <img src="{{ '/images/tada/tada-examples.png' | relative_url }}" alt="Three TADA workloads composing semantic and symbolic steps">
       <div class="figure-caption">
-        TABench results organized by the workload taxonomy. TADA-Agent is strongest on semantic–symbolic composition tasks — exactly the regime the two-atom interface is designed for — while the taxonomy makes the framework's coverage boundary explicit rather than hiding it.
+        Three workloads that outgrow task-specific semantic operators. Orange boxes are semantic LLM steps; teal boxes are deterministic symbolic steps. (a) A row-aligned sentiment field is materialized, filtered symbolically, then feeds corpus-level topic discovery. (b) The same Categorization atom is invoked inside ordinary group-wise control flow. (c) Discovered aspects become row-aligned features entering an ordinary regression.
       </div>
     </div>
+  </section>
+
+  <section class="project-section pp-fadeup">
+    <h2 class="section-title">Public Document-Extraction Benchmarks</h2>
+    <div class="figure-block">
+      <img src="{{ '/images/tada/public-benchmarks.png' | relative_url }}" alt="CUAD and BioDEX benchmark quality">
+      <div class="figure-caption">
+        All displayed metrics are higher-is-better. (a) On CUAD, TADA-Agent reaches 0.787 average F1, versus 0.753 for DocETL and 0.619 for LOTUS under the same model and evaluator. (b) On BioDEX, the unchanged two-atom interface also leads the reproduced alternatives on RP@5, RP@10, and term recall.
+      </div>
+    </div>
+  </section>
+
+  <section class="project-section pp-fadeup">
+    <h2 class="section-title">TABench: End-to-End Workbook Outcomes</h2>
+    <div class="figure-block">
+      <img src="{{ '/images/tada/tabench-outcomes.png' | relative_url }}" alt="TABench end-to-end workbook outcomes">
+      <div class="figure-caption">
+        Query-specific artifact evaluation over 26 complete workbook requests. A Good result must satisfy all mandatory criteria for output structure and analytical content. TADA-Agent produces <strong>21/26 Good outputs (80.8%)</strong>, compared with 16 for Codex, 15 for Shortcut AI, 14 for Claude in Excel, and 2 for Excel Copilot.
+      </div>
+    </div>
+  </section>
+
+  <section class="project-section pp-fadeup">
+    <h2 class="section-title">Inside the Agent Loop</h2>
+    <div class="figure-block">
+      <img src="{{ '/images/tada/react-case-study.png' | relative_url }}" alt="TADA atoms inside a ReAct analytical loop">
+      <div class="figure-caption">
+        An end-to-end case study: given a natural-language request over a review workbook, the agent interleaves reasoning with three action types. Categorization induces a detached issue taxonomy (N→M), Tagging assigns row-aligned issue fields (N→N), and the deterministic runtime joins, groups, and computes regional refund effects. Each intermediate result is materialized state that the next reasoning turn can inspect.
+      </div>
+    </div>
+  </section>
+
+  <section class="project-section pp-fadeup">
+    <h2 class="section-title">Scalable Execution</h2>
     <p style="font-size: 1.05em; line-height: 1.7; color: #444;">
-      On the artifact-based evaluation, TADA-Agent attains a <strong>0.764 composite score across all 26 requests</strong>, and <strong>0.841 on semantic–symbolic tasks</strong> (vs. 0.486 for the strongest readable baseline artifacts). In the bounded-context scaling study, moving from (n,r) = (60,10) to (500,19) cuts complete-execution LLM calls by <strong>85.3%</strong> and wall time by <strong>30.0%</strong> with no observed decrease in reported semantic metrics.
+      On three approximately 2.6K-row open-vocabulary joint-topic workloads, moving from (n,r) = (60,10) to (500,19) cuts complete-execution LLM calls by <strong>85.3%</strong> and wall time by <strong>30.0%</strong>, with no observed decrease in the reported global-topic or row-level metrics.
     </p>
   </section>
 

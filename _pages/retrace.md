@@ -27,9 +27,9 @@ author_profile: false
   </header>
 
   <section class="teaser-section">
-    <img src="{{ '/images/retrace/route-iteration.png' | relative_url }}" alt="ReTRACE route-level iterative search" class="teaser-image">
+    <img src="{{ '/images/retrace/architecture.jpg' | relative_url }}" alt="ReTRACE system architecture and decision instances" class="teaser-image">
     <div class="teaser-caption">
-      <strong>Route-level iterative search on a real target.</strong> The agent proposes and verifies an initial route (Route 1), saves it and explores reordered variants (Routes 2–3), then escapes the local optimum by switching to new disconnection classes (Routes 4–5). Route 5 — a Suzuki / oxa-Michael strategy with a repaired purchasable leaf — scores highest and is selected. The agent optimizes for route quality, not just route length.
+      <strong>System architecture with two decision instances from real search trajectories.</strong> An LLM coordination layer runs a Reason–Act–Observe loop over a chemistry tool layer (molecular operations, template-based and template-free single-step engines, building-block buyability lookup, and 3-dimensional route scoring). Every model–tool interaction passes deterministic guarantee gates; a route memory outside the loop preserves partial routes, past disconnection decisions, and abandoned branches as prior context. The lower panels show the agent adjudicating conflicting single-step suggestions and diagnosing a failed route before backtracking.
     </div>
   </section>
 
@@ -79,9 +79,58 @@ author_profile: false
   </section>
 
   <section class="project-section pp-fadeup">
+    <h2 class="section-title">Why Multiple Engines: Validity ≠ Coverage ≠ Exact Match</h2>
+    <div class="figure-block">
+      <img src="{{ '/images/retrace/engine-audit.png' | relative_url }}" alt="Single-step engine pool audit on USPTO-50K">
+      <div class="figure-caption">
+        Auditing nine single-step engines on 50,000 USPTO-50K reactions. <strong>(a)</strong> Whether a candidate is generated, whether it is structurally valid, whether it passes chemical-plausibility audit, and whether it exactly reproduces the reference precursors are four different questions — a single top-k accuracy cannot capture a tool's value for route planning. <strong>(b)</strong> A multi-engine top-10 union outperforms any single engine's top-100 in reference-precursor coverage. <strong>(c)</strong> After structural filtering, each engine retains unique exact hits — the engines are genuinely complementary.
+      </div>
+    </div>
+  </section>
+
+  <section class="project-section pp-fadeup">
+    <h2 class="section-title">Route-Level Performance</h2>
+    <div class="figure-block">
+      <img src="{{ '/images/retrace/route-performance.png' | relative_url }}" alt="ReTRACE route-level performance">
+      <div class="figure-caption">
+        <strong>(a)</strong> Pass@k of two frozen backbones (GPT-5.5 and Qwen3.6-35B-A3B) on Retro*-190, FDA30, and JMC2025, under the same ReTRACE tool stack and a fixed independent LLM audit protocol. <strong>(b)</strong> Audited Pass@1 on Retro*-190 alongside values reported by prior work (cross-protocol literature numbers, shown for context rather than as a same-protocol ranking). <strong>(c)</strong> Length distribution of the first passing route relative to the stock-truncated reference route — first passing routes are frequently shorter.
+      </div>
+    </div>
+  </section>
+
+  <section class="project-section pp-fadeup">
+    <h2 class="section-title">Route-Level Iterative Search</h2>
+    <div class="figure-block">
+      <img src="{{ '/images/retrace/route-iteration.png' | relative_url }}" alt="ReTRACE route-level iterative search">
+      <div class="figure-caption">
+        Route-level iterative search on a real target. The agent proposes and verifies an initial route (Route 1), saves it and explores reordered variants (Routes 2–3), then escapes the local optimum by switching to new disconnection classes (Routes 4–5). Route 5 — a Suzuki / oxa-Michael strategy with a repaired purchasable leaf — scores highest and is selected. The agent optimizes for route quality, not just route length.
+      </div>
+    </div>
+  </section>
+
+  <section class="project-section pp-fadeup">
+    <h2 class="section-title">Wet-Lab Validation</h2>
+    <p style="font-size: 1.05em; line-height: 1.7; color: #444; margin-bottom: 25px;">
+      ReTRACE-proposed routes for two target compounds were taken into the lab. The predicted retrosynthetic framework provided the core disconnection strategy and initial plan; bench chemists refined conditions where the prediction had limitations (e.g., a phosphorylation step with a competing free-carboxyl side reaction, and a late-stage Suzuki coupling on a hindered substrate), substantially shortening route exploration.
+    </p>
+    <div class="figure-block">
+      <img src="{{ '/images/retrace/validation-c1.jpg' | relative_url }}" alt="Compound C1: predicted vs experimental synthesis route">
+      <div class="figure-caption">
+        <strong>Compound C1.</strong> (a) ReTRACE-predicted synthetic route with predicted conditions and theoretical yields; (b) the experimentally optimized route based on the prediction, with actual conditions and isolated yields.
+      </div>
+    </div>
+    <div class="figure-block">
+      <img src="{{ '/images/retrace/validation-c2.png' | relative_url }}" alt="Compound C2: predicted vs experimental synthesis route">
+      <div class="figure-caption">
+        <strong>Compound C2.</strong> (a) Predicted synthetic route with predicted conditions and theoretical yields; (b) the experimentally optimized route, with actual conditions and isolated yields (three-step yield 51%).
+      </div>
+    </div>
+  </section>
+
+  <section class="project-section pp-fadeup">
     <h2 class="section-title">Status</h2>
     <p style="font-size: 1.05em; line-height: 1.7; color: #444;">
-      Manuscript in preparation. The system is being evaluated on standard hard-target suites (Retro*-190) and out-of-distribution drug-molecule sets, with expert chemist assessment of route quality. A reinforcement-learning extension that post-trains a local policy from the agent's own verified rollouts is under active investigation.
+      Manuscript in preparation. The system is evaluated on Retro*-190, FDA30, and JMC2025 with a fixed independent audit protocol, complemented by wet-lab validation of predicted routes and proof-of-concept demonstrations of natural-language steerability (cost-first / green-chemistry-first planning, chemist-feedback revision, and pluggable enzymatic-tool extension).
     </p>
   </section>
 
