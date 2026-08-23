@@ -1,23 +1,23 @@
 ---
 permalink: /cast/
-title: "CAST"
+title: "CAST: Achieving Stable LLM-based Text Analysis for Data Analytics"
 author_profile: false
 ---
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<link rel="stylesheet" href="{{ '/assets/css/project-page.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/project-page.css' | relative_url }}?v={{ site.time | date: '%s' }}">
 
 <div class="project-container">
 
   <header class="project-header">
-    <div class="project-venue-badge"><i class="fas fa-award"></i> ACL 2026 Findings</div>
+    <div class="project-venue-badge">ACL 2026 Findings</div>
     <h1 class="project-title">CAST: Achieving Stable LLM-based Text Analysis for Data Analytics</h1>
     <div class="project-subtitle">Consistency via Algorithmic Prompting and Stable Thinking</div>
 
     <p class="pp-hero-tagline">
       LLM-based text analysis is unstable across runs — a deal-breaker for data analytics. <strong>CAST</strong> constrains the latent reasoning path to deliver consistent, deterministic-grade outputs without sacrificing quality.
     </p>
-    
+
     <div class="project-authors">
       <a href="https://jxtse.github.io">Jinxiang Xie</a><sup>1</sup>,
       Zihao Li<sup>2</sup>,
@@ -27,16 +27,16 @@ author_profile: false
       Dongmei Zhang<sup>4</sup>
     </div>
     <div class="affiliations">
-      <sup>1</sup>Nanjing University &nbsp;|&nbsp;
-      <sup>2</sup>Tsinghua University &nbsp;|&nbsp;
-      <sup>3</sup>Peking University &nbsp;|&nbsp;
+      <sup>1</sup>Nanjing University &nbsp;·&nbsp;
+      <sup>2</sup>Tsinghua University &nbsp;·&nbsp;
+      <sup>3</sup>Peking University &nbsp;·&nbsp;
       <sup>4</sup>Microsoft Research
     </div>
 
     <div class="links-bar">
-      <a href="https://arxiv.org/abs/2602.15861" class="btn-arxiv" target="_blank"><i class="fas fa-file-alt"></i> Paper</a>
-      <a href="https://arxiv.org/pdf/2602.15861" class="btn-pdf" target="_blank"><i class="fas fa-file-pdf"></i> PDF</a>
-      <a href="https://github.com/jxtse/CAST-text-analysis" class="btn-code" target="_blank"><i class="fab fa-github"></i> Code</a>
+      <a href="https://arxiv.org/abs/2602.15861" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-alt"></i> Paper</a>
+      <a href="https://arxiv.org/pdf/2602.15861" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i> PDF</a>
+      <a href="https://github.com/jxtse/CAST-text-analysis" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Code</a>
     </div>
   </header>
 
@@ -48,7 +48,7 @@ author_profile: false
   </section>
 
   <section class="abstract-section">
-    <div class="abstract-title"><i class="fas fa-align-left"></i> Abstract</div>
+    <div class="abstract-title">Abstract</div>
     <div class="abstract-text">
       Text analysis of tabular data relies on two core operations: <strong>summarization</strong> for corpus-level theme extraction and <strong>tagging</strong> for row-level labeling. A critical limitation of employing large language models (LLMs) for these tasks is their inability to meet the high standards of <em>output stability</em> demanded by data analytics.
       <br><br>
@@ -58,45 +58,45 @@ author_profile: false
     </div>
   </section>
 
-  <section class="project-section pp-fadeup">
+  <section class="project-section">
     <h2 class="section-title">Key Contributions</h2>
-    <div class="pp-contrib-grid pp-fadeup-stagger">
-      <div class="pp-contrib-card">
-        <div class="pp-contrib-num">01</div>
-        <h3 class="pp-contrib-title">Formalization of TADA</h3>
-        <p class="pp-contrib-text">We formalize Text Analysis for Data Analysis (TADA) as a tabular-centric paradigm, highlighting <strong>stability as a functional necessity</strong> for integrating probabilistic LLM outputs into deterministic OLAP workflows.</p>
-      </div>
-      <div class="pp-contrib-card">
-        <div class="pp-contrib-num">02</div>
-        <h3 class="pp-contrib-title">CAST Framework</h3>
-        <p class="pp-contrib-text">A novel approach that constrains generation via <strong>Algorithmic Prompting</strong> and intermediate commitments, reducing the entropy of latent paths without expensive search-based methods.</p>
-      </div>
-      <div class="pp-contrib-card">
-        <div class="pp-contrib-num">03</div>
-        <h3 class="pp-contrib-title">Stability Metrics</h3>
-        <p class="pp-contrib-text">We introduce <strong>CAST-S</strong> and <strong>CAST-T</strong>, stability-focused evaluation metrics combining semantic matching with order sensitivity (Kendall's Tau) to capture human-perceived consistency.</p>
-      </div>
-      <div class="pp-contrib-card">
-        <div class="pp-contrib-num">04</div>
-        <h3 class="pp-contrib-title">Strong Empirical Results</h3>
-        <p class="pp-contrib-text">Up to <strong>16.2% improvement</strong> in Stability Score across multiple LLM backbones, with no regression in accuracy.</p>
-      </div>
-    </div>
+    <ol class="pp-contrib-list">
+      <li>
+        <span class="num">01</span>
+        <h3>Formalization of TADA</h3>
+        <p>We formalize Text Analysis for Data Analysis (TADA) as a tabular-centric paradigm, highlighting <strong>stability as a functional necessity</strong> for integrating probabilistic LLM outputs into deterministic OLAP workflows.</p>
+      </li>
+      <li>
+        <span class="num">02</span>
+        <h3>CAST Framework</h3>
+        <p>A novel approach that constrains generation via <strong>Algorithmic Prompting</strong> and intermediate commitments, reducing the entropy of latent paths without expensive search-based methods.</p>
+      </li>
+      <li>
+        <span class="num">03</span>
+        <h3>Stability Metrics</h3>
+        <p>We introduce <strong>CAST-S</strong> and <strong>CAST-T</strong>, stability-focused evaluation metrics combining semantic matching with order sensitivity (Kendall's Tau) to capture human-perceived consistency.</p>
+      </li>
+      <li>
+        <span class="num">04</span>
+        <h3>Strong Empirical Results</h3>
+        <p>Up to <strong>16.2% improvement</strong> in Stability Score across multiple LLM backbones, with no regression in accuracy.</p>
+      </li>
+    </ol>
   </section>
 
-  <section class="project-section pp-fadeup">
+  <section class="project-section">
     <h2 class="section-title">Method</h2>
-    <p style="font-size: 1.05em; line-height: 1.7; color: #444; margin-bottom: 25px;">
+    <p class="pp-lead">
       CAST addresses the instability problem by constraining the LLM's latent reasoning trajectory through two complementary mechanisms:
     </p>
-    
-    <div class="method-grid">
-      <div class="method-card">
-        <h3><i class="fas fa-sitemap"></i> Algorithmic Prompting</h3>
+
+    <div class="pp-method">
+      <div class="pp-method-item">
+        <h3>Algorithmic Prompting</h3>
         <p>Specifies an algorithmic scaffold for the task, translating classic deterministic workflows into a structured prompt sequence. This scaffold acts as a strong prior over valid reasoning transitions, effectively pruning high-entropy paths.</p>
       </div>
-      <div class="method-card">
-        <h3><i class="fas fa-brain"></i> Thinking-before-Speaking</h3>
+      <div class="pp-method-item">
+        <h3>Thinking-before-Speaking</h3>
         <p>Enforces the scaffold by requiring the model to produce well-defined intermediate states (domain, topic schema, clusters) before emitting the final output. By committing to these states, the model follows a more stable reasoning path.</p>
       </div>
     </div>
@@ -109,12 +109,12 @@ author_profile: false
     </div>
   </section>
 
-  <section class="project-section pp-fadeup">
+  <section class="project-section">
     <h2 class="section-title">Empirical Observation</h2>
-    <p style="font-size: 1.05em; line-height: 1.7; color: #444; margin-bottom: 20px;">
+    <p class="pp-lead">
       We empirically demonstrate that requiring relevant intermediate states demonstrably sharpens the model's output distribution. As shown below, CAST produces the sharpest and most concentrated distribution, indicating substantially improved run-to-run stability.
     </p>
-    
+
     <div class="figure-block">
       <img src="{{ '/images/cast-fig3-kde.png' | relative_url }}" alt="Output Length Stability">
       <div class="figure-caption">
@@ -123,21 +123,21 @@ author_profile: false
     </div>
   </section>
 
-  <section class="project-section pp-fadeup">
+  <section class="project-section">
     <h2 class="section-title">Results</h2>
-    
-    <div class="results-grid">
-      <div class="result-item">
-        <div class="result-number">16.2%</div>
-        <div class="result-label">Maximum Stability Score Improvement</div>
+
+    <div class="pp-results-row">
+      <div class="pp-result">
+        <span class="value">+16.2%</span>
+        <span class="label">max Stability Score improvement</span>
       </div>
-      <div class="result-item">
-        <div class="result-number">32</div>
-        <div class="result-label">Dataset-Query Pairs Evaluated</div>
+      <div class="pp-result">
+        <span class="value">32</span>
+        <span class="label">dataset–query pairs evaluated</span>
       </div>
-      <div class="result-item">
-        <div class="result-number">5,100+</div>
-        <div class="result-label">Items Across 4 Diverse Domains</div>
+      <div class="pp-result">
+        <span class="value">5,100+</span>
+        <span class="label">items across 4 domains</span>
       </div>
     </div>
 
@@ -149,7 +149,7 @@ author_profile: false
     </div>
   </section>
 
-  <section class="project-section pp-fadeup">
+  <section class="project-section">
     <h2 class="section-title">Citation</h2>
     <div class="bibtex-section">
       <button class="bibtex-copy-btn" onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText);this.textContent='Copied!';setTimeout(()=>this.textContent='Copy',2000);">Copy</button>
@@ -165,12 +165,16 @@ author_profile: false
     </div>
   </section>
 
-  <section class="project-section" style="margin-top: 50px; padding-top: 30px; border-top: 1px solid #e1e4e8;">
-    <p style="font-size: 0.9em; color: #666; line-height: 1.6;">
-      <strong>Acknowledgments:</strong> This work was done during the author's internship at Microsoft Research. We thank all colleagues and mentors from the DKI group for their support and valuable feedback.
-    </p>
-  </section>
+  <div class="pp-acknowledgments">
+    <strong>Acknowledgments:</strong> This work was done during the author's internship at Microsoft Research. We thank all colleagues and mentors from the DKI group for their support and valuable feedback.
+  </div>
+
+  <footer class="pp-footer">
+    <a href="{{ '/' | relative_url }}" target="_self">← Homepage</a>
+    <span class="sep">·</span>
+    <a href="https://x.com/JinxiangTse" target="_blank" rel="noopener noreferrer">Follow me on X</a>
+    <span class="sep">·</span>
+    <a href="https://www.xiaohongshu.com/user/profile/60c47bae000000000100b07e" target="_blank" rel="noopener noreferrer">Follow me on RedNote</a>
+  </footer>
 
 </div>
-
-{% include project-page-enhance.html %}
