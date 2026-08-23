@@ -188,3 +188,5 @@ author_profile: false
   </footer>
 
 </div>
+
+{% include project-page-enhance.html %}

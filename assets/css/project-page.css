@@ -17,7 +17,7 @@
   --pp-gradient: linear-gradient(90deg, #012F63 0%, #1a4f8a 68%, #FE667B 100%);
 }
 
-/* Brand line across the very top, same as the reading page */
+/* Reading progress: faint track + gradient fill (same signature as the reading page) */
 body::before {
   content: "";
   position: fixed;
@@ -26,7 +26,19 @@ body::before {
   right: 0;
   left: 0;
   height: 3px;
+  background: rgba(1, 47, 99, 0.08);
+  pointer-events: none;
+}
+.pp-progress {
+  position: fixed;
+  z-index: 21;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
   background: var(--pp-gradient);
+  transform-origin: 0 50%;
+  transform: scaleX(0);
   pointer-events: none;
 }
 
@@ -39,6 +51,49 @@ body::before {
   line-height: 1.85;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+/* --- Widescreen: left TOC rail fills the empty gutter ------------------- */
+
+.pp-toc {
+  display: none;
+}
+
+@media (min-width: 1280px) {
+  .project-container { max-width: 940px; }
+  .pp-toc {
+    display: block;
+    position: fixed;
+    top: 46%;
+    transform: translateY(-50%);
+    left: calc(50% - 470px - 15rem);
+    width: 12.5rem;
+    font-size: 0.83rem;
+    line-height: 1.5;
+  }
+  .pp-toc .pp-toc-label {
+    margin-bottom: 0.7rem;
+    color: var(--pp-faint);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .pp-toc a {
+    position: relative;
+    display: block;
+    padding: 0.28rem 0 0.28rem 0.85rem;
+    color: var(--pp-faint);
+    border-left: 2px solid rgba(37, 36, 34, 0.09);
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  .pp-toc a:hover { color: var(--pp-navy); }
+  .pp-toc a.active {
+    color: var(--pp-navy);
+    font-weight: 600;
+    border-left-color: var(--pp-coral);
+    background: linear-gradient(90deg, rgba(1, 47, 99, 0.045), transparent 85%);
+  }
 }
 
 .project-container a { text-decoration: none; }
