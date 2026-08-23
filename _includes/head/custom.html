@@ -39,28 +39,7 @@
 
 <!-- 强调色增强的JavaScript动效 -->
 <script>
-// 页面加载后的滚动动画
 document.addEventListener('DOMContentLoaded', function() {
-  // 滚动触发动画
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  };
-  
-  const observer = new IntersectionObserver(function(entries) {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('animate');
-      }
-    });
-  }, observerOptions);
-  
-  // 为元素添加动画类
-  document.querySelectorAll('.paper-box, .highlight-block').forEach(el => {
-    el.classList.add('fade-in-up');
-    observer.observe(el);
-  });
-  
   // 为重要链接添加强调色效果
   document.querySelectorAll('a[href*="pdf"], a[href*="github"], a[href*="arxiv"]').forEach(link => {
     link.classList.add('link-accent');

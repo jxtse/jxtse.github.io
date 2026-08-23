@@ -312,17 +312,7 @@
   }
 }
 
-/* 滚动触发动画 */
-.fade-in-up {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.6s ease;
-}
-
-.fade-in-up.animate {
-  opacity: 1;
-  transform: translateY(0);
-}
+/* 滚动触发动画已移除：内容应立即可见，不做 scroll-reveal */
 
 /* 强调色加载动画 */
 .loading-accent {
