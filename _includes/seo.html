@@ -8,8 +8,9 @@
   {% assign canonical_url = page.url | replace: "index.html", "" | prepend: site.url %}
 {% endif %}
 
-{% if page.title and page.title != site.title %}
-  {% assign seo_title = page.title | markdownify | strip_html | strip_newlines | escape_once %}
+{% assign page_title_str = page.title | default: "" | strip %}
+{% if page_title_str != "" and page_title_str != site.title %}
+  {% assign seo_title = page_title_str | markdownify | strip_html | strip_newlines | escape_once %}
   <title>{{ seo_title }} - {{ site.title }}</title>
 {% else %}
   {% assign seo_title = site.title %}
