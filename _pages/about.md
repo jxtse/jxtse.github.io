@@ -160,12 +160,6 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- Local Blog Posts Section -->
 {% if site.posts.size > 0 %}
 <div class="local-blogs-section">
-  <div class="local-blogs-header">
-    <h3><i class="fas fa-pen-nib"></i> Latest Posts</h3>
-    <a href="{{ '/blog/' | relative_url }}" class="view-all-btn">
-      View All Posts <i class="fas fa-arrow-right"></i>
-    </a>
-  </div>
   <div class="blog-grid">
     {% assign sorted_posts = site.posts | sort: 'date' | reverse %}
     {% for post in sorted_posts limit:9 %}
@@ -186,6 +180,11 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
     </a>
     {% endfor %}
+  </div>
+  <div class="view-all-posts-footer">
+    <a href="{{ '/blog/' | relative_url }}" class="view-all-btn">
+      View All Posts <i class="fas fa-arrow-right"></i>
+    </a>
   </div>
 </div>
 
