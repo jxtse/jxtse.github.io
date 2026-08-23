@@ -70,4 +70,15 @@ layout: reading
   <section class="post-content" itemprop="articleBody">
     {{ normalized_content }}
   </section>
+
+  <!-- Post Footer: quiet follow-up actions -->
+  <footer class="post-followup">
+    {% if page.discuss_url %}
+    <a href="{{ page.discuss_url }}" target="_blank" rel="noopener noreferrer">Discuss on X →</a>
+    <span class="post-followup-sep" aria-hidden="true">·</span>
+    {% endif %}
+    <a href="https://x.com/JinxiangTse" target="_blank" rel="noopener noreferrer">Follow @JinxiangTse</a>
+    <span class="post-followup-sep" aria-hidden="true">·</span>
+    <a href="{{ '/blog/' | relative_url }}" target="_self">More posts</a>
+  </footer>
 </article>

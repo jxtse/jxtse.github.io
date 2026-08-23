@@ -326,6 +326,23 @@ layout: compress
       }
       .reading-paper .post-content code { color: inherit; }
 
+      .reading-paper .post-followup {
+        margin-top: 4.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--reading-border);
+        font-size: 0.9rem;
+        color: var(--reading-muted);
+        text-align: center;
+      }
+      .reading-paper .post-followup a {
+        color: var(--reading-accent-light);
+        text-decoration: none;
+        transition: color 160ms ease;
+      }
+      .reading-paper .post-followup a:hover { color: var(--reading-accent); text-decoration: none; }
+      .reading-paper .post-followup a::after { display: none !important; }
+      .reading-paper .post-followup-sep { margin: 0 0.6rem; color: #c2bdb7; }
+
       @media (max-width: 980px) {
         .reading-shell { width: min(100%, 800px); padding: 0; }
         .reading-grid { display: block; }

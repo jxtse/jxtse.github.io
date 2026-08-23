@@ -21,6 +21,11 @@
 <link rel="stylesheet" href="{{ '/assets/css/academicons.css' | relative_url }}"/>
 <link rel="stylesheet" href="{{ '/assets/css/accent-enhancements.css' | relative_url }}"/>
 
+<!-- GoatCounter analytics — cookie-free, privacy-friendly. Set goatcounter_code in _config.yml to enable. -->
+{% if site.goatcounter_code %}
+<script data-goatcounter="https://{{ site.goatcounter_code }}.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+{% endif %}
+
 <script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({
