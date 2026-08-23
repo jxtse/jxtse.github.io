@@ -6,7 +6,10 @@
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // --- Reading progress -------------------------------------------------
+  // Re-parent to <body>: ancestors with transform/filter would otherwise
+  // turn position:fixed into container-relative positioning.
   var bar = document.querySelector('.pp-progress');
+  if (bar && bar.parentElement !== document.body) document.body.appendChild(bar);
   function updateProgress() {
     var doc = document.documentElement;
     var max = doc.scrollHeight - window.innerHeight;
