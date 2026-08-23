@@ -77,6 +77,7 @@ Feel free to reach out if you'd like to discuss research or explore potential co
     <div class="pub-authors"><strong>Jinxiang Xie</strong>, Zihao Li, Rui Ding, Bartuer Zhou, Shi Han, Dongmei Zhang</div>
     <div class="pub-links">
       <a href="/tada/"><i class="fas fa-home"></i> Project</a>
+      <a href="https://github.com/jxtse/TADA-Agent"><i class="fab fa-github"></i> Code</a>
     </div>
   </div>
   <div class="pub-item">

@@ -24,6 +24,9 @@ author_profile: false
     <div class="affiliations">
       Nanjing University &nbsp;|&nbsp; Microsoft Research
     </div>
+    <div class="links-bar">
+      <a href="https://github.com/jxtse/TADA-Agent" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Code</a>
+    </div>
   </header>
 
   <section class="teaser-section">
