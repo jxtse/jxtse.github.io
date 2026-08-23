@@ -6,14 +6,14 @@ main:
   - title: "publications"
     url: "/#-publications"
 
-  - title: "Open Source"
-    url: "/#-open-source"
-
   - title: "educations"
     url: "/#-educations"
 
   - title: "internships"
     url: "/#-internships"
+
+  - title: "Open Source"
+    url: "/#-open-source"
 
   - title: "blogs"
     url: "/#-blogs"
