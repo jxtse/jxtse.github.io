@@ -108,7 +108,7 @@ Feel free to reach out if you'd like to discuss research or explore potential co
 - *2021.09 - 2025.06*: &nbsp;Bachelor of Science in Information and Computing Science, <span class="primary-gradient-text">Beijing Jiaotong University</span>.
 
 # <i class="fas fa-laptop-code"></i> Internships
-- *Present*: &nbsp;AI Research Intern, <a href="https://macaron.xin/mindlab" class="link-accent">Mind Lab</a>, working with <a href="https://xtma.github.io/" class="link-accent">Pony Ma</a> and <a href="https://github.com/liuqh16" class="link-accent">Qihan Liu</a>.
+- *2026.08 - Present*: &nbsp;Algorithm Intern, <a href="https://macaron.xin/mindlab" class="link-accent">Mind Lab</a>, **Mindverse**.
 - *2024.08 - 2025.08*: &nbsp;Research Intern, <a href="https://www.microsoft.com/en-us/research/group/data-knowledge-intelligence/" class="link-accent">Data, Knowledge and Intelligence (DKI) Group</a>, **Microsoft**.
 - *2023.11 - 2024.08*: &nbsp;Research Intern, <a href="https://sai.pku.edu.cn/znxyenglish/" class="link-accent">Wangxuan Institute of Computer Technology</a>, **Peking University**.
 <!-- - *2023.05 - 2023.07*: &nbsp;Summer Workshop Student, <a href="https://www.comp.nus.edu.sg/" class="link-accent">School of Computer</a>, **National University of Singapore**. -->
