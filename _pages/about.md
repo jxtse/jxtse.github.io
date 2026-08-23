@@ -19,11 +19,10 @@ redirect_from:
 
 <span class='anchor' id='about-me'></span>
 
-My name is <span class="accent-text">Jinxiang Xie</span> (pronounced "JIN-shee-ahng SHEE-eh"). I am a graduate student at <i class="fas fa-university"></i> **Nanjing University**. I earned my Bachelor's degree in Information and Computing Science from <i class="fas fa-university"></i> **Beijing Jiaotong University**. I was a research intern at <i class="fab fa-microsoft"></i> **Microsoft**, where I have the privilege of working with Principal Researcher <a href="https://www.microsoft.com/en-us/research/people/juding/" class="link-accent">Justin Ding</a>.
-Prior to this, I gained valuable research experience at <i class="fas fa-university"></i> **Peking University** under the guidance of Prof. <a href="https://wanxiaojun.github.io/" class="link-accent">Xiaojun Wan</a>.
+My name is <span class="accent-text">Jinxiang Xie</span> (pronounced "JIN-shee-ahng SHEE-eh"). I am an M.Sc. student at <i class="fas fa-university"></i> <a href="https://www.nju.edu.cn/en/" class="link-accent">Nanjing University</a> and an AI research intern at <a href="https://macaron.xin/mindlab" class="link-accent">Mind Lab</a>, working with <a href="https://xtma.github.io/" class="link-accent">Pony Ma</a> and <a href="https://scholar.google.com/citations?user=a3J4_OQAAAAJ&hl=en" class="link-accent">Qihan Liu</a>. Previously, I was a research intern at <i class="fab fa-microsoft"></i> <a href="https://www.microsoft.com/en-us/research/" class="link-accent">Microsoft Research</a>, supervised by Principal Researcher <a href="https://www.microsoft.com/en-us/research/people/juding/" class="link-accent">Justin Ding</a>, and at <i class="fas fa-university"></i> <a href="https://english.pku.edu.cn/" class="link-accent">Peking University</a>, supervised by Prof. <a href="https://wanxiaojun.github.io/" class="link-accent">Xiaojun Wan</a>.
 
 <div class="quote-accent">
-My research focuses on leveraging <span class="primary-gradient-text">Large Language Models</span> to address complex problems.
+My research explores how <span class="primary-gradient-text">large language models</span> can address complex problems, with a focus on harness engineering, agentic reinforcement learning, and collective intelligence.
 </div>
 
 Feel free to reach out if you'd like to discuss research or explore potential collaboration!
@@ -39,7 +38,7 @@ Feel free to reach out if you'd like to discuss research or explore potential co
   </div>
   
   <div class="highlight-block floating-card">
-    <h3><i class="fas fa-pen-fancy"></i> Content Creator</h3>
+    <h3><i class="fas fa-pen-fancy"></i> Writer &amp; Builder</h3>
     <ul>
       <li>Technical blogs with <span class="accent-text">500K+ views</span></li>
       <li>Active on <a href="https://www.xiaohongshu.com/user/profile/60c47bae000000000100b07e" class="link-accent">Xiaohongshu</a></li>
@@ -104,12 +103,12 @@ Feel free to reach out if you'd like to discuss research or explore potential co
 
 <!--- Qiyang Chen, Yuezhi Wang, **Jinxiang Xie**, Guozheng Li, Chi Harold Liu. $M^3$ Trader: Multimodal Macro–Micro Inference with LLM-Guided Reinforcement Learning for Quantitative Trading. **Under Review**.-->
 
-# <i class="fas fa-graduation-cap"></i> Educations
+# <i class="fas fa-graduation-cap"></i> Education
 - *2025.09 - Present*: &nbsp;Master of Science at <span class="primary-gradient-text">Kuang Yaming Honors School, Nanjing University</span>.
 - *2021.09 - 2025.06*: &nbsp;Bachelor of Science in Information and Computing Science, <span class="primary-gradient-text">Beijing Jiaotong University</span>.
 
 # <i class="fas fa-laptop-code"></i> Internships
-- *2025.08 - Present*: &nbsp;Research Intern, <a href="https://www.asintelligence.xyz/" class="link-accent">Artificial Scientific Intelligence Lab</a>, **National University of Singapore**.
+- *Present*: &nbsp;AI Research Intern, <a href="https://macaron.xin/mindlab" class="link-accent">Mind Lab</a>, working with <a href="https://xtma.github.io/" class="link-accent">Pony Ma</a> and <a href="https://scholar.google.com/citations?user=a3J4_OQAAAAJ&hl=en" class="link-accent">Qihan Liu</a>.
 - *2024.08 - 2025.08*: &nbsp;Research Intern, <a href="https://www.microsoft.com/en-us/research/group/data-knowledge-intelligence/" class="link-accent">Data, Knowledge and Intelligence (DKI) Group</a>, **Microsoft**.
 - *2023.11 - 2024.08*: &nbsp;Research Intern, <a href="https://sai.pku.edu.cn/znxyenglish/" class="link-accent">Wangxuan Institute of Computer Technology</a>, **Peking University**.
 <!-- - *2023.05 - 2023.07*: &nbsp;Summer Workshop Student, <a href="https://www.comp.nus.edu.sg/" class="link-accent">School of Computer</a>, **National University of Singapore**. -->
