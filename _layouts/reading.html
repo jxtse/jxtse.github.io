@@ -453,11 +453,13 @@ layout: compress
         var bar = document.getElementById('reading-progress-bar');
         var toc = document.getElementById('reading-toc');
         var tocList = document.getElementById('reading-toc-list');
-        var headings = Array.prototype.slice.call(
+        var allHeadings = Array.prototype.slice.call(
           document.querySelectorAll('.post-content h1, .post-content h2, .post-content h3')
         );
+        var headings = [];
         var tocLinks = [];
         var activeIndex = -1;
+        var ticking = false;
 
         function uniqueId(text, index) {
           var base = text.toLowerCase()
@@ -474,23 +476,70 @@ layout: compress
           return candidate;
         }
 
-        if (toc && tocList && headings.length) {
-          headings.forEach(function (heading, index) {
-            if (!heading.id) heading.id = uniqueId(heading.textContent, index);
+        allHeadings.forEach(function (heading, index) {
+          if (!heading.id) heading.id = uniqueId(heading.textContent, index);
+        });
+
+        function rebuildToc() {
+          headings = allHeadings.filter(function (heading) { return heading.getClientRects().length > 0; });
+          tocLinks = [];
+          activeIndex = -1;
+          if (!toc || !tocList) return;
+          tocList.textContent = '';
+          headings.forEach(function (heading) {
             var link = document.createElement('a');
             link.className = 'reading-toc-link';
             link.href = '#' + heading.id;
             link.dataset.level = heading.tagName.slice(1);
             link.textContent = heading.textContent.trim();
-            link.addEventListener('click', function (event) {
-              event.preventDefault();
-              heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              if (history.replaceState) history.replaceState(null, '', '#' + heading.id);
-            });
             tocList.appendChild(link);
             tocLinks.push(link);
           });
-          toc.classList.remove('reading-toc-empty');
+          toc.classList.toggle('reading-toc-empty', !headings.length);
+        }
+
+        if (tocList) tocList.addEventListener('click', function (event) {
+          var link = event.target.closest('.reading-toc-link');
+          if (!link) return;
+          var heading = document.getElementById(decodeURIComponent(link.hash.slice(1)));
+          if (!heading) return;
+          event.preventDefault();
+          heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          history.replaceState(null, '', link.hash);
+        });
+
+        var bilingualArticle = document.querySelector('.post-article[data-active-language]');
+        if (bilingualArticle) {
+          var languageButtons = bilingualArticle.querySelectorAll('[data-language-button]');
+
+          function syncLanguage(shouldScroll) {
+            var target = null;
+            try { target = document.getElementById(decodeURIComponent(location.hash.slice(1))); } catch (error) {}
+            var panel = target && target.closest('[data-language-panel]');
+            var language = panel ? panel.dataset.languagePanel :
+              (location.hash ? bilingualArticle.dataset.activeLanguage : 'en');
+            bilingualArticle.dataset.activeLanguage = language;
+            languageButtons.forEach(function (button) {
+              button.setAttribute('aria-pressed', String(button.dataset.languageButton === language));
+            });
+            rebuildToc();
+            if (target && shouldScroll !== false) target.scrollIntoView({ block: 'start' });
+            requestUpdate();
+          }
+
+          languageButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+              var hash = button.dataset.languageButton === 'zh' ? '#chinese' : '#english';
+              if (location.hash !== hash) history.pushState(null, '', hash);
+              syncLanguage(false);
+            });
+          });
+          window.addEventListener('popstate', syncLanguage);
+          window.addEventListener('hashchange', syncLanguage);
+          syncLanguage();
+          bilingualArticle.querySelector('.post-language-switch').hidden = false;
+        } else {
+          rebuildToc();
         }
 
         function updateActiveHeading() {
@@ -507,7 +556,6 @@ layout: compress
           });
         }
 
-        var ticking = false;
         function updateReadingState() {
           var root = document.documentElement;
           var max = root.scrollHeight - root.clientHeight;

@@ -4,7 +4,37 @@ layout: reading
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-<article class="post-article" itemscope itemtype="http://schema.org/BlogPosting">
+{% if page.bilingual == true %}
+<style>
+  .post-article[data-active-language="en"] [data-language-panel="zh"],
+  .post-article[data-active-language="en"] [data-language-text="zh"],
+  .post-article[data-active-language="zh"] [data-language-panel="en"],
+  .post-article[data-active-language="zh"] [data-language-text="en"] { display: none; }
+  .post-language-switch { margin-top: 1.5rem; }
+  .post-language-switch[hidden] { display: none !important; }
+  .post-language-switch button {
+    margin: 0 0.4rem 0 0;
+    padding: 0.45rem 0.9rem;
+    border: 1px solid #012F63;
+    border-radius: 4px;
+    background: transparent;
+    color: #012F63;
+    font: inherit;
+    cursor: pointer;
+  }
+  .post-language-switch button[aria-pressed="true"] { background: #012F63; color: #fff; }
+  .post-language-switch button:hover { text-decoration: none; }
+  .post-language-switch button:focus-visible { outline: 2px solid #012F63; outline-offset: 3px; }
+</style>
+<noscript>
+  <style>
+    .post-article[data-active-language] [data-language-panel] { display: block; }
+    .post-article[data-active-language] [data-language-text] { display: inline; }
+  </style>
+</noscript>
+{% endif %}
+
+<article class="post-article" {% if page.bilingual == true %}data-active-language="en"{% endif %} itemscope itemtype="http://schema.org/BlogPosting">
   <meta itemprop="headline" content="{{ page.title | markdownify | strip_html | strip_newlines | escape_once }}">
   <meta itemprop="datePublished" content="{{ page.date | date_to_xmlschema }}">
 
@@ -16,10 +46,17 @@ layout: reading
     </div>
     {% endif %}
 
-    <h1 class="post-title" itemprop="name">{{ page.title }}</h1>
+    <h1 class="post-title" itemprop="name">{% if page.bilingual == true %}<span lang="en" data-language-text="en">{{ page.title }}</span><span lang="zh-CN" data-language-text="zh">{{ page.title_zh }}</span>{% else %}{{ page.title }}{% endif %}</h1>
 
     {% if page.description %}
-    <p class="post-description">{{ page.description }}</p>
+    <p class="post-description">{% if page.bilingual == true %}<span lang="en" data-language-text="en">{{ page.description }}</span><span lang="zh-CN" data-language-text="zh">{{ page.description_zh }}</span>{% else %}{{ page.description }}{% endif %}</p>
+    {% endif %}
+
+    {% if page.bilingual == true %}
+    <div class="post-language-switch" role="group" aria-label="Article language / 文章语言" hidden>
+      <button type="button" lang="en" data-language-button="en" aria-controls="english" aria-pressed="true">English</button>
+      <button type="button" lang="zh-CN" data-language-button="zh" aria-controls="chinese" aria-pressed="false">中文</button>
+    </div>
     {% endif %}
 
     <div class="post-meta">

@@ -1,6 +1,9 @@
 ---
 layout: post
 title: "Where Collective Intelligence Hits Its Ceiling"
+bilingual: true
+title_zh: "集体智能的天花板在哪里"
+description_zh: "深入探讨编排、多智能体强化学习与一次离线投票审计：为什么多样化的智能体不会自动带来集体收益，以及如何通过协调与融合保留有价值的差异。"
 date: 2026-09-09
 author: "Jinxiang Xie"
 description: "A closer look at orchestration, multi-agent reinforcement learning, and an offline voting audit: why diverse agents do not automatically deliver collective gains, and what it takes to preserve useful differences through coordination and fusion."
@@ -14,9 +17,11 @@ permalink: /blog/where-collective-intelligence-hits-its-ceiling/
 .post-content a { overflow-wrap: anywhere; }
 </style>
 
-[中文](#chinese) · [English](#english) · [引用 / Cite](#cite)
+<noscript>
+<p><a href="#english">English</a> · <a href="#chinese">中文</a> · <a href="#cite">引用 / Cite</a></p>
+</noscript>
 
-<div id="chinese"></div>
+<section id="chinese" data-language-panel="zh" lang="zh-CN" markdown="1">
 
 ## 集体智能的天花板在哪里
 
@@ -117,9 +122,9 @@ Fusion 才是更难的一半。普通答案投票需要可判等的候选，大�
 
 [Read in English ↓](#english)
 
----
+</section>
 
-<div id="english"></div>
+<section id="english" data-language-panel="en" lang="en" markdown="1">
 
 ## Where Collective Intelligence Hits Its Ceiling
 
@@ -219,9 +224,11 @@ I hope more reliable coordination mechanisms can extract important information f
 
 [返回中文 / Back to Chinese ↑](#chinese)
 
+</section>
+
 ---
 
-<div id="cite"></div>
+<section id="cite" markdown="1">
 
 ## 引用本文 / Cite this post
 
@@ -238,3 +245,5 @@ Xie, Jinxiang. (2026, September 9). *Where Collective Intelligence Hits Its Ceil
   note         = {Published September 9, 2026. Chinese and English versions}
 }
 ```
+
+</section>
