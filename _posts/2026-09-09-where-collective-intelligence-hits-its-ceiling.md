@@ -7,6 +7,7 @@ description_zh: "深入探讨编排、多智能体强化学习与一次离线投
 date: 2026-09-09
 author: "Jinxiang Xie"
 description: "A closer look at orchestration, multi-agent reinforcement learning, and an offline voting audit: why diverse agents do not automatically deliver collective gains, and what it takes to preserve useful differences through coordination and fusion."
+cover_image: /images/2026-09-09-where-collective-intelligence-hits-its-ceiling/cover.jpg
 categories: [AI, Research]
 permalink: /blog/where-collective-intelligence-hits-its-ceiling/
 ---
