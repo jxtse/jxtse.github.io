@@ -35,9 +35,14 @@ Complete English text.
 
 <section id="cite" markdown="1">
 
-## Cite this post / 引用本文
+<h2 id="cite-en" data-language-text="en" lang="en">Cite this post</h2>
+<h2 id="cite-zh" data-language-text="zh" lang="zh-CN">引用本文</h2>
+<p data-language-text="en" lang="en">Please cite this post as:</p>
+<p data-language-text="zh" lang="zh-CN">如需引用本文，请使用以下格式：</p>
 
-One shared citation with the canonical URL and the correct author list.
+One shared BibTeX entry: Lil'Log-style `@article`, `author = {Jinxiang Xie}`,
+`journal = {jxtse.github.io}`, full month name, and the English `#english` URL.
+The heading and explanation must switch languages, not remain bilingual.
 
 </section>
 ```

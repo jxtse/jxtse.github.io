@@ -230,19 +230,20 @@ I hope more reliable coordination mechanisms can extract important information f
 
 <section id="cite" markdown="1">
 
-## 引用本文 / Cite this post
+<h2 id="cite-en" data-language-text="en" lang="en">Cite this post</h2>
+<h2 id="cite-zh" data-language-text="zh" lang="zh-CN">引用本文</h2>
 
-Xie, Jinxiang. (2026, September 9). *Where Collective Intelligence Hits Its Ceiling / 集体智能的天花板在哪里*. https://jxtse.github.io/blog/where-collective-intelligence-hits-its-ceiling/
+<p data-language-text="en" lang="en">Please cite this post as:</p>
+<p data-language-text="zh" lang="zh-CN">如需引用本文，请使用以下格式：</p>
 
 ```bibtex
-@misc{xie2026collectiveintelligence,
-  author       = {Xie, Jinxiang},
-  title        = {Where Collective Intelligence Hits Its Ceiling},
-  year         = {2026},
-  month        = sep,
-  howpublished = {Personal blog},
-  url          = {https://jxtse.github.io/blog/where-collective-intelligence-hits-its-ceiling/},
-  note         = {Published September 9, 2026. Chinese and English versions}
+@article{xie2026collective,
+  title = {Where Collective Intelligence Hits Its Ceiling},
+  author = {Jinxiang Xie},
+  journal = {jxtse.github.io},
+  year = {2026},
+  month = {September},
+  url = "https://jxtse.github.io/blog/where-collective-intelligence-hits-its-ceiling/#english"
 }
 ```
 

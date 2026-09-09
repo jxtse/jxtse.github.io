@@ -51,7 +51,7 @@ class BilingualBrowser(unittest.TestCase):
                 self.assertTrue(page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
                 self.assertEqual(page.locator('[data-language-panel="' + language + '"] table').count(), 2)
             self.assertEqual(page.locator('.post-content table').count(), 4)
-            self.assertIn('author       = {Xie, Jinxiang}', page.locator('.post-content').inner_text())
+            self.assertIn('author = {Jinxiang Xie}', page.locator('.post-content').inner_text())
             self.assertTrue(page.evaluate('new Set([...document.querySelectorAll("[id]")].map(element => element.id)).size === document.querySelectorAll("[id]").length'))
             page.close()
 
@@ -95,6 +95,22 @@ class BilingualBrowser(unittest.TestCase):
             self.assertGreaterEqual(box['y'], 0, 'Switch should not scroll itself above viewport')
             self.assertLess(box['y'] + box['height'], height)
             page.close()
+
+    def test_citation_follows_language_and_uses_requested_bibtex(self):
+        page = self.browser.new_page()
+        page.goto(self.base + POST)
+        for language, heading in [('en', 'Cite this post'), ('zh', '引用本文'), ('en', 'Cite this post')]:
+            page.locator('[data-language-button="' + language + '"]').click()
+            self.assertEqual(page.locator('#cite h2:visible').all_inner_texts(), [heading])
+            self.assertEqual(page.locator('.reading-toc-link').last.inner_text(), heading)
+            code = page.locator('#cite pre code').inner_text()
+            for token in ['@article{xie2026collective,', 'author = {Jinxiang Xie}', 'journal = {jxtse.github.io}', 'month = {September}', '/#english"']:
+                self.assertIn(token, code)
+            self.assertNotIn('howpublished', code)
+            self.assertNotIn(' / ', page.locator('#cite p:visible').inner_text())
+        page.goto(self.base + POST + '#cite-zh')
+        self.assertEqual(page.locator('#cite h2:visible').all_inner_texts(), ['引用本文'])
+        page.close()
 
     def test_no_javascript(self):
         page = self.browser.new_page(java_script_enabled=False)

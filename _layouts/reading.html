@@ -515,8 +515,8 @@ layout: compress
           function syncLanguage(shouldScroll) {
             var target = null;
             try { target = document.getElementById(decodeURIComponent(location.hash.slice(1))); } catch (error) {}
-            var panel = target && target.closest('[data-language-panel]');
-            var language = panel ? panel.dataset.languagePanel :
+            var panel = target && target.closest('[data-language-panel], [data-language-text]');
+            var language = panel ? (panel.dataset.languagePanel || panel.dataset.languageText) :
               (location.hash ? bilingualArticle.dataset.activeLanguage : 'en');
             bilingualArticle.dataset.activeLanguage = language;
             languageButtons.forEach(function (button) {
