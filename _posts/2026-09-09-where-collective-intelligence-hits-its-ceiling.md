@@ -244,7 +244,7 @@ I hope more reliable coordination mechanisms can extract important information f
   journal = {jxtse.github.io},
   year = {2026},
   month = {September},
-  url = "https://jxtse.github.io/blog/where-collective-intelligence-hits-its-ceiling/#english"
+  url = "https://jxtse.github.io/blog/where-collective-intelligence-hits-its-ceiling/"
 }
 ```
 
