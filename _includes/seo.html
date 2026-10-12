@@ -17,10 +17,12 @@
   <title>{{ site.title }} - Homepage</title>
 {% endif %}
 
-{% assign seo_description = page.description | default: page.excerpt | default: site.description %}
-{% if seo_description %}
-  {% assign seo_description = seo_description | markdownify | strip_html | strip_newlines | escape_once %}
+{% assign seo_description = page.description | default: page.excerpt | default: site.description | markdownify | strip_html | normalize_whitespace | strip %}
+{% if seo_description == "" %}
+  {% assign seo_description = site.description %}
 {% endif %}
+{% assign seo_description = seo_description | escape_once %}
+<meta name="description" content="{{ seo_description }}">
 
 {% assign seo_author = page.author | default: page.author[0] | default: site.author[0] %}
 {% if seo_author %}
@@ -37,11 +39,9 @@
 {% endif %}
 {% assign seo_twitter_handle = site.author.twitter | default: "JinxiangTse" | replace: "@", "" %}
 
-{% if page.cover_image %}
-  {% assign seo_image = page.cover_image | prepend: seo_url %}
-{% endif %}
+{% assign seo_image = page.cover_image | default: site.social_image | absolute_url %}
 
-<meta property="og:locale" content="en">
+<meta property="og:locale" content="{{ site.locale | replace: '-', '_' }}">
 <meta property="og:site_name" content="{{ site.title }}">
 <meta property="og:title" content="{{ seo_title }}">
 {% if page.date %}

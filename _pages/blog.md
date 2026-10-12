@@ -1,15 +1,13 @@
 ---
 permalink: /blog/
 title: "Blog"
-excerpt: "All blog posts"
+description: "Essays by Jinxiang Xie on AI research, LLM agents, research tools, and personal reflections."
 author_profile: true
 ---
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
 <span class='anchor' id='blog-list'></span>
 
-# <i class="fas fa-blog"></i> All Posts
+# <i class="fas fa-pen-fancy"></i> All Posts
 
 <div class="blog-grid">
 {% assign sorted_posts = site.posts | sort: 'date' | reverse %}
@@ -18,10 +16,10 @@ author_profile: true
     <div class="blog-card">
       <div class="blog-card-image">
         <div class="blog-badge">{{ post.date | date: "%B, %Y" }}</div>
-        {% if post.cover_image %}
-        <img src="{{ post.cover_image | relative_url }}" alt="{{ post.title }}">
+        {% if forloop.index <= 3 %}
+          {% include blog-card-image.html post=post loading="eager" %}
         {% else %}
-        <img src="{{ '/images/default-blog-cover.jpg' | relative_url }}" alt="{{ post.title }}">
+          {% include blog-card-image.html post=post %}
         {% endif %}
       </div>
       <div class="blog-card-content">

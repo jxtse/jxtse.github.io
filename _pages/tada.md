@@ -1,10 +1,11 @@
 ---
 permalink: /tada/
 title: "TADA"
+description: "TADA uses two semantic atoms, tagging and categorization, to give LLM agents reusable, inspectable table state for scalable text analysis."
+cover_image: /images/tada/semantic-boundary.png
 author_profile: false
 ---
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <link rel="stylesheet" href="{{ '/assets/css/project-page.css' | relative_url }}">
 
 <div class="project-container">

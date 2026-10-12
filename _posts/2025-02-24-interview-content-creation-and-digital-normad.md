@@ -4,6 +4,7 @@ title: "As the World Reorders: Interviews, Content Creation, and Digital Nomadis
 date: 2025-02-24
 description: "From interview reflections and Coffee Chats to AI-assisted writing and a digital-nomad experiment in Bali, this essay explores how to build an inner anchor in an age of labels, algorithms, and uncertainty."
 cover_image: /images/2025-02-24-interview-content-creation-and-digital-normad/670.jpg
+cover_thumbnail: /images/thumbnails/2025-02-24-interview-content-creation-and-digital-normad.webp
 categories: [Life, Reflection]
 original_url: https://mp.weixin.qq.com/s/HhTlxsEOsl7kips2pjPhaA
 ---

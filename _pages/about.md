@@ -8,8 +8,6 @@ redirect_from:
   - /about.html
 ---
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
 {% if site.google_scholar_stats_use_cdn %}
 {% assign gsDataBaseUrl = "https://cdn.jsdelivr.net/gh/" | append: site.repository | append: "@" %}
 {% else %}
@@ -117,12 +115,6 @@ Feel free to reach out if you'd like to discuss research or explore potential co
 # <i class="fas fa-code-branch"></i> Open Source
 
 <div class="pub-list">
-  <a class="pub-item pub-item-link" href="/buyu/">
-    <div class="pub-venue-badge">Product · NJU Hackathon</div>
-    <h3>BuYu 步语 — AI Walking Companion</h3>
-    <div class="pub-authors">Walk the Story of a City — real-time voice city guide for Nanjing</div>
-    <div class="pub-description">An AI walking companion that turns city walks into living, personalized narrations: curator-verified local history, real-time speech-to-speech interaction, and auto-generated shareable walking journals. Demo videos and product walkthrough inside.</div>
-  </a>
   <a class="pub-item pub-item-link" href="https://github.com/jxtse/scientific-research-skills" target="_blank" data-repo="jxtse/scientific-research-skills">
     <div class="pub-venue-badge">Skills for AI Agents</div>
     <h3>Scientific Research Skills <span class="gh-stars" data-repo="jxtse/scientific-research-skills"></span></h3>
@@ -155,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-# <i class="fas fa-blog"></i> Blogs
+# <i class="fas fa-pen-fancy"></i> Blogs
 
 <!-- Local Blog Posts Section -->
 {% if site.posts.size > 0 %}
@@ -167,11 +159,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <div class="blog-card">
         <div class="blog-card-image">
           <div class="blog-badge">{{ post.date | date: "%B, %Y" }}</div>
-          {% if post.cover_image %}
-          <img src="{{ post.cover_image | relative_url }}" alt="{{ post.title }}">
-          {% else %}
-          <img src="{{ '/images/default-blog-cover.jpg' | relative_url }}" alt="{{ post.title }}">
-          {% endif %}
+          {% include blog-card-image.html post=post %}
         </div>
         <div class="blog-card-content">
           <div class="blog-title">{{ post.title }}</div>

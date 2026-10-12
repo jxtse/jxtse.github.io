@@ -11,7 +11,8 @@ title                    : "Jinxiang Xie"
 title_separator          : "-"
 subtitle                 : 
 name                     : "Jinxiang Xie"
-description              : ""
+description              : "Jinxiang Xie is an M.Sc. student at Nanjing University researching large language models, harness engineering, agentic reinforcement learning, and collective intelligence."
+social_image             : "/images/android-chrome-512x512.jpg"
 url                     : "https://jxtse.github.io"
 baseurl                 : ""
 repository               : "jxtse/jxtse.github.io"
@@ -29,7 +30,7 @@ baidu_site_verification  :  # get baidu_site_verification from https://ziyuan.ba
 # Site Author
 author:
   name             : "Jinxiang Xie"
-  avatar           : "images/android-chrome-512x512.jpg"
+  avatar           : "images/avatar.webp"
   bio              : "Nanjing University"
   location         : "Nanjing, China"
   employer         :
@@ -86,6 +87,13 @@ include:
   - files
 exclude:
   - docs
+  - tests
+  - scripts
+  - AGENTS.md
+  - CODE_REVIEW_IMPROVEMENTS.md
+  - README.md
+  - Gemfile.lock
+  - run_server.sh
   - google_scholar_crawler
   - "*.sublime-project"
   - "*.sublime-workspace"

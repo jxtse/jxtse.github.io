@@ -1,10 +1,11 @@
 ---
 permalink: /retrace/
 title: "ReTRACE"
+description: "ReTRACE orchestrates chemistry tools with a frozen LLM to plan, verify, and restructure multi-step synthetic routes with auditable feedback."
+cover_image: /images/retrace/architecture.jpg
 author_profile: false
 ---
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <link rel="stylesheet" href="{{ '/assets/css/project-page.css' | relative_url }}">
 
 <div class="project-container">

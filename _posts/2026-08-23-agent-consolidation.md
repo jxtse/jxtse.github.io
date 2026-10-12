@@ -4,6 +4,7 @@ title: "Consolidating an Agent That Outgrew Itself"
 date: 2026-08-23
 description: "After months of heavy use, my AI agent had accumulated 272 skills, plaintext API keys, and a 43K-token fixed context — with no way to check its own reasoning. A day of consolidation: usage-based skill retirement, secrets management, context-layer slimming, and a second-model auditor that caught two real errors."
 cover_image: /images/2026-08-23-agent-consolidation/cover.jpg
+cover_thumbnail: /images/thumbnails/2026-08-23-agent-consolidation.webp
 categories: [AI, Agents, Engineering]
 ---
 

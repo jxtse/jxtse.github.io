@@ -1,0 +1,2 @@
+{% assign card_image = include.post.cover_thumbnail | default: include.post.cover_image | default: site.social_image %}
+<img src="{{ card_image | relative_url }}" alt="{{ include.post.title | escape }}" loading="{{ include.loading | default: 'lazy' }}" decoding="async"{% if include.post.cover_thumbnail %} width="720" height="405"{% endif %}>

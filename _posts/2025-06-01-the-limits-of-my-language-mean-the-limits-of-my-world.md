@@ -4,6 +4,7 @@ title: "The Limits of My Language Mean the Limits of My World"
 date: 2025-06-01
 description: "Drawing on Wittgenstein's philosophy, a recent paper argues that our existing language might be the fundamental bottleneck."
 cover_image: /images/2025-06-01-the-limits-of-my-language-mean-the-limits-of-my-world/0.jpg
+cover_thumbnail: /images/thumbnails/2025-06-01-the-limits-of-my-language-mean-the-limits-of-my-world.webp
 categories: [Life, Travel]
 original_url: https://mp.weixin.qq.com/s/pomI-HLyVpOitxor-7hTDQ
 ---

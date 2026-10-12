@@ -4,6 +4,7 @@ title: "Wind Over the Hills: There But for the Grace of God Go I"
 date: 2024-12-08
 description: "Two weeks volunteering at a lakeside cafe in Yunnan, and reflections on freedom, labor, rural life, and how privilege shapes our sense of possibility."
 cover_image: /images/2024-12-08-but-for-the-grace-of-god-go-i/640.jpg
+cover_thumbnail: /images/thumbnails/2024-12-08-but-for-the-grace-of-god-go-i.webp
 categories: [Life, Travel]
 original_url: "https://mp.weixin.qq.com/s/Pz8GQZ_lv6o4PesgHM0T6Q"
 ---

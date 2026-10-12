@@ -1,10 +1,11 @@
 ---
 permalink: /cast/
 title: "CAST: Achieving Stable LLM-based Text Analysis for Data Analytics"
+description: "CAST improves the stability of LLM-based text analysis through algorithmic prompting and stable thinking, while maintaining output quality."
+cover_image: /images/cast-fig2-framework.png
 author_profile: false
 ---
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <link rel="stylesheet" href="{{ '/assets/css/project-page.css' | relative_url }}?v={{ site.time | date: '%s' }}">
 
 <div class="project-container">

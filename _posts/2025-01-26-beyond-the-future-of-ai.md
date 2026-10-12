@@ -4,6 +4,7 @@ title: "Beyond the Future of AI: The Dreams and Deceptions of Cryptocurrency"
 date: 2025-01-26
 description: "From Web 3.0 to Bitcoin breaking $100K, from speculators to true believers - exploring the technical potential of cryptocurrency, its future direction, and the possibility of a decentralized society in the AGI era."
 cover_image: /images/pic04.jpg
+cover_thumbnail: /images/thumbnails/2025-01-26-beyond-the-future-of-ai.webp
 categories: [Tech, Finance]
 original_url: https://mp.weixin.qq.com/s/luu2qEzPnYAuryJ9mYoJ6Q
 ---

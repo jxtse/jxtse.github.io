@@ -104,8 +104,10 @@ class BilingualBrowser(unittest.TestCase):
             self.assertEqual(page.locator('#cite h2:visible').all_inner_texts(), [heading])
             self.assertEqual(page.locator('.reading-toc-link').last.inner_text(), heading)
             code = page.locator('#cite pre code').inner_text()
-            for token in ['@article{xie2026collective,', 'author = {Jinxiang Xie}', 'journal = {jxtse.github.io}', 'month = {September}', '/#english"']:
+            # The citation uses the canonical URL (updated in a7cb11e), not a language hash.
+            for token in ['@article{xie2026collective,', 'author = {Jinxiang Xie}', 'journal = {jxtse.github.io}', 'month = {September}', 'url = "https://jxtse.github.io' + POST + '"']:
                 self.assertIn(token, code)
+            self.assertNotIn('#english', code)
             self.assertNotIn('howpublished', code)
             self.assertNotIn(' / ', page.locator('#cite p:visible').inner_text())
         page.goto(self.base + POST + '#cite-zh')

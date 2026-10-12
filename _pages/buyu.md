@@ -1,10 +1,11 @@
 ---
 permalink: /buyu/
 title: "BuYu 步语"
+description: "BuYu is an AI walking companion for Nanjing, combining verified local history, real-time voice interaction, and shareable walking journals."
+cover_image: /images/buyu/poster.jpg
 author_profile: false
 ---
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <link rel="stylesheet" href="{{ '/assets/css/project-page.css' | relative_url }}">
 
 <div class="project-container">

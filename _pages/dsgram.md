@@ -1,10 +1,11 @@
 ---
 permalink: /dsgram/
 title: "DSGram: Dynamic Weighting Sub-Metrics for Grammatical Error Correction"
+description: "DSGram evaluates grammatical error correction with dynamically weighted semantic coherence, edit level, and fluency metrics aligned with human judgment."
+cover_image: /images/dsgram-fig2-architecture.png
 author_profile: false
 ---
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <link rel="stylesheet" href="{{ '/assets/css/project-page.css' | relative_url }}?v={{ site.time | date: '%s' }}">
 
 <div class="project-container">

@@ -4,6 +4,7 @@ title: "LLMs: Cutting-Edge Technology and Future Applications"
 date: 2023-11-14
 description: "Introduce a number of methods for optimizing the output of large language models and reducing the probability of irrelevant or incorrect responses."
 cover_image: /images/2023-11-14-llms-cutting-edge-technology-and-future-applications/700.jpg
+cover_thumbnail: /images/thumbnails/2023-11-14-llms-cutting-edge-technology-and-future-applications.webp
 categories: [AI, Tutorial]
 original_url: https://mp.weixin.qq.com/s/G7PTKk63RhnwuKplh9qYlQ
 ---
