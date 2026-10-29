@@ -36,9 +36,15 @@
 
   var links = [];
   titles.forEach(function (h, i) {
-    var slug = h.textContent.trim().toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'section-' + i;
-    h.id = slug;
+    // Keep author-set ids; otherwise derive one that does not collide.
+    var slug = h.id;
+    if (!slug) {
+      var base = h.textContent.trim().toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'section-' + i;
+      slug = base;
+      for (var n = 2; document.getElementById(slug); n++) slug = base + '-' + n;
+      h.id = slug;
+    }
     var a = document.createElement('a');
     a.href = '#' + slug;
     a.textContent = h.textContent.trim();

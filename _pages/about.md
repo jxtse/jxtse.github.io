@@ -68,6 +68,7 @@ Feel free to reach out if you'd like to discuss research or explore potential co
     <div class="pub-links">
       <a href="/retrace/"><i class="fas fa-home"></i> Project</a>
       <a href="https://arxiv.org/abs/2610.24744"><i class="fas fa-file-alt"></i> ArXiv</a>
+      <a href="/retrace/#assistant-title"><i class="fas fa-flask"></i> Assistant</a>
     </div>
   </div>
   <div class="pub-item">
