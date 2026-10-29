@@ -99,3 +99,22 @@ categories: [Research, AI]
 前者是安身立命的根基，后者是让前者能持续运转的引擎。
 
 与诸位共勉。
+
+<section id="cite" markdown="1">
+
+## 引用本文
+
+如需引用本文，请使用以下格式：
+
+```bibtex
+@article{xie2026grounded,
+  title = {Staying Grounded in Fast-Paced AI Research},
+  author = {Jinxiang Xie},
+  journal = {jxtse.github.io},
+  year = {2026},
+  month = {June},
+  url = "https://jxtse.github.io/blog/how-to-cope-with-fast-paced-research/"
+}
+```
+
+</section>

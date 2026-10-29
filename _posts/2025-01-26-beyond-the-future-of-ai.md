@@ -7,6 +7,7 @@ cover_image: /images/pic04.jpg
 cover_thumbnail: /images/thumbnails/2025-01-26-beyond-the-future-of-ai.webp
 categories: [Tech, Finance]
 original_url: https://mp.weixin.qq.com/s/luu2qEzPnYAuryJ9mYoJ6Q
+scholar: false
 ---
 
 # 不止AI的未来，再谈谈加密货币的梦想与骗局

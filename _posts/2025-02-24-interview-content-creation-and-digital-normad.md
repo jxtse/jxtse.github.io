@@ -7,6 +7,7 @@ cover_image: /images/2025-02-24-interview-content-creation-and-digital-normad/67
 cover_thumbnail: /images/thumbnails/2025-02-24-interview-content-creation-and-digital-normad.webp
 categories: [Life, Reflection]
 original_url: https://mp.weixin.qq.com/s/HhTlxsEOsl7kips2pjPhaA
+scholar: false
 ---
 
 # 世界在重组，我们如何找到自己的人生支点：聊聊访谈、内容创作和数字游民

@@ -1,9 +1,10 @@
 {%- comment -%}
   Highwire Press citation tags for blog posts, read by Google Scholar and
   reference managers (Zotero). Scholar requires at least title, first author
-  and publication date. Only rendered for posts.
+  and publication date. Only rendered for posts; set `scholar: false` in a post's
+  front matter (personal essays, travel, yearly reviews) to omit them.
 {%- endcomment -%}
-{%- if page.collection == "posts" -%}
+{%- if page.collection == "posts" and page.scholar != false -%}
 {%- assign cite_title = page.title | default: "" | strip -%}
 {%- assign cite_author = page.author | default: site.author.name -%}
 {%- if cite_title != "" and cite_author and page.date -%}

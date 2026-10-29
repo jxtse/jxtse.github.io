@@ -7,6 +7,7 @@ cover_image: /images/2025-06-01-the-limits-of-my-language-mean-the-limits-of-my-
 cover_thumbnail: /images/thumbnails/2025-06-01-the-limits-of-my-language-mean-the-limits-of-my-world.webp
 categories: [Life, Travel]
 original_url: https://mp.weixin.qq.com/s/pomI-HLyVpOitxor-7hTDQ
+scholar: false
 ---
 
 # 我的21岁｜从北京到世界，越过边界我看见的未来

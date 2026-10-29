@@ -152,3 +152,22 @@ ReAct技术（Reasoning and Acting）可让模型进行动态推理，通过"推
 - LLaMa2注重安全隐私，可微调和本地部署
 
 希望读者创造属于自己的专属提示词，让大模型更好地辅助工作和学习。
+
+<section id="cite" markdown="1">
+
+## 引用本文
+
+如需引用本文，请使用以下格式：
+
+```bibtex
+@article{xie2023prompt,
+  title = {Prompt Engineering: How to Better Ask LLMs},
+  author = {Jinxiang Xie},
+  journal = {jxtse.github.io},
+  year = {2023},
+  month = {August},
+  url = "https://jxtse.github.io/blog/prompt-engineering/"
+}
+```
+
+</section>

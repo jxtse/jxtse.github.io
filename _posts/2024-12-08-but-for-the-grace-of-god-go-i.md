@@ -7,6 +7,7 @@ cover_image: /images/2024-12-08-but-for-the-grace-of-god-go-i/640.jpg
 cover_thumbnail: /images/thumbnails/2024-12-08-but-for-the-grace-of-god-go-i.webp
 categories: [Life, Travel]
 original_url: "https://mp.weixin.qq.com/s/Pz8GQZ_lv6o4PesgHM0T6Q"
+scholar: false
 ---
 # 风轻轻拂过半山腰
 

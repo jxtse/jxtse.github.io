@@ -79,3 +79,22 @@ Both catches were the same class of error: Hermes's reasoning being confidently 
 ## What I learned
 
 The shift is treating Hermes like a codebase that needs lifecycle management, not a collection that only grows. Skills retire. Credentials rotate. Context compresses. Decisions get audited. Adding things is the fun part — but maintaining the system, keeping it honest, and letting things go is engineering work you cannot skip.
+
+<section id="cite" markdown="1">
+
+## Cite this post
+
+Please cite this post as:
+
+```bibtex
+@article{xie2026consolidation,
+  title = {Consolidating an Agent That Outgrew Itself},
+  author = {Jinxiang Xie},
+  journal = {jxtse.github.io},
+  year = {2026},
+  month = {August},
+  url = "https://jxtse.github.io/blog/agent-consolidation/"
+}
+```
+
+</section>

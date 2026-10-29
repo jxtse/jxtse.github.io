@@ -263,3 +263,22 @@ Claude Code 给了我们一个极其顺手的脚手架。它让我们意识到�
 **确定性的、可观测的、容错的生存环境。**
 
 未来，这种LLM 编排 + 专业代码执行 + 多智能体协作的模式，或许将成为科研自动化的新常态。
+
+<section id="cite" markdown="1">
+
+## 引用本文
+
+如需引用本文，请使用以下格式：
+
+```bibtex
+@article{xie2025claudecode,
+  title = {Claude Code Skills and Subagents in Practice},
+  author = {Jinxiang Xie},
+  journal = {jxtse.github.io},
+  year = {2025},
+  month = {November},
+  url = "https://jxtse.github.io/blog/claude-code-skills-subagents/"
+}
+```
+
+</section>

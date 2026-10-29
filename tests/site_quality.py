@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Check metadata, navigation, assets and loading policy after a Jekyll build."""
 import json
+import re
 import unittest
 from html.parser import HTMLParser
 from pathlib import Path
@@ -56,9 +57,18 @@ class SiteQuality(unittest.TestCase):
     def test_post_citation_meta(self):
         posts = list((SITE / 'blog').glob('*/index.html'))
         self.assertGreater(len(posts), 5)
+        opted_out = set()
+        for source in (ROOT / '_posts').glob('*.md'):
+            front = source.read_text().split('\n---', 1)[0]
+            if re.search(r'^scholar:\s*false\s*$', front, re.M):
+                opted_out.add(source.stem[11:])
+        self.assertGreater(len(opted_out), 0)
         for path in posts:
             with self.subTest(page=str(path.relative_to(SITE))):
                 doc = Document(path)
+                if path.parent.name in opted_out:
+                    self.assertEqual(doc.meta('citation_title'), [])
+                    continue
                 for key in ['citation_title', 'citation_author',
                             'citation_publication_date']:
                     values = doc.meta(key)
