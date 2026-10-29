@@ -11,7 +11,7 @@ author_profile: false
 <div class="project-container">
 
   <header class="project-header">
-    <div class="project-venue-badge"><i class="fas fa-database"></i> In Submission · 2026</div>
+    <div class="project-venue-badge"><i class="fas fa-database"></i> arXiv · 2026</div>
     <h1 class="project-title">Semantic Atoms for Scalable Text Analysis in Data Analytics in the Era of LLM-Based Agents</h1>
     <div class="project-subtitle">An agent-facing systems abstraction for text analysis in the era of LLM-based agents</div>
 
@@ -26,6 +26,7 @@ author_profile: false
       Nanjing University &nbsp;|&nbsp; Microsoft Research
     </div>
     <div class="links-bar">
+      <a href="https://arxiv.org/abs/2610.34860" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-alt"></i> ArXiv</a>
       <a href="https://github.com/jxtse/TADA-Agent" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Code</a>
     </div>
   </header>
@@ -131,7 +132,7 @@ author_profile: false
   <section class="project-section pp-fadeup">
     <h2 class="section-title">Status</h2>
     <p style="font-size: 1.05em; line-height: 1.7; color: #444;">
-      In submission. A unified cross-system benchmark campaign (all baselines under three-repeat self-consistency with a position-debiased LLM judge and human calibration) is in progress.
+      Preprint available on <a href="https://arxiv.org/abs/2610.34860">arXiv:2610.34860</a>.
     </p>
   </section>
 

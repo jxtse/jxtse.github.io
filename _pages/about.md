@@ -62,19 +62,21 @@ Feel free to reach out if you'd like to discuss research or explore potential co
 
 <div class="pub-list">
   <div class="pub-item">
-    <div class="pub-venue-badge">In Preparation</div>
-    <h3><a href="/retrace/">ReTRACE: Chemically Auditable Large Language Model Agent for Multi-Step Retrosynthesis Planning</a></h3>
-    <div class="pub-authors"><strong>Jinxiang Xie</strong>, Yijian Zhang, Hao Dong</div>
+    <div class="pub-venue-badge">arXiv 2026</div>
+    <h3><a href="/retrace/">ReTRACE: Feedback-Guided LLM Agent in a Chemistry Harness for Retrosynthesis Planning</a></h3>
+    <div class="pub-authors"><strong>Jinxiang Xie</strong>, Yijian Zhang, Qingyuan Yi, Jianyi Wang, Hao Dong</div>
     <div class="pub-links">
       <a href="/retrace/"><i class="fas fa-home"></i> Project</a>
+      <a href="https://arxiv.org/abs/2610.24744"><i class="fas fa-file-alt"></i> ArXiv</a>
     </div>
   </div>
   <div class="pub-item">
-    <div class="pub-venue-badge">In Submission</div>
+    <div class="pub-venue-badge">arXiv 2026</div>
     <h3><a href="/tada/">Semantic Atoms for Scalable Text Analysis in Data Analytics in the Era of LLM-Based Agents</a></h3>
     <div class="pub-authors"><strong>Jinxiang Xie</strong>, Zihao Li, Rui Ding, Bartuer Zhou, Shi Han, Dongmei Zhang</div>
     <div class="pub-links">
       <a href="/tada/"><i class="fas fa-home"></i> Project</a>
+      <a href="https://arxiv.org/abs/2610.34860"><i class="fas fa-file-alt"></i> ArXiv</a>
       <a href="https://github.com/jxtse/TADA-Agent"><i class="fab fa-github"></i> Code</a>
     </div>
   </div>

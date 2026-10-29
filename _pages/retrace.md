@@ -11,8 +11,8 @@ author_profile: false
 <div class="project-container">
 
   <header class="project-header">
-    <div class="project-venue-badge"><i class="fas fa-flask"></i> In Preparation · 2026</div>
-    <h1 class="project-title">ReTRACE: Chemically Auditable Large Language Model Agent for Multi-Step Retrosynthesis Planning</h1>
+    <div class="project-venue-badge"><i class="fas fa-flask"></i> arXiv · 2026</div>
+    <h1 class="project-title">ReTRACE: Feedback-Guided LLM Agent in a Chemistry Harness for Retrosynthesis Planning</h1>
     <div class="project-subtitle">A frozen LLM orchestrating heterogeneous chemistry engines with auditable route evaluation</div>
 
     <p class="pp-hero-tagline">
@@ -20,10 +20,13 @@ author_profile: false
     </p>
 
     <div class="project-authors">
-      <a href="https://jxtse.github.io">Jinxiang Xie</a>, Yijian Zhang, Hao Dong
+      <a href="https://jxtse.github.io">Jinxiang Xie</a>, Yijian Zhang, Qingyuan Yi, Jianyi Wang, Hao Dong
     </div>
     <div class="affiliations">
       Nanjing University
+    </div>
+    <div class="links-bar">
+      <a href="https://arxiv.org/abs/2610.24744" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-alt"></i> ArXiv</a>
     </div>
   </header>
 
@@ -131,7 +134,7 @@ author_profile: false
   <section class="project-section pp-fadeup">
     <h2 class="section-title">Status</h2>
     <p style="font-size: 1.05em; line-height: 1.7; color: #444;">
-      Manuscript in preparation. The system is evaluated on Retro*-190, FDA30, and JMC2025 with a fixed independent audit protocol, complemented by wet-lab validation of predicted routes and proof-of-concept demonstrations of natural-language steerability (cost-first / green-chemistry-first planning, chemist-feedback revision, and pluggable enzymatic-tool extension).
+      Preprint available on <a href="https://arxiv.org/abs/2610.24744">arXiv:2610.24744</a>. The system is evaluated on Retro*-190, FDA30, and JMC2025 with a fixed independent audit protocol, complemented by wet-lab validation of predicted routes and proof-of-concept demonstrations of natural-language steerability (cost-first / green-chemistry-first planning, chemist-feedback revision, and pluggable enzymatic-tool extension).
     </p>
   </section>
 
