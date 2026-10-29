@@ -1,0 +1,19 @@
+{%- comment -%}
+  Highwire Press citation tags for blog posts, read by Google Scholar and
+  reference managers (Zotero). Scholar requires at least title, first author
+  and publication date. Only rendered for posts.
+{%- endcomment -%}
+{%- if page.collection == "posts" -%}
+{%- assign cite_title = page.title | default: "" | strip -%}
+{%- assign cite_author = page.author | default: site.author.name -%}
+{%- if cite_title != "" and cite_author and page.date -%}
+<meta name="citation_title" content="{{ cite_title | strip_html | escape_once }}">
+<meta name="citation_author" content="{{ cite_author | strip_html | escape_once }}">
+<meta name="citation_publication_date" content="{{ page.date | date: '%Y/%m/%d' }}">
+<meta name="citation_journal_title" content="{{ site.url | remove: 'https://' | remove: 'http://' }}">
+<meta name="citation_fulltext_html_url" content="{{ page.url | absolute_url }}">
+{%- if page.bilingual -%}
+<meta name="citation_language" content="en">
+{%- endif -%}
+{%- endif -%}
+{%- endif -%}

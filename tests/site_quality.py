@@ -53,6 +53,22 @@ class SiteQuality(unittest.TestCase):
                 self.assertFalse(any('font-awesome' in a.get('href', '')
                                      for a in doc.elements('link')))
 
+    def test_post_citation_meta(self):
+        posts = list((SITE / 'blog').glob('*/index.html'))
+        self.assertGreater(len(posts), 5)
+        for path in posts:
+            with self.subTest(page=str(path.relative_to(SITE))):
+                doc = Document(path)
+                for key in ['citation_title', 'citation_author',
+                            'citation_publication_date']:
+                    values = doc.meta(key)
+                    self.assertEqual(len(values), 1, key)
+                    self.assertTrue(values[0].strip(), key)
+                self.assertRegex(doc.meta('citation_publication_date')[0],
+                                 r'^\d{4}/\d{2}/\d{2}$')
+        for path in [SITE / 'index.html', SITE / 'blog/index.html']:
+            self.assertEqual(Document(path).meta('citation_title'), [])
+
     def test_home_navigation(self):
         doc = Document(SITE / 'index.html')
         ids = {a['id'] for _, a in doc.tags if 'id' in a}
