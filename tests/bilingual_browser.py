@@ -80,7 +80,7 @@ class BilingualBrowser(unittest.TestCase):
         page.goto(self.base + '/blog/')
         link = page.locator('a[href*="where-collective-intelligence-hits-its-ceiling"]').first
         self.assertIn('Where Collective Intelligence', link.inner_text())
-        old = page.locator('a[href*="/blog/"]').evaluate_all('(links) => links.map(link => link.href).find(href => !href.endsWith("/blog/") && !href.includes("where-collective-intelligence-hits-its-ceiling"))')
+        old = page.locator('a[href*="/blog/"]').evaluate_all('(links) => links.map(link => link.href).find(href => !href.endsWith("/blog/") && !["where-collective-intelligence-hits-its-ceiling", "one-memory-many-agents"].some(slug => href.includes(slug)))')
         self.assertIsNotNone(old)
         page.goto(old)
         self.assertEqual(page.locator('[data-language-button]').count(), 0)
