@@ -213,78 +213,6 @@ Recall profile 是整套设计的核心。一个 profile 由几个参数组成�
 
 本文的搭建说明和评测工具已开源：<https://github.com/jxtse/dose-mem>
 
-### 参考文献 {#zh-references}
-
-\[1\] Meta. How to get started with Muse. Meta Help Center, 2026. [https://www.meta.com/help/superintelligence/1331373868832401/](https://www.meta.com/help/superintelligence/1331373868832401/)
-
-\[2\] Introducing Grok Bot, 2026. [https://x.ai/news/introducing-grok-bot](https://x.ai/news/introducing-grok-bot)
-
-\[3\] OpenClaw: Your assistant, on your devices, in your chats. [https://github.com/openclaw/openclaw](https://github.com/openclaw/openclaw)
-
-\[4\] Nous Research. Hermes Agent. [https://github.com/nousresearch/hermes-agent](https://github.com/nousresearch/hermes-agent)
-
-\[5\] Pi: a minimal agent harness. [https://pi.dev/](https://pi.dev/)
-
-\[6\] Anthropic. How Claude remembers your project. Claude Code Docs. [https://code.claude.com/docs/en/memory](https://code.claude.com/docs/en/memory)
-
-\[7\] OpenAI. Memories. ChatGPT Learn. [https://learn.chatgpt.com/docs/customization/memories](https://learn.chatgpt.com/docs/customization/memories)
-
-\[8\] OpenClaw. Memory overview. [https://docs.openclaw.ai/concepts/memory/](https://docs.openclaw.ai/concepts/memory/)
-
-\[9\] Nous Research. Persistent Memory. Hermes Agent Docs. [https://hermes-agent.nousresearch.com/docs/user-guide/features/memory](https://hermes-agent.nousresearch.com/docs/user-guide/features/memory)
-
-\[10\] Tailscale. Tailscale Serve. [https://tailscale.com/docs/features/tailscale-serve](https://tailscale.com/docs/features/tailscale-serve)
-
-\[11\] Packer, C., Wooders, S., Lin, K., Fang, V., Patil, S. G., Stoica, I., Gonzalez, J. E. MemGPT: Towards LLMs as Operating Systems. arXiv:2310.08560, 2023.
-
-\[12\] Park, J. S., O'Brien, J. C., Cai, C. J., Morris, M. R., Liang, P., Bernstein, M. S. Generative Agents: Interactive Simulacra of Human Behavior. UIST 2023.
-
-\[13\] Zhong, W., Guo, L., Gao, Q., Ye, H., Wang, Y. MemoryBank: Enhancing Large Language Models with Long-Term Memory. AAAI 2024.
-
-\[14\] Chhikara, P., Khant, D., Aryan, S., Singh, T., Yadav, D. Mem0: Building Production-Ready AI Agents with Scalable Long-Term Memory. arXiv:2504.19413, 2025.
-
-\[15\] Rasmussen, P., Paliychuk, P., Beauvais, T., Ryan, J., Chalef, D. Zep: A Temporal Knowledge Graph Architecture for Agent Memory. arXiv:2501.13956, 2025.
-
-\[16\] Xu, W., Liang, Z., Mei, K., Gao, H., Tan, J., Zhang, Y. A-Mem: Agentic Memory for LLM Agents. arXiv:2502.12110, 2025.
-
-\[17\] Volcengine. OpenViking: Context Database for AI Agents. [https://github.com/volcengine/OpenViking](https://github.com/volcengine/OpenViking)
-
-\[18\] Liu, N. F., Lin, K., Hewitt, J., Paranjape, A., Bevilacqua, M., Petroni, F., Liang, P. Lost in the Middle: How Language Models Use Long Contexts. TACL 12:157–173, 2024.
-
-\[19\] Shi, F., Chen, X., Misra, K., Scales, N., Dohan, D., Chi, E., Schärli, N., Zhou, D. Large Language Models Can Be Easily Distracted by Irrelevant Context. ICML 2023.
-
-\[20\] Hong, K., Troynikov, A., Huber, J. Context Rot: How Increasing Input Tokens Impacts LLM Performance. Chroma Research, 2025. [https://research.trychroma.com/context-rot](https://research.trychroma.com/context-rot)
-
-\[21\] Anthropic. Effective context engineering for AI agents, 2025. [https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)
-
-\[22\] Mallen, A., Asai, A., Zhong, V., Das, R., Khashabi, D., Hajishirzi, H. When Not to Trust Language Models: Investigating Effectiveness of Parametric and Non-Parametric Memories. ACL 2023.
-
-\[23\] Asai, A., Wu, Z., Wang, Y., Sil, A., Hajishirzi, H. Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection. ICLR 2024.
-
-\[24\] Jiang, Z., Xu, F. F., Gao, L., Sun, Z., Liu, Q., Dwivedi-Yu, J., Yang, Y., Callan, J., Neubig, G. Active Retrieval Augmented Generation. EMNLP 2023.
-
-\[25\] Horvitz, E. Principles of Mixed-Initiative User Interfaces. CHI 1999.
-
-\[26\] Karpukhin, V., Oguz, B., Min, S., Lewis, P., Wu, L., Edunov, S., Chen, D., Yih, W. Dense Passage Retrieval for Open-Domain Question Answering. EMNLP 2020.
-
-\[27\] Robertson, S., Zaragoza, H. The Probabilistic Relevance Framework: BM25 and Beyond. Foundations and Trends in Information Retrieval 3(4):333–389, 2009.
-
-\[28\] Cormack, G. V., Clarke, C. L. A., Büttcher, S. Reciprocal Rank Fusion Outperforms Condorcet and Individual Rank Learning Methods. SIGIR 2009.
-
-\[29\] Maharana, A., Lee, D.-H., Tulyakov, S., Bansal, M., Barbieri, F., Fang, Y. Evaluating Very Long-Term Conversational Memory of LLM Agents. ACL 2024.
-
-\[30\] Wu, D., Wang, H., Yu, W., Zhang, Y., Chang, K.-W., Yu, D. LongMemEval: Benchmarking Chat Assistants on Long-Term Interactive Memory. ICLR 2025.
-
-\[31\] Hu, Y., Wang, Y., McAuley, J. Evaluating Memory in LLM Agents via Incremental Multi-Turn Interactions. arXiv:2507.05257, 2025.
-
-\[32\] Zep. Is Mem0 Really SOTA in Agent Memory? 2025. [https://www.getzep.com/blog/lies-damn-lies-statistics-is-mem0-really-sota-in-agent-memory/](https://www.getzep.com/blog/lies-damn-lies-statistics-is-mem0-really-sota-in-agent-memory/)
-
-\[33\] Yadav, D. Revisiting Zep's 84% LoCoMo Claim: Corrected Evaluation & 58.44% Accuracy. GitHub issue getzep/zep-papers#5, 2025.
-
-\[34\] Field, C. A., Welsh, A. H. Bootstrapping Clustered Data. Journal of the Royal Statistical Society Series B 69(3):369–390, 2007.
-
-\[35\] Landis, J. R., Koch, G. G. The Measurement of Observer Agreement for Categorical Data. Biometrics 33(1):159–174, 1977.
-
 </section>
 
 <section id="english" data-language-panel="en" lang="en" markdown="1">
@@ -475,7 +403,32 @@ There are several questions I cannot yet answer. First, profiles are tuned by ha
 
 The build specs and the evaluation kit for this post are open source: <https://github.com/jxtse/dose-mem>
 
-### References {#en-references}
+</section>
+
+<section id="cite" markdown="1">
+
+<h2 id="cite-en" data-language-text="en" lang="en">Cite this post</h2>
+<h2 id="cite-zh" data-language-text="zh" lang="zh-CN">引用本文</h2>
+
+<p data-language-text="en" lang="en">Please cite this post as:</p>
+<p data-language-text="zh" lang="zh-CN">如需引用本文，请使用以下格式：</p>
+
+```bibtex
+@article{xie2026memory,
+  title = {One Memory, Many Agents: A Shared Memory Layer with Per-Agent Recall},
+  author = {Jinxiang Xie},
+  journal = {jxtse.github.io},
+  year = {2026},
+  month = {October},
+  url = "https://jxtse.github.io/blog/one-memory-many-agents/#english"
+}
+```
+
+</section>
+
+<section id="chinese-references" data-language-panel="zh" lang="zh-CN" markdown="1">
+
+## 参考文献 {#zh-references}
 
 \[1\] Meta. How to get started with Muse. Meta Help Center, 2026. [https://www.meta.com/help/superintelligence/1331373868832401/](https://www.meta.com/help/superintelligence/1331373868832401/)
 
@@ -549,23 +502,78 @@ The build specs and the evaluation kit for this post are open source: <https://g
 
 </section>
 
-<section id="cite" markdown="1">
+<section id="english-references" data-language-panel="en" lang="en" markdown="1">
 
-<h2 id="cite-en" data-language-text="en" lang="en">Cite this post</h2>
-<h2 id="cite-zh" data-language-text="zh" lang="zh-CN">引用本文</h2>
+## References {#en-references}
 
-<p data-language-text="en" lang="en">Please cite this post as:</p>
-<p data-language-text="zh" lang="zh-CN">如需引用本文，请使用以下格式：</p>
+\[1\] Meta. How to get started with Muse. Meta Help Center, 2026. [https://www.meta.com/help/superintelligence/1331373868832401/](https://www.meta.com/help/superintelligence/1331373868832401/)
 
-```bibtex
-@article{xie2026memory,
-  title = {One Memory, Many Agents: A Shared Memory Layer with Per-Agent Recall},
-  author = {Jinxiang Xie},
-  journal = {jxtse.github.io},
-  year = {2026},
-  month = {October},
-  url = "https://jxtse.github.io/blog/one-memory-many-agents/#english"
-}
-```
+\[2\] Introducing Grok Bot, 2026. [https://x.ai/news/introducing-grok-bot](https://x.ai/news/introducing-grok-bot)
+
+\[3\] OpenClaw: Your assistant, on your devices, in your chats. [https://github.com/openclaw/openclaw](https://github.com/openclaw/openclaw)
+
+\[4\] Nous Research. Hermes Agent. [https://github.com/nousresearch/hermes-agent](https://github.com/nousresearch/hermes-agent)
+
+\[5\] Pi: a minimal agent harness. [https://pi.dev/](https://pi.dev/)
+
+\[6\] Anthropic. How Claude remembers your project. Claude Code Docs. [https://code.claude.com/docs/en/memory](https://code.claude.com/docs/en/memory)
+
+\[7\] OpenAI. Memories. ChatGPT Learn. [https://learn.chatgpt.com/docs/customization/memories](https://learn.chatgpt.com/docs/customization/memories)
+
+\[8\] OpenClaw. Memory overview. [https://docs.openclaw.ai/concepts/memory/](https://docs.openclaw.ai/concepts/memory/)
+
+\[9\] Nous Research. Persistent Memory. Hermes Agent Docs. [https://hermes-agent.nousresearch.com/docs/user-guide/features/memory](https://hermes-agent.nousresearch.com/docs/user-guide/features/memory)
+
+\[10\] Tailscale. Tailscale Serve. [https://tailscale.com/docs/features/tailscale-serve](https://tailscale.com/docs/features/tailscale-serve)
+
+\[11\] Packer, C., Wooders, S., Lin, K., Fang, V., Patil, S. G., Stoica, I., Gonzalez, J. E. MemGPT: Towards LLMs as Operating Systems. arXiv:2310.08560, 2023.
+
+\[12\] Park, J. S., O'Brien, J. C., Cai, C. J., Morris, M. R., Liang, P., Bernstein, M. S. Generative Agents: Interactive Simulacra of Human Behavior. UIST 2023.
+
+\[13\] Zhong, W., Guo, L., Gao, Q., Ye, H., Wang, Y. MemoryBank: Enhancing Large Language Models with Long-Term Memory. AAAI 2024.
+
+\[14\] Chhikara, P., Khant, D., Aryan, S., Singh, T., Yadav, D. Mem0: Building Production-Ready AI Agents with Scalable Long-Term Memory. arXiv:2504.19413, 2025.
+
+\[15\] Rasmussen, P., Paliychuk, P., Beauvais, T., Ryan, J., Chalef, D. Zep: A Temporal Knowledge Graph Architecture for Agent Memory. arXiv:2501.13956, 2025.
+
+\[16\] Xu, W., Liang, Z., Mei, K., Gao, H., Tan, J., Zhang, Y. A-Mem: Agentic Memory for LLM Agents. arXiv:2502.12110, 2025.
+
+\[17\] Volcengine. OpenViking: Context Database for AI Agents. [https://github.com/volcengine/OpenViking](https://github.com/volcengine/OpenViking)
+
+\[18\] Liu, N. F., Lin, K., Hewitt, J., Paranjape, A., Bevilacqua, M., Petroni, F., Liang, P. Lost in the Middle: How Language Models Use Long Contexts. TACL 12:157–173, 2024.
+
+\[19\] Shi, F., Chen, X., Misra, K., Scales, N., Dohan, D., Chi, E., Schärli, N., Zhou, D. Large Language Models Can Be Easily Distracted by Irrelevant Context. ICML 2023.
+
+\[20\] Hong, K., Troynikov, A., Huber, J. Context Rot: How Increasing Input Tokens Impacts LLM Performance. Chroma Research, 2025. [https://research.trychroma.com/context-rot](https://research.trychroma.com/context-rot)
+
+\[21\] Anthropic. Effective context engineering for AI agents, 2025. [https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)
+
+\[22\] Mallen, A., Asai, A., Zhong, V., Das, R., Khashabi, D., Hajishirzi, H. When Not to Trust Language Models: Investigating Effectiveness of Parametric and Non-Parametric Memories. ACL 2023.
+
+\[23\] Asai, A., Wu, Z., Wang, Y., Sil, A., Hajishirzi, H. Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection. ICLR 2024.
+
+\[24\] Jiang, Z., Xu, F. F., Gao, L., Sun, Z., Liu, Q., Dwivedi-Yu, J., Yang, Y., Callan, J., Neubig, G. Active Retrieval Augmented Generation. EMNLP 2023.
+
+\[25\] Horvitz, E. Principles of Mixed-Initiative User Interfaces. CHI 1999.
+
+\[26\] Karpukhin, V., Oguz, B., Min, S., Lewis, P., Wu, L., Edunov, S., Chen, D., Yih, W. Dense Passage Retrieval for Open-Domain Question Answering. EMNLP 2020.
+
+\[27\] Robertson, S., Zaragoza, H. The Probabilistic Relevance Framework: BM25 and Beyond. Foundations and Trends in Information Retrieval 3(4):333–389, 2009.
+
+\[28\] Cormack, G. V., Clarke, C. L. A., Büttcher, S. Reciprocal Rank Fusion Outperforms Condorcet and Individual Rank Learning Methods. SIGIR 2009.
+
+\[29\] Maharana, A., Lee, D.-H., Tulyakov, S., Bansal, M., Barbieri, F., Fang, Y. Evaluating Very Long-Term Conversational Memory of LLM Agents. ACL 2024.
+
+\[30\] Wu, D., Wang, H., Yu, W., Zhang, Y., Chang, K.-W., Yu, D. LongMemEval: Benchmarking Chat Assistants on Long-Term Interactive Memory. ICLR 2025.
+
+\[31\] Hu, Y., Wang, Y., McAuley, J. Evaluating Memory in LLM Agents via Incremental Multi-Turn Interactions. arXiv:2507.05257, 2025.
+
+\[32\] Zep. Is Mem0 Really SOTA in Agent Memory? 2025. [https://www.getzep.com/blog/lies-damn-lies-statistics-is-mem0-really-sota-in-agent-memory/](https://www.getzep.com/blog/lies-damn-lies-statistics-is-mem0-really-sota-in-agent-memory/)
+
+\[33\] Yadav, D. Revisiting Zep's 84% LoCoMo Claim: Corrected Evaluation & 58.44% Accuracy. GitHub issue getzep/zep-papers#5, 2025.
+
+\[34\] Field, C. A., Welsh, A. H. Bootstrapping Clustered Data. Journal of the Royal Statistical Society Series B 69(3):369–390, 2007.
+
+\[35\] Landis, J. R., Koch, G. G. The Measurement of Observer Agreement for Categorical Data. Biometrics 33(1):159–174, 1977.
 
 </section>
