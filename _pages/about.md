@@ -21,7 +21,6 @@ My name is <span class="accent-text">Jinxiang Xie</span> (pronounced "JIN-shee-a
 
 <div class="quote-accent">
 My research explores how <strong class="ink">large language models</strong> can address complex problems, with a focus on harness engineering, agentic reinforcement learning, and collective intelligence.
-<div class="focus-tags"><span><i data-icon="harness"></i>Harness engineering</span><span><i data-icon="loop"></i>Agentic RL</span><span><i data-icon="agents"></i>Collective intelligence</span></div>
 </div>
 
 Feel free to reach out if you'd like to discuss research or explore potential collaboration!
@@ -64,8 +63,7 @@ Feel free to reach out if you'd like to discuss research or explore potential co
 <div class="pub-list">
   <div class="pub-item">
     <div class="pub-venue-badge is-preprint">arXiv 2026</div>
-    <i class="pub-mark" data-icon="retro" aria-hidden="true"></i>
-    <h3><a href="/retrace/">ReTRACE: Feedback-Guided LLM Agent in a Chemistry Harness for Retrosynthesis Planning</a></h3>
+    <h3><i class="pub-mark" data-icon="retro" aria-hidden="true"></i><a href="/retrace/">ReTRACE: Feedback-Guided LLM Agent in a Chemistry Harness for Retrosynthesis Planning</a></h3>
     <div class="pub-authors"><strong>Jinxiang Xie</strong>, Yijian Zhang, Qingyuan Yi, Jianyi Wang, Hao Dong</div>
     <div class="pub-links">
       <a href="/retrace/"><i class="fas fa-home"></i> Project</a>
@@ -75,8 +73,7 @@ Feel free to reach out if you'd like to discuss research or explore potential co
   </div>
   <div class="pub-item">
     <div class="pub-venue-badge is-preprint">arXiv 2026</div>
-    <i class="pub-mark" data-icon="atoms" aria-hidden="true"></i>
-    <h3><a href="/tada/">Semantic Atoms for Scalable Text Analysis in Data Analytics in the Era of LLM-Based Agents</a></h3>
+    <h3><i class="pub-mark" data-icon="atoms" aria-hidden="true"></i><a href="/tada/">Semantic Atoms for Scalable Text Analysis in Data Analytics in the Era of LLM-Based Agents</a></h3>
     <div class="pub-authors"><strong>Jinxiang Xie</strong>, Zihao Li, Rui Ding, Bartuer Zhou, Shi Han, Dongmei Zhang</div>
     <div class="pub-links">
       <a href="/tada/"><i class="fas fa-home"></i> Project</a>
@@ -86,8 +83,7 @@ Feel free to reach out if you'd like to discuss research or explore potential co
   </div>
   <div class="pub-item">
     <div class="pub-venue-badge is-venue">ACL 2026 Findings</div>
-    <i class="pub-mark" data-icon="trace" aria-hidden="true"></i>
-    <h3><a href="/cast/">CAST: Achieving Stable LLM-based Text Analysis for Data Analytics</a></h3>
+    <h3><i class="pub-mark" data-icon="trace" aria-hidden="true"></i><a href="/cast/">CAST: Achieving Stable LLM-based Text Analysis for Data Analytics</a></h3>
     <div class="pub-authors"><strong>Jinxiang Xie</strong>, Zihao Li, Wei He, Rui Ding, Shi Han, Dongmei Zhang</div>
     <div class="pub-links">
       <a href="/cast/"><i class="fas fa-home"></i> Project</a>
@@ -97,8 +93,7 @@ Feel free to reach out if you'd like to discuss research or explore potential co
   </div>
   <div class="pub-item">
     <div class="pub-venue-badge is-venue">AAAI 2025</div>
-    <i class="pub-mark" data-icon="judge" aria-hidden="true"></i>
-    <h3><a href="/dsgram/">DSGram: Dynamic Weighting Sub-Metrics for Grammatical Error Correction in the Era of Large Language Models</a></h3>
+    <h3><i class="pub-mark" data-icon="judge" aria-hidden="true"></i><a href="/dsgram/">DSGram: Dynamic Weighting Sub-Metrics for Grammatical Error Correction in the Era of Large Language Models</a></h3>
     <div class="pub-authors"><strong>Jinxiang Xie</strong>, Yilin Li, Xunjian Yin, Xiaojun Wan</div>
     <div class="pub-links">
       <a href="/dsgram/"><i class="fas fa-home"></i> Project</a>
@@ -112,13 +107,13 @@ Feel free to reach out if you'd like to discuss research or explore potential co
 
 # <i class="fas fa-graduation-cap"></i> Education
 <div class="tl">
-  <div class="tl-row"><span class="tl-date">2025.09 — Present</span><span class="tl-body"><b>Kuang Yaming Honors School, Nanjing University</b><span>Master of Science</span></span></div>
+  <div class="tl-row"><span class="tl-date">2025.09 — Present</span><span class="tl-body"><b>Nanjing University</b><span>Master of Science at Kuang Yaming Honors School</span></span></div>
   <div class="tl-row"><span class="tl-date">2021.09 — 2025.06</span><span class="tl-body"><b>Beijing Jiaotong University</b><span>Bachelor of Science in Information and Computing Science</span></span></div>
 </div>
 
 # <i class="fas fa-laptop-code"></i> Internships
 <div class="tl">
-  <div class="tl-row"><span class="tl-date">2026.08 — Present</span><span class="tl-body"><b>Mindverse</b><span>Algorithm Intern, <a href="https://macaron.xin/mindlab" class="link-accent">Mind Lab</a></span></span></div>
+  <div class="tl-row"><span class="tl-date">2026.08 — Present</span><span class="tl-body"><b><a href="https://macaron.xin/mindlab" class="link-accent">Mind Lab</a> (Mindverse)</b><span>Algorithm Intern, Continual Learning Group</span></span></div>
   <div class="tl-row"><span class="tl-date">2024.08 — 2025.08</span><span class="tl-body"><b>Microsoft</b><span>Research Intern, <a href="https://www.microsoft.com/en-us/research/group/data-knowledge-intelligence/" class="link-accent">Data, Knowledge and Intelligence (DKI) Group</a></span></span></div>
   <div class="tl-row"><span class="tl-date">2023.11 — 2024.08</span><span class="tl-body"><b>Peking University</b><span>Research Intern, <a href="https://sai.pku.edu.cn/znxyenglish/" class="link-accent">Wangxuan Institute of Computer Technology</a></span></span></div>
 </div>
@@ -170,11 +165,10 @@ document.addEventListener('DOMContentLoaded', function() {
     <a href="{{ post.url | relative_url }}" class="blog-card-link">
       <div class="blog-card">
         <div class="blog-card-image">
-          <div class="blog-badge">{{ post.date | date: "%b %Y" }}</div>
+          <div class="blog-badge">{{ post.date | date: "%b %Y" }}</div>{% if post.bilingual %}<div class="blog-lang">中 / EN</div>{% endif %}
           {% include blog-card-image.html post=post %}
         </div>
         <div class="blog-card-content">
-          <div class="blog-meta">{% if post.categories.size > 0 %}{{ post.categories | last }}{% endif %}{% if post.bilingual %} · 中 / EN{% endif %}</div>
           <div class="blog-title">{{ post.title }}</div>
           <div class="blog-description">{{ post.description | default: post.excerpt | strip_html | truncatewords: 26 }}</div>
         </div>
