@@ -1,0 +1,131 @@
+/* ==========================================================================
+   Homepage refresh (design/homepage-refresh)
+   Same structure and content; calmer colour roles, a serif voice for
+   headings, research marks on papers, timeline rows, tidier blog cards.
+   Coral now marks a single thing per block. Navy carries structure.
+   ========================================================================== */
+:root {
+  --rf-navy: #012F63;
+  --rf-navy-2: #1A4F8A;
+  --rf-coral: #FE667B;
+  --rf-ink: #1a1a1a;
+  --rf-muted: #5b6472;
+  --rf-line: #e6e8ec;
+  --rf-tint: #f3f5f8;
+  --rf-serif: "Charter", "Iowan Old Style", "Source Serif 4", Georgia, serif;
+}
+
+/* ---------- sidebar: name in serif, calmer icon column ---------- */
+.author__name { font-family: var(--rf-serif); font-weight: 600; letter-spacing: -.01em; }
+@media (min-width: 1024px) {
+  .author__urls li { margin-bottom: 2px; }
+  .author__urls a { display: flex; align-items: center; gap: 10px; padding: 4px 0; }
+  .author__urls a i, .author__urls a svg { width: 18px; text-align: center; color: #8a94a3 !important; }
+  .author__urls a:hover i { color: var(--rf-navy) !important; }
+}
+
+/* ---------- section headings: serif, short coral tick instead of a full pink rule ---------- */
+.page__content h1 {
+  font-family: var(--rf-serif);
+  font-weight: 600;
+  letter-spacing: -.012em;
+  border-bottom: 1px solid var(--rf-line) !important;
+  position: relative;
+}
+.page__content h1::after {
+  content: ""; position: absolute; left: 0; bottom: -1px; width: 36px; height: 2px; background: var(--rf-coral);
+}
+.page__content h1 .fas, .page__content h1 .fab { font-size: .78em; margin-right: .15em; color: var(--rf-navy); }
+
+/* ---------- intro: name stays the one coral word; statement in serif ---------- */
+.quote-accent {
+  font-family: var(--rf-serif);
+  font-size: 1.12em;
+  line-height: 1.55;
+  box-shadow: none !important;
+  background: var(--rf-tint) !important;
+  border-left-width: 3px !important;
+}
+.quote-accent { padding-left: 2.4rem !important; }
+.quote-accent .ink { color: var(--rf-navy); font-weight: 700; }
+.focus-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; font-family: Inter, -apple-system, sans-serif; }
+.focus-tags span {
+  display: inline-flex; align-items: center; gap: 8px; font-size: .74em; font-weight: 600; letter-spacing: .01em;
+  color: var(--rf-navy); background: #fff; border: 1px solid #d9dee6; border-radius: 999px; padding: 5px 12px 5px 6px;
+}
+.focus-tags i { display: inline-block; width: 20px; height: 20px; }
+.focus-tags i svg { width: 100%; height: 100%; display: block; }
+
+/* ---------- highlight cards: solid headings, numbers carry the emphasis ---------- */
+.highlight-block::before { background: var(--rf-navy) !important; height: 3px !important; }
+.highlight-block h3 {
+  background: none !important; -webkit-text-fill-color: currentColor !important; color: var(--rf-navy) !important;
+  font-family: var(--rf-serif); font-weight: 600 !important; font-size: 1.28em !important;
+}
+.highlight-block h3 i { font-size: .8em; margin-right: .2em; }
+.highlight-block b.stat { color: var(--rf-coral) !important; font-weight: 700; font-variant-numeric: tabular-nums; }
+.highlight-block ul li { color: #2b3440 !important; }
+.highlight-block ul li::before { color: #9aa6b5 !important; }
+
+/* ---------- research marks (assets/js/brand-marks.js) ---------- */
+.ic { display: block; overflow: visible; }
+.ic .f1 { fill: #012F63; } .ic .f2 { fill: #2E4A3B; } .ic .f3 { fill: #A7B39A; } .ic .fa { fill: #FE667B; } .ic .fb { fill: #fff; }
+.ic .s1 { fill: none; stroke: #012F63; stroke-linecap: square; } .ic .s2 { fill: none; stroke: #2E4A3B; stroke-linecap: square; } .ic .s3 { fill: none; stroke: #A7B39A; }
+.focus-tags .ic .fa { fill: #A7B39A; }
+
+/* ---------- publications: mark column, venue status, quieter link buttons ---------- */
+.pub-list .pub-item:has(.pub-mark) {
+  display: grid; grid-template-columns: 56px 1fr; column-gap: 18px; align-items: start;
+}
+.pub-item:has(.pub-mark) > * { grid-column: 2; }
+.pub-item:has(.pub-mark) > .pub-venue-badge { justify-self: start; }
+.pub-item .pub-mark { grid-column: 1; grid-row: 1 / span 4; width: 56px; height: 56px; display: block; margin-top: 2px; }
+.pub-item .pub-mark svg { width: 100%; height: 100%; display: block; }
+.pub-item { box-shadow: none !important; border-color: var(--rf-line) !important; }
+.pub-item:hover { box-shadow: 0 6px 20px rgba(1,47,99,.08) !important; border-color: #d5dbe4 !important; }
+.pub-item h3 { font-size: 1.04rem !important; }
+.pub-venue-badge { font-size: .72rem !important; }
+.pub-venue-badge.is-venue   { background: var(--rf-navy); color: #fff; }
+.pub-venue-badge.is-preprint { background: #fff; color: var(--rf-navy); box-shadow: inset 0 0 0 1.5px var(--rf-navy); }
+/* links keep the site's pink pill identity, one size smaller and flatter */
+.pub-links a { box-shadow: none !important; font-size: .78rem !important; padding: .24rem .66rem !important; }
+.pub-links a:hover { transform: none !important; background: #e5475d !important; }
+
+/* open-source cards share the publication card skin */
+a.pub-item-link .pub-venue-badge { background: #e9eef5; color: var(--rf-navy); box-shadow: none; }
+
+/* ---------- education / internships: timeline rows ---------- */
+.tl { border-top: 1px solid var(--rf-line); margin: .4rem 0 1.2rem; }
+.tl-row { display: grid; grid-template-columns: 168px 1fr; gap: 20px; padding: .72rem 0; border-bottom: 1px solid var(--rf-line); align-items: baseline; }
+.tl-date { font-size: .82em; color: var(--rf-muted); font-variant-numeric: tabular-nums; letter-spacing: .01em; white-space: nowrap; }
+.tl-body b { display: block; color: var(--rf-ink); font-weight: 600; }
+.tl-body > span { display: block; font-size: .9em; color: var(--rf-muted); margin-top: 2px; }
+.tl-body a { color: var(--rf-navy) !important; }
+
+/* ---------- blog cards: shorter date chip, category line, full titles ---------- */
+.blog-badge {
+  background: rgba(255,255,255,.94) !important; color: var(--rf-navy) !important;
+  box-shadow: 0 0 0 1px rgba(1,47,99,.18), 0 2px 6px rgba(0,0,0,.14) !important; font-weight: 700 !important; letter-spacing: .02em;
+}
+.blog-card { box-shadow: none !important; border: 1px solid var(--rf-line) !important; height: 100%; display: flex; flex-direction: column; }
+.blog-card-link { height: 100%; }
+.blog-card-link:hover .blog-card { box-shadow: 0 8px 24px rgba(1,47,99,.10) !important; }
+.blog-meta { font-size: .7rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: #C9405A; margin-bottom: .35rem; }
+.blog-title { -webkit-line-clamp: 3 !important; line-clamp: 3; font-family: var(--rf-serif); font-weight: 600 !important; letter-spacing: -.005em; }
+.blog-description { -webkit-line-clamp: 3 !important; line-clamp: 3; }
+
+/* ---------- footer aligned to the content column ---------- */
+.site-footer { border-top: 1px solid var(--rf-line); margin-top: 3rem; }
+.site-footer a { color: var(--rf-muted); }
+.site-footer a:hover { color: var(--rf-navy); }
+
+/* ---------- mobile ---------- */
+@media (max-width: 768px) {
+  .pub-list .pub-item:has(.pub-mark) { grid-template-columns: 40px 1fr; column-gap: 12px; }
+  .pub-item .pub-mark { width: 40px; height: 40px; }
+  .tl-row { grid-template-columns: 1fr; gap: 2px; }
+  .focus-tags span { font-size: .72em; }
+}
+
+.highlight-block b.ink, .highlight-block .ink { color: var(--rf-navy) !important; font-weight: 600; }
+.site-footer a { font-weight: 600; }

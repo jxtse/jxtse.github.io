@@ -20,7 +20,8 @@ redirect_from:
 My name is <span class="accent-text">Jinxiang Xie</span> (pronounced "JIN-shee-ahng SHEE-eh"). I am an M.Sc. student at <i class="fas fa-university"></i> <a href="https://www.nju.edu.cn/en/" class="link-accent">Nanjing University</a>, supervised by Prof. <a href="https://donghaolab.com/" class="link-accent">Hao Dong</a>. Previously, I was a research intern at <i class="fab fa-microsoft"></i> <a href="https://www.microsoft.com/en-us/research/" class="link-accent">Microsoft</a>, supervised by Principal Researcher <a href="https://www.microsoft.com/en-us/research/people/juding/" class="link-accent">Justin Ding</a>, and at <i class="fas fa-university"></i> <a href="https://english.pku.edu.cn/" class="link-accent">Peking University</a>, supervised by Prof. <a href="https://wanxiaojun.github.io/" class="link-accent">Xiaojun Wan</a>.
 
 <div class="quote-accent">
-My research explores how <span class="primary-gradient-text">large language models</span> can address complex problems, with a focus on harness engineering, agentic reinforcement learning, and collective intelligence.
+My research explores how <strong class="ink">large language models</strong> can address complex problems, with a focus on harness engineering, agentic reinforcement learning, and collective intelligence.
+<div class="focus-tags"><span><i data-icon="harness"></i>Harness engineering</span><span><i data-icon="loop"></i>Agentic RL</span><span><i data-icon="agents"></i>Collective intelligence</span></div>
 </div>
 
 Feel free to reach out if you'd like to discuss research or explore potential collaboration!
@@ -29,27 +30,27 @@ Feel free to reach out if you'd like to discuss research or explore potential co
   <div class="highlight-block floating-card">
     <h3><i class="fas fa-microscope"></i> AI Researcher</h3>
     <ul>
-      <li>Research focus on <span class="accent-text">LLMs and NLP</span></li>
-      <li>Internships at <span class="primary-gradient-text">top institutions</span></li>
-      <li>Publications at <span class="accent-text">AAAI</span>, <span class="accent-text">ACL</span></li>
+      <li>Research focus on <b class="ink">LLMs and NLP</b></li>
+      <li>Internships at <b class="ink">top institutions</b></li>
+      <li>Publications at <b class="ink">AAAI</b> and <b class="ink">ACL</b></li>
     </ul>
   </div>
   
   <div class="highlight-block floating-card">
     <h3><i class="fas fa-pen-fancy"></i> Writer &amp; Builder</h3>
     <ul>
-      <li>Technical blogs with <span class="accent-text">500K+ views</span></li>
+      <li>Technical blogs with <b class="stat">500K+</b> views</li>
       <li>Active on <a href="https://www.xiaohongshu.com/user/profile/60c47bae000000000100b07e" class="link-accent">Xiaohongshu</a></li>
-      <li><a href="https://mp.weixin.qq.com/s/5wn3NvB2FBpJD1jK0L4qbQ" class="link-accent">Articles</a> about <span class="primary-gradient-text">Tech & Humanities</span></li>
+      <li><a href="https://mp.weixin.qq.com/s/5wn3NvB2FBpJD1jK0L4qbQ" class="link-accent">Articles</a> about <b class="ink">Tech & Humanities</b></li>
     </ul>
   </div>
   
   <div class="highlight-block floating-card">
     <h3><i class="fas fa-globe-asia"></i> Life Explorer</h3>
     <ul>
-      <li>Visited <span class="accent-text">9 countries</span> worldwide</li>
-      <li>Traveled to <span class="accent-text">32 provinces</span> in China</li>
-      <li>Rich experience in <span class="primary-gradient-text">social work</span></li>
+      <li>Visited <b class="stat">9</b> countries worldwide</li>
+      <li>Traveled to <b class="stat">32</b> provinces in China</li>
+      <li>Rich experience in <b class="ink">social work</b></li>
     </ul>
   </div>
 </div>
@@ -62,42 +63,46 @@ Feel free to reach out if you'd like to discuss research or explore potential co
 
 <div class="pub-list">
   <div class="pub-item">
-    <div class="pub-venue-badge">arXiv 2026</div>
+    <div class="pub-venue-badge is-preprint">arXiv 2026</div>
+    <i class="pub-mark" data-icon="retro" aria-hidden="true"></i>
     <h3><a href="/retrace/">ReTRACE: Feedback-Guided LLM Agent in a Chemistry Harness for Retrosynthesis Planning</a></h3>
     <div class="pub-authors"><strong>Jinxiang Xie</strong>, Yijian Zhang, Qingyuan Yi, Jianyi Wang, Hao Dong</div>
     <div class="pub-links">
       <a href="/retrace/"><i class="fas fa-home"></i> Project</a>
-      <a href="https://arxiv.org/abs/2610.24744"><i class="fas fa-file-alt"></i> ArXiv</a>
+      <a href="https://arxiv.org/abs/2610.24744"><i class="fas fa-file-alt"></i> arXiv</a>
       <a href="/retrace/#assistant-title"><i class="fas fa-flask"></i> Assistant</a>
     </div>
   </div>
   <div class="pub-item">
-    <div class="pub-venue-badge">arXiv 2026</div>
+    <div class="pub-venue-badge is-preprint">arXiv 2026</div>
+    <i class="pub-mark" data-icon="atoms" aria-hidden="true"></i>
     <h3><a href="/tada/">Semantic Atoms for Scalable Text Analysis in Data Analytics in the Era of LLM-Based Agents</a></h3>
     <div class="pub-authors"><strong>Jinxiang Xie</strong>, Zihao Li, Rui Ding, Bartuer Zhou, Shi Han, Dongmei Zhang</div>
     <div class="pub-links">
       <a href="/tada/"><i class="fas fa-home"></i> Project</a>
-      <a href="https://arxiv.org/abs/2610.34860"><i class="fas fa-file-alt"></i> ArXiv</a>
+      <a href="https://arxiv.org/abs/2610.34860"><i class="fas fa-file-alt"></i> arXiv</a>
       <a href="https://github.com/jxtse/TADA-Agent"><i class="fab fa-github"></i> Code</a>
     </div>
   </div>
   <div class="pub-item">
-    <div class="pub-venue-badge">ACL 2026 Findings</div>
+    <div class="pub-venue-badge is-venue">ACL 2026 Findings</div>
+    <i class="pub-mark" data-icon="trace" aria-hidden="true"></i>
     <h3><a href="/cast/">CAST: Achieving Stable LLM-based Text Analysis for Data Analytics</a></h3>
     <div class="pub-authors"><strong>Jinxiang Xie</strong>, Zihao Li, Wei He, Rui Ding, Shi Han, Dongmei Zhang</div>
     <div class="pub-links">
       <a href="/cast/"><i class="fas fa-home"></i> Project</a>
-      <a href="https://arxiv.org/abs/2602.15861"><i class="fas fa-file-alt"></i> ArXiv</a>
+      <a href="https://arxiv.org/abs/2602.15861"><i class="fas fa-file-alt"></i> arXiv</a>
       <a href="https://github.com/jxtse/CAST-text-analysis"><i class="fab fa-github"></i> Code</a>
     </div>
   </div>
   <div class="pub-item">
-    <div class="pub-venue-badge">AAAI 2025</div>
+    <div class="pub-venue-badge is-venue">AAAI 2025</div>
+    <i class="pub-mark" data-icon="judge" aria-hidden="true"></i>
     <h3><a href="/dsgram/">DSGram: Dynamic Weighting Sub-Metrics for Grammatical Error Correction in the Era of Large Language Models</a></h3>
     <div class="pub-authors"><strong>Jinxiang Xie</strong>, Yilin Li, Xunjian Yin, Xiaojun Wan</div>
     <div class="pub-links">
       <a href="/dsgram/"><i class="fas fa-home"></i> Project</a>
-      <a href="https://arxiv.org/abs/2412.12832"><i class="fas fa-file-alt"></i> ArXiv</a>
+      <a href="https://arxiv.org/abs/2412.12832"><i class="fas fa-file-alt"></i> arXiv</a>
       <a href="https://github.com/jxtse/GEC-Metrics-DSGram"><i class="fab fa-github"></i> Code</a>
     </div>
   </div>
@@ -106,13 +111,17 @@ Feel free to reach out if you'd like to discuss research or explore potential co
 <!--- Qiyang Chen, Yuezhi Wang, **Jinxiang Xie**, Guozheng Li, Chi Harold Liu. $M^3$ Trader: Multimodal Macro–Micro Inference with LLM-Guided Reinforcement Learning for Quantitative Trading. **Under Review**.-->
 
 # <i class="fas fa-graduation-cap"></i> Education
-- 2025.09 - Present: &nbsp;Master of Science at <span class="primary-gradient-text">Kuang Yaming Honors School, Nanjing University</span>.
-- 2021.09 - 2025.06: &nbsp;Bachelor of Science in Information and Computing Science, <span class="primary-gradient-text">Beijing Jiaotong University</span>.
+<div class="tl">
+  <div class="tl-row"><span class="tl-date">2025.09 — Present</span><span class="tl-body"><b>Kuang Yaming Honors School, Nanjing University</b><span>Master of Science</span></span></div>
+  <div class="tl-row"><span class="tl-date">2021.09 — 2025.06</span><span class="tl-body"><b>Beijing Jiaotong University</b><span>Bachelor of Science in Information and Computing Science</span></span></div>
+</div>
 
 # <i class="fas fa-laptop-code"></i> Internships
-- 2026.08 - Present: &nbsp;Algorithm Intern, <a href="https://macaron.xin/mindlab" class="link-accent">Mind Lab</a>, **Mindverse**.
-- 2024.08 - 2025.08: &nbsp;Research Intern, <a href="https://www.microsoft.com/en-us/research/group/data-knowledge-intelligence/" class="link-accent">Data, Knowledge and Intelligence (DKI) Group</a>, **Microsoft**.
-- 2023.11 - 2024.08: &nbsp;Research Intern, <a href="https://sai.pku.edu.cn/znxyenglish/" class="link-accent">Wangxuan Institute of Computer Technology</a>, **Peking University**.
+<div class="tl">
+  <div class="tl-row"><span class="tl-date">2026.08 — Present</span><span class="tl-body"><b>Mindverse</b><span>Algorithm Intern, <a href="https://macaron.xin/mindlab" class="link-accent">Mind Lab</a></span></span></div>
+  <div class="tl-row"><span class="tl-date">2024.08 — 2025.08</span><span class="tl-body"><b>Microsoft</b><span>Research Intern, <a href="https://www.microsoft.com/en-us/research/group/data-knowledge-intelligence/" class="link-accent">Data, Knowledge and Intelligence (DKI) Group</a></span></span></div>
+  <div class="tl-row"><span class="tl-date">2023.11 — 2024.08</span><span class="tl-body"><b>Peking University</b><span>Research Intern, <a href="https://sai.pku.edu.cn/znxyenglish/" class="link-accent">Wangxuan Institute of Computer Technology</a></span></span></div>
+</div>
 <!-- - 2023.05 - 2023.07: &nbsp;Summer Workshop Student, <a href="https://www.comp.nus.edu.sg/" class="link-accent">School of Computer</a>, **National University of Singapore**. -->
 
 # <i class="fas fa-code-branch"></i> Open Source
@@ -161,12 +170,13 @@ document.addEventListener('DOMContentLoaded', function() {
     <a href="{{ post.url | relative_url }}" class="blog-card-link">
       <div class="blog-card">
         <div class="blog-card-image">
-          <div class="blog-badge">{{ post.date | date: "%B, %Y" }}</div>
+          <div class="blog-badge">{{ post.date | date: "%b %Y" }}</div>
           {% include blog-card-image.html post=post %}
         </div>
         <div class="blog-card-content">
+          <div class="blog-meta">{% if post.categories.size > 0 %}{{ post.categories | last }}{% endif %}{% if post.bilingual %} · 中 / EN{% endif %}</div>
           <div class="blog-title">{{ post.title }}</div>
-          <div class="blog-description">{{ post.description | default: post.excerpt | strip_html | truncate: 120 }}</div>
+          <div class="blog-description">{{ post.description | default: post.excerpt | strip_html | truncatewords: 26 }}</div>
         </div>
       </div>
     </a>
@@ -297,3 +307,5 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>-->
 
 <!--</div>-->
+
+<script src="{{ '/assets/js/brand-marks.js' | relative_url }}" defer></script>
