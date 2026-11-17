@@ -25,31 +25,29 @@ My research explores how <strong class="ink">large language models</strong> can 
 
 Feel free to reach out if you'd like to discuss research or explore potential collaboration!
 
-<div class="highlight-blocks">
+<div class="highlight-blocks research-directions">
   <div class="highlight-block floating-card">
-    <h3><i class="fas fa-microscope"></i> AI Researcher</h3>
+    <h3>Harness-Model Co-Design</h3>
     <ul>
-      <li>Research focus on <b class="ink">LLMs and NLP</b></li>
-      <li>Internships at <b class="ink">top institutions</b></li>
-      <li>Publications at <b class="ink">AAAI</b> and <b class="ink">ACL</b></li>
+      <li><a href="/retrace/" class="link-accent">ReTRACE-27B-latest</a>: exploring model adaptation within a feedback-guided chemistry harness for retrosynthesis planning.</li>
+      <li><a href="https://huggingface.co/jxtse/ClinAge-4B" class="link-accent">ClinAge-4B</a> / <a href="https://huggingface.co/jxtse/ClinAge-9B" class="link-accent">ClinAge-9B</a>: distilled cohort-specific biological-age teachers, developed with a multi-agent harness, into models evaluated on held-out population data.</li>
     </ul>
   </div>
-  
+
   <div class="highlight-block floating-card">
-    <h3><i class="fas fa-pen-fancy"></i> Writer &amp; Builder</h3>
+    <h3>Long-Horizon Continual Learning</h3>
     <ul>
-      <li>Technical blogs with <b class="stat">500K+</b> views</li>
-      <li>Active on <a href="https://www.xiaohongshu.com/user/profile/60c47bae000000000100b07e" class="link-accent">Xiaohongshu</a></li>
-      <li><a href="https://mp.weixin.qq.com/s/5wn3NvB2FBpJD1jK0L4qbQ" class="link-accent">Articles</a> about <b class="ink">Tech & Humanities</b></li>
+      <li><a href="https://github.com/jxtse/tada/tree/main/benchmark" class="link-accent">TADA-Bench</a> and <a href="https://github.com/jxtse/tada/tree/main/agent" class="link-accent">TADA-Agent</a>: long-horizon text-analysis tasks and an agent that reuses semantic results as persistent tabular state.</li>
+      <li><a href="/cast/" class="link-accent">CAST</a> and <a href="/dsgram/" class="link-accent">DSGram</a>: evaluation methods for output stability and human-aligned text quality, providing foundations for measuring progress.</li>
     </ul>
   </div>
-  
+
   <div class="highlight-block floating-card">
-    <h3><i class="fas fa-globe-asia"></i> Life Explorer</h3>
+    <h3>Data-Driven RSI</h3>
     <ul>
-      <li>Visited <b class="stat">9</b> countries worldwide</li>
-      <li>Traveled to <b class="stat">32</b> provinces in China</li>
-      <li>Rich experience in <b class="ink">social work</b></li>
+      <li>At <b class="ink">Mind Lab</b>, I study recursive self-improvement (RSI) through failure-driven data generation.</li>
+      <li><b class="ink">Traj2data</b> recovers failed trajectories through self-sampling or teacher hints; <b class="ink">Traj2env</b> turns relevant papers and code into executable scientific tasks.</li>
+      <li>These pipelines support ongoing work on continual post-training for scientific problem-solving.</li>
     </ul>
   </div>
 </div>

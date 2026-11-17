@@ -59,6 +59,12 @@
 .highlight-block .ink, .highlight-block a { color: var(--rf-navy) !important; font-weight: 600; }
 .highlight-block a:hover { color: var(--rf-coral) !important; }
 .highlight-block b.stat { color: var(--rf-coral) !important; font-weight: 700; font-variant-numeric: tabular-nums; }
+.research-directions .highlight-block { min-width: 0; }
+.research-directions h3 { line-height: 1.25; min-height: 2.5em; }
+.research-directions a { overflow-wrap: anywhere; }
+@media (max-width: 768px) {
+  .research-directions h3 { min-height: 0; }
+}
 
 /* ---------- 4. publications: small mark before the title ---------- */
 .pub-item { box-shadow: none !important; border-color: var(--rf-line) !important; }

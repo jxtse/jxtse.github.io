@@ -101,6 +101,26 @@ class SiteQuality(unittest.TestCase):
             self.assertIn(logo.get('width'), ['20', '24'])
             self.assertEqual(logo.get('width'), logo.get('height'))
 
+    def test_research_directions(self):
+        html = (SITE / 'index.html').read_text()
+        headings = re.findall(r'<h3[^>]*>(.*?)</h3>', html, re.S)
+        for title in ['Harness-Model Co-Design',
+                      'Long-Horizon Continual Learning', 'Data-Driven RSI']:
+            self.assertIn(title, headings)
+        for old_title in ['AI Researcher', 'Writer &amp; Builder', 'Life Explorer']:
+            self.assertNotIn(old_title, html)
+        for name in ['ReTRACE-27B-latest', 'ClinAge-4B', 'ClinAge-9B',
+                     'TADA-Bench', 'TADA-Agent', 'CAST', 'DSGram',
+                     'Traj2data', 'Traj2env']:
+            self.assertIn(name, html)
+        links = {a.get('href') for a in Document(SITE / 'index.html').elements('a')}
+        for href in ['/retrace/', '/cast/', '/dsgram/',
+                     'https://huggingface.co/jxtse/ClinAge-4B',
+                     'https://huggingface.co/jxtse/ClinAge-9B',
+                     'https://github.com/jxtse/tada/tree/main/benchmark',
+                     'https://github.com/jxtse/tada/tree/main/agent']:
+            self.assertIn(href, links)
+
     def test_icons_and_manifest(self):
         doc = Document(SITE / 'index.html')
         for a in doc.elements('link'):
