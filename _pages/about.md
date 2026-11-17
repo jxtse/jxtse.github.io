@@ -28,7 +28,8 @@ My research explores how <strong class="ink">large language models</strong> can 
     <h3>Harness-Model Co-Design</h3>
     <p class="rd-lead">The harness produces trajectories and verdicts, and the model is trained to work inside that harness.</p>
     <ul>
-      <li><a href="/retrace/" class="link-accent">ReTRACE</a> plans retrosynthesis routes with harness feedback. <b class="ink rd-name">Retrace-27B-latest</b> is post-trained on its trajectories and audit verdicts, then deployed back into the harness, self-improving continually.</li>
+      <li><a href="/retrace/" class="link-accent">ReTRACE</a> plans retrosynthesis routes with harness feedback.</li>
+      <li><b class="ink rd-name">Retrace-27B-latest</b> is post-trained on these trajectories and audit verdicts, then deployed back into the harness to improve continually.</li>
       <li>A multi-agent harness built biological-age models for five cohorts. These models are distilled into unified cross-cohort <a href="https://huggingface.co/jxtse/ClinAge-4B" class="link-accent rd-name">ClinAge-4B</a> and <a href="https://huggingface.co/jxtse/ClinAge-9B" class="link-accent rd-name">ClinAge-9B</a>.</li>
     </ul>
   </div>
@@ -37,8 +38,10 @@ My research explores how <strong class="ink">large language models</strong> can 
     <h3>Long-Horizon Evaluation</h3>
     <p class="rd-lead">An agent should keep and reuse what it has already worked out, with progress that can be measured reliably.</p>
     <ul>
-      <li><a href="https://github.com/jxtse/tada/tree/main/agent" class="link-accent rd-name">TADA-Agent</a> stores semantic state and uses semantic operators in a unified namespace. <a href="https://github.com/jxtse/tada/tree/main/benchmark" class="link-accent rd-name">TADA-Bench</a> tests professional text analysis that spans many steps.</li>
-      <li><a href="/cast/" class="link-accent">CAST</a> measures and improves the stability of repeated LLM analysis. <a href="/dsgram/" class="link-accent">DSGram</a> evaluates text quality in agreement with human judgement.</li>
+      <li><a href="https://github.com/jxtse/tada/tree/main/agent" class="link-accent rd-name">TADA-Agent</a> stores semantic state and uses semantic operators in a unified namespace.</li>
+      <li><a href="https://github.com/jxtse/tada/tree/main/benchmark" class="link-accent rd-name">TADA-Bench</a> tests professional text analysis that spans many steps.</li>
+      <li><a href="/cast/" class="link-accent">CAST</a> measures and improves the stability of repeated LLM analysis.</li>
+      <li><a href="/dsgram/" class="link-accent">DSGram</a> evaluates text quality in agreement with human judgement.</li>
     </ul>
   </div>
 
