@@ -49,8 +49,8 @@ My research explores how <strong class="ink">large language models</strong> can 
     <h3>Data-Driven RSI</h3>
     <p class="rd-lead">A model's own failures generate training data, so each round of post-training targets what it still cannot do.</p>
     <ul>
-      <li><b class="ink">Traj2data</b> locates the failing step in a trajectory and resumes from it through self-sampling or teacher hints.</li>
-      <li><b class="ink">Traj2env</b> retrieves papers and code related to each error type and turns them into executable scientific tasks.</li>
+      <li><a href="https://github.com/jxtse/agent-snapshot-resume" class="link-accent">Traj2data</a> locates the failing step in a trajectory and resumes from it through self-sampling or teacher hints.</li>
+      <li><a href="https://github.com/jxtse/tbs-taskgen" class="link-accent">Traj2env</a> retrieves papers and code related to each error type and turns them into executable scientific tasks.</li>
       <li>I am developing both pipelines to feed ongoing continual post-training of DeepSeek V4.1 Flash.</li>
     </ul>
   </div>

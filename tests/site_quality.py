@@ -131,7 +131,9 @@ class SiteQuality(unittest.TestCase):
                      'https://huggingface.co/jxtse/ClinAge-4B',
                      'https://huggingface.co/jxtse/ClinAge-9B',
                      'https://github.com/jxtse/tada/tree/main/benchmark',
-                     'https://github.com/jxtse/tada/tree/main/agent']:
+                     'https://github.com/jxtse/tada/tree/main/agent',
+                     'https://github.com/jxtse/agent-snapshot-resume',
+                     'https://github.com/jxtse/tbs-taskgen']:
             self.assertIn(href, links)
 
     def test_icons_and_manifest(self):
