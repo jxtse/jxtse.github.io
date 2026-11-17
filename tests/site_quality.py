@@ -88,6 +88,18 @@ class SiteQuality(unittest.TestCase):
                 self.assertIn(unquote(href[2:]), ids)
         self.assertTrue(any(a.get('href') == '/#-education' for a in doc.elements('a')))
 
+    def test_xiaohongshu_icon_frame(self):
+        import xml.etree.ElementTree as ET
+        svg = ET.parse(ROOT / '_includes/icons/xiaohongshu.svg').getroot()
+        ns = {'svg': 'http://www.w3.org/2000/svg'}
+        frame = svg.find('svg:rect', ns)
+        if frame is None:
+            self.fail('Xiaohongshu icon must include a square frame')
+        self.assertEqual(frame.get('fill'), 'none')
+        self.assertEqual(frame.get('stroke'), 'currentColor')
+        self.assertEqual(frame.get('width'), frame.get('height'))
+        self.assertIsNotNone(svg.find('svg:g/svg:path', ns))
+
     def test_institution_logos(self):
         doc = Document(SITE / 'index.html')
         logos = [a for a in doc.elements('img')
