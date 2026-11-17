@@ -20,7 +20,7 @@ redirect_from:
 My name is <span class="accent-text">Jinxiang Xie</span> (pronounced "JIN-shee-ahng SHEE-eh"). I am an M.Sc. student at <a href="https://www.nju.edu.cn/en/" class="link-accent institution-link"><img class="institution-logo" src="/images/institutions/nanjing-university.png" alt="" width="20" height="20">Nanjing University</a>, supervised by Prof. <a href="https://donghaolab.com/" class="link-accent">Hao Dong</a>. Previously, I was a research intern at <a href="https://www.microsoft.com/en-us/research/" class="link-accent institution-link"><img class="institution-logo" src="/images/institutions/microsoft.svg" alt="" width="20" height="20">Microsoft</a>, supervised by Principal Researcher <a href="https://www.microsoft.com/en-us/research/people/juding/" class="link-accent">Justin Ding</a>, and at <a href="https://english.pku.edu.cn/" class="link-accent institution-link"><img class="institution-logo" src="/images/institutions/peking-university.png" alt="" width="20" height="20">Peking University</a>, supervised by Prof. <a href="https://wanxiaojun.github.io/" class="link-accent">Xiaojun Wan</a>.
 
 <div class="quote-accent">
-My research explores how <strong class="ink">large language models</strong> can address complex problems, with a focus on harness engineering, agentic reinforcement learning, and collective intelligence.
+My research explores how <strong class="ink">large language models</strong> can address complex problems, with a focus on agentic system and its applications in scientific discovery
 </div>
 
 Feel free to reach out if you'd like to discuss research or explore potential collaboration!
