@@ -123,8 +123,9 @@ class SiteQuality(unittest.TestCase):
             self.assertNotIn(old_title, html)
         for name in ['ReTRACE-27B-latest', 'ClinAge-4B', 'ClinAge-9B',
                      'TADA-Bench', 'TADA-Agent', 'CAST', 'DSGram',
-                     'Traj2data', 'Traj2env']:
+                     'Traj2data', 'Traj2env', 'Mind Lab']:
             self.assertIn(name, html)
+        self.assertEqual(html.count('class="rd-lead"'), 3)
         links = {a.get('href') for a in Document(SITE / 'index.html').elements('a')}
         for href in ['/retrace/', '/cast/', '/dsgram/',
                      'https://huggingface.co/jxtse/ClinAge-4B',

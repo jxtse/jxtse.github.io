@@ -61,6 +61,8 @@
 .highlight-block b.stat { color: var(--rf-coral) !important; font-weight: 700; font-variant-numeric: tabular-nums; }
 .research-directions .highlight-block { min-width: 0; }
 .research-directions h3 { line-height: 1.25; min-height: 2.5em; }
+.research-directions .rd-lead { margin: 0 0 1rem; font-family: var(--rf-serif); font-size: 1.02em; line-height: 1.5; color: var(--rf-ink); }
+.research-directions .rd-name { white-space: nowrap; }
 .research-directions a { overflow-wrap: anywhere; }
 @media (max-width: 768px) {
   .research-directions h3 { min-height: 0; }
