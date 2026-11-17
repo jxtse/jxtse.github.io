@@ -122,14 +122,29 @@ class SiteQuality(unittest.TestCase):
             self.assertIn(href, links)
 
     def test_icons_and_manifest(self):
-        doc = Document(SITE / 'index.html')
-        for a in doc.elements('link'):
-            if a.get('rel') in ['icon', 'apple-touch-icon', 'manifest']:
+        pages = [SITE / 'index.html', SITE / 'blog/index.html', SITE / 'cast/index.html']
+        pages += list((SITE / 'blog').glob('*/index.html'))
+        for page in pages:
+            doc = Document(page)
+            links = [a for a in doc.elements('link')
+                     if a.get('rel') in ['icon', 'apple-touch-icon', 'manifest']]
+            self.assertTrue(any(a.get('href') == '/images/jx-mark.svg' for a in links))
+            for a in links:
                 self.assertTrue((SITE / a['href'].lstrip('/')).is_file(), a['href'])
+        svg = (SITE / 'images/jx-mark.svg').read_text()
+        self.assertNotIn('<image', svg)  # Vector mark, not an embedded portrait.
+        self.assertIn('Jinxiang Xie', svg)
+        for size in [16, 32, 180, 192, 512]:
+            data = (SITE / f'images/jx-icon-{size}.png').read_bytes()
+            self.assertEqual(data[:8], b'\x89PNG\r\n\x1a\n')
+            self.assertEqual(int.from_bytes(data[16:20], 'big'), size)
+            self.assertEqual(int.from_bytes(data[20:24], 'big'), size)
+        self.assertTrue((SITE / 'favicon.ico').is_file())
         manifest_path = SITE / 'images/site.webmanifest'
         manifest = json.loads(manifest_path.read_text())
         self.assertTrue(manifest['name'])
         for icon in manifest['icons']:
+            self.assertTrue(icon['src'].startswith('jx-icon-'))
             self.assertTrue((manifest_path.parent / icon['src']).is_file())
 
     def test_private_build_inputs_excluded(self):

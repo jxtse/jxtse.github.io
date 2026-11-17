@@ -14,11 +14,8 @@ def main():
         portrait = ImageOps.exif_transpose(source).convert('RGB')
         avatar = ImageOps.fit(portrait, (384, 384), method=Image.Resampling.LANCZOS)
         avatar.save(IMAGES / 'avatar.webp', quality=82, method=6)
-        for name, size in [('favicon-16x16', 16), ('favicon-32x32', 32),
-                           ('apple-touch-icon', 180), ('android-chrome-192x192', 192),
-                           ('android-chrome-512x512', 512)]:
-            ImageOps.fit(portrait, (size, size), method=Image.Resampling.LANCZOS).save(
-                IMAGES / (name + '.png'), optimize=True)
+        # Site icons are generated from images/jx-mark.svg by generate_site_icons.py.
+        # Never replace the personal logo with a portrait during photo optimization.
 
     # Only posts with an explicit cover_thumbnail opt in. Paths are root-relative.
     for post in sorted((ROOT / '_posts').glob('*.md')):

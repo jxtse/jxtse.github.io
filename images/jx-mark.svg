@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Jinxiang Xie — JX</title>
+  <rect width="64" height="64" rx="12" fill="#012F63"/>
+  <g fill="none" stroke-width="6" stroke-linecap="square" stroke-linejoin="round">
+    <path d="M12 20H29V39C29 49 13 49 13 39" stroke="#FFFFFF"/>
+    <path d="M52 20L38 46" stroke="#FE667B"/>
+    <path d="M38 20L52 46" stroke="#FFFFFF"/>
+  </g>
+</svg>
