@@ -128,6 +128,7 @@ class SiteQuality(unittest.TestCase):
         self.assertEqual(html.count('class="rd-lead"'), 3)
         links = {a.get('href') for a in Document(SITE / 'index.html').elements('a')}
         for href in ['/retrace/', '/cast/', '/dsgram/',
+                     'https://huggingface.co/jxtse/ReTRACE-27B-latest',
                      'https://huggingface.co/jxtse/ClinAge-4B',
                      'https://huggingface.co/jxtse/ClinAge-9B',
                      'https://github.com/jxtse/tada/tree/main/benchmark',

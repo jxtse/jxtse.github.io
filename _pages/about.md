@@ -29,7 +29,7 @@ My research explores how <strong class="ink">large language models</strong> can 
     <p class="rd-lead">The harness produces trajectories and verdicts, and the model is trained to work inside that harness.</p>
     <ul>
       <li><a href="/retrace/" class="link-accent">ReTRACE</a> plans retrosynthesis routes with harness feedback.</li>
-      <li><b class="ink rd-name">ReTRACE-27B-latest</b> is post-trained on these trajectories and audit verdicts, then deployed back into the harness to improve continually.</li>
+      <li><a href="https://huggingface.co/jxtse/ReTRACE-27B-latest" class="link-accent rd-name">ReTRACE-27B-latest</a> is post-trained on these trajectories and audit verdicts, then deployed back into the harness to improve continually.</li>
       <li><a href="https://huggingface.co/jxtse/ClinAge-4B" class="link-accent rd-name">ClinAge-4B</a> and <a href="https://huggingface.co/jxtse/ClinAge-9B" class="link-accent rd-name">ClinAge-9B</a> distill five cohort-specific biological-age models from a multi-agent harness into unified cross-cohort models.</li>
     </ul>
   </div>
