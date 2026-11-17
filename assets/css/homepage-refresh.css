@@ -94,7 +94,17 @@ a.pub-item-link .pub-venue-badge { background: var(--rf-tint) !important; color:
 .tl { border-top: 1px solid var(--rf-line); margin: .4rem 0 1.2rem; }
 .tl-row { display: grid; grid-template-columns: 168px 1fr; gap: 20px; padding: .72rem 0; border-bottom: 1px solid var(--rf-line); align-items: baseline; }
 .tl-date { font-size: .82em; color: var(--rf-slate); font-variant-numeric: tabular-nums; letter-spacing: .01em; white-space: nowrap; }
-.tl-body b { display: block; color: var(--rf-ink); font-weight: 600; }
+/* Institution marks retain their original colours and aspect ratios. */
+.page__content img.institution-logo {
+  display: inline-block; width: 24px; height: 24px; max-width: none;
+  object-fit: contain; flex: 0 0 24px; margin: 0; padding: 0;
+  border: 0; border-radius: 0; box-shadow: none; vertical-align: -.22em;
+}
+.institution-link { white-space: nowrap; }
+.page__content .institution-link img.institution-logo { width: 20px; height: 20px; margin-right: .3em; }
+.tl-body { min-width: 0; }
+.tl-body b { display: flex; align-items: center; gap: .5em; color: var(--rf-ink); font-weight: 600; }
+.tl-body > span { padding-left: calc(24px + .5rem); }
 .tl-body b a { color: var(--rf-navy) !important; font-weight: 600; }
 .tl-body > span { display: block; font-size: .9em; color: var(--rf-slate); margin-top: 2px; }
 .tl-body > span a { color: var(--rf-navy) !important; }

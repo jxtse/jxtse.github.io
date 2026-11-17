@@ -17,7 +17,7 @@ redirect_from:
 
 <span class='anchor' id='about-me'></span>
 
-My name is <span class="accent-text">Jinxiang Xie</span> (pronounced "JIN-shee-ahng SHEE-eh"). I am an M.Sc. student at <i class="fas fa-university"></i> <a href="https://www.nju.edu.cn/en/" class="link-accent">Nanjing University</a>, supervised by Prof. <a href="https://donghaolab.com/" class="link-accent">Hao Dong</a>. Previously, I was a research intern at <i class="fab fa-microsoft"></i> <a href="https://www.microsoft.com/en-us/research/" class="link-accent">Microsoft</a>, supervised by Principal Researcher <a href="https://www.microsoft.com/en-us/research/people/juding/" class="link-accent">Justin Ding</a>, and at <i class="fas fa-university"></i> <a href="https://english.pku.edu.cn/" class="link-accent">Peking University</a>, supervised by Prof. <a href="https://wanxiaojun.github.io/" class="link-accent">Xiaojun Wan</a>.
+My name is <span class="accent-text">Jinxiang Xie</span> (pronounced "JIN-shee-ahng SHEE-eh"). I am an M.Sc. student at <a href="https://www.nju.edu.cn/en/" class="link-accent institution-link"><img class="institution-logo" src="/images/institutions/nanjing-university.png" alt="" width="20" height="20">Nanjing University</a>, supervised by Prof. <a href="https://donghaolab.com/" class="link-accent">Hao Dong</a>. Previously, I was a research intern at <a href="https://www.microsoft.com/en-us/research/" class="link-accent institution-link"><img class="institution-logo" src="/images/institutions/microsoft.svg" alt="" width="20" height="20">Microsoft</a>, supervised by Principal Researcher <a href="https://www.microsoft.com/en-us/research/people/juding/" class="link-accent">Justin Ding</a>, and at <a href="https://english.pku.edu.cn/" class="link-accent institution-link"><img class="institution-logo" src="/images/institutions/peking-university.png" alt="" width="20" height="20">Peking University</a>, supervised by Prof. <a href="https://wanxiaojun.github.io/" class="link-accent">Xiaojun Wan</a>.
 
 <div class="quote-accent">
 My research explores how <strong class="ink">large language models</strong> can address complex problems, with a focus on harness engineering, agentic reinforcement learning, and collective intelligence.
@@ -107,15 +107,15 @@ Feel free to reach out if you'd like to discuss research or explore potential co
 
 # <i class="fas fa-graduation-cap"></i> Education
 <div class="tl">
-  <div class="tl-row"><span class="tl-date">2025.09 — Present</span><span class="tl-body"><b>Nanjing University</b><span>Master of Science at Kuang Yaming Honors School</span></span></div>
-  <div class="tl-row"><span class="tl-date">2021.09 — 2025.06</span><span class="tl-body"><b>Beijing Jiaotong University</b><span>Bachelor of Science in Information and Computing Science</span></span></div>
+  <div class="tl-row"><span class="tl-date">2025.09 — Present</span><span class="tl-body"><b><img class="institution-logo" src="/images/institutions/nanjing-university.png" alt="" width="24" height="24"><span>Nanjing University</span></b><span>Master of Science at Kuang Yaming Honors School</span></span></div>
+  <div class="tl-row"><span class="tl-date">2021.09 — 2025.06</span><span class="tl-body"><b><img class="institution-logo" src="/images/institutions/beijing-jiaotong-university.png" alt="" width="24" height="24"><span>Beijing Jiaotong University</span></b><span>Bachelor of Science in Information and Computing Science</span></span></div>
 </div>
 
 # <i class="fas fa-laptop-code"></i> Internships
 <div class="tl">
-  <div class="tl-row"><span class="tl-date">2026.08 — Present</span><span class="tl-body"><b><a href="https://macaron.xin/mindlab" class="link-accent">Mind Lab</a> (Mindverse)</b><span>Algorithm Intern, Continual Learning Group</span></span></div>
-  <div class="tl-row"><span class="tl-date">2024.08 — 2025.08</span><span class="tl-body"><b>Microsoft</b><span>Research Intern, <a href="https://www.microsoft.com/en-us/research/group/data-knowledge-intelligence/" class="link-accent">Data, Knowledge and Intelligence (DKI) Group</a></span></span></div>
-  <div class="tl-row"><span class="tl-date">2023.11 — 2024.08</span><span class="tl-body"><b>Peking University</b><span>Research Intern, <a href="https://sai.pku.edu.cn/znxyenglish/" class="link-accent">Wangxuan Institute of Computer Technology</a></span></span></div>
+  <div class="tl-row"><span class="tl-date">2026.08 — Present</span><span class="tl-body"><b><img class="institution-logo" src="/images/institutions/mind-lab.png" alt="" width="24" height="24"><span><a href="https://macaron.xin/mindlab" class="link-accent">Mind Lab</a> (Mindverse)</span></b><span>Algorithm Intern, Continual Learning Group</span></span></div>
+  <div class="tl-row"><span class="tl-date">2024.08 — 2025.08</span><span class="tl-body"><b><img class="institution-logo" src="/images/institutions/microsoft.svg" alt="" width="24" height="24"><span>Microsoft</span></b><span>Research Intern, <a href="https://www.microsoft.com/en-us/research/group/data-knowledge-intelligence/" class="link-accent">Data, Knowledge and Intelligence (DKI) Group</a></span></span></div>
+  <div class="tl-row"><span class="tl-date">2023.11 — 2024.08</span><span class="tl-body"><b><img class="institution-logo" src="/images/institutions/peking-university.png" alt="" width="24" height="24"><span>Peking University</span></b><span>Research Intern, <a href="https://sai.pku.edu.cn/znxyenglish/" class="link-accent">Wangxuan Institute of Computer Technology</a></span></span></div>
 </div>
 <!-- - 2023.05 - 2023.07: &nbsp;Summer Workshop Student, <a href="https://www.comp.nus.edu.sg/" class="link-accent">School of Computer</a>, **National University of Singapore**. -->
 

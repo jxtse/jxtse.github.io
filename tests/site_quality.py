@@ -88,6 +88,19 @@ class SiteQuality(unittest.TestCase):
                 self.assertIn(unquote(href[2:]), ids)
         self.assertTrue(any(a.get('href') == '/#-education' for a in doc.elements('a')))
 
+    def test_institution_logos(self):
+        doc = Document(SITE / 'index.html')
+        logos = [a for a in doc.elements('img')
+                 if 'institution-logo' in a.get('class', '').split()]
+        self.assertEqual(len(logos), 8)  # Three biography marks, five timeline marks.
+        self.assertEqual(len({a['src'] for a in logos}), 5)
+        for logo in logos:
+            self.assertTrue(logo['src'].startswith('/images/institutions/'))
+            self.assertTrue((SITE / logo['src'].lstrip('/')).is_file())
+            self.assertEqual(logo.get('alt'), '')  # Adjacent names supply the text.
+            self.assertIn(logo.get('width'), ['20', '24'])
+            self.assertEqual(logo.get('width'), logo.get('height'))
+
     def test_icons_and_manifest(self):
         doc = Document(SITE / 'index.html')
         for a in doc.elements('link'):
