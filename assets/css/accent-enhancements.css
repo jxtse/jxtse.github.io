@@ -117,14 +117,16 @@
   transform: scale(1.05);
 }
 
-/* Sidebar图标保持主色 */
-.sidebar .fas, .sidebar .fab, .sidebar .far,
-.author__urls .fas, .author__urls .fab, .author__urls .far {
+/* Sidebar font and SVG icons use the same palette. */
+.sidebar .fas, .sidebar .fab, .sidebar .far, .sidebar svg,
+.author__urls .fas, .author__urls .fab, .author__urls .far, .author__urls svg {
   color: #012F63 !important;
+  fill: currentColor;
 }
+.sidebar svg { transition: color 0.3s ease; }
 
-.sidebar .fas:hover, .sidebar .fab:hover, .sidebar .far:hover,
-.author__urls .fas:hover, .author__urls .fab:hover, .author__urls .far:hover {
+.sidebar .fas:hover, .sidebar .fab:hover, .sidebar .far:hover, .sidebar svg:hover,
+.author__urls .fas:hover, .author__urls .fab:hover, .author__urls .far:hover, .author__urls svg:hover {
   color: #FE667B !important; /* 悬停时使用粉色强调 */
 }
 

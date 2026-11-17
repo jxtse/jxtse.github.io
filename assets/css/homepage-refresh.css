@@ -28,7 +28,7 @@
 .author__urls i, .author__urls svg, .author__urls .fas, .author__urls .fab, .author__urls .far, .author__urls .ai { color: var(--rf-slate) !important; fill: currentColor; }
 .author__urls a { color: var(--rf-ink) !important; }
 .author__urls a:hover { color: var(--rf-navy) !important; }
-.author__urls a:hover .fas, .author__urls a:hover .fab, .author__urls a:hover .far, .author__urls a:hover .ai { color: var(--rf-navy) !important; }
+.author__urls a:hover .fas, .author__urls a:hover .fab, .author__urls a:hover .far, .author__urls a:hover .ai, .author__urls a:hover svg { color: var(--rf-navy) !important; }
 
 /* intro: name is the one coral word, solid (no pink-to-purple gradient) */
 .page__content .accent-text {
