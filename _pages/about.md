@@ -28,27 +28,27 @@ My research explores how <strong class="ink">large language models</strong> can 
     <h3>Harness-Model Co-Design</h3>
     <p class="rd-lead">The harness produces trajectories and verdicts, and the model is trained to work inside that harness.</p>
     <ul>
-      <li><a href="/retrace/" class="link-accent">ReTRACE</a> plans retrosynthesis routes with chemistry tools, route memory and an independent audit. <b class="ink rd-name">ReTRACE-27B-latest</b> is post-trained on its trajectories and audit verdicts, then deployed back into the harness.</li>
-      <li>A multi-agent harness built biological-age models for five cohorts (<b class="stat">672K</b> participants). Its teachers were distilled into <a href="https://huggingface.co/jxtse/ClinAge-4B" class="link-accent rd-name">ClinAge-4B</a> and <a href="https://huggingface.co/jxtse/ClinAge-9B" class="link-accent rd-name">ClinAge-9B</a>.</li>
+      <li><a href="/retrace/" class="link-accent">ReTRACE</a> plans retrosynthesis routes with harness feedback. <b class="ink rd-name">Retrace-27B-latest</b> is post-trained on its trajectories and audit verdicts, then deployed back into the harness, self-improving continually.</li>
+      <li>A multi-agent harness built biological-age models for five cohorts. These models are distilled into unified cross-cohort <a href="https://huggingface.co/jxtse/ClinAge-4B" class="link-accent rd-name">ClinAge-4B</a> and <a href="https://huggingface.co/jxtse/ClinAge-9B" class="link-accent rd-name">ClinAge-9B</a>.</li>
     </ul>
   </div>
 
   <div class="highlight-block floating-card">
-    <h3>Long-Horizon Continual Learning</h3>
-    <p class="rd-lead">Over long tasks, an agent should keep and reuse what it has already worked out, with progress that can be measured reliably.</p>
+    <h3>Long-Horizon Evaluation</h3>
+    <p class="rd-lead">An agent should keep and reuse what it has already worked out, with progress that can be measured reliably.</p>
     <ul>
-      <li><a href="https://github.com/jxtse/tada/tree/main/agent" class="link-accent">TADA-Agent</a> stores semantic results as tabular state that later steps can reuse. <a href="https://github.com/jxtse/tada/tree/main/benchmark" class="link-accent">TADA-Bench</a> tests professional text analysis that spans many steps.</li>
+      <li><a href="https://github.com/jxtse/tada/tree/main/agent" class="link-accent rd-name">TADA-Agent</a> stores semantic state and uses semantic operators in a unified namespace. <a href="https://github.com/jxtse/tada/tree/main/benchmark" class="link-accent rd-name">TADA-Bench</a> tests professional text analysis that spans many steps.</li>
       <li><a href="/cast/" class="link-accent">CAST</a> measures and improves the stability of repeated LLM analysis. <a href="/dsgram/" class="link-accent">DSGram</a> evaluates text quality in agreement with human judgement.</li>
     </ul>
   </div>
 
   <div class="highlight-block floating-card">
     <h3>Data-Driven RSI</h3>
-    <p class="rd-lead">A model's own failures become training data, so each round of post-training targets what it still cannot do.</p>
+    <p class="rd-lead">A model's own failures generate training data, so each round of post-training targets what it still cannot do.</p>
     <ul>
       <li><b class="ink">Traj2data</b> locates the failing step in a trajectory and resumes from it through self-sampling or teacher hints.</li>
       <li><b class="ink">Traj2env</b> retrieves papers and code related to each error type and turns them into executable scientific tasks.</li>
-      <li>At <b class="ink">Mind Lab</b>, both pipelines feed ongoing continual post-training of DeepSeek V4.1 Flash.</li>
+      <li>I am developing both pipelines to feed ongoing continual post-training of DeepSeek V4.1 Flash.</li>
     </ul>
   </div>
 </div>
