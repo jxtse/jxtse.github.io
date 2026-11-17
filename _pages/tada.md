@@ -27,7 +27,7 @@ author_profile: false
     </div>
     <div class="links-bar">
       <a href="https://arxiv.org/abs/2610.34860" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-alt"></i> ArXiv</a>
-      <a href="https://github.com/jxtse/TADA-Agent" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Code</a>
+      <a href="https://github.com/jxtse/tada" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Code</a>
     </div>
   </header>
 

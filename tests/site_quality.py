@@ -121,7 +121,7 @@ class SiteQuality(unittest.TestCase):
             self.assertIn(title, headings)
         for old_title in ['AI Researcher', 'Writer &amp; Builder', 'Life Explorer']:
             self.assertNotIn(old_title, html)
-        for name in ['Retrace-27B-latest', 'ClinAge-4B', 'ClinAge-9B',
+        for name in ['ReTRACE-27B-latest', 'ClinAge-4B', 'ClinAge-9B',
                      'TADA-Bench', 'TADA-Agent', 'CAST', 'DSGram',
                      'Traj2data', 'Traj2env']:
             self.assertIn(name, html)
@@ -135,6 +135,26 @@ class SiteQuality(unittest.TestCase):
                      'https://github.com/jxtse/agent-snapshot-resume',
                      'https://github.com/jxtse/tbs-taskgen']:
             self.assertIn(href, links)
+
+    def test_home_social_preview(self):
+        doc = Document(SITE / 'index.html')
+        description = doc.meta('description')[0]
+        self.assertIn('agentic systems', description)
+        for stale in ['agentic reinforcement learning', 'collective intelligence']:
+            self.assertNotIn(stale, description)
+        for key in ['og:image', 'twitter:image']:
+            self.assertEqual(doc.meta(key), ['https://jxtse.github.io/images/social-card.png'])
+        data = (SITE / 'images/social-card.png').read_bytes()
+        self.assertEqual(data[:8], b'\x89PNG\r\n\x1a\n')
+        self.assertEqual((int.from_bytes(data[16:20], 'big'),
+                          int.from_bytes(data[20:24], 'big')), (1200, 630))
+        self.assertLess(len(data), 300_000)
+
+    def test_canonical_code_links(self):
+        for page in ['index.html', 'tada/index.html', 'dsgram/index.html']:
+            html = (SITE / page).read_text()
+            self.assertNotIn('github.com/jxtse/TADA-Agent', html)
+            self.assertNotIn('github.com/jxtse/GEC-Metrics-DSGram', html)
 
     def test_icons_and_manifest(self):
         pages = [SITE / 'index.html', SITE / 'blog/index.html', SITE / 'cast/index.html']

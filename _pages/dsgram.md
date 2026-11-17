@@ -32,7 +32,7 @@ author_profile: false
     <div class="links-bar">
       <a href="https://arxiv.org/abs/2412.12832" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-alt"></i> Paper</a>
       <a href="https://arxiv.org/pdf/2412.12832" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-pdf"></i> PDF</a>
-      <a href="https://github.com/jxtse/GEC-Metrics-DSGram" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Code</a>
+      <a href="https://github.com/jxtse/GEC-metrics-DSGram" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Code</a>
     </div>
   </header>
 

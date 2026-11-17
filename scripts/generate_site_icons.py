@@ -25,6 +25,11 @@ def main():
     source.save(ROOT / 'favicon.ico', sizes=[(16, 16), (32, 32), (48, 48)])
     # Some older links may still request the previous images/ endpoint.
     (IMAGES / 'favicon.ico').write_bytes((ROOT / 'favicon.ico').read_bytes())
+    # Link-preview card (Open Graph / X). Uses the same mark; no portrait.
+    card = subprocess.check_output([
+        'rsvg-convert', '-w', '1200', '-h', '630', str(IMAGES / 'social-card.svg')])
+    Image.open(io.BytesIO(card)).convert('RGB').save(
+        IMAGES / 'social-card.png', optimize=True)
 
 
 if __name__ == '__main__':

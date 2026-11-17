@@ -20,7 +20,7 @@ redirect_from:
 My name is <span class="accent-text">Jinxiang Xie</span> (pronounced "JIN-shee-ahng SHEE-eh"). I am an M.Sc. student at <a href="https://www.nju.edu.cn/en/" class="link-accent institution-link"><img class="institution-logo" src="/images/institutions/nanjing-university.png" alt="" width="20" height="20">Nanjing University</a>, supervised by Prof. <a href="https://donghaolab.com/" class="link-accent">Hao Dong</a>. Previously, I was a research intern at <a href="https://www.microsoft.com/en-us/research/" class="link-accent institution-link"><img class="institution-logo" src="/images/institutions/microsoft.svg" alt="" width="20" height="20">Microsoft</a>, supervised by Principal Researcher <a href="https://www.microsoft.com/en-us/research/people/juding/" class="link-accent">Justin Ding</a>, and at <a href="https://english.pku.edu.cn/" class="link-accent institution-link"><img class="institution-logo" src="/images/institutions/peking-university.png" alt="" width="20" height="20">Peking University</a>, supervised by Prof. <a href="https://wanxiaojun.github.io/" class="link-accent">Xiaojun Wan</a>.
 
 <div class="quote-accent">
-My research explores how <strong class="ink">large language models</strong> can address complex problems, with a focus on agentic system and its applications in scientific discovery
+My research explores how <strong class="ink">large language models</strong> can address complex problems, with a focus on agentic systems and their applications in scientific discovery.
 </div>
 
 <div class="highlight-blocks research-directions">
@@ -29,8 +29,8 @@ My research explores how <strong class="ink">large language models</strong> can 
     <p class="rd-lead">The harness produces trajectories and verdicts, and the model is trained to work inside that harness.</p>
     <ul>
       <li><a href="/retrace/" class="link-accent">ReTRACE</a> plans retrosynthesis routes with harness feedback.</li>
-      <li><b class="ink rd-name">Retrace-27B-latest</b> is post-trained on these trajectories and audit verdicts, then deployed back into the harness to improve continually.</li>
-      <li>A multi-agent harness built biological-age models for five cohorts. These models are distilled into unified cross-cohort <a href="https://huggingface.co/jxtse/ClinAge-4B" class="link-accent rd-name">ClinAge-4B</a> and <a href="https://huggingface.co/jxtse/ClinAge-9B" class="link-accent rd-name">ClinAge-9B</a>.</li>
+      <li><b class="ink rd-name">ReTRACE-27B-latest</b> is post-trained on these trajectories and audit verdicts, then deployed back into the harness to improve continually.</li>
+      <li><a href="https://huggingface.co/jxtse/ClinAge-4B" class="link-accent rd-name">ClinAge-4B</a> and <a href="https://huggingface.co/jxtse/ClinAge-9B" class="link-accent rd-name">ClinAge-9B</a> distill five cohort-specific biological-age models from a multi-agent harness into unified cross-cohort models.</li>
     </ul>
   </div>
 
@@ -51,7 +51,7 @@ My research explores how <strong class="ink">large language models</strong> can 
     <ul>
       <li><a href="https://github.com/jxtse/agent-snapshot-resume" class="link-accent">Traj2data</a> locates the failing step in a trajectory and resumes from it through self-sampling or teacher hints.</li>
       <li><a href="https://github.com/jxtse/tbs-taskgen" class="link-accent">Traj2env</a> retrieves papers and code related to each error type and turns them into executable scientific tasks.</li>
-      <li>I am developing both pipelines to feed ongoing continual post-training of DeepSeek V4.1 Flash.</li>
+      <li><b class="ink">Continual post-training</b> of DeepSeek V4.1 Flash on data from both pipelines is ongoing.</li>
     </ul>
   </div>
 </div>
@@ -80,7 +80,7 @@ My research explores how <strong class="ink">large language models</strong> can 
     <div class="pub-links">
       <a href="/tada/"><i class="fas fa-home"></i> Project</a>
       <a href="https://arxiv.org/abs/2610.34860"><i class="fas fa-file-alt"></i> arXiv</a>
-      <a href="https://github.com/jxtse/TADA-Agent"><i class="fab fa-github"></i> Code</a>
+      <a href="https://github.com/jxtse/tada"><i class="fab fa-github"></i> Code</a>
     </div>
   </div>
   <div class="pub-item">
@@ -100,7 +100,7 @@ My research explores how <strong class="ink">large language models</strong> can 
     <div class="pub-links">
       <a href="/dsgram/"><i class="fas fa-home"></i> Project</a>
       <a href="https://arxiv.org/abs/2412.12832"><i class="fas fa-file-alt"></i> arXiv</a>
-      <a href="https://github.com/jxtse/GEC-Metrics-DSGram"><i class="fab fa-github"></i> Code</a>
+      <a href="https://github.com/jxtse/GEC-metrics-DSGram"><i class="fab fa-github"></i> Code</a>
     </div>
   </div>
 </div>

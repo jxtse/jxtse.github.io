@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <title>Jinxiang Xie — social preview card</title>
+  <rect width="1200" height="630" fill="#FFFFFF"/>
+  <rect x="0" y="0" width="1200" height="10" fill="#012F63"/>
+  <!-- JX mark, same geometry as images/jx-mark.svg scaled ×3. -->
+  <g transform="translate(96 72) scale(3)">
+    <rect width="64" height="64" rx="12" fill="#012F63"/>
+    <g fill="none" stroke-width="6" stroke-linecap="square" stroke-linejoin="round">
+      <path d="M12 20H29V39C29 49 13 49 13 39" stroke="#FFFFFF"/>
+      <path d="M52 20L38 46" stroke="#FE667B"/>
+      <path d="M38 20L52 46" stroke="#FFFFFF"/>
+    </g>
+  </g>
+  <text x="96" y="372" font-family="Charter, Georgia, serif" font-size="78" font-weight="700" fill="#1A1A1A">Jinxiang Xie</text>
+  <rect x="98" y="398" width="64" height="5" fill="#FE667B"/>
+  <text x="96" y="458" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="32" fill="#012F63">Agentic systems for scientific discovery</text>
+  <text x="96" y="508" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="26" fill="#5B6472">Harness-Model Co-Design · Long-Horizon Evaluation · Data-Driven RSI</text>
+  <text x="96" y="566" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="24" fill="#5B6472">M.Sc. student, Nanjing University  ·  jxtse.github.io</text>
+</svg>
