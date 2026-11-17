@@ -23,8 +23,6 @@ My name is <span class="accent-text">Jinxiang Xie</span> (pronounced "JIN-shee-a
 My research explores how <strong class="ink">large language models</strong> can address complex problems, with a focus on agentic system and its applications in scientific discovery
 </div>
 
-Feel free to reach out if you'd like to discuss research or explore potential collaboration!
-
 <div class="highlight-blocks research-directions">
   <div class="highlight-block floating-card">
     <h3>Harness-Model Co-Design</h3>
