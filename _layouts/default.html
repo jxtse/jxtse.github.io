@@ -5,6 +5,7 @@ layout: compress
 <!doctype html>
 <html lang="{{ site.lang | default: 'en' }}" class="no-js">
   <head>
+    {% if page.permalink == '/retrace/' %}<meta name="referrer" content="no-referrer">{% endif %}
     {% include head.html %}
     {% include head/custom.html %}
   </head>

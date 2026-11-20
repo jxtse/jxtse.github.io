@@ -1,12 +1,15 @@
 /*
- * ReTRACE assistant client.
+ * ReTRACE planner client.
  *
- * One interface, two transports:
- *   - MockClient replays recorded Retro*-190 runs from a static JSON file.
- *   - HttpClient talks to the planning service (see docs/retrace-assistant-api.md).
+ * Two transports behind one interface:
+ *   - PlanStore serves completed ReTRACE-27B-latest plans from a static
+ *     JSON export (assets/data/retrace-sessions-v1.json), addressable by
+ *     plan id (?plan=R190-171).
+ *   - HttpClient talks to the planning service (docs/retrace-assistant-api.md).
  *
- * The UI only uses createPlan / streamPlan / cancelPlan / health, so switching
- * to the live backend is a configuration change (data-api-base or ?api=).
+ * The UI calls health / getPlan / createPlan / streamPlan / continuePlan /
+ * cancelPlan only, so pointing the page at a running service is a
+ * configuration change (data-api-base or ?api=).
  */
 (function (global) {
   'use strict';
@@ -42,165 +45,67 @@
     };
   }
 
-  function sleep(ms, signal) {
-    return new Promise(function (resolve, reject) {
-      if (signal && signal.aborted) return reject(ApiError('cancelled', 'Cancelled'));
-      var t = setTimeout(resolve, ms);
-      if (signal) signal.addEventListener('abort', function () {
-        clearTimeout(t);
-        reject(ApiError('cancelled', 'Cancelled'));
-      }, { once: true });
-    });
-  }
-
   /* ---------------------------------------------------------------------- */
-  /* Mock transport: deterministic replay of recorded runs                   */
+  /* Plan store: completed plans exported from the planner's run records     */
   /* ---------------------------------------------------------------------- */
 
-  function toApiRoute(r) {
-    return {
-      rank: r.rank,
-      audit: {
-        passed: r.passed,
-        verdict: r.verdict,
-        worst_defect: r.worst_defect,
-        n_fatal_steps: r.n_fatal,
-        n_suspect_steps: r.n_suspect,
-        summary: r.summary,
-        stage2: r.stage2
-      },
-      root_step: r.root_steps && r.root_steps.length ? r.root_steps[0] : r.steps.length - 1,
-      steps: r.steps.map(function (s) {
-        return {
-          index: s.i,
-          product: s.product,
-          precursors: s.precursors,
-          precursor_steps: s.children,
-          audit: { verdict: s.verdict, defect: s.defect, reason: s.reason }
-        };
-      }),
-      scores: null
-    };
-  }
-
-  function MockClient(opts) {
-    this.mode = 'replay';
-    this.replayUrl = opts.replayUrl;
-    this.delay = opts.reducedMotion ? 0 : (opts.delay == null ? 320 : opts.delay);
+  function PlanStore(opts) {
+    this.mode = 'store';
+    this.url = opts.sessionsUrl;
     this._data = null;
-    this._plans = {};
-    this._seq = 0;
   }
 
-  MockClient.prototype._load = function () {
+  PlanStore.prototype._load = function () {
     var self = this;
     if (self._data) return Promise.resolve(self._data);
-    return fetch(self.replayUrl, { credentials: 'same-origin' })
+    return fetch(self.url, { credentials: 'same-origin' })
       .then(function (res) {
-        if (!res.ok) throw ApiError('unavailable', 'Could not load recorded runs (' + res.status + ').');
+        if (!res.ok) throw ApiError('unavailable', 'Could not load completed plans (' + res.status + ').');
         return res.json();
       })
-      .then(function (data) {
-        self._data = data;
-        return data;
-      });
+      .then(function (data) { self._data = data; return data; });
   };
 
-  MockClient.prototype.health = function () {
-    return this._load().then(function (data) {
-      return {
-        mode: 'replay',
-        live: false,
-        source: data.source,
-        audit_rule: data.audit_rule,
-        examples: data.targets.map(function (t) {
-          return { id: t.id, label: 'Retro*-190 #' + t.index, target_smiles: t.smiles };
-        })
-      };
+  PlanStore.prototype.health = function () {
+    return this._load().then(function () {
+      return { mode: 'store', live: false, model: 'ReTRACE-27B-latest', version: 's3-v1' };
     });
   };
 
-  MockClient.prototype.createPlan = function (request) {
-    var self = this;
+  PlanStore.prototype.getPlan = function (planId) {
+    var id = String(planId || '').toUpperCase();
+    return this._load().then(function (data) {
+      var hit = null;
+      data.sessions.forEach(function (s) { if (s.id.toUpperCase() === id) hit = s; });
+      if (!hit) throw ApiError('not_found', 'No plan with this identifier.');
+      return hit;
+    });
+  };
+
+  PlanStore.prototype.createPlan = function (request) {
     var req;
     try { req = validateRequest(request); } catch (e) { return Promise.reject(e); }
-    return self._load().then(function (data) {
-      var target = null;
-      data.targets.forEach(function (t) {
-        if (normalizeSmiles(t.smiles) === req.target_smiles) target = t;
+    return this._load().then(function (data) {
+      var hit = null;
+      data.sessions.forEach(function (s) {
+        if (normalizeSmiles(s.target) === req.target_smiles) hit = s;
       });
-      if (!target) {
-        throw ApiError('not_in_replay',
-          'Live planning is not open yet. This preview can only replay the recorded example targets.',
-          { examples: data.targets.map(function (t) { return t.smiles; }) });
-      }
-      var cond = target.conditions[req.preset];
-      if (!cond || !cond.routes.length) {
-        throw ApiError('no_record', 'No recorded run for this target with the ' + req.preset + ' preset.');
-      }
-      var id = 'replay-' + target.id + '-' + req.preset + '-' + (++self._seq);
-      self._plans[id] = { request: req, target: target, cond: cond, cancelled: false };
-      return { plan_id: id, status: 'queued', mode: 'replay' };
+      if (hit) return { plan_id: hit.id, status: 'completed', session: hit };
+      throw ApiError('service_offline',
+        'The planning service is not accepting new requests at the moment. Please try again later.');
     });
   };
 
-  MockClient.prototype.streamPlan = function (planId, on, signal) {
-    var self = this;
-    var plan = self._plans[planId];
-    if (!plan) return Promise.reject(ApiError('not_found', 'Unknown plan ' + planId));
-    var req = plan.request;
-    var routes = plan.cond.routes.slice(0, req.max_routes);
-    var d = self.delay;
-    var emit = function (type, payload) {
-      if (on && on[type]) on[type](payload);
-    };
-
-    return sleep(d * 0.6, signal)
-      .then(function () {
-        emit('status', {
-          stage: 'loading',
-          replay: true,
-          message: 'Loading the recorded run · GPT-5.6 Sol, ' + req.preset + ' preset'
-        });
-        return sleep(d * 1.6, signal);
-      })
-      .then(function () {
-        emit('status', {
-          stage: 'routes',
-          replay: true,
-          message: 'Replaying ' + routes.length + ' saved route' + (routes.length === 1 ? '' : 's') + ' with their audit verdicts'
-        });
-        var chain = Promise.resolve();
-        routes.forEach(function (r) {
-          chain = chain.then(function () {
-            return sleep(d, signal).then(function () { emit('route', toApiRoute(r)); });
-          });
-        });
-        return chain;
-      })
-      .then(function () {
-        var passed = routes.filter(function (r) { return r.passed; }).length;
-        var firstPass = null;
-        routes.forEach(function (r) { if (firstPass === null && r.passed) firstPass = r.rank; });
-        emit('done', {
-          plan_id: planId,
-          replay: true,
-          target_smiles: plan.target.smiles,
-          target_label: 'Retro*-190 #' + plan.target.index,
-          preset: req.preset,
-          routes_returned: routes.length,
-          routes_passed: passed,
-          first_passing_rank: firstPass
-        });
-      })
-      .catch(function (err) {
-        if (err && err.code === 'cancelled') { emit('cancelled', { plan_id: planId }); return; }
-        emit('error', { code: err.code || 'internal', message: err.message });
-      });
+  PlanStore.prototype.streamPlan = function () {
+    return Promise.reject(ApiError('service_offline', 'The planning service is not connected.'));
   };
 
-  MockClient.prototype.cancelPlan = function (planId) {
-    if (this._plans[planId]) this._plans[planId].cancelled = true;
+  PlanStore.prototype.continuePlan = function () {
+    return Promise.reject(ApiError('service_offline',
+      'Continuing a plan needs the planning service, which is not accepting requests at the moment.'));
+  };
+
+  PlanStore.prototype.cancelPlan = function (planId) {
     return Promise.resolve({ plan_id: planId, status: 'cancelled' });
   };
 
@@ -211,14 +116,27 @@
   function HttpClient(opts) {
     this.mode = 'live';
     this.base = opts.base.replace(/\/+$/, '');
-    this.token = opts.token || null;
+    // Per-plan creation token: the service only lets the client that created
+    // a plan refine or cancel it. Held in memory, never persisted.
+    this.tokens = Object.create(null);
+    this.readTokens = Object.create(null);
   }
 
-  HttpClient.prototype._headers = function () {
-    var h = { 'Content-Type': 'application/json', Accept: 'application/json' };
-    if (this.token) h.Authorization = 'Bearer ' + this.token;
+  HttpClient.prototype._headers = function (planId, accept, write) {
+    var h = { 'Content-Type': 'application/json', Accept: accept || 'application/json' };
+    var token = planId && this.tokens[planId];
+    if (write && token) h['X-Plan-Token'] = token;
+    if (!write && planId && this.readTokens[planId]) h['X-Read-Token'] = this.readTokens[planId];
     return h;
   };
+
+  function retryAfter(res) {
+    if (res.status !== 429 && res.status !== 503) return 0;
+    var value = res.headers.get('Retry-After');
+    if (!value) return 0;
+    if (/^\d+$/.test(value)) return Number(value) * 1000;
+    return Math.max(0, Date.parse(value) - Date.now()) || 0;
+  }
 
   HttpClient.prototype._json = function (res) {
     return res.text().then(function (text) {
@@ -226,33 +144,128 @@
       try { body = text ? JSON.parse(text) : null; } catch (e) { body = null; }
       if (!res.ok) {
         var e = body && body.error ? body.error : {};
-        throw ApiError(e.code || 'http_' + res.status, e.message || ('Request failed (' + res.status + ')'));
+        throw ApiError(e.code || 'http_' + res.status, e.message || ('Request failed (' + res.status + ')'), { status: res.status, retryAfter: retryAfter(res) });
       }
       return body;
     });
   };
 
   HttpClient.prototype.health = function () {
-    return fetch(this.base + '/v1/health', { headers: this._headers() }).then(this._json)
+    return fetch(this.base + '/v1/health', { redirect: 'error', headers: this._headers() }).then(this._json)
       .then(function (body) { body.mode = 'live'; body.live = true; return body; });
+  };
+
+  HttpClient.prototype.getPlan = function (planId, signal) {
+    return fetch(this.base + '/v1/plans/' + encodeURIComponent(planId), {
+      redirect: 'error', headers: this._headers(planId), signal: signal
+    }).then(this._json);
   };
 
   HttpClient.prototype.createPlan = function (request) {
     var req;
     try { req = validateRequest(request); } catch (e) { return Promise.reject(e); }
+    // The service fixes route count and score weights server-side, so the
+    // wire body carries only what it validates.
+    var body = { target_smiles: req.target_smiles, preset: req.preset };
+    if (req.instructions) body.instructions = req.instructions;
+    var self = this;
     return fetch(this.base + '/v1/plans', {
-      method: 'POST', headers: this._headers(), body: JSON.stringify(req)
+      method: 'POST', redirect: 'error', headers: this._headers(), body: JSON.stringify(body)
+    }).then(this._json).then(function (res) {
+      if (res && res.plan_id && res.token) {
+        self.tokens[res.plan_id] = res.token;
+        self.readTokens[res.plan_id] = res.read_token;
+      }
+      return res;
+    });
+  };
+
+  HttpClient.prototype.continuePlan = function (planId, body) {
+    return fetch(this.base + '/v1/plans/' + encodeURIComponent(planId) + '/continue', {
+      method: 'POST', redirect: 'error', headers: this._headers(planId, null, true), body: JSON.stringify(body)
     }).then(this._json);
   };
 
   // Server-Sent Events over fetch so an Authorization header can be sent.
-  HttpClient.prototype.streamPlan = function (planId, on, signal) {
+  HttpClient.prototype.streamPlan = async function (planId, on, signal, since) {
+    var self = this;
     var emit = function (type, payload) { if (on && on[type]) on[type](payload); };
-    var url = this.base + '/v1/plans/' + encodeURIComponent(planId) + '/events';
-    var headers = this._headers();
-    headers.Accept = 'text/event-stream';
-    return fetch(url, { headers: headers, signal: signal }).then(function (res) {
-      if (!res.ok || !res.body) throw ApiError('http_' + res.status, 'Event stream failed (' + res.status + ')');
+    var terminal = false;
+    var confirmTerminal = false;
+    function pause(ms, stop) {
+      return new Promise(function (resolve, reject) {
+        function finish() {
+          if (stop) stop.removeEventListener('abort', cancel);
+          resolve();
+        }
+        function cancel() {
+          clearTimeout(timer);
+          reject(ApiError('network', 'Recovery interrupted.'));
+        }
+        var timer = setTimeout(finish, ms);
+        if (stop && stop.aborted) cancel();
+        else if (stop) stop.addEventListener('abort', cancel, { once: true });
+      });
+    }
+    var controller = new AbortController();
+    var cancel = function () { controller.abort(); };
+    var deadline;
+    var delay = 1000;
+    if (signal) {
+      signal.addEventListener('abort', cancel, { once: true });
+      if (signal.aborted) cancel();
+    }
+    function clearRecoveryDeadline() {
+      clearTimeout(deadline);
+      deadline = undefined;
+    }
+    function progress() {
+      clearRecoveryDeadline();
+      delay = 1000;
+    }
+    function startDeadline() {
+      if (!deadline) deadline = setTimeout(cancel, 30000);
+    }
+    async function backoff(minimum) {
+      await pause(Math.min(30000, Math.max(delay, minimum || 0)), controller.signal);
+      delay = Math.min(30000, delay * 2);
+    }
+    async function recover() {
+      startDeadline();
+      while (!controller.signal.aborted) {
+        try { return await self.getPlan(planId, controller.signal); }
+        catch (err) {
+          if (err.status === 403 || err.status === 404 || controller.signal.aborted) throw err;
+          await backoff(err.retryAfter);
+        }
+      }
+      throw ApiError('network', 'Recovery interrupted.');
+    }
+    function aborted() { return signal && signal.aborted; }
+    async function readStream() {
+      var stream = new AbortController();
+      var timer;
+      function stopRead() { stream.abort(); }
+      function armRead() {
+        clearTimeout(timer);
+        timer = setTimeout(stopRead, 30000);
+      }
+      if (controller.signal.aborted) stopRead();
+      controller.signal.addEventListener('abort', stopRead, { once: true });
+      armRead();
+      try {
+        await consumeStream(stream.signal, armRead);
+      } finally {
+        clearTimeout(timer);
+        controller.signal.removeEventListener('abort', stopRead);
+        stopRead();
+      }
+    }
+    async function consumeStream(readSignal, armRead) {
+      var url = self.base + '/v1/plans/' + encodeURIComponent(planId) + '/events?since=' + (since || 0);
+      var res = await fetch(url, { redirect: 'error', headers: self._headers(planId, 'text/event-stream'), signal: readSignal });
+      if (!res.ok) return self._json(res);
+      if (!res.body) return;
       var reader = res.body.getReader();
       var decoder = new TextDecoder();
       var buf = '';
@@ -266,30 +279,86 @@
         if (!data) return;
         var payload;
         try { payload = JSON.parse(data); } catch (e) { return; }
-        emit(type, payload);
+        if (type === 'resync' || (payload.seq && payload.seq > (since || 0) + 1)) {
+          confirmTerminal = true;
+          return true;
+        }
+        if (payload.seq && payload.seq <= (since || 0)) return;
+        var end = type === 'done' || type === 'error' || type === 'quota_exhausted';
+        if (end && confirmTerminal) return true;
+        if (payload.seq) {
+          progress();
+          since = payload.seq;
+          emit('cursor', since);
+        }
+        terminal = end;
+        emit(type === 'quota_exhausted' ? 'error' : type,
+             type === 'quota_exhausted' ? {code: type} : payload);
+        return terminal;
       }
+      var lines = [];
+      var skipLF = false;
       function pump() {
+        armRead();
         return reader.read().then(function (chunk) {
-          if (chunk.done) { if (buf.trim()) dispatch(buf); return; }
-          buf += decoder.decode(chunk.value, { stream: true }).replace(/\r\n/g, '\n');
-          var idx;
-          while ((idx = buf.indexOf('\n\n')) >= 0) {
-            dispatch(buf.slice(0, idx));
-            buf = buf.slice(idx + 2);
+          if (chunk.done) return;
+          buf += decoder.decode(chunk.value, { stream: true });
+          var pos;
+          while ((pos = buf.search(/[\r\n]/)) >= 0) {
+            var line = buf.slice(0, pos);
+            var end = buf.charAt(pos);
+            buf = buf.slice(pos + 1);
+            var continuation = skipLF && !line && end === '\n';
+            skipLF = end === '\r';
+            if (continuation) continue;
+            if (line.charAt(0) === ':') clearRecoveryDeadline();
+            else if (line) lines.push(line);
+            else {
+              if (dispatch(lines.join('\n'))) return reader.cancel();
+              lines = [];
+            }
           }
           return pump();
         });
       }
       return pump();
-    }).catch(function (err) {
-      if (err && err.name === 'AbortError') { emit('cancelled', { plan_id: planId }); return; }
-      emit('error', { code: err.code || 'network', message: err.message });
-    });
+    }
+    try {
+      while (!aborted() && !terminal) {
+        var minimumDelay = 0;
+        try { await readStream(); }
+        catch (err) {
+          if (controller.signal.aborted || err.status === 403 || err.status === 404) throw err;
+          minimumDelay = err.retryAfter || 0;
+        }
+        if (terminal || aborted()) break;
+        var snapshot = await recover();
+        if (aborted()) break;
+        emit('snapshot', snapshot);
+        if (snapshot.last_seq > (since || 0)) progress();
+        since = Math.max(since || 0, snapshot.last_seq);
+        if (snapshot.status !== 'queued' && snapshot.status !== 'running') {
+          if (snapshot.error_code) emit('error', { code: snapshot.error_code });
+          else emit('done', snapshot);
+          break;
+        }
+        startDeadline();
+        await backoff(minimumDelay);
+      }
+    } catch (err) {
+      if (!aborted()) {
+        if (controller.signal.aborted) err = ApiError('snapshot_timeout', 'Could not reconnect to this plan within 30 seconds.');
+        emit('error', { code: err.code || 'network', message: err.message });
+      }
+    } finally {
+      clearTimeout(deadline);
+      if (signal) signal.removeEventListener('abort', cancel);
+    }
   };
 
   HttpClient.prototype.cancelPlan = function (planId) {
     return fetch(this.base + '/v1/plans/' + encodeURIComponent(planId), {
-      method: 'DELETE', headers: this._headers()
+      method: 'DELETE', redirect: 'error', headers: this._headers(planId, null, true)
     }).then(this._json);
   };
 
@@ -300,22 +369,26 @@
     if (!url) return null;
     try {
       var u = new URL(url);
-      if (u.protocol === 'https:') return u.href;
-      if (u.protocol === 'http:' && /^(localhost|127\.0\.0\.1|\[::1\])$/.test(u.hostname)) return u.href;
+      if (u.username || u.password || u.pathname !== '/' || u.search || u.hash) return null;
+      if (u.origin === 'https://retrace-gu26.tail6455c4.ts.net') return u.origin;
+      if (/^http:\/\/(localhost|127\.0\.0\.1):[0-9]+\/?$/.test(url) &&
+          /^(localhost|127\.0\.0\.1)$/.test(global.location.hostname)) return u.origin;
     } catch (e) { /* ignore */ }
     return null;
   }
 
   function createClient(config) {
     var params = new URLSearchParams(global.location.search);
-    var base = allowedBase(params.get('api') || config.apiBase || '');
+    var local = /^(localhost|127\.0\.0\.1)$/.test(global.location.hostname);
+    var stored = /^R190-[0-9]+$/i.test(params.get('plan') || '');
+    var base = !stored && (allowedBase(params.get('api')) || (!local && allowedBase(config.apiBase)));
     if (base) return new HttpClient({ base: base, token: config.token });
-    return new MockClient({ replayUrl: config.replayUrl, reducedMotion: config.reducedMotion, delay: config.delay });
+    return new PlanStore({ sessionsUrl: config.sessionsUrl });
   }
 
   global.ReTRACEApi = {
     createClient: createClient,
-    MockClient: MockClient,
+    PlanStore: PlanStore,
     HttpClient: HttpClient,
     DEFAULT_WEIGHTS: DEFAULT_WEIGHTS,
     PRESETS: PRESETS,

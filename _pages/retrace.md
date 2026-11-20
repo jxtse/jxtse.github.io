@@ -4,7 +4,7 @@ title: "ReTRACE"
 description: "ReTRACE places an LLM in a chemistry harness to plan, audit and revise multi-step retrosynthesis routes, with a planning assistant for organic chemists."
 cover_image: /images/retrace/harness.png
 author_profile: false
-retrace_api_base: ""
+retrace_api_base: "https://retrace-gu26.tail6455c4.ts.net"
 ---
 
 <link rel="stylesheet" href="{{ '/assets/css/project-page.css' | relative_url }}">
@@ -42,83 +42,75 @@ retrace_api_base: ""
 
   <section class="project-section ra" id="assistant" aria-labelledby="assistant-title">
     <h2 class="section-title" id="assistant-title">ReTRACE Assistant</h2>
-    <p class="pp-lead">
-      We are turning ReTRACE into a planning assistant for organic chemists. You give a target molecule; the assistant returns ranked candidate routes, each with step-level audit notes, so you can see which disconnections hold up and which need your judgement. Routes are proposals for expert review, not validated procedures.
-    </p>
-    <ul class="ra-intro">
-      <li>
-        <h3>Ranked candidate routes</h3>
-        <p>Up to ten complete routes per target, every leaf checked against a purchasable building-block library.</p>
-      </li>
-      <li>
-        <h3>An audit you can read</h3>
-        <p>Each step carries a verdict and its reason, from skeletal-carbon bookkeeping to reagent and mechanism checks.</p>
-      </li>
-      <li>
-        <h3>Your priorities</h3>
-        <p>Weight feasibility, cost and greenness, or steer the search in plain language, then continue a session with feedback.</p>
-      </li>
-    </ul>
+    <p class="pp-lead">Enter or draw a target molecule. ReTRACE plans candidate routes, scores each one and shows which tools support every step.</p>
+    <div id="ra-console" class="ra-console" data-api-base="{{ page.retrace_api_base }}" data-sessions-url="{{ '/assets/data/retrace-sessions-v1.json' | relative_url }}" data-jsme-url="{{ '/assets/js/retrace/jsme/jsme.nocache.js' | relative_url }}">
+      <header class="ra-top">
+        <span class="ra-brand">ReTRACE <span>Route planner</span></span>
+        <div class="ra-status" data-ra="status" aria-live="polite"></div>
+        <span class="ra-model">Model <b data-ra="model">ReTRACE-27B-latest</b></span>
+      </header>
 
-    <div id="ra-console" class="ra-console is-replay" data-api-base="{{ page.retrace_api_base }}" data-replay-url="{{ '/assets/data/retrace-replay-v1.json' | relative_url }}">
-      <div class="ra-bar">
-        <span class="ra-bar-title">Route planner</span>
-        <span class="ra-mode" data-ra="mode"><span data-ra="mode-text">Preview · replays recorded benchmark runs</span></span>
-      </div>
-      <form class="ra-body" data-ra="form" novalidate>
-        <div class="ra-main">
-          <div class="ra-field">
-            <label class="ra-label" for="ra-smiles">Target molecule (SMILES)</label>
-            <textarea id="ra-smiles" class="ra-smiles" data-ra="smiles" rows="2" spellcheck="false" autocomplete="off" autocapitalize="off" placeholder="e.g. O=C(O)[C@H]1CCOC[C@H]1c1ccc(I)cc1"></textarea>
-            <div class="ra-chips" data-ra="examples" aria-label="Example targets"></div>
+      <form class="ra-input" data-ra="form" novalidate>
+        <div class="ra-col ra-col--target">
+          <label class="ra-label" for="ra-smiles">Target molecule</label>
+          <div class="ra-target-row">
+            <input id="ra-smiles" class="ra-smiles" data-ra="smiles" type="text" spellcheck="false" autocomplete="off" autocapitalize="off" placeholder="Paste a SMILES string or draw the structure">
+            <button type="button" class="ra-draw" data-ra="draw" aria-expanded="false" aria-controls="ra-sketch">
+              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5 16.5 6.2v7.6L10 17.5l-6.5-3.7V6.2z"/></svg>
+              Draw structure
+            </button>
           </div>
-          <div class="ra-field">
-            <span class="ra-label" id="ra-preset-label">Search preset</span>
-            <fieldset class="ra-seg" data-ra="preset" aria-labelledby="ra-preset-label">
-              <legend>Search preset</legend>
-              <label><input type="radio" name="ra-preset" value="fast"><span>Fast</span></label>
-              <label><input type="radio" name="ra-preset" value="standard" checked><span>Standard</span></label>
-              <label><input type="radio" name="ra-preset" value="thorough"><span>Thorough</span></label>
-            </fieldset>
-            <p class="ra-hint">Presets differ in reasoning effort, query budget and route capacity. In the paper more search did not give better routes: standard had the highest Audit@1 and Audit@10 of the three on every benchmark.</p>
-          </div>
-          <details class="ra-prefs">
-            <summary>Route preferences</summary>
-            <div class="ra-prefs-body">
-              <p class="ra-locked" data-ra="pref-note">The preview replays runs made with the default weights (0.70 / 0.15 / 0.15), so these controls are locked until live planning opens.</p>
-              <div class="ra-weight"><label for="ra-w-feas">Feasibility</label><input id="ra-w-feas" type="range" name="feasibility" min="0" max="1" step="0.05" value="0.7" data-ra="weight"><output data-ra="weight-out" data-for="feasibility">0.70</output></div>
-              <div class="ra-weight"><label for="ra-w-cost">Cost</label><input id="ra-w-cost" type="range" name="cost" min="0" max="1" step="0.05" value="0.15" data-ra="weight"><output data-ra="weight-out" data-for="cost">0.15</output></div>
-              <div class="ra-weight"><label for="ra-w-green">Greenness</label><input id="ra-w-green" type="range" name="greenness" min="0" max="1" step="0.05" value="0.15" data-ra="weight"><output data-ra="weight-out" data-for="greenness">0.15</output></div>
-              <label class="ra-label ra-label--spaced" for="ra-instructions">Instructions to the planner</label>
-              <textarea id="ra-instructions" data-ra="instructions" rows="2" placeholder="e.g. avoid Mitsunobu conditions; prefer a late-stage amide coupling"></textarea>
-              <p class="ra-hint">Weights change how candidates are compared and ranked. They never change the audit verdict.</p>
-            </div>
-          </details>
         </div>
-        <div class="ra-side">
-          <span class="ra-label">Target</span>
-          <div class="ra-preview" data-ra="preview" aria-live="polite"><div class="ra-preview-empty">Target structure appears here</div></div>
-          <p class="ra-hint ra-preview-note" data-ra="preview-note"></p>
-          <div class="ra-actions">
-            <button type="submit" class="ra-run" data-ra="run">Plan routes</button>
-            <button type="button" class="ra-cancel" data-ra="cancel" hidden>Cancel</button>
+        <div class="ra-col ra-col--effort">
+          <span class="ra-label" id="ra-effort-label">Search effort</span>
+          <fieldset class="ra-seg" data-ra="preset" aria-labelledby="ra-effort-label">
+            <label><input type="radio" name="ra-preset" value="fast"><span>Fast</span></label>
+            <label><input type="radio" name="ra-preset" value="standard" checked><span>Standard</span></label>
+            <label><input type="radio" name="ra-preset" value="thorough"><span>Thorough</span></label>
+          </fieldset>
+        </div>
+        <div class="ra-col ra-col--run">
+          <span class="ra-label" aria-hidden="true">&nbsp;</span>
+          <button type="submit" class="ra-run" data-ra="run">Plan routes</button>
+        </div>
+        <div class="ra-sketch" id="ra-sketch" data-ra="sketch" hidden>
+          <div class="ra-sketch-pad" id="ra-jsme" data-ra="jsme"><p class="ra-sketch-wait">Loading the structure editor…</p></div>
+          <div class="ra-sketch-actions">
+            <button type="button" class="ra-btn" data-ra="sketch-cancel">Cancel</button>
+            <button type="button" class="ra-btn ra-btn--primary" data-ra="sketch-use">Use this structure</button>
           </div>
         </div>
       </form>
+
       <div class="ra-error" data-ra="error" role="alert" hidden></div>
-      <ol class="ra-log" data-ra="log" aria-live="polite" hidden></ol>
-      <div class="ra-results" data-ra="results" hidden>
-        <div class="ra-summary" data-ra="summary" aria-live="polite"></div>
-        <div class="ra-results-grid">
-          <div class="ra-route-list" data-ra="route-list" role="tablist" aria-label="Candidate routes"></div>
-          <div class="ra-route-detail" data-ra="route-detail" role="tabpanel"></div>
+
+      <div class="ra-results" data-ra="results">
+        <div class="ra-empty" data-ra="empty">
+          <p>Ranked routes for your target appear here.</p>
         </div>
+        <div class="ra-list" data-ra="routes" role="tablist" aria-label="Candidate routes" hidden></div>
+        <div class="ra-detail" data-ra="detail" role="tabpanel" hidden></div>
+        <aside class="ra-drawer" data-ra="drawer" hidden aria-label="Tool calls in this run"></aside>
       </div>
+
+      <form class="ra-steer" data-ra="steer" novalidate>
+        <label class="ra-label" for="ra-feedback">Refine the search</label>
+        <input id="ra-feedback" data-ra="feedback" type="text" placeholder="Tell the planner what to change, e.g. avoid Boc protection or prefer cheaper starting materials">
+        <button type="submit" class="ra-btn" data-ra="steer-run">Continue planning</button>
+      </form>
+
+      <dialog class="ra-quota" data-ra="quota" aria-labelledby="ra-quota-title" aria-describedby="ra-quota-body">
+        <div class="ra-quota-body">
+          <h3 id="ra-quota-title">Planning quota used up</h3>
+          <p class="ra-quota-zh" id="ra-quota-body">今日额度不足，请明天再试</p>
+          <p class="ra-quota-en">Today's planning quota is used up. Please try again tomorrow.</p>
+          <div class="ra-quota-actions">
+            <button type="button" class="ra-btn ra-btn--primary" data-ra="quota-close">Close</button>
+          </div>
+        </div>
+      </dialog>
     </div>
-    <p class="ra-foot">
-      <span>Live planning on our group's servers is being set up. Until then the planner replays recorded Retro*-190 runs from the paper, with their frozen audit verdicts.</span>
-      <span>Interested in early access? <a href="mailto:jxTse@outlook.com?subject=ReTRACE%20assistant%20access">Get in touch</a>.</span>
-    </p>
+    <p class="ra-foot">Routes are computational proposals for expert review, not experimentally validated procedures. Structure editor: <a href="https://jsme-editor.github.io/">JSME</a> (BSD licence).</p>
     <noscript><p class="pp-table-note">The route planner needs JavaScript.</p></noscript>
   </section>
 
