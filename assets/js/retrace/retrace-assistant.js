@@ -444,6 +444,20 @@
       tr.appendChild(el('td', null, timeText(ms[x[0]])));
       body.appendChild(tr);
     });
+    // Bookkeeping calls (e.g. plan notes) are counted in the run total but
+    // have no row of their own; show them so the table adds up.
+    var other = (plan.tool_calls || 0) - total;
+    if (other > 0) {
+      var orow = el('tr');
+      var oname = el('td');
+      oname.appendChild(el('span', null, 'Other'));
+      oname.appendChild(el('span', 'ra-tool-what', 'planner bookkeeping'));
+      orow.appendChild(oname);
+      orow.appendChild(el('td', null, String(other)));
+      orow.appendChild(el('td', null, '–'));
+      body.appendChild(orow);
+      total += other;
+    }
     t.appendChild(body);
     var foot = el('tfoot');
     var fr = el('tr');
@@ -896,6 +910,7 @@
     if (!id) { showEmpty(); return; }
     return client.getPlan(id).then(function (plan) {
       els.smiles.value = plan.target;
+      settleTotals(plan);
       showPlan(plan);
     }).catch(function (err) { showEmpty(); fail(err); });
   }).catch(function (err) {
