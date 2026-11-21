@@ -210,8 +210,9 @@
     ['check_buyability', 'Stock lookup', 'purchasable building blocks'],
     ['validate_smiles', 'Structure validation', 'parses and sanitises structures'],
     ['analyze_molecule', 'Molecule analysis', 'functional groups, complexity'],
-    ['save_best_route', 'Route saved', 'adds a route to the ranked set'],
-    ['list_best_routes', 'Ranked set review', 'reads the current ranking']
+    ['save_best_route', 'Candidate route stored', 'adds a candidate to the planner\'s working set'],
+    ['list_best_routes', 'Working set review', 'reads the planner\'s current candidates'],
+    ['enzymatic_retro', 'Enzymatic single-step prediction', 'enzyme-catalysed disconnections']
   ];
   var STOCK = { Zinc: 'ZINC', BioNav: 'BioNav' };
 
@@ -485,7 +486,15 @@
   TOOL_NAMES.load_result = 'Result reload';
   TOOL_NAMES.todo_write = 'Plan notes';
   TOOL_NAMES.todo_read = 'Plan notes';
-  TOOL_NAMES.other = 'Planner tool';
+  TOOL_NAMES.enzymatic_retro = 'Enzymatic single-step prediction';
+  TOOL_NAMES.apply_template = 'Template application';
+  TOOL_NAMES.get_best_route = 'Route recall';
+  TOOL_NAMES.rank_routes = 'Route ranking';
+  TOOL_NAMES.compare_molecules = 'Molecule comparison';
+  TOOL_NAMES.identify_bonds = 'Bond analysis';
+  TOOL_NAMES.retro_decompose = 'Disconnection analysis';
+  TOOL_NAMES.backtrack_and_summarize = 'Search backtrack';
+  TOOL_NAMES.other = 'Chemistry tool';
 
   var STEPS = [
     ['queue', 'Waiting for a free planner'],
@@ -515,7 +524,7 @@
       case 'prefetch': return 'Matching templates and querying single-step models for the target';
       case 'resume': return 'Resuming from the saved routes with your feedback';
       case 'model_step':
-        return 'Planner chose ' + (a.tools || 0) + (a.tools === 1 ? ' tool call' : ' tool calls');
+        return a.tools ? 'Planner decided next ' + (a.tools === 1 ? 'action' : a.tools + ' actions') : 'Planner reviewed results';
       case 'tool_start': return name + ' started';
       case 'tool_done':
         var bits = [name];
@@ -524,7 +533,7 @@
         else if (a.tool === 'check_buyability' && a.n != null) bits.push(a.n + (a.of != null ? ' of ' + a.of : '') + ' purchasable');
         else if (a.tool === 'explore_branches' && a.n != null) bits.push(a.n + ' branches ranked');
         else if (a.tool === 'score_route' && a.score != null) bits.push('candidate scored ' + a.score.toFixed(3));
-        else if (a.tool === 'list_best_routes' && a.n != null) bits.push(a.n + ' routes in memory');
+        else if (a.tool === 'list_best_routes' && a.n != null) bits.push(a.n + ' saved so far');
         return bits.join(' · ');
     }
     return '';
