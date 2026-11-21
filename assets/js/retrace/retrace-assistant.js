@@ -396,10 +396,29 @@
     return '< 1 s';
   }
 
-  function renderDrawer(plan) {
+  // A refined plan reports per-phase totals from older services; the per-tool
+  // counts are cumulative, so never show fewer calls than they add up to.
+  function settleTotals(plan) {
+    var sum = 0;
+    var counts = plan.tool_counts || {};
+    Object.keys(counts).forEach(function (k) { sum += Number(counts[k]) || 0; });
+    if (sum > (plan.tool_calls || 0)) plan.tool_calls = sum;
+  }
+
+  function renderDrawer(plan, keepOpen) {
+    var wasOpen = keepOpen && !els.drawer.hidden;
     clear(els.drawer);
     els.drawer.id = 'ra-drawer';
-    els.drawer.hidden = true;
+    els.drawer.hidden = !wasOpen;
+    var close = el('button', 'ra-drawer-close', '\u00d7');
+    close.type = 'button';
+    close.setAttribute('aria-label', 'Close tool calls');
+    close.addEventListener('click', function () {
+      els.drawer.hidden = true;
+      var link = els.status.querySelector('.ra-link');
+      if (link) { link.setAttribute('aria-expanded', 'false'); link.focus(); }
+    });
+    els.drawer.appendChild(close);
     els.drawer.appendChild(el('h5', null, 'Tool calls in this plan'));
     var t = el('table');
     var head = el('thead');
@@ -730,6 +749,7 @@
       cursor: function (seq) { plan.last_seq = seq; },
       snapshot: function (snapshot) {
         Object.assign(plan, snapshot);
+        settleTotals(plan);
         showPlan(plan);
         setRunning(plan.status === 'queued' || plan.status === 'running');
       },
@@ -766,14 +786,26 @@
       },
       done: function (done) {
         if (done.iterations != null) plan.iterations = done.iterations;
-        if (done.tool_calls != null) plan.tool_calls = done.tool_calls;
+        if (done.tool_calls != null) plan.tool_calls = Math.max(plan.tool_calls || 0, done.tool_calls);
         if (done.tool_counts) plan.tool_counts = done.tool_counts;
+        if (done.tool_ms) plan.tool_ms = done.tool_ms;
         if (done.wall_s) plan.wall_s = done.wall_s;
         if (done.status) plan.status = done.status;
         plan.progress = { status: done.status || 'completed', stage: done.status || 'completed' };
         renderDrawer(plan);
         setRunning(false);
         renderStatus(plan, false);
+        // The live stream's final event carries totals only; the per-tool
+        // breakdown is in the stored plan record.
+        if (!done.tool_counts && client.getPlan) {
+          client.getPlan(planId).then(function (rec) {
+            if (!rec || !rec.tool_counts) return;
+            plan.tool_counts = rec.tool_counts;
+            plan.tool_ms = rec.tool_ms || {};
+            settleTotals(plan);
+            if (state.plan === plan) { renderDrawer(plan, true); renderStatus(plan, false); }
+          }).catch(function () {});
+        }
         if (done.status === 'cancelled') setError('Planning was cancelled.');
         if ((done.status === 'failed') && !plan.routes.length) {
           setError(ERRORS.service_unavailable);

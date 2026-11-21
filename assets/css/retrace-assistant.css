@@ -531,7 +531,9 @@
   box-shadow: -12px 0 24px -18px rgba(1, 47, 99, 0.45);
   overflow: auto;
 }
-.ra-drawer h5 { margin: 0 0 10px; color: var(--ra-ink); font-size: 16px; }
+.ra-drawer h5 { margin: 0 0 10px; padding-right: 32px; color: var(--ra-ink); font-size: 16px; }
+.ra-drawer-close { position: absolute; top: 10px; right: 12px; width: 28px; height: 28px; padding: 0; border: 0; border-radius: 6px; background: transparent; color: var(--ra-sub); font-size: 20px; line-height: 28px; cursor: pointer; }
+.ra-drawer-close:hover, .ra-drawer-close:focus-visible { background: #EEF2F7; color: var(--ra-ink); }
 .ra-drawer table { width: 100%; margin: 0; border-collapse: collapse; font-size: 14px; }
 .ra-drawer td, .ra-drawer th { padding: 7px 4px; border: 0; border-bottom: 1px solid #E8EDF3; text-align: left; }
 .ra-drawer th { color: var(--ra-sub); font-weight: 600; }
