@@ -34,6 +34,11 @@
     steer: $('[data-ra="steer"]'),
     feedback: $('[data-ra="feedback"]'),
     steerRun: $('[data-ra="steer-run"]'),
+    live: $('[data-ra="live"]'),
+    liveNow: $('[data-ra="live-now"]'),
+    clock: $('[data-ra="clock"]'),
+    steps: $('[data-ra="steps"]'),
+    feed: $('[data-ra="feed"]'),
     quota: $('[data-ra="quota"]'),
     quotaClose: $('[data-ra="quota-close"]')
   };
@@ -267,6 +272,7 @@
 
   function showEmpty() {
     state.plan = null;
+    liveStop();
     syncControls();
     clear(els.status);
     els.routes.hidden = true;
@@ -469,6 +475,184 @@
     els.drawer.appendChild(t);
   }
 
+  /* ---------------- live progress ---------------- */
+
+  // Plain-language names for the planner's tools (same set as TOOLS above).
+  var TOOL_NAMES = {};
+  TOOLS.forEach(function (t) { TOOL_NAMES[t[0]] = t[1]; });
+  TOOL_NAMES.read_doc = 'Protocol reference';
+  TOOL_NAMES.recall_similar_routes = 'Precedent recall';
+  TOOL_NAMES.load_result = 'Result reload';
+  TOOL_NAMES.todo_write = 'Plan notes';
+  TOOL_NAMES.todo_read = 'Plan notes';
+  TOOL_NAMES.other = 'Planner tool';
+
+  var STEPS = [
+    ['queue', 'Waiting for a free planner'],
+    ['load', 'Loading chemistry tools'],
+    ['seed', 'Matching reaction templates and querying four single-step models'],
+    ['search', 'Proposing disconnections and checking them with tools'],
+    ['routes', 'Scoring and saving complete routes']
+  ];
+  var FEED_MAX = 5;
+  var live = { timer: null, started: 0, step: null, feed: [], active: null, plan: null };
+
+  function clockText(s) {
+    s = Math.max(0, Math.floor(s));
+    return Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2);
+  }
+
+  function secs(ms) {
+    if (ms == null) return '';
+    if (ms < 1000) return '< 1 s';
+    if (ms < 60000) return Math.round(ms / 1000) + ' s';
+    return (ms / 60000).toFixed(1) + ' min';
+  }
+
+  function activityText(a) {
+    var name = TOOL_NAMES[a.tool] || TOOL_NAMES.other;
+    switch (a.kind) {
+      case 'prefetch': return 'Matching templates and querying single-step models for the target';
+      case 'resume': return 'Resuming from the saved routes with your feedback';
+      case 'model_step':
+        return 'Planner chose ' + (a.tools || 0) + (a.tools === 1 ? ' tool call' : ' tool calls');
+      case 'tool_start': return name + ' started';
+      case 'tool_done':
+        var bits = [name];
+        if (a.tool === 'neural_retro' && a.n != null) bits.push(a.n + ' candidates' + (a.engines ? ' from ' + a.engines + ' models' : ''));
+        else if (a.tool === 'suggest_templates' && a.n != null) bits.push(a.n + ' templates');
+        else if (a.tool === 'check_buyability' && a.n != null) bits.push(a.n + (a.of != null ? ' of ' + a.of : '') + ' purchasable');
+        else if (a.tool === 'explore_branches' && a.n != null) bits.push(a.n + ' branches ranked');
+        else if (a.tool === 'score_route' && a.score != null) bits.push('candidate scored ' + a.score.toFixed(3));
+        else if (a.tool === 'list_best_routes' && a.n != null) bits.push(a.n + ' routes in memory');
+        return bits.join(' · ');
+    }
+    return '';
+  }
+
+  function stepFor(plan) {
+    var p = plan.progress || {};
+    if (p.status === 'queued' || p.stage === 'queued') return 'queue';
+    if (p.stage === 'starting' || p.stage === 'loading') return 'load';
+    if (plan.routes && plan.routes.length) return 'routes';
+    if (live.seeded) return 'search';
+    return 'seed';
+  }
+
+  function renderSteps() {
+    clear(els.steps);
+    var at = STEPS.findIndex(function (s) { return s[0] === live.step; });
+    STEPS.forEach(function (s, i) {
+      if (s[0] === 'queue' && live.step !== 'queue') return;
+      var cls = 'ra-step' + (i < at ? ' is-done' : (i === at ? ' is-now' : ''));
+      var li = el('li', cls, s[1]);
+      if (i === at) li.setAttribute('aria-current', 'step');
+      els.steps.appendChild(li);
+    });
+  }
+
+  function renderFeed() {
+    clear(els.feed);
+    live.feed.slice(-FEED_MAX).reverse().forEach(function (f) {
+      var li = el('li', f.running ? 'is-running' : null);
+      li.appendChild(el('span', 'ra-feed-t', clockText(f.t)));
+      li.appendChild(el('span', 'ra-feed-what', f.text));
+      if (f.ms != null) li.appendChild(el('span', 'ra-feed-ms', secs(f.ms)));
+      els.feed.appendChild(li);
+    });
+  }
+
+  function nowText(plan) {
+    var p = plan.progress || {};
+    if (live.step === 'queue') return p.queue_position ? 'Queued · position ' + p.queue_position : 'Queued';
+    if (live.step === 'load') return 'Loading chemistry tools';
+    if (live.active) return (TOOL_NAMES[live.active] || TOOL_NAMES.other) + ' running…';
+    if (live.step === 'seed') return 'Querying the template library and single-step models';
+    return 'Planner is choosing the next disconnection';
+  }
+
+  function tick() {
+    if (!live.started) return;
+    var s = (Date.now() - live.started) / 1000;
+    els.clock.textContent = clockText(s);
+    var hint = '';
+    var preset = live.plan && live.plan.preset;
+    var typical = { fast: '3–6 min', standard: '8–15 min', thorough: '15–30 min' }[preset];
+    if (typical) hint = 'usually ' + typical;
+    els.clock.title = hint;
+    els.clock.setAttribute('data-hint', hint);
+  }
+
+  function liveStart(plan, offsetS) {
+    live.plan = plan;
+    if (!live.started) {
+      live.started = Date.now() - 1000 * (offsetS || 0);
+      live.feed = [];
+      live.seeded = false;
+      live.active = null;
+    }
+    els.live.hidden = false;
+    if (!live.timer) live.timer = setInterval(tick, 1000);
+    liveUpdate(plan);
+    tick();
+  }
+
+  function liveUpdate(plan) {
+    if (els.live.hidden) return;
+    live.step = stepFor(plan);
+    renderSteps();
+    els.liveNow.textContent = nowText(plan);
+  }
+
+  // Keep the clock on the server's plan time so it never trails the feed.
+  function anchor(elapsedS) {
+    if (elapsedS == null || !live.started) return;
+    var shown = (Date.now() - live.started) / 1000;
+    if (elapsedS > shown) live.started = Date.now() - 1000 * elapsedS;
+  }
+
+  function liveActivity(plan, a) {
+    if (!live.started) liveStart(plan, a.elapsed_s);
+    anchor(a.elapsed_s);
+    var t = a.elapsed_s != null ? a.elapsed_s : (Date.now() - live.started) / 1000;
+    if (a.kind === 'tool_start') {
+      live.active = a.tool;
+      live.feed.push({ t: t, text: activityText(a), running: true, tool: a.tool });
+    } else if (a.kind === 'tool_done') {
+      // Replace the matching running line, if any.
+      for (var i = live.feed.length - 1; i >= 0; i--) {
+        if (live.feed[i].running && live.feed[i].tool === a.tool) { live.feed.splice(i, 1); break; }
+      }
+      live.feed.push({ t: t, text: activityText(a), ms: a.ms });
+      if (live.active === a.tool) live.active = null;
+    } else if (a.kind === 'model_step') {
+      // The first planner turn starts only after the target prefetch has finished.
+      live.feed.forEach(function (f) {
+        if (f.kind === 'prefetch' && f.running) {
+          f.running = false;
+          f.text = 'Templates and single-step candidates ready for the planner';
+        }
+      });
+      live.seeded = true;
+      live.active = null;
+      live.feed.push({ t: t, text: activityText(a), ms: a.ms });
+    } else {
+      live.feed.push({ t: t, text: activityText(a), running: a.kind === 'prefetch', kind: a.kind });
+    }
+    if (live.feed.length > 40) live.feed = live.feed.slice(-40);
+    renderFeed();
+    liveUpdate(plan);
+  }
+
+  function liveStop() {
+    if (live.timer) clearInterval(live.timer);
+    live.timer = null;
+    live.started = 0;
+    live.active = null;
+    live.plan = null;
+    els.live.hidden = true;
+  }
+
   /* ---------------- route table ---------------- */
 
   function renderRoutes() {
@@ -651,7 +835,12 @@
     var plan = state.plan;
     var r = plan && plan.routes[state.route];
     clear(els.detail);
-    if (!r) return;
+    if (!r) {
+      if (plan && state.running) {
+        els.detail.appendChild(el('p', 'ra-wait', 'Routes appear here as soon as the planner scores and saves the first complete route.'));
+      }
+      return;
+    }
     var order = forwardOrder(r);
 
     var head = el('div', 'ra-detail-head');
@@ -739,9 +928,11 @@
   }
 
   function setRunning(on) {
+    var changed = state.running !== on;
     state.running = on;
     els.run.textContent = on ? 'Planning…' : 'Plan routes';
     syncControls();
+    if (changed && state.plan && !state.plan.routes.length) renderDetail();
   }
 
   function mergeRoute(plan, route) {
@@ -765,7 +956,9 @@
         Object.assign(plan, snapshot);
         settleTotals(plan);
         showPlan(plan);
-        setRunning(plan.status === 'queued' || plan.status === 'running');
+        var busy = plan.status === 'queued' || plan.status === 'running';
+        setRunning(busy);
+        if (busy) liveStart(plan, (plan.progress || {}).elapsed_s); else liveStop();
       },
       status: function (ev) {
         plan.progress = plan.progress || {};
@@ -781,6 +974,12 @@
         setRunning(true);
         if (state.plan !== plan) showPlan(plan);
         else { renderStatus(plan, true); }
+        if (!live.started) liveStart(plan, ev.elapsed_s);
+        anchor(ev.elapsed_s);
+        liveUpdate(plan);
+      },
+      activity: function (a) {
+        liveActivity(plan, a);
       },
       route: function (route) {
         mergeRoute(plan, route);
@@ -806,6 +1005,7 @@
         if (done.wall_s) plan.wall_s = done.wall_s;
         if (done.status) plan.status = done.status;
         plan.progress = { status: done.status || 'completed', stage: done.status || 'completed' };
+        liveStop();
         renderDrawer(plan);
         setRunning(false);
         renderStatus(plan, false);
@@ -828,12 +1028,14 @@
         }
       },
       error: function (err) {
+        liveStop();
         setRunning(false);
         fail(err || { code: 'service_unavailable' });
         if (state.plan === plan) renderStatus(plan, false);
       },
-      cancelled: function () { setRunning(false); setError('Planning was cancelled.'); }
+      cancelled: function () { liveStop(); setRunning(false); setError('Planning was cancelled.'); }
     }, state.controller.signal, plan.last_seq || 0).then(function () {
+      liveStop();
       setRunning(false);
       if (state.plan === plan) renderStatus(plan, false);
     });
@@ -858,6 +1060,8 @@
         progress: { status: res.status, queue_position: res.queue_position }
       };
       showPlan(plan);
+      liveStop();
+      liveStart(plan, 0);
       return stream(res.plan_id, plan);
     }).catch(function (err) { setRunning(false); fail(err); });
   }
@@ -875,6 +1079,8 @@
       .then(function () {
         els.feedback.value = '';
         state.plan.progress = { status: 'queued', stage: 'queued' };
+        liveStop();
+        liveStart(state.plan, 0);
         return stream(state.plan.id, state.plan);
       })
       .catch(function (err) { setRunning(false); fail(err); });

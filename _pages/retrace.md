@@ -84,6 +84,15 @@ retrace_api_base: "https://retrace-gu26.tail6455c4.ts.net"
 
       <div class="ra-error" data-ra="error" role="alert" hidden></div>
 
+      <div class="ra-live" data-ra="live" hidden>
+        <div class="ra-live-head">
+          <span class="ra-live-now" data-ra="live-now" role="status"></span>
+          <span class="ra-clock" data-ra="clock" aria-label="Elapsed time">0:00</span>
+        </div>
+        <ol class="ra-steps" data-ra="steps"></ol>
+        <ul class="ra-feed" data-ra="feed" aria-label="Recent planner actions"></ul>
+      </div>
+
       <div class="ra-results" data-ra="results">
         <div class="ra-empty" data-ra="empty">
           <p>Ranked routes for your target appear here.</p>
