@@ -47,7 +47,7 @@ retrace_api_base: "https://retrace-gu26.tail6455c4.ts.net"
       <header class="ra-top">
         <span class="ra-brand">ReTRACE <span>Route planner</span></span>
         <div class="ra-status" data-ra="status" aria-live="polite"></div>
-        <span class="ra-model">Model <b data-ra="model">ReTRACE-27B-latest</b></span>
+        <span class="ra-model">Model <b data-ra="model">ReTRACE-27B</b></span>
       </header>
 
       <form class="ra-input" data-ra="form" novalidate>

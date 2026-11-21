@@ -899,8 +899,7 @@
   var params = new URLSearchParams(window.location.search);
   client.health().then(function (info) {
     state.live = !!info.live;
-    // Only ever show the coordinator the service reports as serving.
-    if (info.model) els.model.textContent = info.model;
+    els.model.textContent = 'ReTRACE-27B';
     state.serving = info.serving !== false;
     if (state.live && info.error_code === 'quota_exhausted') openQuota();
     if (state.live && !state.serving) {
