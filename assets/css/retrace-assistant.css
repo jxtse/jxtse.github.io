@@ -689,7 +689,7 @@
 .ra-step.is-done::before { border-color: var(--ra-ok); background: var(--ra-ok); }
 .ra-step.is-now { color: var(--ra-ink); font-weight: 600; }
 .ra-step.is-now::before { border-color: var(--ra-ink); background: #fff; box-shadow: inset 0 0 0 2px #fff, inset 0 0 0 5px var(--ra-ink); animation: ra-pulse 1.2s ease-in-out infinite; }
-.ra-feed { grid-area: feed; margin: 0; padding: 0; list-style: none; font-size: 13.5px; max-height: 9.6em; overflow: hidden; }
+.ra-feed { grid-area: feed; margin: 0; padding: 0; list-style: none; font-size: 13.5px; }
 .ra-feed li {
   display: grid;
   grid-template-columns: 38px minmax(0, 1fr) auto;

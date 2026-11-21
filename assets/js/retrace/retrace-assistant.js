@@ -495,7 +495,7 @@
     ['routes', 'Scoring and saving complete routes']
   ];
   var FEED_MAX = 5;
-  var live = { timer: null, started: 0, step: null, feed: [], active: null, plan: null };
+  var live = { timer: null, started: 0, step: null, feed: [], running: {}, plan: null };
 
   function clockText(s) {
     s = Math.max(0, Math.floor(s));
@@ -566,7 +566,13 @@
     var p = plan.progress || {};
     if (live.step === 'queue') return p.queue_position ? 'Queued · position ' + p.queue_position : 'Queued';
     if (live.step === 'load') return 'Loading chemistry tools';
-    if (live.active) return (TOOL_NAMES[live.active] || TOOL_NAMES.other) + ' running…';
+    var busy = Object.keys(live.running).filter(function (k) { return live.running[k] > 0; });
+    if (busy.length) {
+      return 'Running ' + busy.map(function (k) {
+        var name = (TOOL_NAMES[k] || TOOL_NAMES.other).toLowerCase();
+        return live.running[k] > 1 ? name + ' ×' + live.running[k] : name;
+      }).join(', ') + '…';
+    }
     if (live.step === 'seed') return 'Querying the template library and single-step models';
     return 'Planner is choosing the next disconnection';
   }
@@ -589,7 +595,7 @@
       live.started = Date.now() - 1000 * (offsetS || 0);
       live.feed = [];
       live.seeded = false;
-      live.active = null;
+      live.running = {};
     }
     els.live.hidden = false;
     if (!live.timer) live.timer = setInterval(tick, 1000);
@@ -615,16 +621,12 @@
     if (!live.started) liveStart(plan, a.elapsed_s);
     anchor(a.elapsed_s);
     var t = a.elapsed_s != null ? a.elapsed_s : (Date.now() - live.started) / 1000;
+    // Running tools show in the headline; the feed lists finished actions only.
     if (a.kind === 'tool_start') {
-      live.active = a.tool;
-      live.feed.push({ t: t, text: activityText(a), running: true, tool: a.tool });
+      live.running[a.tool] = (live.running[a.tool] || 0) + 1;
     } else if (a.kind === 'tool_done') {
-      // Replace the matching running line, if any.
-      for (var i = live.feed.length - 1; i >= 0; i--) {
-        if (live.feed[i].running && live.feed[i].tool === a.tool) { live.feed.splice(i, 1); break; }
-      }
+      if (live.running[a.tool] > 0) live.running[a.tool] -= 1;
       live.feed.push({ t: t, text: activityText(a), ms: a.ms });
-      if (live.active === a.tool) live.active = null;
     } else if (a.kind === 'model_step') {
       // The first planner turn starts only after the target prefetch has finished.
       live.feed.forEach(function (f) {
@@ -634,7 +636,7 @@
         }
       });
       live.seeded = true;
-      live.active = null;
+      live.running = {};
       live.feed.push({ t: t, text: activityText(a), ms: a.ms });
     } else {
       live.feed.push({ t: t, text: activityText(a), running: a.kind === 'prefetch', kind: a.kind });
@@ -648,7 +650,7 @@
     if (live.timer) clearInterval(live.timer);
     live.timer = null;
     live.started = 0;
-    live.active = null;
+    live.running = {};
     live.plan = null;
     els.live.hidden = true;
   }
